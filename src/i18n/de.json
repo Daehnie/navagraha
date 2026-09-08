@@ -1,5 +1,5 @@
 {
-  "nav": { "home": "Start", "palette": "Farben", "themes": "Themen" },
+  "nav": { "home": "Übersicht", "palette": "Farben", "themes": "Einrichten" },
   "tagline": "Neun Planeten, neun Farben",
   "lede": "Ein Farbschema für Terminal und Editor, dessen Töne nicht gewählt, sondern abgelesen sind: jede Farbe ist die klassische Farbe eines Grahas, ihre Sättigung folgt seiner Stärke in einem einzigen Geburtshoroskop.",
   "chartCaption": "23. Mai 1982, 19:47 MESZ, Wedel. Siderisch nach Lahiri, Häuser nach Zeichen. Lagna in Tula.",

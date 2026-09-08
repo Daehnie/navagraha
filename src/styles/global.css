@@ -5,7 +5,13 @@
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  /* Bewegung faellt weg, Farbe nicht: ein harter Hell/Dunkel-Sprung ueber den
+     ganzen Viewport waere unangenehmer als die Blende, die er ersetzt. */
+  *, *::before, *::after {
+    animation: none !important;
+    transition-property: opacity, background-color, border-color, color !important;
+    transition-duration: .2s !important;
+  }
 }
 
 body {

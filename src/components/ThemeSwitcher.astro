@@ -37,6 +37,9 @@ const variants = Object.entries(palette.variants)
     padding: .42rem .85rem .42rem .5rem; font: inherit; font-size: .84rem;
     cursor: pointer; transition: border-color .2s, color .2s; }
   .tabs button:hover { border-color: var(--hl_high); color: var(--chandra); }
+  /* Rueckmeldung liegt auf dem Druck, nicht auf dem Loslassen. */
+  .tabs button:active { border-color: var(--hl_high); color: var(--chandra);
+    transform: scale(.97); transition: transform 100ms ease-out; }
   .tabs button[aria-selected="true"] { border-color: var(--shukra); color: var(--chandra_b); }
   .sw { display: inline-flex; }
   .sw i { width: .62rem; height: .95rem; display: block; }

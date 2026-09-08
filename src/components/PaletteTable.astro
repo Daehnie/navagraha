@@ -86,11 +86,13 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
   document.querySelectorAll('.hx button').forEach(b => {
     b.addEventListener('click', async () => {
       const hex = b.dataset.hex
-      try { await navigator.clipboard.writeText(hex); toast.textContent = `${hex} ${word}` }
-      catch { toast.textContent = hex }
+      // Erst zeigen, dann kopieren: das Clipboard-Promise gehoert nicht auf den Eingabepfad.
+      toast.textContent = `${hex} ${word}`
       toast.classList.add('on')
       clearTimeout(timer)
       timer = setTimeout(() => toast.classList.remove('on'), 1400)
+      try { await navigator.clipboard.writeText(hex) }
+      catch { toast.textContent = hex }
     })
   })
 </script>
@@ -110,6 +112,9 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
     border: 0; padding: .1rem .3rem; margin: .1rem 0; border-radius: 4px;
     cursor: pointer; font: inherit; color: var(--ketu); }
   .hx button:hover { background: var(--hl_med); color: var(--chandra); }
+  /* Rueckmeldung liegt auf dem Druck, nicht auf dem Loslassen. */
+  .hx button:active { background: var(--hl_med); color: var(--chandra);
+    transform: scale(.97); transition: transform 100ms ease-out; }
   .hx button i { width: .74rem; height: .74rem; border-radius: 2px; background: var(--c);
     display: block; box-shadow: 0 0 0 1px var(--hl_high); }
   .hx code { font-size: .69rem; }

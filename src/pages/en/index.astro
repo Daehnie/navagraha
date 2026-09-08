@@ -26,9 +26,9 @@ const t = useTranslations(lang)
     <h2>{t.preview.title}</h2>
     <p>{t.preview.lede}</p>
     <CodePreview />
-    <p style="margin-top:1.6rem">
-      <a href={path('/palette', lang)}>{t.palette.title}</a> ·
-      <a href={path('/themes', lang)}>{t.themes.title}</a>
+    <p class="go">
+      <a class="cta" href={path('/themes', lang)}>{t.themes.title}</a>
+      <a href={path('/palette', lang)}>{t.palette.title}</a>
     </p>
   </section>
 
@@ -48,4 +48,9 @@ const t = useTranslations(lang)
   .sub { font-size: 1.12rem; color: var(--subtle); margin: 0 0 1.7rem; max-width: 40ch; }
   .born { font-size: .78rem; color: var(--ketu); margin: 1.6rem 0 0; }
   .method p { max-width: 62ch; }
+  /* Einrichten ist die Hauptsache und traegt deshalb Flaeche, nicht nur Farbe. */
+  .go { display: flex; align-items: center; gap: 1.5rem; margin-top: 1.6rem; }
+  .cta { display: inline-block; background: var(--shukra); color: var(--base);
+    text-decoration: none; padding: .625rem 1.25rem; border-radius: 999px;
+    font-size: .95rem; }
 </style>

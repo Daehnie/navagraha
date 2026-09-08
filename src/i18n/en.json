@@ -1,5 +1,5 @@
 {
-  "nav": { "home": "Home", "palette": "Palette", "themes": "Themes" },
+  "nav": { "home": "Overview", "palette": "Palette", "themes": "Install" },
   "tagline": "Nine planets, nine colours",
   "lede": "A colour scheme for terminal and editor whose tones were not picked but read off: every colour is the classical colour of a graha, its saturation follows that planet's strength in one particular birth chart.",
   "chartCaption": "23 May 1982, 19:47 CEST, Wedel. Sidereal, Lahiri ayanamsa, whole-sign houses. Lagna in Tula.",
