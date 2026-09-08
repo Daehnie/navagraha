@@ -1,0 +1,171 @@
+// Erzeugt alle Dateien unter themes/ aus src/data/palette.json.
+// palette.json ist die einzige Farbquelle — die Ausgaben hier nie von Hand
+// bearbeiten, sondern die Palette aendern und neu generieren.
+//
+// themes/vim/ und themes/bat/ bleiben unangetastet: beide enthalten keine
+// Hexwerte, sondern nehmen die Farben ueber die ANSI-Plaetze vom Terminal.
+
+import { readFileSync, writeFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import { dirname, join } from 'node:path'
+
+import {
+  VARIANT_ORDER, ANSI_SLOTS, ANSI_SLOT_LABELS, TABBY_HEADER,
+  TABBY_VARIANT_NOTES, TABBY_NAMED, ITERM_FIXED, VSCODE_COLORS,
+  VSCODE_ANSI_NAMES, VSCODE_SEMANTIC, VSCODE_TOKEN_RULES,
+} from './theme-schemas.mjs'
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..')
+const read = (...p) => readFileSync(join(root, ...p), 'utf8')
+const write = (...args) => {
+  const content = args.pop()
+  writeFileSync(join(root, ...args), content)
+}
+
+const palette = JSON.parse(read('src', 'data', 'palette.json'))
+
+// --- Helfer ---------------------------------------------------------------
+
+// Plist schreibt 0 und 1 mit Dezimalpunkt, JS nicht.
+const formatFloat = (n) => {
+  const s = n.toString()
+  return s.includes('.') ? s : `${s}.0`
+}
+
+const component = (hex, offset) =>
+  formatFloat(parseInt(hex.slice(offset, offset + 2), 16) / 255)
+
+const withAlpha = (hex, alpha) => (alpha ? hex + alpha : hex)
+
+// --- tabby ----------------------------------------------------------------
+
+function generateTabby() {
+  const blocks = VARIANT_ORDER.map((key) => {
+    const v = palette.variants[key]
+    const named = Object.entries(TABBY_NAMED)
+      .map(([field, colorKey]) => `      ${field}: "${v.colors[colorKey]}"`)
+      .join('\n')
+    const colors = ANSI_SLOTS.map((colorKey, i) => {
+      const [name, graha] = ANSI_SLOT_LABELS[i]
+      const slot = String(i).padStart(2)
+      return `        - "${v.colors[colorKey]}"  # ${slot} ${name.padEnd(11)} – ${graha}`
+    }).join('\n')
+
+    return [
+      `    # ${TABBY_VARIANT_NOTES[key]}`,
+      `    - name: "Graha ${v.label}"`,
+      named,
+      '      colors:',
+      colors,
+    ].join('\n')
+  })
+
+  const body = `${TABBY_HEADER}\n\nterminal:\n  customColorSchemes:\n${blocks.join('\n\n')}\n`
+  write('themes', 'tabby', 'navagraha.yaml', body)
+}
+
+// --- iTerm2 ---------------------------------------------------------------
+
+function itermColorDict(hex) {
+  return [
+    '\t<dict>',
+    '\t\t<key>Alpha Component</key>',
+    '\t\t<real>1.0</real>',
+    '\t\t<key>Blue Component</key>',
+    `\t\t<real>${component(hex, 5)}</real>`,
+    '\t\t<key>Color Space</key>',
+    '\t\t<string>sRGB</string>',
+    '\t\t<key>Green Component</key>',
+    `\t\t<real>${component(hex, 3)}</real>`,
+    '\t\t<key>Red Component</key>',
+    `\t\t<real>${component(hex, 1)}</real>`,
+    '\t</dict>',
+  ].join('\n')
+}
+
+function generateIterm2() {
+  for (const key of VARIANT_ORDER) {
+    const v = palette.variants[key]
+    const entries = {}
+    ANSI_SLOTS.forEach((colorKey, i) => {
+      entries[`Ansi ${i} Color`] = v.colors[colorKey]
+    })
+    for (const [itermKey, colorKey] of Object.entries(ITERM_FIXED)) {
+      entries[itermKey] = v.colors[colorKey]
+    }
+
+    // iTerm2 schreibt die Keys alphabetisch, also "Ansi 10" vor "Ansi 2".
+    const body = Object.keys(entries).sort()
+      .map((k) => `\t<key>${k}</key>\n${itermColorDict(entries[k])}`)
+      .join('\n')
+
+    write('themes', 'iterm2', `Navagraha ${v.label}.itermcolors`,
+      '<?xml version="1.0" encoding="UTF-8"?>\n'
+      + '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n'
+      + `<plist version="1.0">\n<dict>\n${body}\n</dict>\n</plist>\n`)
+  }
+}
+
+// --- VS Code --------------------------------------------------------------
+
+function generateVscodeThemes() {
+  for (const key of VARIANT_ORDER) {
+    const v = palette.variants[key]
+
+    const colors = {}
+    for (const [vscodeKey, [colorKey, alpha]] of Object.entries(VSCODE_COLORS)) {
+      colors[vscodeKey] = withAlpha(v.colors[colorKey], alpha)
+    }
+    ANSI_SLOTS.forEach((colorKey, i) => {
+      colors[`terminal.ansi${VSCODE_ANSI_NAMES[i]}`] = v.colors[colorKey]
+    })
+
+    const theme = {
+      name: `Graha ${v.label}`,
+      type: v.mode,
+      semanticHighlighting: true,
+      semanticTokenColors: Object.fromEntries(
+        Object.entries(VSCODE_SEMANTIC).map(([token, colorKey]) => [token, v.colors[colorKey]]),
+      ),
+      colors,
+      tokenColors: VSCODE_TOKEN_RULES.map((rule) => ({
+        name: rule.name,
+        scope: rule.scope,
+        settings: {
+          foreground: v.colors[rule.paletteKey],
+          ...(rule.fontStyle ? { fontStyle: rule.fontStyle } : {}),
+        },
+      })),
+    }
+
+    write('themes', 'vscode', 'navagraha', 'themes', `graha-${key}-color-theme.json`,
+      JSON.stringify(theme, null, 2))
+  }
+}
+
+// Nur contributes.themes wird erzeugt. Alles andere — vor allem version —
+// bleibt so stehen, wie es in der Datei steht.
+function updateVscodePackageJson() {
+  const path = ['themes', 'vscode', 'navagraha', 'package.json']
+  const pkg = JSON.parse(read(...path))
+
+  pkg.contributes.themes = VARIANT_ORDER.map((key) => {
+    const v = palette.variants[key]
+    return {
+      label: `Graha ${v.label}`,
+      uiTheme: v.mode === 'dark' ? 'vs-dark' : 'vs',
+      path: `./themes/graha-${key}-color-theme.json`,
+    }
+  })
+
+  write(...path, JSON.stringify(pkg, null, 2))
+}
+
+// --- Lauf -----------------------------------------------------------------
+
+generateTabby()
+generateIterm2()
+generateVscodeThemes()
+updateVscodePackageJson()
+
+console.log(`themes/ aus palette.json erzeugt (${VARIANT_ORDER.length} Varianten).`)
