@@ -5,22 +5,15 @@ import { getLangFromUrl, useTranslations } from '../../i18n/utils'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
+// Beschreibungen stehen in src/i18n/, hier nur Struktur und Befehle.
 const tools = [
-  { name: 'Tabby', file: 'themes/tabby/navagraha.yaml',
-    de: 'Block in die Konfigurationsdatei unter terminal: einfügen.',
-    en: 'Paste the block into the config file under terminal:.',
+  { key: 'tabby', name: 'Tabby', file: 'themes/tabby/navagraha.yaml',
     cmd: 'Settings → Config file\nSettings → Farbschema\nDarstellung → Terminal background: From color scheme' },
-  { name: 'iTerm2', file: 'themes/iterm2',
-    de: 'Die vier .itermcolors doppelklicken, dann im Profil auswählen.',
-    en: 'Double-click the four .itermcolors files, then pick one in the profile.',
+  { key: 'iterm2', name: 'iTerm2', file: 'themes/iterm2',
     cmd: 'Profiles → Colors → Color Presets\nUse different colors for light and dark mode' },
-  { name: 'VS Code', file: 'themes/vscode/navagraha',
-    de: 'Ordner nach ~/.vscode/extensions/ kopieren, neu starten.',
-    en: 'Copy the folder to ~/.vscode/extensions/ and restart.',
+  { key: 'vscode', name: 'VS Code', file: 'themes/vscode/navagraha',
     cmd: 'cp -R navagraha ~/.vscode/extensions/\n⌘K ⌘T' },
-  { name: 'Vim & bat', file: 'themes/vim/navagraha.vim',
-    de: 'Beide nehmen die Farben vom Terminal und wechseln mit.',
-    en: 'Both take their colours from the terminal and switch along.',
+  { key: 'vimbat', name: 'Vim & bat', file: 'themes/vim/navagraha.vim',
     cmd: 'cp navagraha.vim ~/.vim/colors/\ncolorscheme navagraha\nexport BAT_THEME=ansi' }
 ]
 const repo = 'https://github.com/Daehnie/navagraha/tree/main/'
@@ -34,7 +27,7 @@ const repo = 'https://github.com/Daehnie/navagraha/tree/main/'
       {tools.map(tool => (
         <div>
           <h3>{tool.name}</h3>
-          <p>{lang === 'en' ? tool.en : tool.de}</p>
+          <p>{t.themes.tools[tool.key]}</p>
           <pre class="mono">{tool.cmd}</pre>
           <p><a href={repo + tool.file}>{t.themes.download}</a></p>
         </div>

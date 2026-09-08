@@ -22,7 +22,13 @@
   "themes": {
     "title": "Install",
     "lede": "Every file carries all four variants. Which language element maps to which graha is decided by the editor, not the terminal.",
-    "download": "Download"
+    "download": "Download",
+    "tools": {
+      "tabby": "Paste the block into the config file under terminal:.",
+      "iterm2": "Double-click the four .itermcolors files, then pick one in the profile.",
+      "vscode": "Copy the folder to ~/.vscode/extensions/ and restart.",
+      "vimbat": "Both take their colours from the terminal and switch along."
+    }
   },
   "method": {
     "title": "How the scheme is built",

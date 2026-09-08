@@ -22,7 +22,13 @@
   "themes": {
     "title": "Einrichten",
     "lede": "Alle vier Varianten stecken in jeder Datei. Die Zuordnung von Sprachelement zu Graha liegt im Editor, nicht im Terminal.",
-    "download": "Herunterladen"
+    "download": "Herunterladen",
+    "tools": {
+      "tabby": "Block in die Konfigurationsdatei unter terminal: einfügen.",
+      "iterm2": "Die vier .itermcolors doppelklicken, dann im Profil auswählen.",
+      "vscode": "Ordner nach ~/.vscode/extensions/ kopieren, neu starten.",
+      "vimbat": "Beide nehmen die Farben vom Terminal und wechseln mit."
+    }
   },
   "method": {
     "title": "Wie das Schema entsteht",
