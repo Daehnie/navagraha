@@ -27,6 +27,16 @@ Wird eine Farbe geändert, gehört sie in `palette.json` — nie in eine
 Theme-Datei oder ins CSS. Die Dateien unter `themes/` sind Ausgabe, keine
 Quelle.
 
+`scripts/generate-themes.mjs` baut sie: tabby, die vier iTerm2-Dateien, die
+vier VS-Code-Themes und `contributes.themes` im Extension-Manifest. Die
+Zuordnungstabellen stehen daneben in `scripts/theme-schemas.mjs`. Der
+Generator läuft bei jedem `npm run build` mit, einzeln über
+`npm run generate:themes`. Nach einer Farbänderung gehören die neu erzeugten
+Dateien mit in den Commit.
+
+`themes/vim/` und `themes/bat/` fasst der Generator nicht an: beide enthalten
+keine Hexwerte, sondern nehmen die Farben über die ANSI-Plätze vom Terminal.
+
 ### Varianten
 
 Vier Stück, in `palette.json` unter `variants`:
@@ -112,8 +122,7 @@ einzige der Seite.
 
 ## Offene Punkte
 
-- Generator, der aus `palette.json` alle Dateien unter `themes/` baut. Bis
-  dahin sind sie von Hand erzeugt und müssen bei Farbänderungen mitgezogen
-  werden.
-- `astro.config.mjs`: `site` steht auf `navagraha.digitalspirit.io`.
-- `src/pages/themes.astro`: Repo-Adresse enthält noch `USER`.
+- Der `cmd`-Block für Tabby in `src/pages/themes.astro` nennt die Menüpunkte
+  auf Deutsch („Farbschema", „Darstellung") und steht so auch auf der
+  englischen Seite. Entweder englische Menünamen ergänzen oder den Block
+  ebenfalls nach `src/i18n/` ziehen.
