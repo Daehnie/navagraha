@@ -14,13 +14,18 @@ const roles: Record<string, { de: string; en: string }> = {
   ketu:    { de: 'Kommentare', en: 'Comments' }
 }
 const lang = Astro.currentLocale === 'en' ? 'en' : 'de'
-const neutrals = [
-  ['base',     { de: 'Grund',            en: 'Ground' }],
-  ['surface',  { de: 'Fläche',           en: 'Surface' }],
-  ['overlay',  { de: 'Auflage',          en: 'Overlay' }],
-  ['subtle',   { de: 'Chandra gedämpft', en: 'Chandra, damped' }],
-  ['hl_high',  { de: 'Auswahl',          en: 'Selection' }]
-] as const
+// Welche Werte hier stehen, entscheidet palette.json — nur die Beschriftung
+// liegt hier, weil sie Oberflaeche ist und keine Palettendaten.
+const neutralLabels: Record<string, { de: string; en: string }> = {
+  base:    { de: 'Grund',                en: 'Ground' },
+  surface: { de: 'Fläche',               en: 'Surface' },
+  overlay: { de: 'Auflage',              en: 'Overlay' },
+  subtle:  { de: 'Chandra gedämpft',     en: 'Chandra, damped' },
+  hl_low:  { de: 'Hervorhebung schwach', en: 'Highlight, low' },
+  hl_med:  { de: 'Hervorhebung mittel',  en: 'Highlight, medium' },
+  hl_high: { de: 'Auswahl',              en: 'Selection' }
+}
+const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
 ---
 <table>
   <thead>
