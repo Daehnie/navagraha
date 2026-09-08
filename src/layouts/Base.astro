@@ -34,7 +34,7 @@ const nav = [
     <link rel="alternate" hreflang={l}
           href={new URL(path(here, l as any), Astro.site).toString()} />
   ))}
-  <set:html><style>{vars}</style></set:html>
+  <style set:html={vars}></style>
   <script is:inline>
     // Vor dem ersten Anstrich setzen, damit nichts aufblitzt.
     (() => {
