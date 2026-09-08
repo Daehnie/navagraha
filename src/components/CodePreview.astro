@@ -1,0 +1,38 @@
+---
+const { title = 'dignity.ts' } = Astro.props
+---
+<div class="pane">
+  <div class="bar"><i></i><i></i><i></i><span class="mono">{title}</span></div>
+  <pre><code><span class="ketu">// dignity.ts</span>
+<span class="mangala">import</span> &#123; <span class="shukra">Graha</span> &#125; <span class="mangala">from</span> <span class="budha">"./jyotisha"</span>
+
+<span class="mangala">export function</span> <span class="guru">dignity</span>(<span class="chandra">g</span>: <span class="shukra">Graha</span>): <span class="shukra">string</span> &#123;
+  <span class="mangala">const</span> <span class="chandra">arc</span> <span class="shani">=</span> <span class="chandra">Math</span>.<span class="guru">abs</span>(<span class="chandra">g</span>.<span class="shukra">longitude</span> <span class="shani">-</span> <span class="chandra">g</span>.<span class="shukra">exaltation</span>)
+  <span class="mangala">if</span> (<span class="chandra">arc</span> <span class="shani">&lt;</span> <span class="surya">3</span>) <span class="mangala">return</span> <span class="budha">"uccha"</span>
+  <span class="mangala">if</span> (<span class="chandra">g</span>.<span class="shukra">retrograde</span>) <span class="mangala">return</span> <span class="budha">"vakri"</span>
+  <span class="mangala">return</span> <span class="budha">"sama"</span>
+&#125;
+
+<span class="ketu">// Mond: 46,38° siderisch, exaltiert in Rohini</span>
+<span class="guru">dignity</span>(<span class="chandra">chandra</span>)  <span class="ketu">// "uccha"</span></code></pre>
+</div>
+
+<style>
+  .pane { background: var(--surface); border: 1px solid var(--hl_med);
+    border-radius: 10px; overflow: hidden; }
+  .bar { display: flex; align-items: center; gap: .45rem; padding: .55rem .8rem;
+    border-bottom: 1px solid var(--hl_med); color: var(--ketu); font-size: .74rem; }
+  .bar i { width: .6rem; height: .6rem; border-radius: 50%;
+    background: var(--hl_high); display: block; }
+  pre { margin: 0; padding: 1.1rem 1.2rem; overflow-x: auto; font-size: .78rem;
+    line-height: 1.85; font-family: "Monaspace Neon", ui-monospace, "SF Mono", Menlo, monospace; }
+  .ketu { color: var(--ketu); font-style: italic; }
+  .chandra { color: var(--chandra); }
+  .mangala { color: var(--mangala); }
+  .budha { color: var(--budha); }
+  .guru { color: var(--guru); }
+  .shukra { color: var(--shukra); }
+  .shani { color: var(--shani); }
+  .surya { color: var(--surya); }
+  .rahu { color: var(--rahu); }
+</style>

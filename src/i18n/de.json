@@ -1,0 +1,38 @@
+{
+  "nav": { "home": "Start", "palette": "Farben", "themes": "Themen" },
+  "tagline": "Neun Planeten, neun Farben",
+  "lede": "Ein Farbschema für Terminal und Editor, dessen Töne nicht gewählt, sondern abgelesen sind: jede Farbe ist die klassische Farbe eines Grahas, ihre Sättigung folgt seiner Stärke in einem einzigen Geburtshoroskop.",
+  "chartCaption": "23. Mai 1982, 19:47 MESZ, Wedel. Siderisch nach Lahiri, Häuser nach Zeichen. Lagna in Tula.",
+  "variant": "Variante",
+  "variants": {
+    "swati": "Luft, dunkel. Grundton aus dem Lagna Tula und Guru in Swati, dessen Gottheit Vayu ist.",
+    "pratipada": "Erde, dunkel. Grundton aus der Erd-Gruppe: fünf Grahas stehen in Vrishabha und Kanya.",
+    "ushas": "Erde, hell. Dieselbe Herleitung, aufgehellt. Ushas ist die Morgenröte.",
+    "tula": "Luft, hell. Dieselbe Herleitung, aufgehellt. Tula ist das Waagezeichen des Lagna."
+  },
+  "palette": {
+    "title": "Die Grahas",
+    "lede": "Farbton nach der klassischen Zuordnung, Sättigung nach der Würde im Chart. Ein Klick kopiert den Wert.",
+    "graha": "Graha", "role": "Rolle im Code", "source": "Farbe und Stand",
+    "groundTitle": "Grund und Fläche",
+    "groundLede": "Hier entscheidet sich, welche Grahas hervortreten. Die vier Varianten unterscheiden sich ausschließlich in diesen Werten.",
+    "copied": "kopiert"
+  },
+  "preview": { "title": "Im Code", "lede": "Dieselbe Datei in der gewählten Variante." },
+  "themes": {
+    "title": "Einrichten",
+    "lede": "Alle vier Varianten stecken in jeder Datei. Die Zuordnung von Sprachelement zu Graha liegt im Editor, nicht im Terminal.",
+    "download": "Herunterladen"
+  },
+  "method": {
+    "title": "Wie das Schema entsteht",
+    "p1": "Die klassische Jyotisha-Literatur weist jedem Graha eine Farbe zu: die Sonne kupferrot, der Mond weiß, Mars blutrot, Merkur grasgrün, Jupiter goldgelb, Venus weiß-schillernd, Saturn dunkelblau, Rahu rauchig, Ketu aschgrau. Neun Planeten ergeben damit von selbst neun Töne über den ganzen Farbkreis. Kein Ton musste erfunden oder verschoben werden.",
+    "h2": "Sättigung",
+    "p2": "Die Kraft einer Farbe folgt der Stärke ihres Grahas. Shukra steht exaltiert in Revati und ist Atmakaraka, hat also die kräftigste Farbe. Guru steht mit Dig Bala im Lagna. Rahu bleibt rauchig und blass, Mangala im zwölften Haus zurückgenommen.",
+    "h3": "Zwei Gründe",
+    "p3": "Der Hintergrund kam zuerst aus der Erd-Dominanz: fünf der neun Grahas stehen in Vrishabha und Kanya. Nur liegen diese beiden Zeichen im achten und zwölften Haus, den verborgensten des Charts. Die zweite Herleitung nimmt das Lagna: Tula, ein Vayu-Zeichen, mit Jupiter in Swati, dessen Gottheit Vayu selbst ist. Beide Wege sind hier, weil beide etwas taugen.",
+    "h4": "Kontrast",
+    "p4": "Jede Farbe, die Text tragen kann, erreicht mindestens 4,5 zu 1 — und zwar nicht nur gegen den Grund, sondern auch gegen Fläche und Auflage. Die Helligkeiten sind dafür nicht ausgesucht, sondern gelöst worden."
+  },
+  "footer": "Ein Horoskop, neun Farben, vier Varianten. Frei verwendbar."
+}

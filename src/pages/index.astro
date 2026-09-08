@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro'
+import Chart from '../components/Chart.astro'
+import ThemeSwitcher from '../components/ThemeSwitcher.astro'
+import CodePreview from '../components/CodePreview.astro'
+import { getLangFromUrl, useTranslations, path } from '../i18n/utils'
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+<Base title={`Navagraha — ${t.tagline}`} description={t.lede}>
+  <header class="wrap">
+    <div class="hero">
+      <div>
+        <h1>{t.tagline}</h1>
+        <p class="sub">{t.lede}</p>
+        <ThemeSwitcher labels={t.variants} />
+      </div>
+      <div>
+        <Chart />
+        <p class="born">{t.chartCaption}</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="wrap">
+    <h2>{t.preview.title}</h2>
+    <p>{t.preview.lede}</p>
+    <CodePreview />
+    <p style="margin-top:1.6rem">
+      <a href={path('/palette', lang)}>{t.palette.title}</a> ·
+      <a href={path('/themes', lang)}>{t.themes.title}</a>
+    </p>
+  </section>
+
+  <section class="wrap method">
+    <h2>{t.method.title}</h2>
+    <p>{t.method.p1}</p>
+    <h3>{t.method.h2}</h3><p>{t.method.p2}</p>
+    <h3>{t.method.h3}</h3><p>{t.method.p3}</p>
+    <h3>{t.method.h4}</h3><p>{t.method.p4}</p>
+  </section>
+</Base>
+
+<style>
+  header { padding: 2rem 0 3.6rem; }
+  .hero { display: grid; gap: 2.2rem; align-items: center; }
+  @media (min-width: 52rem) { .hero { grid-template-columns: minmax(0,1fr) 20rem; gap: 3.4rem; } }
+  .sub { font-size: 1.12rem; color: var(--subtle); margin: 0 0 1.7rem; max-width: 40ch; }
+  .born { font-size: .78rem; color: var(--ketu); margin: 1.6rem 0 0; }
+  .method p { max-width: 62ch; }
+</style>

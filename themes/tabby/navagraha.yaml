@@ -1,0 +1,121 @@
+# Graha – Tabby-Farbschemata (vier Varianten)
+# Abgeleitet aus dem siderischen Geburtshoroskop (Lahiri): 23.05.1982, 19:47 MESZ, Wedel.
+#
+# Farbton der Akzente = klassische Graha-Farbe (BPHS)
+# Saettigung          = Staerke des Grahas im Chart
+# Vordergrund         = Chandra, exaltiert in Rohini
+#
+# Zwei Herleitungen fuer den Grundton, je hell und dunkel:
+#   Pratipada / Ushas – Prithvi, aus der Erd-Gruppe im 8. und 12. Haus
+#   Swati / Tula      – Vayu, aus dem Lagna (Tula) und Guru in Swati
+#
+# Einbau: Settings → Config file → Block terminal: / customColorSchemes:
+#         Danach Settings → Color Scheme, und Appearance → Terminal background:
+#         From color scheme.
+#
+# Alle Farben 1–15 liegen bei >= 4.5:1 gegen background, surface und overlay.
+# Die ANSI-Plaetze tragen nur einen Farbton, keine Rolle – die Zuordnung zu
+# Syntaxelementen steht in graha.vim bzw. im VS-Code-Theme.
+# Platz 9 ist Surya (Kupfer), nicht ein helleres Mangala.
+
+terminal:
+  customColorSchemes:
+    # Erde  · dunkel · Grundton 76°  – Prithvi-Dominanz, 5 Grahas in Vrishabha und Kanya
+    - name: "Graha Pratipada"
+      foreground: "#dcd7c8"
+      background: "#16120d"
+      selection: "#3c362d"
+      cursor: "#00a2a3"
+      cursorAccent: "#16120d"
+      colors:
+        - "#2c2924"  #  0 schwarz     – Grundton
+        - "#e46d64"  #  1 rot         – Mangala – 4.6:1
+        - "#58a164"  #  2 gruen       – Budha – 4.6:1
+        - "#b68a00"  #  3 gelb        – Guru – 4.6:1
+        - "#6d91d5"  #  4 blau        – Shani – 4.6:1
+        - "#a288b3"  #  5 magenta     – Rahu – 4.6:1
+        - "#00a2a3"  #  6 cyan        – Shukra – 4.6:1
+        - "#a9a298"  #  7 weiss       – Chandra gedaempft – 5.7:1
+        - "#979188"  #  8 hellschwarz – Ketu – 4.6:1
+        - "#d07c3d"  #  9 hellrot     – Surya (Kupfer) – 4.6:1
+        - "#83cd8e"  # 10 hellgruen   – Budha – 7.6:1
+        - "#e3b648"  # 11 hellgelb    – Guru – 7.6:1
+        - "#98bcff"  # 12 hellblau    – Shani – 7.6:1
+        - "#cdb2df"  # 13 hellmagenta – Rahu – 7.6:1
+        - "#3bcfd0"  # 14 hellcyan    – Shukra – 7.6:1
+        - "#f2ede3"  # 15 hellweiss   – Chandra – 12.4:1
+
+    # Erde  · hell   · Grundton 76°  – dieselbe Herleitung, Ushas: die Morgenroete
+    - name: "Graha Ushas"
+      foreground: "#2d281e"
+      background: "#f8efe2"
+      selection: "#d5c8b6"
+      cursor: "#01686a"
+      cursorAccent: "#f8efe2"
+      colors:
+        - "#e2dad0"  #  0 schwarz     – Grundton
+        - "#a83632"  #  1 rot         – Mangala – 4.7:1
+        - "#216b33"  #  2 gruen       – Budha – 4.7:1
+        - "#775a00"  #  3 gelb        – Guru – 4.7:1
+        - "#3b5c9c"  #  4 blau        – Shani – 4.7:1
+        - "#6e547d"  #  5 magenta     – Rahu – 4.7:1
+        - "#01686a"  #  6 cyan        – Shukra – 4.8:1
+        - "#564f47"  #  7 weiss       – Chandra gedaempft – 5.8:1
+        - "#635d56"  #  8 hellschwarz – Ketu – 4.7:1
+        - "#934a00"  #  9 hellrot     – Surya (Kupfer) – 4.7:1
+        - "#06511e"  # 10 hellgruen   – Budha – 6.9:1
+        - "#594200"  # 11 hellgelb    – Guru – 6.9:1
+        - "#26447c"  # 12 hellblau    – Shani – 6.9:1
+        - "#533d60"  # 13 hellmagenta – Rahu – 6.9:1
+        - "#004d4e"  # 14 hellcyan    – Shukra – 7.0:1
+        - "#1a1810"  # 15 hellweiss   – Chandra – 12.8:1
+
+    # Luft  · dunkel · Grundton 255° – Lagna Tula, Guru in Swati, Gottheit Vayu
+    - name: "Graha Swati"
+      foreground: "#ced6e3"
+      background: "#101317"
+      selection: "#32373e"
+      cursor: "#02a0a2"
+      cursorAccent: "#101317"
+      colors:
+        - "#26292d"  #  0 schwarz     – Grundton
+        - "#e46c64"  #  1 rot         – Mangala – 4.6:1
+        - "#57a064"  #  2 gruen       – Budha – 4.6:1
+        - "#b58a02"  #  3 gelb        – Guru – 4.6:1
+        - "#6c90d4"  #  4 blau        – Shani – 4.6:1
+        - "#a186b2"  #  5 magenta     – Rahu – 4.6:1
+        - "#02a0a2"  #  6 cyan        – Shukra – 4.6:1
+        - "#9ba2ac"  #  7 weiss       – Chandra gedaempft – 5.7:1
+        - "#8b9199"  #  8 hellschwarz – Ketu – 4.6:1
+        - "#d07c3c"  #  9 hellrot     – Surya (Kupfer) – 4.6:1
+        - "#82cc8d"  # 10 hellgruen   – Budha – 7.6:1
+        - "#e2b547"  # 11 hellgelb    – Guru – 7.6:1
+        - "#97bcfe"  # 12 hellblau    – Shani – 7.6:1
+        - "#ccb1de"  # 13 hellmagenta – Rahu – 7.6:1
+        - "#3aced0"  # 14 hellcyan    – Shukra – 7.6:1
+        - "#e7edf6"  # 15 hellweiss   – Chandra – 12.4:1
+
+    # Luft  · hell   · Grundton 255° – Lagna Tula, Vayu-Tattva
+    - name: "Graha Tula"
+      foreground: "#232933"
+      background: "#ebf1f8"
+      selection: "#c3cbd5"
+      cursor: "#006a6b"
+      cursorAccent: "#ebf1f8"
+      colors:
+        - "#d7dce2"  #  0 schwarz     – Grundton
+        - "#a83632"  #  1 rot         – Mangala – 4.7:1
+        - "#216b33"  #  2 gruen       – Budha – 4.7:1
+        - "#775a00"  #  3 gelb        – Guru – 4.7:1
+        - "#3c5d9d"  #  4 blau        – Shani – 4.7:1
+        - "#6e547d"  #  5 magenta     – Rahu – 4.7:1
+        - "#006a6b"  #  6 cyan        – Shukra – 4.7:1
+        - "#4b525a"  #  7 weiss       – Chandra gedaempft – 5.7:1
+        - "#595e66"  #  8 hellschwarz – Ketu – 4.7:1
+        - "#944b00"  #  9 hellrot     – Surya (Kupfer) – 4.7:1
+        - "#08511f"  # 10 hellgruen   – Budha – 6.9:1
+        - "#594200"  # 11 hellgelb    – Guru – 6.9:1
+        - "#27447d"  # 12 hellblau    – Shani – 6.9:1
+        - "#533d60"  # 13 hellmagenta – Rahu – 6.9:1
+        - "#014f4f"  # 14 hellcyan    – Shukra – 6.8:1
+        - "#14181f"  # 15 hellweiss   – Chandra – 12.9:1

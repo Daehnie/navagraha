@@ -1,0 +1,47 @@
+---
+import palette from '../data/palette.json'
+const { labels } = Astro.props as { labels: Record<string, string> }
+const variants = Object.entries(palette.variants)
+---
+<div class="tabs" role="tablist" aria-label="Variante">
+  {variants.map(([key, v]) => (
+    <button role="tab" data-v={key} aria-selected={key === 'swati'}>
+      <span class="sw">
+        <i style={`background:${v.colors.base}`}></i>
+        <i style={`background:${v.colors.shukra}`}></i>
+        <i style={`background:${v.colors.guru}`}></i>
+      </span>{v.label}
+    </button>
+  ))}
+</div>
+<p class="vnote" id="vnote"></p>
+
+<script is:inline define:vars={{ labels }}>
+  const tabs = document.querySelectorAll('.tabs button')
+  const note = document.getElementById('vnote')
+  function pick(v, remember = true) {
+    document.documentElement.dataset.theme = v
+    tabs.forEach(b => b.setAttribute('aria-selected', String(b.dataset.v === v)))
+    if (note) note.textContent = labels[v] ?? ''
+    if (remember) try { localStorage.setItem('navagraha', v) } catch {}
+  }
+  tabs.forEach(b => b.addEventListener('click', () => pick(b.dataset.v)))
+  pick(document.documentElement.dataset.theme || 'swati', false)
+</script>
+
+<style>
+  .tabs { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .tabs button { display: inline-flex; align-items: center; gap: .5rem;
+    background: var(--surface); color: var(--subtle);
+    border: 1px solid var(--hl_med); border-radius: 999px;
+    padding: .42rem .85rem .42rem .5rem; font: inherit; font-size: .84rem;
+    cursor: pointer; transition: border-color .2s, color .2s; }
+  .tabs button:hover { border-color: var(--hl_high); color: var(--chandra); }
+  .tabs button[aria-selected="true"] { border-color: var(--shukra); color: var(--chandra_b); }
+  .sw { display: inline-flex; }
+  .sw i { width: .62rem; height: .95rem; display: block; }
+  .sw i:first-child { border-radius: 3px 0 0 3px; }
+  .sw i:last-child { border-radius: 0 3px 3px 0; }
+  .vnote { color: var(--ketu); font-size: .86rem; margin: .9rem 0 0;
+    max-width: 44ch; min-height: 3rem; }
+</style>

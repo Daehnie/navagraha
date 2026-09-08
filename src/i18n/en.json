@@ -1,0 +1,38 @@
+{
+  "nav": { "home": "Home", "palette": "Palette", "themes": "Themes" },
+  "tagline": "Nine planets, nine colours",
+  "lede": "A colour scheme for terminal and editor whose tones were not picked but read off: every colour is the classical colour of a graha, its saturation follows that planet's strength in one particular birth chart.",
+  "chartCaption": "23 May 1982, 19:47 CEST, Wedel. Sidereal, Lahiri ayanamsa, whole-sign houses. Lagna in Tula.",
+  "variant": "Variant",
+  "variants": {
+    "swati": "Air, dark. Ground tone from the Tula lagna and Jupiter in Swati, whose deity is Vayu.",
+    "pratipada": "Earth, dark. Ground tone from the earth group: five grahas sit in Vrishabha and Kanya.",
+    "ushas": "Earth, light. Same derivation, lifted. Ushas is the dawn.",
+    "tula": "Air, light. Same derivation, lifted. Tula is the lagna's sign, the scales."
+  },
+  "palette": {
+    "title": "The grahas",
+    "lede": "Hue from the classical assignment, saturation from dignity in the chart. Click a value to copy it.",
+    "graha": "Graha", "role": "Role in code", "source": "Colour and placement",
+    "groundTitle": "Ground and surface",
+    "groundLede": "This is where it is decided which grahas step forward. The four variants differ in these values alone.",
+    "copied": "copied"
+  },
+  "preview": { "title": "In code", "lede": "The same file in the selected variant." },
+  "themes": {
+    "title": "Install",
+    "lede": "Every file carries all four variants. Which language element maps to which graha is decided by the editor, not the terminal.",
+    "download": "Download"
+  },
+  "method": {
+    "title": "How the scheme is built",
+    "p1": "Classical Jyotisha literature assigns each graha a colour: the Sun copper red, the Moon white, Mars blood red, Mercury grass green, Jupiter golden yellow, Venus iridescent white, Saturn dark blue, Rahu smoky, Ketu ash grey. Nine planets therefore yield nine tones across the whole wheel on their own. No tone had to be invented or shifted.",
+    "h2": "Saturation",
+    "p2": "A colour's force follows its graha's strength. Shukra is exalted in Revati and is atmakaraka, so it carries the strongest colour. Guru holds dig bala in the lagna. Rahu stays smoky and pale, Mangala in the twelfth house restrained.",
+    "h3": "Two grounds",
+    "p3": "The background first came from earth dominance: five of the nine grahas sit in Vrishabha and Kanya. But those two signs fall in the eighth and twelfth houses, the most hidden of the chart. The second derivation takes the lagna: Tula, an air sign, with Jupiter in Swati, whose deity is Vayu himself. Both paths are here because both hold up.",
+    "h4": "Contrast",
+    "p4": "Every colour that can carry text reaches at least 4.5 to 1 — not only against the ground, but against surface and overlay too. The lightness values were solved for, not chosen."
+  },
+  "footer": "One birth chart, nine colours, four variants. Free to use."
+}

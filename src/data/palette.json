@@ -1,0 +1,222 @@
+{
+ "meta": {
+  "name": "Navagraha",
+  "birth": {
+   "date": "1982-05-23",
+   "time": "19:47",
+   "tz": "CEST",
+   "place": "Wedel, Deutschland",
+   "ayanamsa": "Lahiri",
+   "lagna": "Tula 22°26′, Vishakha P1"
+  }
+ },
+ "variants": {
+  "swati": {
+   "label": "Swati",
+   "mode": "dark",
+   "ground": "vayu",
+   "colors": {
+    "base": "#101317",
+    "surface": "#1a1d20",
+    "overlay": "#26292d",
+    "chandra": "#ced6e3",
+    "chandra_b": "#e7edf6",
+    "ketu": "#8b9199",
+    "subtle": "#9ba2ac",
+    "mangala": "#e46c64",
+    "mangala_b": "#ffa399",
+    "surya": "#d07c3c",
+    "surya_b": "#fea668",
+    "guru": "#b58a02",
+    "guru_b": "#e2b547",
+    "budha": "#57a064",
+    "budha_b": "#82cc8d",
+    "shukra": "#02a0a2",
+    "shukra_b": "#3aced0",
+    "shani": "#6c90d4",
+    "shani_b": "#97bcfe",
+    "rahu": "#a186b2",
+    "rahu_b": "#ccb1de",
+    "hl_low": "#15191f",
+    "hl_med": "#22262d",
+    "hl_high": "#32373e"
+   }
+  },
+  "pratipada": {
+   "label": "Pratipada",
+   "mode": "dark",
+   "ground": "prithvi",
+   "colors": {
+    "base": "#16120d",
+    "surface": "#1f1c17",
+    "overlay": "#2c2924",
+    "chandra": "#dcd7c8",
+    "chandra_b": "#f2ede3",
+    "ketu": "#979188",
+    "subtle": "#a9a298",
+    "mangala": "#e46d64",
+    "mangala_b": "#ffa39a",
+    "surya": "#d07c3d",
+    "surya_b": "#ffa86a",
+    "guru": "#b68a00",
+    "guru_b": "#e3b648",
+    "budha": "#58a164",
+    "budha_b": "#83cd8e",
+    "shukra": "#00a2a3",
+    "shukra_b": "#3bcfd0",
+    "shani": "#6d91d5",
+    "shani_b": "#98bcff",
+    "rahu": "#a288b3",
+    "rahu_b": "#cdb2df",
+    "hl_low": "#1d1810",
+    "hl_med": "#2b251d",
+    "hl_high": "#3c362d"
+   }
+  },
+  "ushas": {
+   "label": "Ushas",
+   "mode": "light",
+   "ground": "prithvi",
+   "colors": {
+    "base": "#f8efe2",
+    "surface": "#eee6da",
+    "overlay": "#e2dad0",
+    "chandra": "#2d281e",
+    "chandra_b": "#1a1810",
+    "ketu": "#635d56",
+    "subtle": "#564f47",
+    "mangala": "#a83632",
+    "mangala_b": "#851e1e",
+    "surya": "#934a00",
+    "surya_b": "#6f3600",
+    "guru": "#775a00",
+    "guru_b": "#594200",
+    "budha": "#216b33",
+    "budha_b": "#06511e",
+    "shukra": "#01686a",
+    "shukra_b": "#004d4e",
+    "shani": "#3b5c9c",
+    "shani_b": "#26447c",
+    "rahu": "#6e547d",
+    "rahu_b": "#533d60",
+    "hl_low": "#f6e8d6",
+    "hl_med": "#e5d8c6",
+    "hl_high": "#d5c8b6"
+   }
+  },
+  "tula": {
+   "label": "Tula",
+   "mode": "light",
+   "ground": "vayu",
+   "colors": {
+    "base": "#ebf1f8",
+    "surface": "#e3e8ee",
+    "overlay": "#d7dce2",
+    "chandra": "#232933",
+    "chandra_b": "#14181f",
+    "ketu": "#595e66",
+    "subtle": "#4b525a",
+    "mangala": "#a83632",
+    "mangala_b": "#851e1e",
+    "surya": "#944b00",
+    "surya_b": "#6f3600",
+    "guru": "#775a00",
+    "guru_b": "#594200",
+    "budha": "#216b33",
+    "budha_b": "#08511f",
+    "shukra": "#006a6b",
+    "shukra_b": "#014f4f",
+    "shani": "#3c5d9d",
+    "shani_b": "#27447d",
+    "rahu": "#6e547d",
+    "rahu_b": "#533d60",
+    "hl_low": "#e3ebf5",
+    "hl_med": "#d3dbe5",
+    "hl_high": "#c3cbd5"
+   }
+  }
+ },
+ "grahas": [
+  {
+   "key": "surya",
+   "sa": "Sūrya",
+   "abbr": "Sū",
+   "house": 8,
+   "color": "kupferrot",
+   "pos": "Krittika, Vrishabha"
+  },
+  {
+   "key": "chandra",
+   "sa": "Chandra",
+   "abbr": "Ch",
+   "house": 8,
+   "color": "weiß",
+   "pos": "Rohini, exaltiert"
+  },
+  {
+   "key": "mangala",
+   "sa": "Mangala",
+   "abbr": "Ma",
+   "house": 12,
+   "color": "blutrot",
+   "pos": "U. Phalguni, Kanya"
+  },
+  {
+   "key": "budha",
+   "sa": "Budha",
+   "abbr": "Bu",
+   "house": 8,
+   "color": "grasgrün",
+   "pos": "Rohini, retrograd"
+  },
+  {
+   "key": "guru",
+   "sa": "Guru",
+   "abbr": "Gu",
+   "house": 1,
+   "color": "goldgelb",
+   "pos": "Swati, Tula, Dig Bala"
+  },
+  {
+   "key": "shukra",
+   "sa": "Shukra",
+   "abbr": "Śu",
+   "house": 6,
+   "color": "weiß-schillernd",
+   "pos": "Revati, exaltiert, Atmakaraka"
+  },
+  {
+   "key": "shani",
+   "sa": "Shani",
+   "abbr": "Śa",
+   "house": 12,
+   "color": "dunkelblau",
+   "pos": "Hasta, Kanya, retrograd"
+  },
+  {
+   "key": "rahu",
+   "sa": "Rahu",
+   "abbr": "Ra",
+   "house": 9,
+   "color": "rauchig",
+   "pos": "Punarvasu, Mithuna"
+  },
+  {
+   "key": "ketu",
+   "sa": "Ketu",
+   "abbr": "Ke",
+   "house": 3,
+   "color": "aschgrau",
+   "pos": "P. Ashadha, Dhanu"
+  }
+ ],
+ "neutrals": [
+  "base",
+  "surface",
+  "overlay",
+  "subtle",
+  "hl_low",
+  "hl_med",
+  "hl_high"
+ ]
+}

@@ -1,0 +1,71 @@
+---
+import palette from '../data/palette.json'
+import '../styles/global.css'
+import { getLangFromUrl, useTranslations, path, languages } from '../i18n/utils'
+
+const { title, description } = Astro.props as { title: string; description?: string }
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const here = Astro.url.pathname.replace(/^\/en/, '') || '/'
+
+// CSS-Variablen aus der Palette erzeugen — eine einzige Quelle fuer Seite und Themes.
+const vars = Object.entries(palette.variants).map(([key, v]) => {
+  const decls = Object.entries(v.colors).map(([n, hex]) => `--${n}:${hex};`).join('')
+  return `html[data-theme="${key}"]{${decls}}`
+}).join('\n')
+
+const nav = [
+  ['/', t.nav.home],
+  ['/palette', t.nav.palette],
+  ['/themes', t.nav.themes]
+] as const
+---
+<!doctype html>
+<html lang={lang} data-theme="swati">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{title}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  {Object.keys(languages).map(l => (
+    <link rel="alternate" hreflang={l}
+          href={new URL(path(here, l as any), Astro.site).toString()} />
+  ))}
+  <set:html><style>{vars}</style></set:html>
+  <script is:inline>
+    // Vor dem ersten Anstrich setzen, damit nichts aufblitzt.
+    (() => {
+      let v
+      try { v = localStorage.getItem('navagraha') } catch {}
+      if (!v) v = matchMedia('(prefers-color-scheme: light)').matches ? 'ushas' : 'swati'
+      document.documentElement.dataset.theme = v
+    })()
+  </script>
+</head>
+<body>
+  <div class="wrap top">
+    <a class="brand" href={path('/', lang)}>
+      <img src="/favicon.svg" alt="" width="24" height="24" />Navagraha
+    </a>
+    <nav>
+      {nav.map(([p, label]) => (
+        <a href={path(p, lang)}
+           aria-current={here === p ? 'page' : undefined}>{label}</a>
+      ))}
+    </nav>
+    <span class="lang">
+      {Object.entries(languages).map(([l, name], i) => (
+        <>{i > 0 && ' / '}<a href={path(here, l as any)}
+          aria-current={l === lang ? 'true' : undefined}>{name}</a></>
+      ))}
+    </span>
+  </div>
+
+  <slot />
+
+  <footer class="wrap"><p>{t.footer}</p></footer>
+</body>
+</html>

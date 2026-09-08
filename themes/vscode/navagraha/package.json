@@ -1,0 +1,37 @@
+{
+  "name": "graha",
+  "displayName": "Graha",
+  "description": "Vier Farbschemata, abgeleitet aus einem siderischen Geburtshoroskop.",
+  "version": "1.2.0",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Graha Pratipada",
+        "uiTheme": "vs-dark",
+        "path": "./themes/graha-pratipada-color-theme.json"
+      },
+      {
+        "label": "Graha Ushas",
+        "uiTheme": "vs",
+        "path": "./themes/graha-ushas-color-theme.json"
+      },
+      {
+        "label": "Graha Swati",
+        "uiTheme": "vs-dark",
+        "path": "./themes/graha-swati-color-theme.json"
+      },
+      {
+        "label": "Graha Tula",
+        "uiTheme": "vs",
+        "path": "./themes/graha-tula-color-theme.json"
+      }
+    ]
+  }
+}

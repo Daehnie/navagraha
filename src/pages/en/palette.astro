@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro'
+import ThemeSwitcher from '../../components/ThemeSwitcher.astro'
+import PaletteTable from '../../components/PaletteTable.astro'
+import { getLangFromUrl, useTranslations } from '../../i18n/utils'
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+<Base title={`${t.palette.title} — Navagraha`} description={t.palette.lede}>
+  <section class="wrap" style="border-top:0">
+    <h2>{t.palette.title}</h2>
+    <p>{t.palette.lede}</p>
+    <ThemeSwitcher labels={t.variants} />
+    <div style="height:1.8rem"></div>
+    <PaletteTable t={t} />
+  </section>
+</Base>

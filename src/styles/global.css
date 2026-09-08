@@ -1,0 +1,46 @@
+/* Navagraha — die Seite traegt das Schema, das sie zeigt.
+   Die Variablen werden aus src/data/palette.json erzeugt (siehe Base.astro). */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--base);
+  color: var(--chandra);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  transition: background .45s ease, color .45s ease;
+}
+code, .mono { font-family: "Monaspace Neon", ui-monospace, "SF Mono", Menlo, monospace; }
+a { color: var(--shani); }
+:focus-visible { outline: 2px solid var(--shukra); outline-offset: 2px; border-radius: 3px; }
+
+.wrap { width: min(64rem, 100% - 2.4rem); margin-inline: auto; }
+section { padding: 3.4rem 0; border-top: 1px solid var(--hl_med); }
+h1 { font-size: clamp(2.3rem, 7.5vw, 3.9rem); line-height: 1.02; font-weight: 400;
+     letter-spacing: -.028em; margin: 0 0 .9rem; }
+h2 { font-size: 1.55rem; font-weight: 400; margin: 0 0 .3rem; letter-spacing: -.012em; }
+h2 + p { color: var(--ketu); margin: 0 0 1.9rem; max-width: 42ch; }
+h3 { font-size: 1rem; font-weight: 400; margin: 1.6rem 0 .3rem; }
+
+/* Kopfzeile */
+.top { display: flex; align-items: center; gap: 1.1rem; padding: 1.4rem 0;
+       flex-wrap: wrap; font-size: .88rem; }
+.brand { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none;
+         color: var(--chandra); font-size: 1rem; }
+.brand img { width: 1.5rem; height: 1.5rem; border-radius: 5px; display: block; }
+.top nav { display: flex; gap: 1rem; margin-left: auto; }
+.top nav a { color: var(--ketu); text-decoration: none; }
+.top nav a:hover, .top nav a[aria-current="page"] { color: var(--chandra); }
+.lang a { color: var(--ketu); text-decoration: none; font-size: .8rem; }
+.lang a[aria-current="true"] { color: var(--chandra); }
+
+footer { padding: 2.6rem 0 4rem; color: var(--ketu); font-size: .8rem;
+         border-top: 1px solid var(--hl_med); }

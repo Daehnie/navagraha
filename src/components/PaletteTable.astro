@@ -1,0 +1,117 @@
+---
+import palette from '../data/palette.json'
+const { t } = Astro.props as { t: any }
+const variants = Object.entries(palette.variants)
+const roles: Record<string, { de: string; en: string }> = {
+  surya:   { de: 'Zahlen und Konstanten', en: 'Numbers and constants' },
+  chandra: { de: 'Bezeichner und Grundtext', en: 'Identifiers and body text' },
+  mangala: { de: 'Schlüsselwörter und Steuerfluss', en: 'Keywords and control flow' },
+  budha:   { de: 'Zeichenketten', en: 'Strings' },
+  guru:    { de: 'Funktionen und Selektoren', en: 'Functions and selectors' },
+  shukra:  { de: 'Typen und Eigenschaftsnamen', en: 'Types and property names' },
+  shani:   { de: 'Operatoren', en: 'Operators' },
+  rahu:    { de: 'Präprozessor, At-Rules, Tags', en: 'Preprocessor, at-rules, tags' },
+  ketu:    { de: 'Kommentare', en: 'Comments' }
+}
+const lang = Astro.currentLocale === 'en' ? 'en' : 'de'
+const neutrals = [
+  ['base',     { de: 'Grund',            en: 'Ground' }],
+  ['surface',  { de: 'Fläche',           en: 'Surface' }],
+  ['overlay',  { de: 'Auflage',          en: 'Overlay' }],
+  ['subtle',   { de: 'Chandra gedämpft', en: 'Chandra, damped' }],
+  ['hl_high',  { de: 'Auswahl',          en: 'Selection' }]
+] as const
+---
+<table>
+  <thead>
+    <tr>
+      <th>{t.palette.graha}</th>
+      <th>{t.palette.role}</th>
+      <th class="so">{t.palette.source}</th>
+      <th>{variants.map(([, v]) => v.label).join(' · ')}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {palette.grahas.map(g => (
+      <tr>
+        <th scope="row">
+          <span class="dot" style={`background:var(--${g.key})`}></span>
+          <span class="gn">{g.sa}</span>
+        </th>
+        <td class="ro">{roles[g.key][lang]}</td>
+        <td class="so">{g.color}, {g.pos}</td>
+        <td class="hx">{variants.map(([, v]) => (
+          <button data-hex={v.colors[g.key]} style={`--c:${v.colors[g.key]}`}
+                  title={`${v.label}: ${v.colors[g.key]}`}>
+            <i></i><code>{v.colors[g.key]}</code>
+          </button>
+        ))}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<h2 style="margin-top:2.6rem">{t.palette.groundTitle}</h2>
+<p>{t.palette.groundLede}</p>
+<table>
+  <tbody>
+    {neutrals.map(([key, label]) => (
+      <tr>
+        <th scope="row">
+          <span class="dot" style={`background:var(--${key})`}></span>
+          <span class="gn">{label[lang]}</span>
+        </th>
+        <td class="ro" colspan="2"><code>{key}</code></td>
+        <td class="hx">{variants.map(([, v]) => (
+          <button data-hex={v.colors[key]} style={`--c:${v.colors[key]}`}
+                  title={`${v.label}: ${v.colors[key]}`}>
+            <i></i><code>{v.colors[key]}</code>
+          </button>
+        ))}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<div id="copied" role="status" aria-live="polite"></div>
+
+<script is:inline define:vars={{ word: t.palette.copied }}>
+  const toast = document.getElementById('copied')
+  let timer
+  document.querySelectorAll('.hx button').forEach(b => {
+    b.addEventListener('click', async () => {
+      const hex = b.dataset.hex
+      try { await navigator.clipboard.writeText(hex); toast.textContent = `${hex} ${word}` }
+      catch { toast.textContent = hex }
+      toast.classList.add('on')
+      clearTimeout(timer)
+      timer = setTimeout(() => toast.classList.remove('on'), 1400)
+    })
+  })
+</script>
+
+<style>
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; vertical-align: top; padding: .62rem .7rem .62rem 0;
+    border-bottom: 1px solid var(--hl_low); font-weight: 400; }
+  thead th { color: var(--ketu); font-size: .74rem; border-bottom-color: var(--hl_high); }
+  .dot { width: .8rem; height: .8rem; border-radius: 50%; display: inline-block;
+    vertical-align: -1px; margin-right: .5rem; }
+  .gn { font-size: 1rem; }
+  .ro { font-size: .9rem; }
+  .so { color: var(--ketu); font-size: .78rem; max-width: 22ch; }
+  .hx { white-space: nowrap; }
+  .hx button { display: inline-flex; align-items: center; gap: .34rem; background: none;
+    border: 0; padding: .1rem .3rem; margin: .1rem 0; border-radius: 4px;
+    cursor: pointer; font: inherit; color: var(--ketu); }
+  .hx button:hover { background: var(--hl_med); color: var(--chandra); }
+  .hx button i { width: .74rem; height: .74rem; border-radius: 2px; background: var(--c);
+    display: block; box-shadow: 0 0 0 1px var(--hl_high); }
+  .hx code { font-size: .69rem; }
+  @media (max-width: 46rem) { .so { display: none; } .hx code { display: none; } }
+  #copied { position: fixed; left: 50%; bottom: 1.6rem; transform: translateX(-50%);
+    background: var(--overlay); color: var(--chandra); border: 1px solid var(--hl_high);
+    padding: .45rem .9rem; border-radius: 999px; font-size: .8rem; opacity: 0;
+    pointer-events: none; transition: opacity .2s; }
+  #copied.on { opacity: 1; }
+</style>

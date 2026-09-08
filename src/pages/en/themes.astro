@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro'
+import ThemeSwitcher from '../../components/ThemeSwitcher.astro'
+import { getLangFromUrl, useTranslations } from '../../i18n/utils'
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const tools = [
+  { name: 'Tabby', file: 'themes/tabby/navagraha.yaml',
+    de: 'Block in die Konfigurationsdatei unter terminal: einfügen.',
+    en: 'Paste the block into the config file under terminal:.',
+    cmd: 'Settings → Config file\nSettings → Farbschema\nDarstellung → Terminal background: From color scheme' },
+  { name: 'iTerm2', file: 'themes/iterm2',
+    de: 'Die vier .itermcolors doppelklicken, dann im Profil auswählen.',
+    en: 'Double-click the four .itermcolors files, then pick one in the profile.',
+    cmd: 'Profiles → Colors → Color Presets\nUse different colors for light and dark mode' },
+  { name: 'VS Code', file: 'themes/vscode/navagraha',
+    de: 'Ordner nach ~/.vscode/extensions/ kopieren, neu starten.',
+    en: 'Copy the folder to ~/.vscode/extensions/ and restart.',
+    cmd: 'cp -R navagraha ~/.vscode/extensions/\n⌘K ⌘T' },
+  { name: 'Vim & bat', file: 'themes/vim/navagraha.vim',
+    de: 'Beide nehmen die Farben vom Terminal und wechseln mit.',
+    en: 'Both take their colours from the terminal and switch along.',
+    cmd: 'cp navagraha.vim ~/.vim/colors/\ncolorscheme navagraha\nexport BAT_THEME=ansi' }
+]
+const repo = 'https://github.com/USER/navagraha/tree/main/'
+---
+<Base title={`${t.themes.title} — Navagraha`} description={t.themes.lede}>
+  <section class="wrap" style="border-top:0">
+    <h2>{t.themes.title}</h2>
+    <p>{t.themes.lede}</p>
+    <ThemeSwitcher labels={t.variants} />
+    <div class="steps">
+      {tools.map(tool => (
+        <div>
+          <h3>{tool.name}</h3>
+          <p>{lang === 'en' ? tool.en : tool.de}</p>
+          <pre class="mono">{tool.cmd}</pre>
+          <p><a href={repo + tool.file}>{t.themes.download}</a></p>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .steps { display: grid; gap: 1.8rem; margin-top: 2.2rem; }
+  @media (min-width: 46rem) { .steps { grid-template-columns: 1fr 1fr; gap: 1.8rem 2.4rem; } }
+  .steps h3 { margin: 0 0 .35rem; }
+  .steps p { margin: 0 0 .55rem; font-size: .88rem; color: var(--ketu); }
+  .steps pre { background: var(--surface); border: 1px solid var(--hl_med);
+    border-radius: 8px; padding: .7rem .85rem; font-size: .74rem; line-height: 1.7;
+    color: var(--subtle); white-space: pre-wrap; margin: 0 0 .55rem; }
+</style>
