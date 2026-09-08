@@ -1,12 +1,12 @@
 ---
 import palette from '../data/palette.json'
 import '../styles/global.css'
-import { getLangFromUrl, useTranslations, path, languages } from '../i18n/utils'
+import { getLangFromUrl, useTranslations, path, asset, stripBase, languages } from '../i18n/utils'
 
 const { title, description } = Astro.props as { title: string; description?: string }
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
-const here = Astro.url.pathname.replace(/^\/en/, '') || '/'
+const here = stripBase(Astro.url.pathname).replace(/^\/en/, '') || '/'
 
 // CSS-Variablen aus der Palette erzeugen — eine einzige Quelle fuer Seite und Themes.
 const vars = Object.entries(palette.variants).map(([key, v]) => {
@@ -27,9 +27,9 @@ const nav = [
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{title}</title>
   {description && <meta name="description" content={description} />}
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="icon" href="/favicon-32.png" sizes="32x32" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" href={asset('/favicon.svg')} type="image/svg+xml" />
+  <link rel="icon" href={asset('/favicon-32.png')} sizes="32x32" />
+  <link rel="apple-touch-icon" href={asset('/apple-touch-icon.png')} />
   {Object.keys(languages).map(l => (
     <link rel="alternate" hreflang={l}
           href={new URL(path(here, l as any), Astro.site).toString()} />
@@ -48,7 +48,7 @@ const nav = [
 <body>
   <div class="wrap top">
     <a class="brand" href={path('/', lang)}>
-      <img src="/favicon.svg" alt="" width="24" height="24" />Navagraha
+      <img src={asset('/favicon.svg')} alt="" width="24" height="24" />Navagraha
     </a>
     <nav>
       {nav.map(([p, label]) => (

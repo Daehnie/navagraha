@@ -1,10 +1,11 @@
 import { defineConfig } from 'astro/config'
 
-// Fuer GitHub Pages mit eigener Domain bleibt site auf der Domain stehen.
-// Ohne eigene Domain stattdessen:
-//   site: 'https://<user>.github.io', base: '/navagraha'
+// Ausgeliefert wird unter der github.io-Adresse, daher site + base.
+// Mit eigener Domain stattdessen:
+//   site: 'https://navagraha.digitalspirit.io', base entfaellt
 export default defineConfig({
-  site: 'https://navagraha.digitalspirit.io',
+  site: 'https://daehnie.github.io',
+  base: '/navagraha',
   i18n: {
     defaultLocale: 'de',
     locales: ['de', 'en'],
