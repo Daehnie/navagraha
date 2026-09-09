@@ -30,11 +30,11 @@ const variants = Object.entries(palette.variants)
 </script>
 
 <style>
-  .tabs { display: flex; flex-wrap: wrap; gap: .4rem; }
-  .tabs button { display: inline-flex; align-items: center; gap: .5rem;
+  .tabs { display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .tabs button { display: inline-flex; align-items: center; gap: var(--s2);
     background: var(--surface); color: var(--subtle);
     border: 1px solid var(--hl_med); border-radius: 999px;
-    padding: .42rem .85rem .42rem .5rem; font: inherit; font-size: .84rem;
+    padding: var(--s2) var(--s3) var(--s2) var(--s2); font: inherit; font-size: .84rem;
     cursor: pointer; transition: border-color .2s, color .2s; }
   .tabs button:hover { border-color: var(--hl_high); color: var(--chandra); }
   /* Rueckmeldung liegt auf dem Druck, nicht auf dem Loslassen. */
@@ -45,6 +45,6 @@ const variants = Object.entries(palette.variants)
   .sw i { width: .62rem; height: .95rem; display: block; }
   .sw i:first-child { border-radius: 3px 0 0 3px; }
   .sw i:last-child { border-radius: 0 3px 3px 0; }
-  .vnote { color: var(--ketu); font-size: .86rem; margin: .9rem 0 0;
+  .vnote { color: var(--ketu); font-size: .86rem; margin: var(--s4) 0 0;
     max-width: 44ch; min-height: 3rem; }
 </style>

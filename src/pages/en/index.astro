@@ -42,15 +42,16 @@ const t = useTranslations(lang)
 </Base>
 
 <style>
-  header { padding: 2rem 0 3.6rem; }
-  .hero { display: grid; gap: 2.2rem; align-items: center; }
-  @media (min-width: 52rem) { .hero { grid-template-columns: minmax(0,1fr) 20rem; gap: 3.4rem; } }
-  .sub { font-size: 1.12rem; color: var(--subtle); margin: 0 0 1.7rem; max-width: 40ch; }
-  .born { font-size: .78rem; color: var(--ketu); margin: 1.6rem 0 0; }
+  header { padding: var(--s6) 0 var(--s8); }
+  .hero { display: grid; gap: var(--s6); align-items: center; }
+  @media (min-width: 52rem) { .hero { grid-template-columns: minmax(0,1fr) 20rem; gap: var(--s7); } }
+  .sub { font-size: 1.12rem; color: var(--subtle); margin: 0 0 var(--s5); max-width: 40ch; }
+  .born { font-size: .78rem; color: var(--ketu); letter-spacing: .012em;
+    margin: var(--s5) 0 0; }
   .method p { max-width: 62ch; }
   /* Einrichten ist die Hauptsache und traegt deshalb Flaeche, nicht nur Farbe. */
-  .go { display: flex; align-items: center; gap: 1.5rem; margin-top: 1.6rem; }
+  .go { display: flex; align-items: center; gap: var(--s5); margin-top: var(--s5); }
   .cta { display: inline-block; background: var(--shukra); color: var(--base);
-    text-decoration: none; padding: .625rem 1.25rem; border-radius: 999px;
+    text-decoration: none; padding: var(--s3) var(--s5); border-radius: 999px;
     font-size: .95rem; }
 </style>

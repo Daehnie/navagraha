@@ -20,11 +20,12 @@ const { title = 'dignity.ts' } = Astro.props
 <style>
   .pane { background: var(--surface); border: 1px solid var(--hl_med);
     border-radius: 10px; overflow: hidden; }
-  .bar { display: flex; align-items: center; gap: .45rem; padding: .55rem .8rem;
-    border-bottom: 1px solid var(--hl_med); color: var(--ketu); font-size: .74rem; }
+  .bar { display: flex; align-items: center; gap: var(--s2); padding: var(--s2) var(--s3);
+    border-bottom: 1px solid var(--hl_med); color: var(--ketu); font-size: .74rem;
+    letter-spacing: .012em; }
   .bar i { width: .6rem; height: .6rem; border-radius: 50%;
     background: var(--hl_high); display: block; }
-  pre { margin: 0; padding: 1.1rem 1.2rem; overflow-x: auto; font-size: .78rem;
+  pre { margin: 0; padding: var(--s4); overflow-x: auto; font-size: .78rem;
     line-height: 1.85; font-family: "Monaspace Neon", ui-monospace, "SF Mono", Menlo, monospace; }
   .ketu { color: var(--ketu); font-style: italic; }
   .chandra { color: var(--chandra); }

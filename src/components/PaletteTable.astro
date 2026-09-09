@@ -56,7 +56,7 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
   </tbody>
 </table>
 
-<h2 style="margin-top:2.6rem">{t.palette.groundTitle}</h2>
+<h2 class="ground">{t.palette.groundTitle}</h2>
 <p>{t.palette.groundLede}</p>
 <table>
   <tbody>
@@ -99,17 +99,21 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
 
 <style>
   table { width: 100%; border-collapse: collapse; }
-  th, td { text-align: left; vertical-align: top; padding: .62rem .7rem .62rem 0;
+  table:first-of-type { margin-top: var(--s6); }
+  th, td { text-align: left; vertical-align: top;
+    padding: var(--s3) var(--s3) var(--s3) 0;
     border-bottom: 1px solid var(--hl_low); font-weight: 400; }
-  thead th { color: var(--ketu); font-size: .74rem; border-bottom-color: var(--hl_high); }
+  thead th { color: var(--ketu); font-size: .74rem; letter-spacing: .012em;
+    border-bottom-color: var(--hl_high); }
   .dot { width: .8rem; height: .8rem; border-radius: 50%; display: inline-block;
-    vertical-align: -1px; margin-right: .5rem; }
+    vertical-align: -1px; margin-right: var(--s2); }
+  .ground { margin-top: var(--s7); }
   .gn { font-size: 1rem; }
   .ro { font-size: .9rem; }
-  .so { color: var(--ketu); font-size: .78rem; max-width: 22ch; }
+  .so { color: var(--ketu); font-size: .78rem; letter-spacing: .012em; max-width: 22ch; }
   .hx { white-space: nowrap; }
-  .hx button { display: inline-flex; align-items: center; gap: .34rem; background: none;
-    border: 0; padding: .1rem .3rem; margin: .1rem 0; border-radius: 4px;
+  .hx button { display: inline-flex; align-items: center; gap: var(--s1); background: none;
+    border: 0; padding: var(--s1); margin: var(--s1) 0; border-radius: 4px;
     cursor: pointer; font: inherit; color: var(--ketu); }
   .hx button:hover { background: var(--hl_med); color: var(--chandra); }
   /* Rueckmeldung liegt auf dem Druck, nicht auf dem Loslassen. */
@@ -117,11 +121,22 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
     transform: scale(.97); transition: transform 100ms ease-out; }
   .hx button i { width: .74rem; height: .74rem; border-radius: 2px; background: var(--c);
     display: block; box-shadow: 0 0 0 1px var(--hl_high); }
-  .hx code { font-size: .69rem; }
+  .hx code { font-size: .69rem; letter-spacing: .016em; }
   @media (max-width: 46rem) { .so { display: none; } .hx code { display: none; } }
-  #copied { position: fixed; left: 50%; bottom: 1.6rem; transform: translateX(-50%);
-    background: var(--overlay); color: var(--chandra); border: 1px solid var(--hl_high);
-    padding: .45rem .9rem; border-radius: 999px; font-size: .8rem; opacity: 0;
-    pointer-events: none; transition: opacity .2s; }
-  #copied.on { opacity: 1; }
+  /* Schwebende Chrome ueber Inhalt: Glas, das ankommt, nicht eine Flaeche,
+     die eingeblendet wird. Unschaerfe und Groesse laufen zusammen hoch. */
+  #copied { position: fixed; left: 50%; bottom: var(--s5);
+    transform: translateX(-50%) scale(.96);
+    background: color-mix(in oklab, var(--overlay) 72%, transparent);
+    -webkit-backdrop-filter: blur(0px) saturate(100%);
+    backdrop-filter: blur(0px) saturate(100%);
+    color: var(--chandra);
+    border: 1px solid color-mix(in oklab, var(--hl_high) 60%, transparent);
+    padding: var(--s2) var(--s4); border-radius: 999px; font-size: .8rem;
+    letter-spacing: .012em; opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s, transform .2s, backdrop-filter .2s; }
+  #copied.on { opacity: 1; transform: translateX(-50%) scale(1);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%); }
 </style>

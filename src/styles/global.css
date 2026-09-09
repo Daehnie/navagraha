@@ -1,6 +1,13 @@
 /* Navagraha — die Seite traegt das Schema, das sie zeigt.
    Die Variablen werden aus src/data/palette.json erzeugt (siehe Base.astro). */
 
+/* Abstandsskala, 4pt-Schritte. Jeder Abstand der Seite steht auf einer
+   dieser Stufen — kein Wert dazwischen, damit keiner geraten ist. */
+:root {
+  --s1: .25rem; --s2: .5rem;  --s3: .75rem; --s4: 1rem;
+  --s5: 1.5rem; --s6: 2rem;   --s7: 3rem;   --s8: 4rem;
+}
+
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
@@ -19,7 +26,7 @@ body {
   background: var(--base);
   color: var(--chandra);
   font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-  font-size: 17px;
+  font-size: 1.0625rem;   /* 17px bei Standardeinstellung, waechst aber mit ihr */
   line-height: 1.62;
   -webkit-font-smoothing: antialiased;
   transition: background .45s ease, color .45s ease;
@@ -28,25 +35,27 @@ code, .mono { font-family: "Monaspace Neon", ui-monospace, "SF Mono", Menlo, mon
 a { color: var(--shani); }
 :focus-visible { outline: 2px solid var(--shukra); outline-offset: 2px; border-radius: 3px; }
 
-.wrap { width: min(64rem, 100% - 2.4rem); margin-inline: auto; }
-section { padding: 3.4rem 0; border-top: 1px solid var(--hl_med); }
+.wrap { width: min(64rem, 100% - var(--s6)); margin-inline: auto; }
+section { padding: var(--s7) 0; border-top: 1px solid var(--hl_med); }
 h1 { font-size: clamp(2.3rem, 7.5vw, 3.9rem); line-height: 1.02; font-weight: 400;
-     letter-spacing: -.028em; margin: 0 0 .9rem; }
-h2 { font-size: 1.55rem; font-weight: 400; margin: 0 0 .3rem; letter-spacing: -.012em; }
-h2 + p { color: var(--ketu); margin: 0 0 1.9rem; max-width: 42ch; }
-h3 { font-size: 1rem; font-weight: 400; margin: 1.6rem 0 .3rem; }
+     letter-spacing: -.028em; margin: 0 0 var(--s4); }
+h2 { font-size: 1.55rem; font-weight: 400; margin: 0 0 var(--s1); letter-spacing: -.012em;
+     line-height: 1.22; }
+h2 + p { color: var(--ketu); margin: 0 0 var(--s6); max-width: 42ch; }
+h3 { font-size: 1rem; font-weight: 400; margin: var(--s5) 0 var(--s1); line-height: 1.35; }
 
 /* Kopfzeile */
-.top { display: flex; align-items: center; gap: 1.1rem; padding: 1.4rem 0;
+.top { display: flex; align-items: center; gap: var(--s4); padding: var(--s5) 0;
        flex-wrap: wrap; font-size: .88rem; }
-.brand { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none;
+.brand { display: inline-flex; align-items: center; gap: var(--s2); text-decoration: none;
          color: var(--chandra); font-size: 1rem; }
 .brand img { width: 1.5rem; height: 1.5rem; border-radius: 5px; display: block; }
-.top nav { display: flex; gap: 1rem; margin-left: auto; }
+.top nav { display: flex; gap: var(--s4); margin-left: auto; }
 .top nav a { color: var(--ketu); text-decoration: none; }
 .top nav a:hover, .top nav a[aria-current="page"] { color: var(--chandra); }
-.lang a { color: var(--ketu); text-decoration: none; font-size: .8rem; }
+.lang a { color: var(--ketu); text-decoration: none; font-size: .8rem;
+         letter-spacing: .012em; }
 .lang a[aria-current="true"] { color: var(--chandra); }
 
-footer { padding: 2.6rem 0 4rem; color: var(--ketu); font-size: .8rem;
-         border-top: 1px solid var(--hl_med); }
+footer { padding: var(--s7) 0 var(--s8); color: var(--ketu); font-size: .8rem;
+         letter-spacing: .012em; border-top: 1px solid var(--hl_med); }
