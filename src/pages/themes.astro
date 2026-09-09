@@ -22,7 +22,7 @@ const repo = 'https://github.com/Daehnie/navagraha/tree/main/'
   <section class="wrap" style="border-top:0">
     <h2>{t.themes.title}</h2>
     <p>{t.themes.lede}</p>
-    <ThemeSwitcher labels={t.variants} />
+    <ThemeSwitcher labels={t.variants} systemLabel={t.systemLabel} systemNote={t.systemNote} />
     <div class="steps">
       {tools.map(tool => (
         <div>

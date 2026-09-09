@@ -18,8 +18,10 @@ const { title = 'dignity.ts' } = Astro.props
 </div>
 
 <style>
+  /* Eine grosse Flaeche liest sich dicker als ein kleiner Chip. Wodurch, das
+     entscheidet der Modus der Variante — siehe --tiefe in Base.astro. */
   .pane { background: var(--surface); border: 1px solid var(--hl_med);
-    border-radius: 10px; overflow: hidden; }
+    border-radius: 10px; overflow: hidden; box-shadow: var(--tiefe); }
   .bar { display: flex; align-items: center; gap: var(--s2); padding: var(--s2) var(--s3);
     border-bottom: 1px solid var(--hl_med); color: var(--ketu); font-size: .74rem;
     letter-spacing: .012em; }

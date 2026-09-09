@@ -13,7 +13,7 @@ const t = useTranslations(lang)
       <div>
         <h1>{t.tagline}</h1>
         <p class="sub">{t.lede}</p>
-        <ThemeSwitcher labels={t.variants} />
+        <ThemeSwitcher labels={t.variants} systemLabel={t.systemLabel} systemNote={t.systemNote} />
       </div>
       <div>
         <Chart />

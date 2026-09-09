@@ -4,6 +4,8 @@
   "lede": "A colour scheme for terminal and editor whose tones were not picked but read off: every colour is the classical colour of a graha, its saturation follows that planet's strength in one particular birth chart.",
   "chartCaption": "23 May 1982, 19:47 CEST, Wedel. Sidereal, Lahiri ayanamsa, whole-sign houses. Lagna in Tula.",
   "variant": "Variant",
+  "systemLabel": "System",
+  "systemNote": "Follows the operating system setting: light shows Ushas, dark shows Swati.",
   "variants": {
     "swati": "Air, dark. Ground tone from the Tula lagna and Jupiter in Swati, whose deity is Vayu.",
     "pratipada": "Earth, dark. Ground tone from the earth group: five grahas sit in Vrishabha and Kanya.",

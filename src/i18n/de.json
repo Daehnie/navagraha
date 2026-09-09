@@ -4,6 +4,8 @@
   "lede": "Ein Farbschema für Terminal und Editor, dessen Töne nicht gewählt, sondern abgelesen sind: jede Farbe ist die klassische Farbe eines Grahas, ihre Sättigung folgt seiner Stärke in einem einzigen Geburtshoroskop.",
   "chartCaption": "23. Mai 1982, 19:47 MESZ, Wedel. Siderisch nach Lahiri, Häuser nach Zeichen. Lagna in Tula.",
   "variant": "Variante",
+  "systemLabel": "System",
+  "systemNote": "Folgt der Einstellung des Betriebssystems: hell zeigt Ushas, dunkel zeigt Swati.",
   "variants": {
     "swati": "Luft, dunkel. Grundton aus dem Lagna Tula und Guru in Swati, dessen Gottheit Vayu ist.",
     "pratipada": "Erde, dunkel. Grundton aus der Erd-Gruppe: fünf Grahas stehen in Vrishabha und Kanya.",

@@ -1,11 +1,14 @@
 ---
 import palette from '../data/palette.json'
-const { labels } = Astro.props as { labels: Record<string, string> }
+const { labels, systemLabel, systemNote } = Astro.props as {
+  labels: Record<string, string>; systemLabel: string; systemNote: string
+}
 const variants = Object.entries(palette.variants)
+const v = palette.variants as Record<string, { colors: Record<string, string> }>
 ---
 <div class="tabs" role="radiogroup" aria-label="Variante">
   {variants.map(([key, v]) => (
-    <button role="radio" data-v={key} aria-checked={key === 'swati'}>
+    <button role="radio" data-v={key} aria-checked="false">
       <span class="sw">
         <i style={`background:${v.colors.base}`}></i>
         <i style={`background:${v.colors.shukra}`}></i>
@@ -13,20 +16,62 @@ const variants = Object.entries(palette.variants)
       </span>{v.label}
     </button>
   ))}
+  <button role="radio" data-system aria-checked="false">
+    <span class="sw">
+      <i style={`background:${v.ushas.colors.base}`}></i>
+      <i style={`background:${v.swati.colors.base}`}></i>
+    </span>{systemLabel}
+  </button>
 </div>
 <p class="vnote" id="vnote"></p>
 
-<script is:inline define:vars={{ labels }}>
+<script is:inline define:vars={{ labels, systemNote }}>
   const tabs = document.querySelectorAll('.tabs button')
   const note = document.getElementById('vnote')
-  function pick(v, remember = true) {
+  const vomSystem = () =>
+    matchMedia('(prefers-color-scheme: light)').matches ? 'ushas' : 'swati'
+
+  function zeige(v, folgtSystem) {
     document.documentElement.dataset.theme = v
-    tabs.forEach(b => b.setAttribute('aria-checked', String(b.dataset.v === v)))
-    if (note) note.textContent = labels[v] ?? ''
-    if (remember) try { localStorage.setItem('navagraha', v) } catch {}
+    tabs.forEach(b => {
+      const an = folgtSystem ? b.hasAttribute('data-system') : b.dataset.v === v
+      b.setAttribute('aria-checked', String(an))
+      // Roving Tabindex: die Gruppe ist ein Halt in der Tab-Reihenfolge, nicht fuenf.
+      b.tabIndex = an ? 0 : -1
+    })
+    if (note) note.textContent = folgtSystem ? systemNote : (labels[v] ?? '')
   }
-  tabs.forEach(b => b.addEventListener('click', () => pick(b.dataset.v)))
-  pick(document.documentElement.dataset.theme || 'swati', false)
+
+  function waehle(b) {
+    if (b.hasAttribute('data-system')) {
+      try { localStorage.removeItem('navagraha') } catch {}
+      zeige(vomSystem(), true)
+    } else {
+      try { localStorage.setItem('navagraha', b.dataset.v) } catch {}
+      zeige(b.dataset.v, false)
+    }
+  }
+
+  const SCHRITT = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }
+  tabs.forEach((b, i) => {
+    b.addEventListener('click', () => waehle(b))
+    b.addEventListener('keydown', e => {
+      const d = SCHRITT[e.key]
+      if (!d) return
+      e.preventDefault()
+      // In einer Radiogruppe folgt die Wahl dem Fokus, und die Enden schliessen sich.
+      const ziel = tabs[(i + d + tabs.length) % tabs.length]
+      waehle(ziel)
+      ziel.focus()
+    })
+  })
+
+  // Wechselt das System, folgt die Seite mit — solange nichts gewaehlt wurde.
+  document.addEventListener('navagraha:system', e => zeige(e.detail, true))
+
+  let gespeichert
+  try { gespeichert = localStorage.getItem('navagraha') } catch {}
+  zeige(gespeichert || vomSystem(), !gespeichert)
 </script>
 
 <style>

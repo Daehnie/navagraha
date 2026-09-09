@@ -8,10 +8,19 @@ const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 const here = stripBase(Astro.url.pathname).replace(/^\/en/, '') || '/'
 
+// Tiefe folgt dem Modus, nicht dem Geschmack: auf hellem Grund traegt ein
+// Schatten, auf dunklem nicht — dort ist selbst reines Schwarz nur 1,13:1.
+// Da faengt stattdessen eine helle Oberkante das Licht. Beide Werte sind auf
+// dieselbe Sichtbarkeit gemessen, rund 1,25:1 gegen ihren Untergrund.
+const TIEFE = {
+  light: '0 1px 2px rgb(0 0 0 / .06), 0 8px 24px rgb(0 0 0 / .10)',
+  dark:  'inset 0 1px 0 rgb(255 255 255 / .08)'
+} as const
+
 // CSS-Variablen aus der Palette erzeugen — eine einzige Quelle fuer Seite und Themes.
 const vars = Object.entries(palette.variants).map(([key, v]) => {
   const decls = Object.entries(v.colors).map(([n, hex]) => `--${n}:${hex};`).join('')
-  return `html[data-theme="${key}"]{${decls}}`
+  return `html[data-theme="${key}"]{${decls}--tiefe:${TIEFE[v.mode as 'light' | 'dark']};}`
 }).join('\n')
 
 const nav = [
@@ -38,10 +47,18 @@ const nav = [
   <script is:inline>
     // Vor dem ersten Anstrich setzen, damit nichts aufblitzt.
     (() => {
+      const hell = matchMedia('(prefers-color-scheme: light)')
+      const vomSystem = () => hell.matches ? 'ushas' : 'swati'
       let v
       try { v = localStorage.getItem('navagraha') } catch {}
-      if (!v) v = matchMedia('(prefers-color-scheme: light)').matches ? 'ushas' : 'swati'
-      document.documentElement.dataset.theme = v
+      document.documentElement.dataset.theme = v || vomSystem()
+      // Ohne eigene Wahl folgt die Seite dem System auch waehrend der Sitzung.
+      hell.addEventListener('change', () => {
+        let gewaehlt
+        try { gewaehlt = localStorage.getItem('navagraha') } catch {}
+        if (!gewaehlt) document.dispatchEvent(
+          new CustomEvent('navagraha:system', { detail: vomSystem() }))
+      })
     })()
   </script>
 </head>

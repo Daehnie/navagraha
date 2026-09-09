@@ -10,7 +10,7 @@ const t = useTranslations(lang)
   <section class="wrap" style="border-top:0">
     <h2>{t.palette.title}</h2>
     <p>{t.palette.lede}</p>
-    <ThemeSwitcher labels={t.variants} />
+    <ThemeSwitcher labels={t.variants} systemLabel={t.systemLabel} systemNote={t.systemNote} />
     <PaletteTable t={t} />
   </section>
 </Base>

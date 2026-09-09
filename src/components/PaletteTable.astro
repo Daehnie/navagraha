@@ -142,6 +142,13 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     backdrop-filter: blur(20px) saturate(180%); }
 
+  /* Ohne Transluzenz wird aus dem Glas eine deckende Flaeche; das
+     Materialisieren faellt weg, das Einblenden bleibt. */
+  @media (prefers-reduced-transparency: reduce) {
+    #copied, #copied.on { background: var(--overlay); border-color: var(--hl_high);
+      -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+
   @media (prefers-contrast: more) {
     .so, thead th { color: var(--subtle); }
     th, td { border-bottom-color: var(--hl_high); }
