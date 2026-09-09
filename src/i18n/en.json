@@ -4,7 +4,7 @@
   "copy": "copy",
   "copied": "copied",
   "tagline": "Nine planets, nine colours",
-  "lede": "A colour scheme for terminal and editor whose tones were not picked but read off: every colour is the classical colour of a graha, its saturation follows that planet's strength in one particular birth chart.",
+  "lede": "A colour scheme for terminal and editor whose tones were not picked but read off: every colour is the classical colour of a graha, its saturation follows that planet's strength in one particular birth chart as far as the hue allows.",
   "chartCaption": "23 May 1982, 19:47 CEST, Wedel. Sidereal, Lahiri ayanamsa, whole-sign houses. Lagna in Tula.",
   "chart": {
     "alt": "North Indian birth chart with the nine grahas",
@@ -66,25 +66,29 @@
     },
     "force": {
       "h": "Where each colour's force comes from",
-      "p": "A graha can stand strong or weak in a chart — depending on the sign and the house it occupies. That strength decides here how forceful its colour is. Four examples from this chart:",
+      "p": "A graha can stand strong or weak in a chart — depending on the sign and the house it occupies. That strength decides the saturation here, but only within what the prescribed hue allows. Five cases from this chart, three of them evidence and two objections:",
       "cases": [
-        {
-          "name": "Venus",
-          "text": "stands in its most favourable sign, Pisces. That is called exalted, and it is the strongest placement there is. It is also atmakaraka, the planet at the highest degree, which the tradition reads as the most important of the chart. So it gets the strongest tone: the turquoise."
-        },
-        {
-          "name": "Jupiter",
-          "text": "stands in the first house. For Jupiter that is the best position imaginable, called dig bala, literally directional strength. Its gold is saturated to match."
-        },
-        {
-          "name": "Mars and Saturn",
-          "text": "stand in the twelfth house, the house of withdrawal and of what is hidden. Their colours are audibly held back."
-        },
-        {
-          "name": "Rahu",
-          "text": "is not a body but a crossing point, and counts as smoky and diffuse. It stays pale."
-        }
-      ]
+          {
+            "name": "Venus",
+            "text": "stands in its most favourable sign, Pisces. That is called exalted, and it is the strongest placement there is. It is also atmakaraka, the planet at the highest degree, which the tradition reads as the most important of the chart. Its turquoise therefore sits at the limit: no more saturated is possible at that lightness."
+          },
+          {
+            "name": "Jupiter",
+            "text": "stands in the first house. For Jupiter that is the best position imaginable, called dig bala, literally directional strength. Its gold sits at the limit too. In the two light variants Sūrya reaches it as well — less headroom is left there, and three colours hit the ceiling at once."
+          },
+          {
+            "name": "Rahu",
+            "text": "is not a body but a crossing point, and counts as smoky and diffuse. It stays pale, under thirty per cent in every variant."
+          },
+          {
+            "name": "Saturn",
+            "text": "and Mars both stand in the twelfth house, the house of withdrawal and of what is hidden. Both should therefore be held back. Saturn does sit below Mars in every variant — but Mars stays in the upper middle at seventy to seventy-four per cent. For Mars the rule does not hold, and the ladder shows it rather than passing over it."
+          },
+          {
+            "name": "The Moon",
+            "text": "is where the rule ends. It stands exalted and should therefore be forceful. But its classical colour is white, and white carries no saturation. The hue comes first; strength cannot push past it."
+          }
+        ]
     },
     "grounds": {
       "h": "Why there are two grounds",
@@ -102,7 +106,7 @@
       "wheelAlt": "Polar chart of the nine hues: angle is hue, distance from the centre is saturation.",
       "wheel": "Angle is the hue, distance from the centre the saturation. Seven tones share the circle; Chandra and Ketu sit near the middle because white and ash grey carry no hue. The values are those of the selected variant.",
       "strengthAlt": "Saturation of the nine grahas as a share of what is possible at their lightness.",
-      "strength": "Measured as a share of what is reachable at that lightness and hue — there is no other fair way to compare tones, since red can go more saturated than turquoise by nature. Shukra and Guru sit at the limit. Chandra is the exception: exalted, but white, and white cannot carry saturation.",
+      "strength": "Measured as a share of what is reachable at that lightness and hue — there is no other fair way to compare tones, since red can go more saturated than turquoise by nature. Shukra and Guru sit at the limit in every variant, joined by Sūrya in the light ones. At the bottom are the two lunar nodes — and Chandra, which stands exalted but is white.",
       "earth": "Earth — five grahas in Taurus and Virgo",
       "air": "Air — the lagna in Libra",
       "grounds": "Four variants, two derivations. The three marks on each field are Shukra, Guru and Mangala on that ground.",

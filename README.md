@@ -2,7 +2,7 @@
 
 Ein Farbschema für Terminal und Editor, abgeleitet aus einem siderischen
 Geburtshoroskop. Jede Farbe ist die klassische Farbe eines Grahas, ihre
-Sättigung folgt seiner Stärke im Chart.
+Sättigung folgt seiner Stärke im Chart, soweit der Farbton es zulässt.
 
 Vier Varianten:
 

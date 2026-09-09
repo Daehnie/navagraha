@@ -4,7 +4,7 @@
   "copy": "kopieren",
   "copied": "kopiert",
   "tagline": "Neun Planeten, neun Farben",
-  "lede": "Ein Farbschema für Terminal und Editor, dessen Töne nicht gewählt, sondern abgelesen sind: jede Farbe ist die klassische Farbe eines Grahas, ihre Sättigung folgt seiner Stärke in einem einzigen Geburtshoroskop.",
+  "lede": "Ein Farbschema für Terminal und Editor, dessen Töne nicht gewählt, sondern abgelesen sind: jede Farbe ist die klassische Farbe eines Grahas, ihre Sättigung folgt so weit wie möglich seiner Stärke in einem einzigen Geburtshoroskop.",
   "chartCaption": "23. Mai 1982, 19:47 MESZ, Wedel. Siderisch nach Lahiri, Häuser nach Zeichen. Lagna in Tula.",
   "chart": {
     "alt": "Nordindisches Geburtsdiagramm mit den neun Grahas",
@@ -66,25 +66,29 @@
     },
     "force": {
       "h": "Woher die Kraft jeder Farbe kommt",
-      "p": "Ein Graha kann in einem Horoskop stark oder schwach stehen — je nachdem, in welchem Zeichen und in welchem Haus er sich befindet. Diese Stärke bestimmt hier, wie kräftig seine Farbe ausfällt. Vier Beispiele aus diesem Chart:",
+      "p": "Ein Graha kann in einem Horoskop stark oder schwach stehen — je nachdem, in welchem Zeichen und in welchem Haus er sich befindet. Diese Stärke entscheidet hier über die Sättigung, allerdings nur innerhalb dessen, was der vorgegebene Farbton hergibt. Fünf Fälle aus diesem Chart, drei davon Beleg und zwei Einwand:",
       "cases": [
-        {
-          "name": "Venus",
-          "text": "steht in ihrem günstigsten Zeichen, den Fischen. Das heißt exaltiert und ist die stärkste Stellung überhaupt. Zusätzlich ist sie Atmakaraka, der Planet mit dem höchsten Gradstand, den die Tradition als wichtigsten der Karte liest. Sie bekommt deshalb den kräftigsten Ton: das Türkis."
-        },
-        {
-          "name": "Jupiter",
-          "text": "steht im ersten Haus. Für ihn ist das die beste denkbare Position, Dig Bala genannt, wörtlich Richtungsstärke. Sein Gold ist entsprechend satt."
-        },
-        {
-          "name": "Mars und Saturn",
-          "text": "stehen im zwölften Haus, dem Haus des Rückzugs und des Verborgenen. Ihre Farben sind hörbar zurückgenommen."
-        },
-        {
-          "name": "Rahu",
-          "text": "ist kein Körper, sondern ein Kreuzungspunkt, und gilt als rauchig und diffus. Er bleibt blass."
-        }
-      ]
+          {
+            "name": "Venus",
+            "text": "steht in ihrem günstigsten Zeichen, den Fischen. Das heißt exaltiert und ist die stärkste Stellung überhaupt. Zusätzlich ist sie Atmakaraka, der Planet mit dem höchsten Gradstand, den die Tradition als wichtigsten der Karte liest. Ihr Türkis steht deshalb am Anschlag: gesättigter geht es bei dieser Helligkeit nicht."
+          },
+          {
+            "name": "Jupiter",
+            "text": "steht im ersten Haus. Für ihn ist das die beste denkbare Position, Dig Bala genannt, wörtlich Richtungsstärke. Sein Gold steht ebenso am Anschlag. In den beiden hellen Varianten stößt Sūrya mit an — dort bleibt weniger Spielraum, und drei Farben erreichen die Grenze gleichzeitig."
+          },
+          {
+            "name": "Rahu",
+            "text": "ist kein Körper, sondern ein Kreuzungspunkt, und gilt als rauchig und diffus. Er bleibt blass, in jeder Variante unter dreißig Prozent."
+          },
+          {
+            "name": "Saturn",
+            "text": "und Mars stehen beide im zwölften Haus, dem Haus des Rückzugs und des Verborgenen. Danach müssten beide zurückgenommen sein. Saturn liegt in jeder Variante unter Mars — aber Mars bleibt mit siebzig bis vierundsiebzig Prozent im oberen Mittelfeld. Für ihn trägt die Regel nicht, und die Leiter zeigt es, statt darüber hinwegzugehen."
+          },
+          {
+            "name": "Der Mond",
+            "text": "ist der Fall, an dem die Regel endet. Er steht exaltiert und müsste danach kräftig ausfallen. Nur ist seine klassische Farbe Weiß, und Weiß trägt keine Sättigung. Der Farbton kommt zuerst, die Stärke kann ihn nicht überschreiten."
+          }
+        ]
     },
     "grounds": {
       "h": "Warum es zwei Hintergründe gibt",
@@ -102,7 +106,7 @@
       "wheelAlt": "Polardiagramm der neun Farbtöne: Winkel gleich Farbton, Abstand zur Mitte gleich Sättigung.",
       "wheel": "Winkel ist der Farbton, Abstand zur Mitte die Sättigung. Sieben Töne teilen den Kreis; Chandra und Ketu liegen innen, weil Weiß und Aschgrau keinen Farbton tragen. Die Werte gelten für die gewählte Variante.",
       "strengthAlt": "Sättigung der neun Grahas als Anteil des bei ihrer Helligkeit Möglichen.",
-      "strength": "Gemessen als Anteil dessen, was bei dieser Helligkeit und diesem Farbton überhaupt geht — anders lassen sich Töne nicht vergleichen, denn Rot kann von Natur aus gesättigter werden als Türkis. Shukra und Guru stehen am Anschlag. Chandra ist die Ausnahme: exaltiert, aber weiß, und Weiß kann keine Sättigung tragen.",
+      "strength": "Gemessen als Anteil dessen, was bei dieser Helligkeit und diesem Farbton überhaupt geht — anders lassen sich Töne nicht vergleichen, denn Rot kann von Natur aus gesättigter werden als Türkis. Shukra und Guru stehen in jeder Variante am Anschlag, in den hellen Sūrya dazu. Unten liegen die beiden Mondknoten — und Chandra, der exaltiert steht, aber weiß ist.",
       "earth": "Erde — fünf Grahas in Stier und Jungfrau",
       "air": "Luft — das Lagna in der Waage",
       "grounds": "Vier Varianten, zwei Herleitungen. Die drei Striche auf jeder Fläche sind Shukra, Guru und Mangala auf diesem Grund.",

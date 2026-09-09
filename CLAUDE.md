@@ -102,9 +102,19 @@ Surya kupferrot, Chandra weiß, Mangala blutrot, Budha grasgrün, Guru
 goldgelb, Shukra weiß-schillernd, Shani dunkelblau, Rahu rauchig, Ketu
 aschgrau.
 
-**Sättigung folgt der Stärke im Chart.** Shukra ist exaltiert und
-Atmakaraka, hat also die kräftigste Farbe. Guru hat Dig Bala im Lagna. Rahu
-bleibt blass, Mangala im zwölften Haus zurückgenommen.
+**Sättigung folgt der Stärke im Chart, soweit der Farbton es zulässt.**
+Shukra (exaltiert, Atmakaraka) und Guru (Dig Bala im Lagna) stehen in allen
+vier Varianten am Anschlag dessen, was bei ihrer Helligkeit möglich ist; in
+den beiden hellen Varianten stößt Surya mit an, weil dort weniger Spielraum
+bleibt. Rahu und Ketu bleiben blass.
+
+Die Regel hat zwei Grenzen, und beide stehen so auch auf der Seite. Wo
+Farbton und Stärke sich widersprechen, gewinnt der Farbton: Chandra ist
+exaltiert und trotzdem fast ungesättigt, weil er weiß ist. Und sie greift
+nicht überall — Mangala liegt trotz zwölftem Haus im Mittelfeld, wo Shani
+aus demselben Haus im unteren Drittel bleibt. Die Werte stehen in der
+Grafik `Strength`, gerechnet aus `palette.json`. Wer eine Farbe ändert,
+sieht dort nach, ob eine Aussage im Text dadurch falsch wird.
 
 **Kontrast ist gelöst, nicht gewählt.** Jede Farbe, die Text tragen kann,
 erreicht mindestens 4,5:1 gegen `base`, `surface` *und* `overlay`. Die
