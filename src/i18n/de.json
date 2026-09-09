@@ -3,6 +3,14 @@
   "tagline": "Neun Planeten, neun Farben",
   "lede": "Ein Farbschema für Terminal und Editor, dessen Töne nicht gewählt, sondern abgelesen sind: jede Farbe ist die klassische Farbe eines Grahas, ihre Sättigung folgt seiner Stärke in einem einzigen Geburtshoroskop.",
   "chartCaption": "23. Mai 1982, 19:47 MESZ, Wedel. Siderisch nach Lahiri, Häuser nach Zeichen. Lagna in Tula.",
+  "chart": {
+    "alt": "Nordindisches Geburtsdiagramm mit den neun Grahas",
+    "group": "Was die Ziffern im Diagramm bedeuten",
+    "signs": "Zeichen",
+    "houses": "Häuser",
+    "signsNote": "Die Ziffern nennen die Tierkreiszeichen. Die Häuser liegen im nordindischen Diagramm fest: oben in der Mitte das erste, von dort gegen den Uhrzeigersinn.",
+    "housesNote": "Die Ziffern nennen die Häuser, gezählt vom Lagna in Tula. Guru steht damit im ersten Haus, auch wenn er im siebten Zeichen sitzt."
+  },
   "variant": "Variante",
   "systemLabel": "System",
   "systemNote": "Folgt der Einstellung des Betriebssystems: hell zeigt Ushas, dunkel zeigt Swati.",
@@ -35,13 +43,90 @@
   },
   "method": {
     "title": "Wie das Schema entsteht",
-    "p1": "Die klassische Jyotisha-Literatur weist jedem Graha eine Farbe zu: die Sonne kupferrot, der Mond weiß, Mars blutrot, Merkur grasgrün, Jupiter goldgelb, Venus weiß-schillernd, Saturn dunkelblau, Rahu rauchig, Ketu aschgrau. Neun Planeten ergeben damit von selbst neun Töne über den ganzen Farbkreis. Kein Ton musste erfunden oder verschoben werden.",
-    "h2": "Sättigung",
-    "p2": "Die Kraft einer Farbe folgt der Stärke ihres Grahas. Shukra steht exaltiert in Revati und ist Atmakaraka, hat also die kräftigste Farbe. Guru steht mit Dig Bala im Lagna. Rahu bleibt rauchig und blass, Mangala im zwölften Haus zurückgenommen.",
-    "h3": "Zwei Gründe",
-    "p3": "Der Hintergrund kam zuerst aus der Erd-Dominanz: fünf der neun Grahas stehen in Vrishabha und Kanya. Nur liegen diese beiden Zeichen im achten und zwölften Haus, den verborgensten des Charts. Die zweite Herleitung nimmt das Lagna: Tula, ein Vayu-Zeichen, mit Jupiter in Swati, dessen Gottheit Vayu selbst ist. Beide Wege sind hier, weil beide etwas taugen.",
-    "h4": "Kontrast",
-    "p4": "Jede Farbe, die Text tragen kann, erreicht mindestens 4,5 zu 1 — und zwar nicht nur gegen den Grund, sondern auch gegen Fläche und Auflage. Die Helligkeiten sind dafür nicht ausgesucht, sondern gelöst worden."
+    "intro": {
+      "h": "Zuerst: was ein Graha ist",
+      "p1": "Die indische Astrologie rechnet mit neun Himmelskörpern — Sonne, Mond, Merkur, Venus, Mars, Jupiter, Saturn und den beiden Punkten, an denen sich die Mondbahn mit der Sonnenbahn kreuzt. Diese neun heißen Grahas. Ein Geburtshoroskop hält fest, wo sie in einem bestimmten Augenblick standen: in welchem Tierkreiszeichen, und in welchem der zwölf Häuser, die je einen Lebensbereich abdecken.",
+      "p2": "Beide Angaben stehen nebeneinander und meinen Verschiedenes: die Zeichen sagen, wie ein Planet wirkt, die Häuser, worauf. Deshalb steht Guru im Diagramm oben in der Waage, dem siebten Zeichen, und gleichzeitig im ersten Haus. Der Schalter unter dem Diagramm zeigt, welche der beiden Zählungen die Ziffern gerade nennen."
+    },
+    "hues": {
+      "h": "Woher die neun Farbtöne kommen",
+      "p": "Alte Texte beschreiben jeden Graha mit einer festen Farbe: die Sonne kupferrot, den Mond weiß, Mars blutrot, Merkur grasgrün, Jupiter goldgelb, Venus weiß-schillernd, Saturn dunkelblau, und die beiden Mondknoten rauchig und aschgrau. Diese Zuordnungen sind Jahrhunderte alt und stehen so in jeder Standardquelle. Das war der Glücksfall dieses Projekts: neun Planeten ergeben neun Töne, sie verteilen sich fast gleichmäßig über den Farbkreis, und es sind genau so viele, wie ein Editor für Syntax braucht. Kein Ton musste dazuerfunden werden."
+    },
+    "force": {
+      "h": "Woher die Kraft jeder Farbe kommt",
+      "p": "Ein Graha kann in einem Horoskop stark oder schwach stehen — je nachdem, in welchem Zeichen und in welchem Haus er sich befindet. Diese Stärke bestimmt hier, wie kräftig seine Farbe ausfällt. Vier Beispiele aus diesem Chart:",
+      "cases": [
+        {
+          "name": "Venus",
+          "text": "steht in ihrem günstigsten Zeichen, den Fischen. Das heißt exaltiert und ist die stärkste Stellung überhaupt. Zusätzlich ist sie Atmakaraka, der Planet mit dem höchsten Gradstand, den die Tradition als wichtigsten der Karte liest. Sie bekommt deshalb den kräftigsten Ton: das Türkis."
+        },
+        {
+          "name": "Jupiter",
+          "text": "steht im ersten Haus. Für ihn ist das die beste denkbare Position, Dig Bala genannt, wörtlich Richtungsstärke. Sein Gold ist entsprechend satt."
+        },
+        {
+          "name": "Mars und Saturn",
+          "text": "stehen im zwölften Haus, dem Haus des Rückzugs und des Verborgenen. Ihre Farben sind hörbar zurückgenommen."
+        },
+        {
+          "name": "Rahu",
+          "text": "ist kein Körper, sondern ein Kreuzungspunkt, und gilt als rauchig und diffus. Er bleibt blass."
+        }
+      ]
+    },
+    "grounds": {
+      "h": "Warum es zwei Hintergründe gibt",
+      "p1": "Der Hintergrund ist die größte Fläche auf dem Bildschirm. Er sollte deshalb aus dem kommen, was in diesem Horoskop am deutlichsten gehäuft ist — und dafür gab es zwei Lesarten.",
+      "p2": "Die erste zählt die Zeichen: fünf der neun Grahas stehen in Erdzeichen, in Stier und Jungfrau. Erde ergibt einen warmen, bräunlichen Grund. Das sind die Varianten Pratipada und Ushas.",
+      "p3": "Die zweite nimmt das Lagna, den Aszendenten: das Zeichen, das im Geburtsmoment am Osthorizont aufging. Es gilt in der Tradition als das Zeichen der äußeren Erscheinung. Hier ist es die Waage, ein Luftzeichen. Luft ergibt einen kühlen, klaren Grund — Swati und Tula.",
+      "p4": "Der zweite Weg ist eigentlich besser begründet: wenn ein Teil des Horoskops über sichtbare Gestalt entscheidet, dann das erste Haus. Stier und Jungfrau fallen in diesem Horoskop dagegen ins achte und zwölfte Haus, die beiden verborgensten — sie tun das nur wegen dieses Lagna. Nur sieht der warme Grund einfach gut aus. Deshalb sind beide geblieben."
+    },
+    "contrast": {
+      "h": "Warum die Helligkeiten nicht frei gewählt sind",
+      "p1": "Farben zu finden, die zueinander passen, ist die eine Hälfte der Arbeit. Die andere ist, dass man den Text danach noch lesen kann. Die Barrierefreiheitsrichtlinien für das Web nennen dafür eine Zahl: normaler Text braucht mindestens den 4,5-fachen Helligkeitsunterschied zu seinem Hintergrund. Viele bekannte Schemata unterschreiten das ausgerechnet bei Kommentaren.",
+      "p2": "Hier ist jede Farbe, die Text tragen kann, auf genau diesen Wert gerechnet — und zwar gegen alle drei Hintergrundebenen, nicht nur gegen die dunkelste. Der Farbton kommt also aus dem Horoskop, die Helligkeit aus der Rechnung. Beides zusammen ergibt die Farbe."
+    },
+    "glossary": {
+      "h": "Die Begriffe auf einen Blick",
+      "terms": [
+        {
+          "t": "Graha",
+          "d": "Einer der neun Himmelskörper, mit denen die indische Astrologie rechnet. Wörtlich: der Ergreifende."
+        },
+        {
+          "t": "Lagna",
+          "d": "Der Aszendent. Das Tierkreiszeichen, das im Geburtsmoment am Osthorizont aufging. Steht für die äußere Erscheinung."
+        },
+        {
+          "t": "Zeichen",
+          "d": "Eines der zwölf Tierkreiszeichen. Sagt, in welcher Art ein Graha wirkt. Die Zeichen liegen fest am Himmel."
+        },
+        {
+          "t": "Haus",
+          "d": "Einer von zwölf Abschnitten des Horoskops, jeder für einen Lebensbereich. Sagt, worauf ein Graha wirkt. Gezählt wird vom Lagna aus."
+        },
+        {
+          "t": "Nakshatra",
+          "d": "Eine feinere Einteilung des Tierkreises in 27 Mondhäuser. Jedes hat eine eigene Gottheit und ein eigenes Bild."
+        },
+        {
+          "t": "exaltiert",
+          "d": "Ein Graha steht in dem Zeichen, in dem er am stärksten wirkt. Gegenteil: im Fall."
+        },
+        {
+          "t": "Dig Bala",
+          "d": "Richtungsstärke. Jeder Graha hat ein Haus, in dem er besonders gut zur Geltung kommt."
+        },
+        {
+          "t": "Atmakaraka",
+          "d": "Der Graha mit dem höchsten Gradstand im Horoskop. Die Tradition liest ihn als den wichtigsten der Karte."
+        },
+        {
+          "t": "retrograd",
+          "d": "Ein Planet, der von der Erde aus gesehen rückwärts läuft. Gilt als nach innen gewendet, nicht als schwach."
+        }
+      ]
+    }
   },
   "footer": "Ein Horoskop, neun Farben, vier Varianten. Frei verwendbar."
 }

@@ -142,72 +142,92 @@
    "sa": "Sūrya",
    "abbr": "Sū",
    "house": 8,
-   "color": "kupferrot",
-   "pos": "Krittika, Vrishabha"
+   "nakshatra": "Krittika",
+   "sign": "Vrishabha",
+   "dignities": []
   },
   {
    "key": "chandra",
    "sa": "Chandra",
    "abbr": "Ch",
    "house": 8,
-   "color": "weiß",
-   "pos": "Rohini, exaltiert"
+   "nakshatra": "Rohini",
+   "sign": "Vrishabha",
+   "dignities": [
+    "exalted"
+   ]
   },
   {
    "key": "mangala",
    "sa": "Mangala",
    "abbr": "Ma",
    "house": 12,
-   "color": "blutrot",
-   "pos": "U. Phalguni, Kanya"
+   "nakshatra": "U. Phalguni",
+   "sign": "Kanya",
+   "dignities": []
   },
   {
    "key": "budha",
    "sa": "Budha",
    "abbr": "Bu",
    "house": 8,
-   "color": "grasgrün",
-   "pos": "Rohini, retrograd"
+   "nakshatra": "Rohini",
+   "sign": "Vrishabha",
+   "dignities": [
+    "retrograde"
+   ]
   },
   {
    "key": "guru",
    "sa": "Guru",
    "abbr": "Gu",
    "house": 1,
-   "color": "goldgelb",
-   "pos": "Swati, Tula, Dig Bala"
+   "nakshatra": "Swati",
+   "sign": "Tula",
+   "dignities": [
+    "digbala"
+   ]
   },
   {
    "key": "shukra",
    "sa": "Shukra",
    "abbr": "Śu",
    "house": 6,
-   "color": "weiß-schillernd",
-   "pos": "Revati, exaltiert, Atmakaraka"
+   "nakshatra": "Revati",
+   "sign": "Mina",
+   "dignities": [
+    "exalted",
+    "atmakaraka"
+   ]
   },
   {
    "key": "shani",
    "sa": "Shani",
    "abbr": "Śa",
    "house": 12,
-   "color": "dunkelblau",
-   "pos": "Hasta, Kanya, retrograd"
+   "nakshatra": "Hasta",
+   "sign": "Kanya",
+   "dignities": [
+    "retrograde"
+   ]
   },
   {
    "key": "rahu",
    "sa": "Rahu",
    "abbr": "Ra",
    "house": 9,
-   "color": "rauchig",
-   "pos": "Punarvasu, Mithuna"
+   "nakshatra": "Punarvasu",
+   "sign": "Mithuna",
+   "dignities": []
   },
   {
    "key": "ketu",
    "sa": "Ketu",
    "abbr": "Ke",
    "house": 3,
-   "color": "aschgrau",
-   "pos": "P. Ashadha, Dhanu"
+   "nakshatra": "P. Ashadha",
+   "sign": "Dhanu",
+   "dignities": []
   }
  ],
  "neutrals": [

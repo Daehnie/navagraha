@@ -3,6 +3,14 @@
   "tagline": "Nine planets, nine colours",
   "lede": "A colour scheme for terminal and editor whose tones were not picked but read off: every colour is the classical colour of a graha, its saturation follows that planet's strength in one particular birth chart.",
   "chartCaption": "23 May 1982, 19:47 CEST, Wedel. Sidereal, Lahiri ayanamsa, whole-sign houses. Lagna in Tula.",
+  "chart": {
+    "alt": "North Indian birth chart with the nine grahas",
+    "group": "What the numbers in the chart mean",
+    "signs": "Signs",
+    "houses": "Houses",
+    "signsNote": "The numbers name the zodiac signs. In a North Indian chart the houses are fixed: the first is top centre, the rest run anticlockwise from there.",
+    "housesNote": "The numbers name the houses, counted from the lagna in Tula. Guru therefore sits in the first house, even though it stands in the seventh sign."
+  },
   "variant": "Variant",
   "systemLabel": "System",
   "systemNote": "Follows the operating system setting: light shows Ushas, dark shows Swati.",
@@ -35,13 +43,90 @@
   },
   "method": {
     "title": "How the scheme is built",
-    "p1": "Classical Jyotisha literature assigns each graha a colour: the Sun copper red, the Moon white, Mars blood red, Mercury grass green, Jupiter golden yellow, Venus iridescent white, Saturn dark blue, Rahu smoky, Ketu ash grey. Nine planets therefore yield nine tones across the whole wheel on their own. No tone had to be invented or shifted.",
-    "h2": "Saturation",
-    "p2": "A colour's force follows its graha's strength. Shukra is exalted in Revati and is atmakaraka, so it carries the strongest colour. Guru holds dig bala in the lagna. Rahu stays smoky and pale, Mangala in the twelfth house restrained.",
-    "h3": "Two grounds",
-    "p3": "The background first came from earth dominance: five of the nine grahas sit in Vrishabha and Kanya. But those two signs fall in the eighth and twelfth houses, the most hidden of the chart. The second derivation takes the lagna: Tula, an air sign, with Jupiter in Swati, whose deity is Vayu himself. Both paths are here because both hold up.",
-    "h4": "Contrast",
-    "p4": "Every colour that can carry text reaches at least 4.5 to 1 — not only against the ground, but against surface and overlay too. The lightness values were solved for, not chosen."
+    "intro": {
+      "h": "First: what a graha is",
+      "p1": "Indian astrology works with nine celestial bodies — Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, and the two points where the Moon's path crosses the Sun's. These nine are the grahas. A birth chart records where they stood at one particular moment: in which zodiac sign, and in which of the twelve houses, each covering an area of life.",
+      "p2": "The two readings sit side by side and say different things: the sign says how a planet acts, the house says on what. That is why Guru sits at the top of the chart in Libra, the seventh sign, and in the first house at the same time. The switch under the chart says which of the two countings the numbers are showing."
+    },
+    "hues": {
+      "h": "Where the nine hues come from",
+      "p": "Classical texts give every graha a fixed colour: the Sun copper red, the Moon white, Mars blood red, Mercury grass green, Jupiter golden yellow, Venus iridescent white, Saturn dark blue, and the two lunar nodes smoky and ash grey. These assignments are centuries old and appear in every standard source. That was this project's stroke of luck: nine planets give nine tones, they spread almost evenly around the wheel, and there are exactly as many as an editor needs for syntax. No tone had to be invented."
+    },
+    "force": {
+      "h": "Where each colour's force comes from",
+      "p": "A graha can stand strong or weak in a chart — depending on the sign and the house it occupies. That strength decides here how forceful its colour is. Four examples from this chart:",
+      "cases": [
+        {
+          "name": "Venus",
+          "text": "stands in its most favourable sign, Pisces. That is called exalted, and it is the strongest placement there is. It is also atmakaraka, the planet at the highest degree, which the tradition reads as the most important of the chart. So it gets the strongest tone: the turquoise."
+        },
+        {
+          "name": "Jupiter",
+          "text": "stands in the first house. For Jupiter that is the best position imaginable, called dig bala, literally directional strength. Its gold is saturated to match."
+        },
+        {
+          "name": "Mars and Saturn",
+          "text": "stand in the twelfth house, the house of withdrawal and of what is hidden. Their colours are audibly held back."
+        },
+        {
+          "name": "Rahu",
+          "text": "is not a body but a crossing point, and counts as smoky and diffuse. It stays pale."
+        }
+      ]
+    },
+    "grounds": {
+      "h": "Why there are two grounds",
+      "p1": "The background is the largest area on the screen. It should therefore come from whatever this chart clusters most clearly — and there were two ways to read that.",
+      "p2": "The first counts signs: five of the nine grahas stand in earth signs, in Taurus and Virgo. Earth gives a warm, brownish ground. Those are the Pratipada and Ushas variants.",
+      "p3": "The second takes the lagna, the ascendant: the sign rising on the eastern horizon at the moment of birth. The tradition holds it to be the sign of outward appearance. Here it is Libra, an air sign. Air gives a cool, clear ground — Swati and Tula.",
+      "p4": "The second path is in fact better founded: if any part of a chart decides visible form, it is the first house. Taurus and Virgo, by contrast, fall into the eighth and twelfth houses in this chart, the two most hidden ones — and they do so only because of this lagna. It is just that the warm ground simply looks good. So both stayed."
+    },
+    "contrast": {
+      "h": "Why the lightness values are not freely chosen",
+      "p1": "Finding colours that go together is one half of the work. The other is that the text still has to be readable afterwards. The web accessibility guidelines put a number on it: body text needs at least 4.5 times the lightness difference to its background. Many well-known schemes fall short of that in the comments, of all places.",
+      "p2": "Here every colour that can carry text is computed to exactly that value — and against all three background layers, not only the darkest. So the hue comes from the chart, the lightness from the arithmetic. Together they make the colour."
+    },
+    "glossary": {
+      "h": "The terms at a glance",
+      "terms": [
+        {
+          "t": "Graha",
+          "d": "One of the nine celestial bodies Indian astrology works with. Literally: the one that seizes."
+        },
+        {
+          "t": "Lagna",
+          "d": "The ascendant. The zodiac sign rising on the eastern horizon at the moment of birth. Stands for outward appearance."
+        },
+        {
+          "t": "Sign",
+          "d": "One of the twelve zodiac signs. Says in what manner a graha acts. The signs are fixed in the sky."
+        },
+        {
+          "t": "House",
+          "d": "One of twelve sections of the chart, each for an area of life. Says what a graha acts upon. Counted from the lagna."
+        },
+        {
+          "t": "Nakshatra",
+          "d": "A finer division of the zodiac into 27 lunar mansions. Each has its own deity and its own image."
+        },
+        {
+          "t": "exalted",
+          "d": "A graha stands in the sign where it acts most strongly. The opposite is debilitated."
+        },
+        {
+          "t": "dig bala",
+          "d": "Directional strength. Every graha has a house in which it comes into its own."
+        },
+        {
+          "t": "atmakaraka",
+          "d": "The graha at the highest degree in the chart. The tradition reads it as the most important one."
+        },
+        {
+          "t": "retrograde",
+          "d": "A planet moving backwards as seen from Earth. Counts as turned inward, not as weak."
+        }
+      ]
+    }
   },
   "footer": "One birth chart, nine colours, four variants. Free to use."
 }

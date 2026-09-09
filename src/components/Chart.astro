@@ -1,9 +1,11 @@
 ---
 // Nordindisches Rautendiagramm: Haeuser liegen fest, Zeichen rotieren.
-// Lagna Tula, also steht Zeichen 7 im ersten Haus.
+// Lagna Tula, also steht Zeichen 7 im ersten Haus. Die Ziffer in einem Feld
+// kann deshalb zweierlei meinen — der Schalter sagt, welches gerade gilt.
+const { labels } = Astro.props as { labels: any }
 const HOUSE = [[50,26],[25,13],[13,25],[26,50],[13,75],[25,87],
                [50,74],[75,87],[87,75],[74,50],[87,25],[75,13]]
-const SIGN  = [[50,15],[12,5],[5,12],[13,50],[5,88],[12,95],
+const NUM   = [[50,15],[12,5],[5,12],[13,50],[5,88],[12,95],
                [50,88],[88,95],[95,88],[87,50],[95,12],[88,5]]
 const OCC: Record<number, [string, string][]> = {
   0: [['guru','Gu']], 2: [['ketu','Ke']], 5: [['shukra','Śu']],
@@ -12,28 +14,71 @@ const OCC: Record<number, [string, string][]> = {
 }
 let n = 0
 ---
-<svg viewBox="0 0 100 100" class="chart" role="img"
-     aria-label="Nordindisches Geburtsdiagramm mit den neun Grahas">
-  <g fill="none" stroke="var(--hl_high)" stroke-width=".5">
-    <rect x=".25" y=".25" width="99.5" height="99.5" />
-    <path d="M0 0 L100 100 M100 0 L0 100 M50 0 L100 50 L50 100 L0 50 Z" />
-  </g>
-  {SIGN.map(([x, y], i) => (
-    <text x={x} y={y} class="sg">{((6 + i) % 12) + 1}</text>
-  ))}
-  {HOUSE.map(([x, y], h) => (OCC[h] ?? []).map(([key, abbr], j, all) => {
-    const dy = (j - (all.length - 1) / 2) * 6.4
-    const delay = (n++) * 90
-    return <text x={x} y={y + dy} class="gh"
-      style={`fill:var(--${key});animation-delay:${delay}ms`}>{abbr}</text>
-  }))}
-</svg>
+<figure class="chartbox" data-mode="signs">
+  <svg viewBox="0 0 100 100" class="chart" role="img" aria-label={labels.alt}>
+    <g fill="none" stroke="var(--hl_high)" stroke-width=".5">
+      <rect x=".25" y=".25" width="99.5" height="99.5" />
+      <path d="M0 0 L100 100 M100 0 L0 100 M50 0 L100 50 L50 100 L0 50 Z" />
+    </g>
+    {NUM.map(([x, y], i) => (
+      <>
+        <text x={x} y={y} class="sg num">{((6 + i) % 12) + 1}</text>
+        <text x={x} y={y} class="hs num">{i + 1}</text>
+      </>
+    ))}
+    {HOUSE.map(([x, y], h) => (OCC[h] ?? []).map(([key, abbr], j, all) => {
+      const dy = (j - (all.length - 1) / 2) * 6.4
+      const delay = (n++) * 90
+      return <text x={x} y={y + dy} class="gh"
+        style={`fill:var(--${key});animation-delay:${delay}ms`}>{abbr}</text>
+    }))}
+  </svg>
+  <div class="ctl" role="group" aria-label={labels.group}>
+    <button type="button" data-mode="signs" aria-pressed="true">{labels.signs}</button>
+    <button type="button" data-mode="houses" aria-pressed="false">{labels.houses}</button>
+  </div>
+  <figcaption class="note" aria-live="polite">{labels.signsNote}</figcaption>
+</figure>
+
+<script is:inline define:vars={{ notes: { signs: labels.signsNote, houses: labels.housesNote } }}>
+  const box = document.querySelector('.chartbox')
+  const note = box.querySelector('.note')
+  box.querySelectorAll('.ctl button').forEach(b => {
+    b.addEventListener('click', () => {
+      const mode = b.dataset.mode
+      box.dataset.mode = mode
+      note.textContent = notes[mode]
+      box.querySelectorAll('.ctl button').forEach(o =>
+        o.setAttribute('aria-pressed', String(o === b)))
+    })
+  })
+</script>
 
 <style>
+  .chartbox { margin: 0; }
   .chart { width: 100%; max-width: 20rem; display: block; }
-  .chart .sg { font-size: 3.1px; fill: var(--ketu); text-anchor: middle;
+  .chart .num { font-size: 3.1px; fill: var(--ketu); text-anchor: middle;
     font-family: ui-monospace, Menlo, monospace; }
+  .chartbox[data-mode="signs"] .hs,
+  .chartbox[data-mode="houses"] .sg { display: none; }
+  /* Die Haeuserziffern gehoeren zum Lagna, nicht zum Zodiak: eigener Ton. */
+  .chartbox[data-mode="houses"] .hs { fill: var(--guru); }
   .chart .gh { font-size: 5.4px; text-anchor: middle; font-weight: 600;
     animation: rise .5s ease-out backwards; }
   @keyframes rise { from { opacity: 0; transform: translateY(2px); } }
+
+  .ctl { display: flex; gap: var(--s1); margin-top: var(--s4);
+    max-width: 20rem; }
+  .ctl button { flex: 1; background: none; border: 1px solid var(--hl_high);
+    color: var(--ketu); font: inherit; font-size: .8rem; cursor: pointer;
+    padding: var(--s2) var(--s3); border-radius: 999px; }
+  .ctl button:hover { background: var(--hl_med); color: var(--chandra); }
+  .ctl button[aria-pressed="true"] { background: var(--hl_med);
+    color: var(--chandra); border-color: var(--hl_high); }
+  .note { font-size: .78rem; color: var(--ketu); letter-spacing: .012em;
+    margin: var(--s3) 0 0; max-width: 34ch; }
+
+  @media (prefers-contrast: more) {
+    .note, .ctl button { color: var(--subtle); }
+  }
 </style>

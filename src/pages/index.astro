@@ -16,7 +16,7 @@ const t = useTranslations(lang)
         <ThemeSwitcher labels={t.variants} systemLabel={t.systemLabel} systemNote={t.systemNote} />
       </div>
       <div>
-        <Chart />
+        <Chart labels={t.chart} />
         <p class="born">{t.chartCaption}</p>
       </div>
     </div>
@@ -34,10 +34,26 @@ const t = useTranslations(lang)
 
   <section class="wrap method">
     <h2>{t.method.title}</h2>
-    <p>{t.method.p1}</p>
-    <h3>{t.method.h2}</h3><p>{t.method.p2}</p>
-    <h3>{t.method.h3}</h3><p>{t.method.p3}</p>
-    <h3>{t.method.h4}</h3><p>{t.method.p4}</p>
+    <h3>{t.method.intro.h}</h3>
+    <p>{t.method.intro.p1}</p>
+    <p>{t.method.intro.p2}</p>
+    <h3>{t.method.hues.h}</h3><p>{t.method.hues.p}</p>
+    <h3>{t.method.force.h}</h3><p>{t.method.force.p}</p>
+    <ul class="cases">
+      {t.method.force.cases.map(c => <li><b>{c.name}</b> {c.text}</li>)}
+    </ul>
+    <h3>{t.method.grounds.h}</h3>
+    <p>{t.method.grounds.p1}</p>
+    <p>{t.method.grounds.p2}</p>
+    <p>{t.method.grounds.p3}</p>
+    <p>{t.method.grounds.p4}</p>
+    <h3>{t.method.contrast.h}</h3>
+    <p>{t.method.contrast.p1}</p>
+    <p>{t.method.contrast.p2}</p>
+    <h3>{t.method.glossary.h}</h3>
+    <dl class="gloss">
+      {t.method.glossary.terms.map(g => <><dt>{g.t}</dt><dd>{g.d}</dd></>)}
+    </dl>
   </section>
 </Base>
 
@@ -49,6 +65,16 @@ const t = useTranslations(lang)
   .born { font-size: .78rem; color: var(--ketu); letter-spacing: .012em;
     margin: var(--s5) 0 0; }
   .method p { max-width: 62ch; }
+  .cases { list-style: none; padding: 0; margin: var(--s4) 0 0;
+    display: grid; gap: var(--s3); max-width: 62ch; }
+  /* Der Strich statt eines Punkts: die Faelle sind Belege, keine Aufzaehlung. */
+  .cases li { padding-left: var(--s4); border-left: 2px solid var(--hl_high); }
+  .cases b { font-weight: 600; }
+  .gloss { display: grid; gap: 0 var(--s5); margin: var(--s4) 0 0; max-width: 62ch; }
+  @media (min-width: 34rem) { .gloss { grid-template-columns: 9rem 1fr; } }
+  .gloss dt { font-weight: 600; }
+  .gloss dd { margin: 0 0 var(--s4); color: var(--ketu); font-size: .93rem; }
+
   /* Einrichten ist die Hauptsache und traegt deshalb Flaeche, nicht nur Farbe. */
   .go { display: flex; align-items: center; gap: var(--s5); margin-top: var(--s5); }
   .cta { display: inline-block; background: var(--shukra); color: var(--base);
@@ -56,6 +82,6 @@ const t = useTranslations(lang)
     font-size: .95rem; }
 
   @media (prefers-contrast: more) {
-    .born { color: var(--subtle); }
+    .born, .gloss dd { color: var(--subtle); }
   }
 </style>
