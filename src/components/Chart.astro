@@ -44,7 +44,7 @@ let n = 0
     <button role="radio" data-mode="houses" aria-checked="false">{labels.houses}</button>
   </div>
   <figcaption class="note" aria-live="polite">{labels.signsNote}</figcaption>
-  <h2 class="vh" id="chart-liste">{labels.listTitle}</h2>
+  <h3 class="vh" id="chart-liste">{labels.listTitle}</h3>
   <ul class="vh" aria-labelledby="chart-liste">
     {palette.grahas.map(g => (
       <li>{names[g.key][lang]} ({g.sa}): {stand(g, lang)}</li>
