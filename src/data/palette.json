@@ -39,7 +39,8 @@
     "rahu_b": "#ccb1de",
     "hl_low": "#15191f",
     "hl_med": "#22262d",
-    "hl_high": "#32373e"
+    "hl_high": "#32373e",
+    "line": "#6c727a"
    }
   },
   "pratipada": {
@@ -70,7 +71,8 @@
     "rahu_b": "#cdb2df",
     "hl_low": "#1d1810",
     "hl_med": "#2b251d",
-    "hl_high": "#3c362d"
+    "hl_high": "#3c362d",
+    "line": "#787167"
    }
   },
   "ushas": {
@@ -101,7 +103,8 @@
     "rahu_b": "#533d60",
     "hl_low": "#f6e8d6",
     "hl_med": "#e5d8c6",
-    "hl_high": "#d5c8b6"
+    "hl_high": "#d5c8b6",
+    "line": "#867a6a"
    }
   },
   "tula": {
@@ -132,7 +135,8 @@
     "rahu_b": "#533d60",
     "hl_low": "#e3ebf5",
     "hl_med": "#d3dbe5",
-    "hl_high": "#c3cbd5"
+    "hl_high": "#c3cbd5",
+    "line": "#767d87"
    }
   }
  },
@@ -237,6 +241,7 @@
   "subtle",
   "hl_low",
   "hl_med",
-  "hl_high"
+  "hl_high",
+  "line"
  ]
 }

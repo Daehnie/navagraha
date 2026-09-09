@@ -16,7 +16,7 @@ let n = 0
 ---
 <figure class="chartbox" data-mode="signs">
   <svg viewBox="0 0 100 100" class="chart" role="img" aria-label={labels.alt}>
-    <g fill="none" stroke="var(--hl_high)" stroke-width=".5">
+    <g fill="none" stroke="var(--line)" stroke-width=".5">
       <rect x=".25" y=".25" width="99.5" height="99.5" />
       <path d="M0 0 L100 100 M100 0 L0 100 M50 0 L100 50 L50 100 L0 50 Z" />
     </g>
@@ -33,23 +33,41 @@ let n = 0
         style={`fill:var(--${key});animation-delay:${delay}ms`}>{abbr}</text>
     }))}
   </svg>
-  <div class="ctl" role="group" aria-label={labels.group}>
-    <button type="button" data-mode="signs" aria-pressed="true">{labels.signs}</button>
-    <button type="button" data-mode="houses" aria-pressed="false">{labels.houses}</button>
+  <div class="ctl" role="radiogroup" aria-label={labels.group}>
+    <button role="radio" data-mode="signs" aria-checked="true">{labels.signs}</button>
+    <button role="radio" data-mode="houses" aria-checked="false">{labels.houses}</button>
   </div>
   <figcaption class="note" aria-live="polite">{labels.signsNote}</figcaption>
 </figure>
 
 <script is:inline define:vars={{ notes: { signs: labels.signsNote, houses: labels.housesNote } }}>
+  // Dasselbe Muster wie der Variantenschalter: eine Radiogruppe, ein Halt in
+  // der Tab-Reihenfolge, Pfeiltasten wandern mit Umschlag an den Enden.
   const box = document.querySelector('.chartbox')
   const note = box.querySelector('.note')
-  box.querySelectorAll('.ctl button').forEach(b => {
-    b.addEventListener('click', () => {
-      const mode = b.dataset.mode
-      box.dataset.mode = mode
-      note.textContent = notes[mode]
-      box.querySelectorAll('.ctl button').forEach(o =>
-        o.setAttribute('aria-pressed', String(o === b)))
+  const knoepfe = [...box.querySelectorAll('.ctl button')]
+
+  function zeige(modus) {
+    box.dataset.mode = modus
+    note.textContent = notes[modus]
+    knoepfe.forEach(b => {
+      const an = b.dataset.mode === modus
+      b.setAttribute('aria-checked', String(an))
+      b.tabIndex = an ? 0 : -1
+    })
+  }
+
+  const SCHRITT = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }
+  knoepfe.forEach((b, i) => {
+    b.tabIndex = b.dataset.mode === box.dataset.mode ? 0 : -1
+    b.addEventListener('click', () => zeige(b.dataset.mode))
+    b.addEventListener('keydown', e => {
+      const d = SCHRITT[e.key]
+      if (!d) return
+      e.preventDefault()
+      const ziel = knoepfe[(i + d + knoepfe.length) % knoepfe.length]
+      zeige(ziel.dataset.mode)
+      ziel.focus()
     })
   })
 </script>
@@ -67,18 +85,22 @@ let n = 0
     animation: rise .5s ease-out backwards; }
   @keyframes rise { from { opacity: 0; transform: translateY(2px); } }
 
-  .ctl { display: flex; gap: var(--s1); margin-top: var(--s4);
-    max-width: 20rem; }
-  .ctl button { flex: 1; background: none; border: 1px solid var(--hl_high);
-    color: var(--ketu); font: inherit; font-size: .8rem; cursor: pointer;
-    padding: var(--s2) var(--s3); border-radius: 999px; }
-  .ctl button:hover { background: var(--hl_med); color: var(--chandra); }
-  .ctl button[aria-pressed="true"] { background: var(--hl_med);
-    color: var(--chandra); border-color: var(--hl_high); }
+  /* Sieht aus wie der Variantenschalter, weil er sich genauso verhaelt. */
+  .ctl { display: flex; gap: var(--s2); margin-top: var(--s4); max-width: 20rem; }
+  .ctl button { flex: 1; background: var(--surface); color: var(--subtle);
+    border: 1px solid var(--line); border-radius: 999px; font: inherit;
+    font-size: .84rem; cursor: pointer; padding: var(--s2) var(--s3);
+    transition: border-color .2s, color .2s; }
+  .ctl button:hover { border-color: var(--ketu); color: var(--chandra); }
+  .ctl button:active { border-color: var(--ketu); color: var(--chandra);
+    transform: scale(.97); transition: transform 100ms ease-out; }
+  .ctl button[aria-checked="true"] { border-color: var(--shukra);
+    color: var(--chandra_b); }
   .note { font-size: .78rem; color: var(--ketu); letter-spacing: .012em;
     margin: var(--s3) 0 0; max-width: 34ch; }
 
   @media (prefers-contrast: more) {
-    .note, .ctl button { color: var(--subtle); }
+    .note { color: var(--subtle); }
+    .ctl button { border-color: var(--subtle); }
   }
 </style>

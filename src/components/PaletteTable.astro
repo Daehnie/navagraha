@@ -66,37 +66,38 @@ const neutralLabels: Record<string, { de: string; en: string }> = {
   subtle:  { de: 'Chandra gedämpft',     en: 'Chandra, damped' },
   hl_low:  { de: 'Hervorhebung schwach', en: 'Highlight, low' },
   hl_med:  { de: 'Hervorhebung mittel',  en: 'Highlight, medium' },
-  hl_high: { de: 'Auswahl',              en: 'Selection' }
+  hl_high: { de: 'Auswahl',              en: 'Selection' },
+  line:    { de: 'Linie und Rahmen',     en: 'Line and border' }
 }
 const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
 ---
-<table>
-  <thead>
-    <tr>
-      <th>{t.palette.graha}</th>
-      <th>{t.palette.role}</th>
-      <th class="so">{t.palette.source}</th>
-      <th>{variants.map(([, v]) => v.label).join(' · ')}</th>
+<table role="table">
+  <thead role="rowgroup">
+    <tr role="row">
+      <th role="columnheader">{t.palette.graha}</th>
+      <th role="columnheader">{t.palette.role}</th>
+      <th role="columnheader" class="so">{t.palette.source}</th>
+      <th role="columnheader">{variants.map(([, v]) => v.label).join(' · ')}</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody role="rowgroup">
     {palette.grahas.map(g => (
-      <tr>
-        <th scope="row">
+      <tr role="row">
+        <th role="rowheader" scope="row">
           <span class="dot" style={`background:var(--${g.key})`}></span>
           <span class="nm">
             <span class="gn">{names[g.key][lang]}</span>
             <span class="sa">{g.sa}</span>
           </span>
         </th>
-        <td class="ro">{roles[g.key][lang]}</td>
-        <td class="so">
+        <td role="cell" class="ro">{roles[g.key][lang]}</td>
+        <td role="cell" class="so">
           {hues[g.key][lang]} · {signs[g.sign][lang]}, {ord(g.house, lang)}
           {g.dignities.length > 0 && (
             <span class="dg">{g.dignities.map(d => dignities[d][lang]).join(', ')}</span>
           )}
         </td>
-        <td class="hx">{variants.map(([, v]) => (
+        <td role="cell" class="hx">{variants.map(([, v]) => (
           <button data-hex={v.colors[g.key]} style={`--c:${v.colors[g.key]}`}
                   title={`${v.label}: ${v.colors[g.key]}`}
                   aria-label={`${v.label} ${v.colors[g.key]} ${t.palette.copy}`}>
@@ -110,16 +111,16 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
 
 <h2 class="ground">{t.palette.groundTitle}</h2>
 <p>{t.palette.groundLede}</p>
-<table>
-  <tbody>
+<table role="table">
+  <tbody role="rowgroup">
     {neutrals.map(([key, label]) => (
-      <tr>
-        <th scope="row">
+      <tr role="row">
+        <th role="rowheader" scope="row">
           <span class="dot" style={`background:var(--${key})`}></span>
           <span class="gn">{label[lang]}</span>
         </th>
-        <td class="ro" colspan="2"><code>{key}</code></td>
-        <td class="hx">{variants.map(([, v]) => (
+        <td role="cell" class="ro" colspan="2"><code>{key}</code></td>
+        <td role="cell" class="hx">{variants.map(([, v]) => (
           <button data-hex={v.colors[key]} style={`--c:${v.colors[key]}`}
                   title={`${v.label}: ${v.colors[key]}`}
                   aria-label={`${v.label} ${v.colors[key]} ${t.palette.copy}`}>
@@ -178,9 +179,24 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
   .hx button:active { background: var(--hl_med); color: var(--chandra);
     transform: scale(.97); transition: transform 100ms ease-out; }
   .hx button i { width: .74rem; height: .74rem; border-radius: 2px; background: var(--c);
-    display: block; box-shadow: 0 0 0 1px var(--hl_high); }
+    display: block; box-shadow: 0 0 0 1px var(--line); }
   .hx code { font-size: .69rem; letter-spacing: .016em; }
-  @media (max-width: 46rem) { .so { display: none; } .hx code { display: none; } }
+  /* Unter 46rem wird aus jeder Zeile eine Karte: vier Spalten passen dort
+     nicht nebeneinander, und die Stand- und Hexwerte auszublenden hiesse,
+     die Begruendung des Schemas nur am Schreibtisch zu zeigen. display:block
+     nimmt der Tabelle ihre Semantik — die role-Attribute geben sie zurueck. */
+  @media (max-width: 46rem) {
+    table, tbody, tr, th, td { display: block; }
+    thead { display: none; }
+    tr { padding: var(--s4) 0; border-bottom: 1px solid var(--hl_low); }
+    th, td { border: 0; padding: 0; }
+    .ro { margin-top: var(--s1); }
+    .so { max-width: none; margin-top: var(--s1); }
+    .dg { display: inline; margin-left: var(--s2); }
+    .hx { margin-top: var(--s3); display: flex; flex-wrap: wrap; gap: var(--s2);
+      white-space: normal; }
+    .hx button { margin: 0; }
+  }
   /* Schwebende Chrome ueber Inhalt: Glas, das ankommt, nicht eine Flaeche,
      die eingeblendet wird. Unschaerfe und Groesse laufen zusammen hoch. */
   #copied { position: fixed; left: 50%; bottom: var(--s5);

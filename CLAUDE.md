@@ -81,6 +81,20 @@ erreicht mindestens 4,5:1 gegen `base`, `surface` *und* `overlay`. Die
 Helligkeit wurde per Suche in OKLCH auf diesen Wert gebracht. Ein neuer Wert
 muss dieselbe Prüfung bestehen — nicht nur gegen den Hintergrund.
 
+**`line` trägt keinen Text, sondern Kanten**, und ist deshalb auf 3:1 gegen
+dieselben drei Ebenen gelöst — der Wert, den WCAG für die Begrenzung von
+Bedienelementen und für Grafik verlangt, die man zum Verstehen braucht. Er
+steht an den Rändern der Schalter, am Rahmen der Farbfelder und am Raster
+des Diagramms. Die `hl_*`-Werte taugen dafür nicht: sie sind
+Auswahlfarben für den Editor und liegen bewusst bei 1,2 bis 1,6:1. `line`
+ist der einzige Palettenwert, der nur die Seite betrifft — kein Schema in
+`scripts/theme-schemas.mjs` greift ihn ab.
+
+Dekorative Linien bleiben davon unberührt: die Trennstriche zwischen
+Abschnitten und Tabellenzeilen und der Rahmen der Codefläche stehen weiter
+auf `hl_low`/`hl_med`. 3:1 überall hieße, jede Fuge so laut zu machen wie
+eine Bedienkante.
+
 **ANSI-Plätze tragen nur einen Farbton, keine Rolle.** Platz 1 heißt „rot",
 nicht „Schlüsselwörter". Welches Sprachelement welche Farbe bekommt,
 entscheidet der Editor. Die Zuordnung steht in `themes/vim/navagraha.vim`
