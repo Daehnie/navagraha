@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro'
 import ThemeSwitcher from '../../components/ThemeSwitcher.astro'
 import PaletteTable from '../../components/PaletteTable.astro'
+import Spectrum from '../../components/Spectrum.astro'
 import CopyToast from '../../components/CopyToast.astro'
 import { getLangFromUrl, useTranslations } from '../../i18n/utils'
 const lang = getLangFromUrl(Astro.url)
@@ -12,6 +13,7 @@ const t = useTranslations(lang)
     <h2>{t.palette.title}</h2>
     <p>{t.palette.lede}</p>
     <ThemeSwitcher labels={t.variants} systemLabel={t.systemLabel} systemNote={t.systemNote} />
+    <Spectrum />
     <PaletteTable t={t} />
   </section>
   <CopyToast word={t.copied} />

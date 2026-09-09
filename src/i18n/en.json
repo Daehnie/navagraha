@@ -111,7 +111,15 @@
       "air": "Air — the lagna in Libra",
       "grounds": "Four variants, two derivations. The three marks on each field are Shukra, Guru and Mangala on that ground.",
       "contrastAlt": "Contrast ranges of the nine colours against ground, surface and overlay.",
-      "contrast": "Each bar runs from the weakest case — against the overlay — to the strongest against the ground, showing the worst value across all four variants. The line sits at 4.5. Eight colours end just past it because they were computed to exactly that; only Chandra has headroom, since it carries the body text."
+      "contrast": "Each bar runs from the weakest case — against the overlay — to the strongest against the ground, showing the worst value across all four variants. The line sits at 4.5. Eight colours end just past it because they were computed to exactly that; only Chandra has headroom, since it carries the body text.",
+      "tableOpen": "Show every value",
+      "tableCaption": "Contrast against the three layers",
+      "tableFoot": "Body text requires at least",
+      "colour": "Colour",
+      "base": "Ground",
+      "surface": "Surface",
+      "overlay": "Overlay",
+      "subtle": "Chandra, damped"
     },
     "glossary": {
       "h": "The terms at a glance",
@@ -154,6 +162,10 @@
         }
       ]
     }
+  },
+  "close": {
+    "title": "Take it with you",
+    "lede": "Every file carries all four variants — terminal, editor, and whatever else reads colours. If you only need the values, they are on the palette page; one click copies them."
   },
   "footer": "One birth chart, nine colours, four variants. Free to use."
 }

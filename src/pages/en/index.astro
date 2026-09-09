@@ -5,6 +5,7 @@ import HueWheel from '../../components/HueWheel.astro'
 import Strength from '../../components/Strength.astro'
 import Grounds from '../../components/Grounds.astro'
 import ContrastSpan from '../../components/ContrastSpan.astro'
+import ContrastTable from '../../components/ContrastTable.astro'
 import ThemeSwitcher from '../../components/ThemeSwitcher.astro'
 import CodePreview from '../../components/CodePreview.astro'
 import { getLangFromUrl, useTranslations, path } from '../../i18n/utils'
@@ -58,10 +59,20 @@ const t = useTranslations(lang)
     <p>{t.method.contrast.p2}</p>
     <ContrastSpan labels={t.method.figures} />
     <p class="bu">{t.method.figures.contrast}</p>
+    <ContrastTable labels={t.method.figures} />
     <h3>{t.method.glossary.h}</h3>
     <dl class="gloss">
       {t.method.glossary.terms.map(g => <><dt>{g.t}</dt><dd>{g.d}</dd></>)}
     </dl>
+  </section>
+
+  <section class="wrap schluss">
+    <h2>{t.close.title}</h2>
+    <p>{t.close.lede}</p>
+    <p class="go">
+      <a class="cta" href={path('/themes', lang)}>{t.themes.title}</a>
+      <a href={path('/palette', lang)}>{t.palette.title}</a>
+    </p>
   </section>
 </Base>
 

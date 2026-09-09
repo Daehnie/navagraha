@@ -1,0 +1,31 @@
+---
+// Auftakt der Farbseite: die neun Toene als Band, bevor die Tabelle beginnt.
+// Wer nur wissen will, wie das Schema aussieht, hat es hier in einem Blick.
+import palette from '../data/palette.json'
+import { names, type Sprache } from '../i18n/grahas'
+const lang: Sprache = Astro.currentLocale === 'en' ? 'en' : 'de'
+---
+<figure class="band">
+  <ul>
+    {palette.grahas.map(g => (
+      <li style={`--c:var(--${g.key})`}>
+        <span class="feld"></span>
+        <span class="kuerzel mono">{g.abbr}</span>
+        <span class="vh">{names[g.key][lang]}</span>
+      </li>
+    ))}
+  </ul>
+</figure>
+
+<style>
+  .band { margin: var(--s6) 0 0; }
+  .band ul { display: flex; list-style: none; padding: 0; margin: 0; gap: 2px; }
+  .band li { flex: 1; }
+  .feld { display: block; height: 3.4rem; background: var(--c);
+    border-radius: 3px; }
+  .band li:first-child .feld { border-radius: 8px 3px 3px 8px; }
+  .band li:last-child .feld { border-radius: 3px 8px 8px 3px; }
+  .kuerzel { display: block; text-align: center; font-size: .68rem;
+    color: var(--ketu); letter-spacing: .014em; margin-top: var(--s2); }
+  @media (prefers-contrast: more) { .kuerzel { color: var(--subtle); } }
+</style>

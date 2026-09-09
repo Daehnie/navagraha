@@ -111,7 +111,15 @@
       "air": "Luft — das Lagna in der Waage",
       "grounds": "Vier Varianten, zwei Herleitungen. Die drei Striche auf jeder Fläche sind Shukra, Guru und Mangala auf diesem Grund.",
       "contrastAlt": "Kontrastspannen der neun Farben gegen Grund, Fläche und Auflage.",
-      "contrast": "Jeder Balken reicht vom schwächsten Fall — gegen die Auflage — bis zum stärksten gegen den Grund, und zeigt den jeweils ungünstigsten Wert aus allen vier Varianten. Die Linie steht bei 4,5. Acht Farben enden knapp dahinter, weil sie genau darauf gerechnet sind; nur Chandra hat Reserve, weil er den Grundtext trägt."
+      "contrast": "Jeder Balken reicht vom schwächsten Fall — gegen die Auflage — bis zum stärksten gegen den Grund, und zeigt den jeweils ungünstigsten Wert aus allen vier Varianten. Die Linie steht bei 4,5. Acht Farben enden knapp dahinter, weil sie genau darauf gerechnet sind; nur Chandra hat Reserve, weil er den Grundtext trägt.",
+      "tableOpen": "Alle Werte ansehen",
+      "tableCaption": "Kontrast gegen die drei Ebenen",
+      "tableFoot": "Gefordert für normalen Text sind",
+      "colour": "Farbe",
+      "base": "Grund",
+      "surface": "Fläche",
+      "overlay": "Auflage",
+      "subtle": "Chandra gedämpft"
     },
     "glossary": {
       "h": "Die Begriffe auf einen Blick",
@@ -154,6 +162,10 @@
         }
       ]
     }
+  },
+  "close": {
+    "title": "Mitnehmen",
+    "lede": "Alle vier Varianten stecken in jeder Datei — Terminal, Editor, und was sonst Farben liest. Wer nur die Werte braucht, findet sie auf der Farbseite; ein Klick kopiert sie."
   },
   "footer": "Ein Horoskop, neun Farben, vier Varianten. Frei verwendbar."
 }

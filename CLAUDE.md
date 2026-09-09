@@ -31,16 +31,17 @@ Quelle, damit dieselbe Stellung nicht an zwei Orten zweierlei heißt.
 Klick-Delegat auf `[data-copy]` plus die Rückmeldung. Ein neuer Knopf braucht
 nur `data-copy` und, wenn er etwas Kurzes zeigen soll, `data-toast`.
 
-Die vier Grafiken im Methodenteil — `HueWheel`, `Strength`, `Grounds`,
-`ContrastSpan` — rechnen ihre Werte beim Bauen aus `palette.json`, über
-`src/data/color.ts`. Keine Zahl auf der Seite wird von Hand gepflegt; wer
+Die Grafiken im Methodenteil — `HueWheel`, `Strength`, `Grounds`,
+`ContrastSpan` und die aufklappbare Messtabelle `ContrastTable` — rechnen
+ihre Werte beim Bauen aus `palette.json`, über `src/data/color.ts`. Keine Zahl auf der Seite wird von Hand gepflegt; wer
 eine Farbe ändert, ändert die Grafiken mit. `ton()` misst die Sättigung als
 Anteil dessen, was bei dieser Helligkeit und diesem Farbton in sRGB möglich
 ist — nur so lassen sich Töne vergleichen, denn Rot kann von Natur aus
 gesättigter werden als Türkis.
 
-`HueWheel` und `Strength` hängen an der Variante und rendern deshalb alle
-vier Sätze; sichtbar ist der, den `html[data-theme]` auswählt. Was das
+`HueWheel`, `Strength` und `ContrastTable` hängen an der Variante und
+rendern deshalb alle vier Sätze; sichtbar ist der, den `html[data-theme]`
+auswählt. Was das
 Diagramm zeigt, unterscheidet sich je Variante, und eine Grafik, die etwas
 anderes behauptet als der Bildschirm, wäre schlimmer als keine.
 

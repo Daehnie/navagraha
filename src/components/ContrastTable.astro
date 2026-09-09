@@ -1,0 +1,85 @@
+---
+// Das Protokoll hinter der Grafik: jede textfaehige Farbe gegen jede der
+// drei Ebenen, in der gerade gewaehlten Variante. Nichts davon ist gesetzt —
+// alle Zahlen entstehen beim Bauen aus palette.json.
+import palette from '../data/palette.json'
+import { kontrast } from '../data/color'
+import { names, type Sprache } from '../i18n/grahas'
+const { labels } = Astro.props as { labels: any }
+const lang: Sprache = Astro.currentLocale === 'en' ? 'en' : 'de'
+const SOLL = 4.5
+const ebenen = ['base', 'surface', 'overlay'] as const
+const zahl = (n: number) => n.toFixed(2).replace('.', lang === 'de' ? ',' : '.')
+const zeilen = (v: Record<string, string>) =>
+  [...palette.grahas.map(g => ({ key: g.key, name: names[g.key][lang] })),
+   { key: 'subtle', name: labels.subtle }]
+  .map(r => {
+    const werte = ebenen.map(e => kontrast(v[r.key], v[e]))
+    return { ...r, werte, kleinster: Math.min(...werte) }
+  })
+// Fertig gerechnet ins Markup: eine Typumwandlung im Ausdruck liest der
+// Astro-Parser als Tag.
+const saetze = Object.entries(palette.variants).map(([key, variante]) => ({
+  key, label: variante.label,
+  zeilen: zeilen(variante.colors as Record<string, string>)
+}))
+---
+<details class="protokoll">
+  <summary>{labels.tableOpen}</summary>
+  {saetze.map(satz => (
+    <table class="satz" data-v={satz.key}>
+      <caption>{labels.tableCaption} — {satz.label}</caption>
+      <thead>
+        <tr>
+          <th>{labels.colour}</th>
+          {ebenen.map(e => <th class="num">{labels[e]}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {satz.zeilen.map(r => (
+          <tr>
+            <th scope="row">
+              <span class="punkt" style={`background:var(--${r.key})`}></span>{r.name}
+            </th>
+            {r.werte.map(w => (
+              <td class:list={['num', 'mono', w === r.kleinster && 'eng']}>{zahl(w)}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+      <tfoot>
+        <tr><td colspan="4">{labels.tableFoot} {zahl(SOLL)}</td></tr>
+      </tfoot>
+    </table>
+  ))}
+</details>
+
+<style>
+  .protokoll { margin: var(--s4) 0 0; max-width: 34rem; }
+  summary { cursor: pointer; color: var(--ketu); font-size: .82rem;
+    padding: var(--s2) 0; min-height: 44px; display: flex; align-items: center; }
+  summary:hover { color: var(--chandra); }
+  .satz { display: none; width: 100%; border-collapse: collapse;
+    margin-top: var(--s2); }
+  :global(html[data-theme="swati"]) .satz[data-v="swati"],
+  :global(html[data-theme="pratipada"]) .satz[data-v="pratipada"],
+  :global(html[data-theme="ushas"]) .satz[data-v="ushas"],
+  :global(html[data-theme="tula"]) .satz[data-v="tula"] { display: table; }
+  caption { text-align: left; color: var(--ketu); font-size: .76rem;
+    padding-bottom: var(--s2); }
+  th, td { text-align: left; font-weight: 400; font-size: .82rem;
+    padding: .22rem var(--s2) .22rem 0; border-bottom: 1px solid var(--hl_low); }
+  thead th { color: var(--ketu); font-size: .72rem; letter-spacing: .012em; }
+  .num { text-align: right; padding-right: 0; padding-left: var(--s4); }
+  td.num { font-size: .78rem; color: var(--ketu); }
+  /* Der bindende Fall jeder Zeile: an ihm haengt die Loesung. */
+  td.eng { color: var(--chandra); }
+  .punkt { width: .6rem; height: .6rem; border-radius: 50%; display: inline-block;
+    vertical-align: -1px; margin-right: var(--s2);
+    box-shadow: 0 0 0 1px var(--line); }
+  tfoot td { color: var(--ketu); font-size: .76rem; border-bottom: 0;
+    padding-top: var(--s3); }
+  @media (prefers-contrast: more) {
+    summary, caption, thead th, td.num, tfoot td { color: var(--subtle); }
+  }
+</style>
