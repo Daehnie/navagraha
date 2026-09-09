@@ -23,6 +23,14 @@ Deploy läuft über `.github/workflows/deploy.yml` bei jedem Push auf `main`.
 - `src/components/PaletteTable.astro` rendert die Tabelle
 - `themes/` enthält die generierten Dateien je Zielprogramm
 
+Wie ein Graha auf Deutsch und Englisch heißt, in welchem Zeichen und Haus er
+steht, steht in `src/i18n/grahas.ts`. Tabelle und Diagramm lesen dieselbe
+Quelle, damit dieselbe Stellung nicht an zwei Orten zweierlei heißt.
+
+`src/components/CopyToast.astro` ist die einzige Kopierstelle der Seite: ein
+Klick-Delegat auf `[data-copy]` plus die Rückmeldung. Ein neuer Knopf braucht
+nur `data-copy` und, wenn er etwas Kurzes zeigen soll, `data-toast`.
+
 Wird eine Farbe geändert, gehört sie in `palette.json` — nie in eine
 Theme-Datei oder ins CSS. Die Dateien unter `themes/` sind Ausgabe, keine
 Quelle.
@@ -133,6 +141,14 @@ Kein Framework für Interaktion. Der Variantenschalter und das Kopieren sind
 
 `prefers-reduced-motion` wird respektiert, die Animation im Diagramm ist die
 einzige der Seite.
+
+Bedienbares ist mindestens 44 Pixel hoch. In der Kopfzeile geschieht das über
+ein Pseudo-Element: die Fläche wächst, die Zeile nicht — sonst wäre die
+schwebende Leiste auf dem Telefon ein Fünftel des Schirms.
+
+Das Diagramm ist ein `role="img"`, seine Ziffern erreichen also keinen
+Screenreader. Was es zeigt, steht deshalb daneben als Liste in `.vh` — aus
+denselben Daten, und in beiden Ansichten des Umschalters gültig.
 
 ## Offene Punkte
 

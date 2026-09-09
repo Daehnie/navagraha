@@ -1,11 +1,15 @@
 {
   "nav": { "home": "Übersicht", "palette": "Farben", "themes": "Einrichten" },
+  "skip": "Zum Inhalt springen",
+  "copy": "kopieren",
+  "copied": "kopiert",
   "tagline": "Neun Planeten, neun Farben",
   "lede": "Ein Farbschema für Terminal und Editor, dessen Töne nicht gewählt, sondern abgelesen sind: jede Farbe ist die klassische Farbe eines Grahas, ihre Sättigung folgt seiner Stärke in einem einzigen Geburtshoroskop.",
   "chartCaption": "23. Mai 1982, 19:47 MESZ, Wedel. Siderisch nach Lahiri, Häuser nach Zeichen. Lagna in Tula.",
   "chart": {
     "alt": "Nordindisches Geburtsdiagramm mit den neun Grahas",
     "group": "Was die Ziffern im Diagramm bedeuten",
+    "listTitle": "Die neun Grahas mit Zeichen und Haus",
     "signs": "Zeichen",
     "houses": "Häuser",
     "signsNote": "Die Ziffern nennen die Tierkreiszeichen. Die Häuser liegen im nordindischen Diagramm fest: oben in der Mitte das erste, von dort gegen den Uhrzeigersinn.",
@@ -25,15 +29,14 @@
     "lede": "Farbton nach der klassischen Zuordnung, Sättigung nach der Würde im Chart. Ein Klick kopiert den Wert.",
     "graha": "Graha", "role": "Rolle im Code", "source": "Farbe und Stand",
     "groundTitle": "Grund und Fläche",
-    "groundLede": "Hier entscheidet sich, welche Grahas hervortreten. Die vier Varianten unterscheiden sich ausschließlich in diesen Werten.",
-    "copy": "kopieren",
-    "copied": "kopiert"
+    "groundLede": "Hier entscheidet sich, welche Grahas hervortreten. Die vier Varianten unterscheiden sich ausschließlich in diesen Werten."
   },
   "preview": { "title": "Im Code", "lede": "Dieselbe Datei in der gewählten Variante." },
   "themes": {
     "title": "Einrichten",
     "lede": "Alle vier Varianten stecken in jeder Datei. Die Zuordnung von Sprachelement zu Graha liegt im Editor, nicht im Terminal.",
-    "download": "Herunterladen",
+    "open": "Auf GitHub öffnen",
+    "copyCmd": "Befehle kopieren",
     "tools": {
       "tabby": "Block in die Konfigurationsdatei unter terminal: einfügen.",
       "iterm2": "Die vier .itermcolors doppelklicken, dann im Profil auswählen.",

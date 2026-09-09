@@ -1,61 +1,8 @@
 ---
 import palette from '../data/palette.json'
+import { roles, names, hues, dignities, stand } from '../i18n/grahas'
 const { t } = Astro.props as { t: any }
 const variants = Object.entries(palette.variants)
-const roles: Record<string, { de: string; en: string }> = {
-  surya:   { de: 'Zahlen und Konstanten', en: 'Numbers and constants' },
-  chandra: { de: 'Bezeichner und Grundtext', en: 'Identifiers and body text' },
-  mangala: { de: 'Schlüsselwörter und Steuerfluss', en: 'Keywords and control flow' },
-  budha:   { de: 'Zeichenketten', en: 'Strings' },
-  guru:    { de: 'Funktionen und Selektoren', en: 'Functions and selectors' },
-  shukra:  { de: 'Typen und Eigenschaftsnamen', en: 'Types and property names' },
-  shani:   { de: 'Operatoren', en: 'Operators' },
-  rahu:    { de: 'Präprozessor, At-Rules, Tags', en: 'Preprocessor, at-rules, tags' },
-  ketu:    { de: 'Kommentare', en: 'Comments' }
-}
-// Der Sanskritname allein sagt niemandem, welcher Planet gemeint ist. Rahu und
-// Ketu haben keinen: sie sind die beiden Knoten der Mondbahn.
-const names: Record<string, { de: string; en: string }> = {
-  surya:   { de: 'Sonne', en: 'Sun' },
-  chandra: { de: 'Mond', en: 'Moon' },
-  mangala: { de: 'Mars', en: 'Mars' },
-  budha:   { de: 'Merkur', en: 'Mercury' },
-  guru:    { de: 'Jupiter', en: 'Jupiter' },
-  shukra:  { de: 'Venus', en: 'Venus' },
-  shani:   { de: 'Saturn', en: 'Saturn' },
-  rahu:    { de: 'aufsteigender Mondknoten', en: 'ascending lunar node' },
-  ketu:    { de: 'absteigender Mondknoten', en: 'descending lunar node' }
-}
-const hues: Record<string, { de: string; en: string }> = {
-  surya:   { de: 'kupferrot', en: 'copper red' },
-  chandra: { de: 'weiß', en: 'white' },
-  mangala: { de: 'blutrot', en: 'blood red' },
-  budha:   { de: 'grasgrün', en: 'grass green' },
-  guru:    { de: 'goldgelb', en: 'golden yellow' },
-  shukra:  { de: 'weiß-schillernd', en: 'iridescent white' },
-  shani:   { de: 'dunkelblau', en: 'dark blue' },
-  rahu:    { de: 'rauchig', en: 'smoky' },
-  ketu:    { de: 'aschgrau', en: 'ash grey' }
-}
-const signs: Record<string, { de: string; en: string }> = {
-  Vrishabha: { de: 'Stier', en: 'Taurus' },
-  Mithuna:   { de: 'Zwillinge', en: 'Gemini' },
-  Kanya:     { de: 'Jungfrau', en: 'Virgo' },
-  Tula:      { de: 'Waage', en: 'Libra' },
-  Dhanu:     { de: 'Schütze', en: 'Sagittarius' },
-  Mina:      { de: 'Fische', en: 'Pisces' }
-}
-// Diese vier sind der Grund, warum manche Farben kraeftiger ausfallen als
-// andere. Sie stehen deshalb abgesetzt und nicht im Fliesstext der Zelle.
-const dignities: Record<string, { de: string; en: string }> = {
-  exalted:    { de: 'exaltiert', en: 'exalted' },
-  retrograde: { de: 'retrograd', en: 'retrograde' },
-  digbala:    { de: 'Dig Bala', en: 'dig bala' },
-  atmakaraka: { de: 'Atmakaraka', en: 'atmakaraka' }
-}
-const ord = (n: number, l: string) => l === 'en'
-  ? `${n}${['th','st','nd','rd'][n % 10 < 4 && (n < 11 || n > 13) ? n % 10 : 0]} house`
-  : `${n}. Haus`
 const lang = Astro.currentLocale === 'en' ? 'en' : 'de'
 // Welche Werte hier stehen, entscheidet palette.json — nur die Beschriftung
 // liegt hier, weil sie Oberflaeche ist und keine Palettendaten.
@@ -92,15 +39,16 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
         </th>
         <td role="cell" class="ro">{roles[g.key][lang]}</td>
         <td role="cell" class="so">
-          {hues[g.key][lang]} · {signs[g.sign][lang]}, {ord(g.house, lang)}
+          {hues[g.key][lang]} · {stand(g, lang)}
           {g.dignities.length > 0 && (
             <span class="dg">{g.dignities.map(d => dignities[d][lang]).join(', ')}</span>
           )}
         </td>
         <td role="cell" class="hx">{variants.map(([, v]) => (
-          <button data-hex={v.colors[g.key]} style={`--c:${v.colors[g.key]}`}
+          <button data-copy={v.colors[g.key]} data-toast={v.colors[g.key]}
+                  style={`--c:${v.colors[g.key]}`}
                   title={`${v.label}: ${v.colors[g.key]}`}
-                  aria-label={`${v.label} ${v.colors[g.key]} ${t.palette.copy}`}>
+                  aria-label={`${v.label} ${v.colors[g.key]} ${t.copy}`}>
             <i></i><code>{v.colors[g.key]}</code>
           </button>
         ))}</td>
@@ -121,9 +69,10 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
         </th>
         <td role="cell" class="ro" colspan="2"><code>{key}</code></td>
         <td role="cell" class="hx">{variants.map(([, v]) => (
-          <button data-hex={v.colors[key]} style={`--c:${v.colors[key]}`}
+          <button data-copy={v.colors[key]} data-toast={v.colors[key]}
+                  style={`--c:${v.colors[key]}`}
                   title={`${v.label}: ${v.colors[key]}`}
-                  aria-label={`${v.label} ${v.colors[key]} ${t.palette.copy}`}>
+                  aria-label={`${v.label} ${v.colors[key]} ${t.copy}`}>
             <i></i><code>{v.colors[key]}</code>
           </button>
         ))}</td>
@@ -131,25 +80,6 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
     ))}
   </tbody>
 </table>
-
-<div id="copied" role="status" aria-live="polite"></div>
-
-<script is:inline define:vars={{ word: t.palette.copied }}>
-  const toast = document.getElementById('copied')
-  let timer
-  document.querySelectorAll('.hx button').forEach(b => {
-    b.addEventListener('click', async () => {
-      const hex = b.dataset.hex
-      // Erst zeigen, dann kopieren: das Clipboard-Promise gehoert nicht auf den Eingabepfad.
-      toast.textContent = `${hex} ${word}`
-      toast.classList.add('on')
-      clearTimeout(timer)
-      timer = setTimeout(() => toast.classList.remove('on'), 1400)
-      try { await navigator.clipboard.writeText(hex) }
-      catch { toast.textContent = hex }
-    })
-  })
-</script>
 
 <style>
   table { width: 100%; border-collapse: collapse; }
@@ -195,32 +125,8 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
     .dg { display: inline; margin-left: var(--s2); }
     .hx { margin-top: var(--s3); display: flex; flex-wrap: wrap; gap: var(--s2);
       white-space: normal; }
-    .hx button { margin: 0; }
+    .hx button { margin: 0; min-height: 44px; padding-inline: var(--s2); }
   }
-  /* Schwebende Chrome ueber Inhalt: Glas, das ankommt, nicht eine Flaeche,
-     die eingeblendet wird. Unschaerfe und Groesse laufen zusammen hoch. */
-  #copied { position: fixed; left: 50%; bottom: var(--s5);
-    transform: translateX(-50%) scale(.96);
-    background: color-mix(in oklab, var(--overlay) 72%, transparent);
-    -webkit-backdrop-filter: blur(0px) saturate(100%);
-    backdrop-filter: blur(0px) saturate(100%);
-    color: var(--chandra);
-    border: 1px solid color-mix(in oklab, var(--hl_high) 60%, transparent);
-    padding: var(--s2) var(--s4); border-radius: 999px; font-size: .8rem;
-    letter-spacing: .012em; opacity: 0;
-    pointer-events: none;
-    transition: opacity .2s, transform .2s, backdrop-filter .2s; }
-  #copied.on { opacity: 1; transform: translateX(-50%) scale(1);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    backdrop-filter: blur(20px) saturate(180%); }
-
-  /* Ohne Transluzenz wird aus dem Glas eine deckende Flaeche; das
-     Materialisieren faellt weg, das Einblenden bleibt. */
-  @media (prefers-reduced-transparency: reduce) {
-    #copied, #copied.on { background: var(--overlay); border-color: var(--hl_high);
-      -webkit-backdrop-filter: none; backdrop-filter: none; }
-  }
-
   @media (prefers-contrast: more) {
     .so, .sa, thead th { color: var(--subtle); }
     th, td { border-bottom-color: var(--hl_high); }

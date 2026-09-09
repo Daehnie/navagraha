@@ -1,0 +1,48 @@
+---
+// Eine Stelle fuer alles Kopieren der Seite. Jeder Knopf mit data-copy traegt
+// seinen Inhalt selbst; data-toast sagt, was danach kurz aufleuchtet.
+const { word } = Astro.props as { word: string }
+---
+<div id="copied" role="status" aria-live="polite"></div>
+
+<script is:inline define:vars={{ word }}>
+  const toast = document.getElementById('copied')
+  let timer
+  document.addEventListener('click', async e => {
+    const b = e.target.closest('[data-copy]')
+    if (!b) return
+    // Erst zeigen, dann kopieren: das Clipboard-Promise gehoert nicht auf den Eingabepfad.
+    toast.textContent = `${b.dataset.toast ?? ''} ${word}`.trim()
+    toast.classList.add('on')
+    clearTimeout(timer)
+    timer = setTimeout(() => toast.classList.remove('on'), 1400)
+    try { await navigator.clipboard.writeText(b.dataset.copy) }
+    catch { toast.textContent = b.dataset.toast ?? word }
+  })
+</script>
+
+<style is:global>
+  /* Schwebende Chrome ueber Inhalt: Glas, das ankommt, nicht eine Flaeche,
+     die eingeblendet wird. Unschaerfe und Groesse laufen zusammen hoch. */
+  #copied { position: fixed; left: 50%; bottom: var(--s5);
+    transform: translateX(-50%) scale(.96);
+    background: color-mix(in oklab, var(--overlay) 72%, transparent);
+    -webkit-backdrop-filter: blur(0px) saturate(100%);
+    backdrop-filter: blur(0px) saturate(100%);
+    color: var(--chandra);
+    border: 1px solid color-mix(in oklab, var(--hl_high) 60%, transparent);
+    padding: var(--s2) var(--s4); border-radius: 999px; font-size: .8rem;
+    letter-spacing: .012em; opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s, transform .2s, backdrop-filter .2s; }
+  #copied.on { opacity: 1; transform: translateX(-50%) scale(1);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%); }
+
+  /* Ohne Transluzenz wird aus dem Glas eine deckende Flaeche; das
+     Materialisieren faellt weg, das Einblenden bleibt. */
+  @media (prefers-reduced-transparency: reduce) {
+    #copied, #copied.on { background: var(--overlay); border-color: var(--hl_high);
+      -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+</style>

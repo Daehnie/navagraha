@@ -63,6 +63,7 @@ const nav = [
   </script>
 </head>
 <body>
+  <a class="skip" href="#inhalt">{t.skip}</a>
   <div class="wrap top">
     <a class="brand" href={path('/', lang)}>
       <img src={asset('/favicon.svg')} alt="" width="24" height="24" />Navagraha
@@ -81,7 +82,9 @@ const nav = [
     </span>
   </div>
 
-  <slot />
+  <main id="inhalt">
+    <slot />
+  </main>
 
   <footer class="wrap"><p>{t.footer}</p></footer>
 </body>

@@ -38,6 +38,18 @@ a { color: var(--shani); text-decoration: underline;
 a:hover { text-decoration-color: var(--shani); }
 :focus-visible { outline: 2px solid var(--shukra); outline-offset: 2px; border-radius: 3px; }
 
+/* Fuer Augen weg, fuer Screenreader da. */
+.vh { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+      overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* Der Sprung ueber die Kopfzeile: sechs Halte stehen sonst vor dem Inhalt. */
+.skip { position: absolute; left: var(--s4); top: var(--s4); z-index: 20;
+        background: var(--surface); color: var(--chandra);
+        border: 1px solid var(--line); border-radius: 999px;
+        padding: var(--s2) var(--s4); text-decoration: none;
+        transform: translateY(-200%); }
+.skip:focus { transform: none; }
+
 .wrap { width: min(64rem, 100% - var(--s6)); margin-inline: auto; }
 section { padding: var(--s7) 0; border-top: 1px solid var(--hl_med); }
 h1 { font-size: clamp(2.3rem, 7.5vw, 3.9rem); line-height: 1.02; font-weight: 400;
@@ -63,6 +75,11 @@ h3 { font-size: 1rem; font-weight: 400; margin: var(--s5) 0 var(--s1); line-heig
 .brand img { width: 1.5rem; height: 1.5rem; border-radius: 5px; display: block; }
 .top nav { display: flex; gap: var(--s4); margin-left: auto; }
 .top nav a { color: var(--ketu); text-decoration: none; }
+/* Die Kopfzeile bleibt schmal, die Trefferflaeche wird es nicht: das
+   Pseudo-Element dehnt sie senkrecht auf 44px, ohne die Zeile zu heben. */
+.top nav a, .lang a { position: relative; }
+.top nav a::after, .lang a::after { content: ""; position: absolute;
+  left: -2px; right: -2px; top: 50%; height: 44px; transform: translateY(-50%); }
 .top nav a:hover { color: var(--chandra); }
 /* Wo bin ich: eigenes Merkmal, nicht dieselbe Regel wie der Hover. */
 .top nav a[aria-current="page"] { color: var(--chandra);

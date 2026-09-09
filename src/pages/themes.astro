@@ -1,22 +1,25 @@
 ---
 import Base from '../layouts/Base.astro'
 import ThemeSwitcher from '../components/ThemeSwitcher.astro'
+import CopyToast from '../components/CopyToast.astro'
 import { getLangFromUrl, useTranslations } from '../i18n/utils'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
 // Beschreibungen stehen in src/i18n/, hier nur Struktur und Befehle.
+// kind unterscheidet Datei von Ordner, weil GitHub beides anders zeigt und
+// "Herunterladen" fuer einen Ordner nicht stimmt.
 const tools = [
-  { key: 'tabby', name: 'Tabby', file: 'themes/tabby/navagraha.yaml',
+  { key: 'tabby', name: 'Tabby', kind: 'blob', file: 'themes/tabby/navagraha.yaml',
     cmd: 'Settings → Config file\nSettings → Farbschema\nDarstellung → Terminal background: From color scheme' },
-  { key: 'iterm2', name: 'iTerm2', file: 'themes/iterm2',
+  { key: 'iterm2', name: 'iTerm2', kind: 'tree', file: 'themes/iterm2',
     cmd: 'Profiles → Colors → Color Presets\nUse different colors for light and dark mode' },
-  { key: 'vscode', name: 'VS Code', file: 'themes/vscode/navagraha',
+  { key: 'vscode', name: 'VS Code', kind: 'tree', file: 'themes/vscode/navagraha',
     cmd: 'cp -R navagraha ~/.vscode/extensions/\n⌘K ⌘T' },
-  { key: 'vimbat', name: 'Vim & bat', file: 'themes/vim/navagraha.vim',
+  { key: 'vimbat', name: 'Vim & bat', kind: 'blob', file: 'themes/vim/navagraha.vim',
     cmd: 'cp navagraha.vim ~/.vim/colors/\ncolorscheme navagraha\nexport BAT_THEME=ansi' }
 ]
-const repo = 'https://github.com/Daehnie/navagraha/tree/main/'
+const repo = 'https://github.com/Daehnie/navagraha/'
 ---
 <Base title={`${t.themes.title} — Navagraha`} description={t.themes.lede}>
   <section class="wrap" style="border-top:0">
@@ -29,11 +32,17 @@ const repo = 'https://github.com/Daehnie/navagraha/tree/main/'
           <h3>{tool.name}</h3>
           <p>{t.themes.tools[tool.key]}</p>
           <pre class="mono">{tool.cmd}</pre>
-          <p><a href={repo + tool.file}>{t.themes.download}</a></p>
+          <p class="acts">
+            <button class="copy" data-copy={tool.cmd}
+                    aria-label={`${tool.name}: ${t.themes.copyCmd}`}>{t.themes.copyCmd}</button>
+            <a href={`${repo}${tool.kind}/main/${tool.file}`}
+               aria-label={`${tool.name} — ${t.themes.open}`}>{t.themes.open}</a>
+          </p>
         </div>
       ))}
     </div>
   </section>
+  <CopyToast word={t.copied} />
 </Base>
 
 <style>
@@ -45,6 +54,16 @@ const repo = 'https://github.com/Daehnie/navagraha/tree/main/'
     border-radius: 8px; padding: var(--s3); font-size: .74rem; line-height: 1.7;
     letter-spacing: .016em; color: var(--subtle); white-space: pre-wrap;
     margin: 0 0 var(--s2); }
+  /* Was auf der Farbseite gilt, gilt hier auch: was wie ein Wert aussieht,
+     laesst sich mit einem Griff mitnehmen. */
+  .acts { display: flex; align-items: center; gap: var(--s4); flex-wrap: wrap; }
+  .copy { background: var(--surface); color: var(--subtle);
+    border: 1px solid var(--line); border-radius: 999px; font: inherit;
+    font-size: .84rem; padding: var(--s2) var(--s4); min-height: 44px;
+    cursor: pointer; transition: border-color .2s, color .2s; }
+  .copy:hover { border-color: var(--ketu); color: var(--chandra); }
+  .copy:active { border-color: var(--ketu); color: var(--chandra);
+    transform: scale(.97); transition: transform 100ms ease-out; }
 
   @media (prefers-contrast: more) {
     .steps p { color: var(--subtle); }

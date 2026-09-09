@@ -2,7 +2,10 @@
 // Nordindisches Rautendiagramm: Haeuser liegen fest, Zeichen rotieren.
 // Lagna Tula, also steht Zeichen 7 im ersten Haus. Die Ziffer in einem Feld
 // kann deshalb zweierlei meinen — der Schalter sagt, welches gerade gilt.
+import palette from '../data/palette.json'
+import { names, stand, type Sprache } from '../i18n/grahas'
 const { labels } = Astro.props as { labels: any }
+const lang: Sprache = Astro.currentLocale === 'en' ? 'en' : 'de'
 const HOUSE = [[50,26],[25,13],[13,25],[26,50],[13,75],[25,87],
                [50,74],[75,87],[87,75],[74,50],[87,25],[75,13]]
 const NUM   = [[50,15],[12,5],[5,12],[13,50],[5,88],[12,95],
@@ -38,6 +41,12 @@ let n = 0
     <button role="radio" data-mode="houses" aria-checked="false">{labels.houses}</button>
   </div>
   <figcaption class="note" aria-live="polite">{labels.signsNote}</figcaption>
+  <h2 class="vh" id="chart-liste">{labels.listTitle}</h2>
+  <ul class="vh" aria-labelledby="chart-liste">
+    {palette.grahas.map(g => (
+      <li>{names[g.key][lang]} ({g.sa}): {stand(g, lang)}</li>
+    ))}
+  </ul>
 </figure>
 
 <script is:inline define:vars={{ notes: { signs: labels.signsNote, houses: labels.housesNote } }}>
@@ -90,7 +99,7 @@ let n = 0
   .ctl button { flex: 1; background: var(--surface); color: var(--subtle);
     border: 1px solid var(--line); border-radius: 999px; font: inherit;
     font-size: .84rem; cursor: pointer; padding: var(--s2) var(--s3);
-    transition: border-color .2s, color .2s; }
+    min-height: 44px; transition: border-color .2s, color .2s; }
   .ctl button:hover { border-color: var(--ketu); color: var(--chandra); }
   .ctl button:active { border-color: var(--ketu); color: var(--chandra);
     transform: scale(.97); transition: transform 100ms ease-out; }

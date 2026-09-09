@@ -1,11 +1,15 @@
 {
   "nav": { "home": "Overview", "palette": "Palette", "themes": "Install" },
+  "skip": "Skip to content",
+  "copy": "copy",
+  "copied": "copied",
   "tagline": "Nine planets, nine colours",
   "lede": "A colour scheme for terminal and editor whose tones were not picked but read off: every colour is the classical colour of a graha, its saturation follows that planet's strength in one particular birth chart.",
   "chartCaption": "23 May 1982, 19:47 CEST, Wedel. Sidereal, Lahiri ayanamsa, whole-sign houses. Lagna in Tula.",
   "chart": {
     "alt": "North Indian birth chart with the nine grahas",
     "group": "What the numbers in the chart mean",
+    "listTitle": "The nine grahas with sign and house",
     "signs": "Signs",
     "houses": "Houses",
     "signsNote": "The numbers name the zodiac signs. In a North Indian chart the houses are fixed: the first is top centre, the rest run anticlockwise from there.",
@@ -25,15 +29,14 @@
     "lede": "Hue from the classical assignment, saturation from dignity in the chart. Click a value to copy it.",
     "graha": "Graha", "role": "Role in code", "source": "Colour and placement",
     "groundTitle": "Ground and surface",
-    "groundLede": "This is where it is decided which grahas step forward. The four variants differ in these values alone.",
-    "copy": "copy",
-    "copied": "copied"
+    "groundLede": "This is where it is decided which grahas step forward. The four variants differ in these values alone."
   },
   "preview": { "title": "In code", "lede": "The same file in the selected variant." },
   "themes": {
     "title": "Install",
     "lede": "Every file carries all four variants. Which language element maps to which graha is decided by the editor, not the terminal.",
-    "download": "Download",
+    "open": "Open on GitHub",
+    "copyCmd": "Copy commands",
     "tools": {
       "tabby": "Paste the block into the config file under terminal:.",
       "iterm2": "Double-click the four .itermcolors files, then pick one in the profile.",
