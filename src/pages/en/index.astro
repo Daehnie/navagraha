@@ -1,6 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro'
 import Derivation from '../../components/Derivation.astro'
+import HueWheel from '../../components/HueWheel.astro'
+import Strength from '../../components/Strength.astro'
+import Grounds from '../../components/Grounds.astro'
+import ContrastSpan from '../../components/ContrastSpan.astro'
 import ThemeSwitcher from '../../components/ThemeSwitcher.astro'
 import CodePreview from '../../components/CodePreview.astro'
 import { getLangFromUrl, useTranslations, path } from '../../i18n/utils'
@@ -32,7 +36,12 @@ const t = useTranslations(lang)
     <p>{t.method.intro.p1}</p>
     <p>{t.method.intro.p2}</p>
     <h3>{t.method.hues.h}</h3><p>{t.method.hues.p}</p>
+    <HueWheel><span slot="alt">{t.method.figures.wheelAlt}</span></HueWheel>
+    <p class="bu">{t.method.figures.wheel}</p>
+
     <h3>{t.method.force.h}</h3><p>{t.method.force.p}</p>
+    <Strength labels={t.method.figures} />
+    <p class="bu">{t.method.figures.strength}</p>
     <ul class="cases">
       {t.method.force.cases.map(c => <li><b>{c.name}</b> {c.text}</li>)}
     </ul>
@@ -41,9 +50,14 @@ const t = useTranslations(lang)
     <p>{t.method.grounds.p2}</p>
     <p>{t.method.grounds.p3}</p>
     <p>{t.method.grounds.p4}</p>
+    <Grounds labels={t.method.figures} />
+    <p class="bu">{t.method.figures.grounds}</p>
+
     <h3>{t.method.contrast.h}</h3>
     <p>{t.method.contrast.p1}</p>
     <p>{t.method.contrast.p2}</p>
+    <ContrastSpan labels={t.method.figures} />
+    <p class="bu">{t.method.figures.contrast}</p>
     <h3>{t.method.glossary.h}</h3>
     <dl class="gloss">
       {t.method.glossary.terms.map(g => <><dt>{g.t}</dt><dd>{g.d}</dd></>)}
@@ -56,7 +70,10 @@ const t = useTranslations(lang)
   .sub { font-size: 1.19rem; color: var(--subtle); margin: 0 0 var(--s6);
     max-width: 46ch; }
   .method p { max-width: 62ch; }
-  .cases { list-style: none; padding: 0; margin: var(--s4) 0 0;
+  /* Bildunterschrift: sagt, was die Grafik misst, und nennt die Grenze. */
+  .bu { color: var(--ketu); font-size: .82rem; margin: var(--s3) 0 0;
+    max-width: 46ch; }
+  .cases { list-style: none; padding: 0; margin: var(--s5) 0 0;
     display: grid; gap: var(--s3); max-width: 62ch; }
   /* Der Strich statt eines Punkts: die Faelle sind Belege, keine Aufzaehlung. */
   .cases li { padding-left: var(--s4); border-left: 2px solid var(--hl_high); }
@@ -74,6 +91,6 @@ const t = useTranslations(lang)
     font-size: .95rem; }
 
   @media (prefers-contrast: more) {
-    .gloss dd { color: var(--subtle); }
+    .gloss dd, .bu { color: var(--subtle); }
   }
 </style>

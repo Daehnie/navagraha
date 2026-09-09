@@ -1,0 +1,49 @@
+---
+// Die zwei Lesarten nebeneinander: welcher Grund aus welcher Herleitung
+// kommt, und wie die vier Varianten sich darauf verteilen.
+import palette from '../data/palette.json'
+const { labels } = Astro.props as { labels: any }
+const gruppen = [
+  { grund: 'prithvi', titel: labels.earth,
+    varianten: Object.entries(palette.variants).filter(([, v]) => v.ground === 'prithvi') },
+  { grund: 'vayu', titel: labels.air,
+    varianten: Object.entries(palette.variants).filter(([, v]) => v.ground === 'vayu') }
+]
+---
+<figure class="gruende">
+  {gruppen.map(gr => (
+    <div class="gruppe">
+      <h4>{gr.titel}</h4>
+      <div class="paar">
+        {gr.varianten.map(([key, v]) => (
+          <div class="kachel">
+            <span class="flaeche" style={`background:${v.colors.base}`}>
+              <i style={`background:${v.colors.shukra}`}></i>
+              <i style={`background:${v.colors.guru}`}></i>
+              <i style={`background:${v.colors.mangala}`}></i>
+            </span>
+            <span class="name">{v.label}</span>
+            <span class="mono wert">{v.colors.base}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</figure>
+
+<style>
+  .gruende { display: grid; gap: var(--s5); margin: var(--s5) 0 0; max-width: 34rem; }
+  @media (min-width: 34rem) { .gruende { grid-template-columns: 1fr 1fr; gap: var(--s6); } }
+  .gruppe h4 { font-size: .78rem; font-weight: 400; color: var(--ketu);
+    letter-spacing: .012em; margin: 0 0 var(--s3); }
+  .paar { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+  .flaeche { display: flex; align-items: flex-end; gap: .2rem; height: 4.2rem;
+    padding: var(--s2); border-radius: 8px; border: 1px solid var(--line); }
+  .flaeche i { display: block; width: .5rem; height: 1.1rem; border-radius: 2px; }
+  .name { display: block; font-size: .84rem; margin-top: var(--s2); }
+  .wert { display: block; font-size: .68rem; color: var(--ketu);
+    letter-spacing: .014em; }
+  @media (prefers-contrast: more) {
+    .gruppe h4, .wert { color: var(--subtle); }
+  }
+</style>

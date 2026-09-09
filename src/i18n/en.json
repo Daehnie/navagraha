@@ -98,6 +98,17 @@
       "p1": "Finding colours that go together is one half of the work. The other is that the text still has to be readable afterwards. The web accessibility guidelines put a number on it: body text needs at least 4.5 times the lightness difference to its background. Many well-known schemes fall short of that in the comments, of all places.",
       "p2": "Here every colour that can carry text is computed to exactly that value — and against all three background layers, not only the darkest. So the hue comes from the chart, the lightness from the arithmetic. Together they make the colour."
     },
+    "figures": {
+      "wheelAlt": "Polar chart of the nine hues: angle is hue, distance from the centre is saturation.",
+      "wheel": "Angle is the hue, distance from the centre the saturation. Seven tones share the circle; Chandra and Ketu sit near the middle because white and ash grey carry no hue. The values are those of the selected variant.",
+      "strengthAlt": "Saturation of the nine grahas as a share of what is possible at their lightness.",
+      "strength": "Measured as a share of what is reachable at that lightness and hue — there is no other fair way to compare tones, since red can go more saturated than turquoise by nature. Shukra and Guru sit at the limit. Chandra is the exception: exalted, but white, and white cannot carry saturation.",
+      "earth": "Earth — five grahas in Taurus and Virgo",
+      "air": "Air — the lagna in Libra",
+      "grounds": "Four variants, two derivations. The three marks on each field are Shukra, Guru and Mangala on that ground.",
+      "contrastAlt": "Contrast ranges of the nine colours against ground, surface and overlay.",
+      "contrast": "Each bar runs from the weakest case — against the overlay — to the strongest against the ground, showing the worst value across all four variants. The line sits at 4.5. Eight colours end just past it because they were computed to exactly that; only Chandra has headroom, since it carries the body text."
+    },
     "glossary": {
       "h": "The terms at a glance",
       "terms": [

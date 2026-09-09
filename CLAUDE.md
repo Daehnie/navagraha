@@ -31,6 +31,19 @@ Quelle, damit dieselbe Stellung nicht an zwei Orten zweierlei heißt.
 Klick-Delegat auf `[data-copy]` plus die Rückmeldung. Ein neuer Knopf braucht
 nur `data-copy` und, wenn er etwas Kurzes zeigen soll, `data-toast`.
 
+Die vier Grafiken im Methodenteil — `HueWheel`, `Strength`, `Grounds`,
+`ContrastSpan` — rechnen ihre Werte beim Bauen aus `palette.json`, über
+`src/data/color.ts`. Keine Zahl auf der Seite wird von Hand gepflegt; wer
+eine Farbe ändert, ändert die Grafiken mit. `ton()` misst die Sättigung als
+Anteil dessen, was bei dieser Helligkeit und diesem Farbton in sRGB möglich
+ist — nur so lassen sich Töne vergleichen, denn Rot kann von Natur aus
+gesättigter werden als Türkis.
+
+`HueWheel` und `Strength` hängen an der Variante und rendern deshalb alle
+vier Sätze; sichtbar ist der, den `html[data-theme]` auswählt. Was das
+Diagramm zeigt, unterscheidet sich je Variante, und eine Grafik, die etwas
+anderes behauptet als der Bildschirm, wäre schlimmer als keine.
+
 `src/components/Derivation.astro` ist der Abschnitt, der die Kette zeigt:
 Stand im Horoskop, Farbe, Rolle im Code. Diagramm, Tafel und Codezeile hängen
 an einem Zustand — dem Attribut `data-graha` am Abschnitt. Wer die Auswahl
@@ -149,7 +162,9 @@ Kein Framework für Interaktion. Der Variantenschalter und das Kopieren sind
 `is:inline`-Skripte von wenigen Zeilen. So bleiben soll es.
 
 `prefers-reduced-motion` wird respektiert, die Animation im Diagramm ist die
-einzige der Seite.
+einzige der Seite. Sie startet erst, wenn das Diagramm in den Blick kommt —
+es steht nicht mehr im ersten Bild. Ohne Skript bleibt sie aus und die
+Kürzel stehen einfach da; das ist der gewollte Ausfall.
 
 Bedienbares ist mindestens 44 Pixel hoch. In der Kopfzeile geschieht das über
 ein Pseudo-Element: die Fläche wächst, die Zeile nicht — sonst wäre die

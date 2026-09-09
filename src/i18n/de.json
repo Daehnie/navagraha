@@ -98,6 +98,17 @@
       "p1": "Farben zu finden, die zueinander passen, ist die eine Hälfte der Arbeit. Die andere ist, dass man den Text danach noch lesen kann. Die Barrierefreiheitsrichtlinien für das Web nennen dafür eine Zahl: normaler Text braucht mindestens den 4,5-fachen Helligkeitsunterschied zu seinem Hintergrund. Viele bekannte Schemata unterschreiten das ausgerechnet bei Kommentaren.",
       "p2": "Hier ist jede Farbe, die Text tragen kann, auf genau diesen Wert gerechnet — und zwar gegen alle drei Hintergrundebenen, nicht nur gegen die dunkelste. Der Farbton kommt also aus dem Horoskop, die Helligkeit aus der Rechnung. Beides zusammen ergibt die Farbe."
     },
+    "figures": {
+      "wheelAlt": "Polardiagramm der neun Farbtöne: Winkel gleich Farbton, Abstand zur Mitte gleich Sättigung.",
+      "wheel": "Winkel ist der Farbton, Abstand zur Mitte die Sättigung. Sieben Töne teilen den Kreis; Chandra und Ketu liegen innen, weil Weiß und Aschgrau keinen Farbton tragen. Die Werte gelten für die gewählte Variante.",
+      "strengthAlt": "Sättigung der neun Grahas als Anteil des bei ihrer Helligkeit Möglichen.",
+      "strength": "Gemessen als Anteil dessen, was bei dieser Helligkeit und diesem Farbton überhaupt geht — anders lassen sich Töne nicht vergleichen, denn Rot kann von Natur aus gesättigter werden als Türkis. Shukra und Guru stehen am Anschlag. Chandra ist die Ausnahme: exaltiert, aber weiß, und Weiß kann keine Sättigung tragen.",
+      "earth": "Erde — fünf Grahas in Stier und Jungfrau",
+      "air": "Luft — das Lagna in der Waage",
+      "grounds": "Vier Varianten, zwei Herleitungen. Die drei Striche auf jeder Fläche sind Shukra, Guru und Mangala auf diesem Grund.",
+      "contrastAlt": "Kontrastspannen der neun Farben gegen Grund, Fläche und Auflage.",
+      "contrast": "Jeder Balken reicht vom schwächsten Fall — gegen die Auflage — bis zum stärksten gegen den Grund, und zeigt den jeweils ungünstigsten Wert aus allen vier Varianten. Die Linie steht bei 4,5. Acht Farben enden knapp dahinter, weil sie genau darauf gerechnet sind; nur Chandra hat Reserve, weil er den Grundtext trägt."
+    },
     "glossary": {
       "h": "Die Begriffe auf einen Blick",
       "terms": [

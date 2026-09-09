@@ -1,0 +1,55 @@
+---
+// Die neun Toene als Polardiagramm: der Winkel ist der Farbton, der Abstand
+// zur Mitte die Saettigung. Wer keine Saettigung hat, liegt in der Mitte —
+// deshalb sieht man hier, dass sieben Toene den Kreis teilen und zwei
+// Grahas neutral sind.
+import palette from '../data/palette.json'
+import { ton } from '../data/color'
+const R = 38, MITTE = 50
+const saetze = Object.entries(palette.variants).map(([v, variante]) => ({
+  v,
+  punkte: palette.grahas.map(g => {
+    const { grad, anteil } = ton((variante.colors as Record<string, string>)[g.key])
+    const r = 9 + anteil * R
+    const bogen = (grad - 90) * Math.PI / 180
+    return { key: g.key, abbr: g.abbr, anteil,
+             x: MITTE + r * Math.cos(bogen), y: MITTE + r * Math.sin(bogen) }
+  })
+}))
+---
+<figure class="rad">
+  <svg viewBox="0 0 100 100" role="img" aria-labelledby="rad-alt">
+    <title id="rad-alt"><slot name="alt" /></title>
+    <g fill="none" stroke="var(--line)" stroke-width=".35">
+      <circle cx={MITTE} cy={MITTE} r={R + 9} />
+      <circle cx={MITTE} cy={MITTE} r={(R + 9) / 2} stroke-dasharray="1 2" />
+    </g>
+    {saetze.map(({ v, punkte }) => (
+      <g class="satz" data-v={v}>
+        {punkte.map(p => (
+          <g style={`--c:var(--${p.key})`}>
+            <line x1={MITTE} y1={MITTE} x2={p.x} y2={p.y} />
+            <circle cx={p.x} cy={p.y} r="3.4" />
+            <text x={p.x} y={p.y + 1.3}>{p.abbr}</text>
+          </g>
+        ))}
+      </g>
+    ))}
+  </svg>
+</figure>
+
+<style>
+  .rad { margin: var(--s5) 0 0; }
+  .rad svg { width: 100%; max-width: 17rem; display: block; }
+  .satz { display: none; }
+  .satz line { stroke: var(--c); stroke-width: .4; opacity: .5; }
+  .satz circle { fill: var(--c); }
+  .satz text { font-size: 2.6px; text-anchor: middle; fill: var(--base);
+    font-family: ui-monospace, Menlo, monospace; font-weight: 600; }
+  /* Welche Werte gelten, entscheidet die gewaehlte Variante — die Saettigung
+     ist in jeder eine andere. */
+  :global(html[data-theme="swati"]) .satz[data-v="swati"],
+  :global(html[data-theme="pratipada"]) .satz[data-v="pratipada"],
+  :global(html[data-theme="ushas"]) .satz[data-v="ushas"],
+  :global(html[data-theme="tula"]) .satz[data-v="tula"] { display: block; }
+</style>

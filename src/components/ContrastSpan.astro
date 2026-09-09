@@ -1,0 +1,83 @@
+---
+// Das Messprotokoll: je Graha die Spanne vom schwaechsten Fall (gegen die
+// Auflage) bis zum staerksten (gegen den Grund), und zwar der jeweils
+// unguenstigste Wert aus allen vier Varianten. Die Marke steht bei 4,5.
+import palette from '../data/palette.json'
+import { kontrast } from '../data/color'
+import { names, type Sprache } from '../i18n/grahas'
+const { labels } = Astro.props as { labels: any }
+const lang: Sprache = Astro.currentLocale === 'en' ? 'en' : 'de'
+const varianten = Object.values(palette.variants) as { colors: Record<string, string> }[]
+const schlimmster = (key: string, grund: string) =>
+  Math.min(...varianten.map(v => kontrast(v.colors[key], v.colors[grund])))
+const MAX = 13
+const reihen = palette.grahas.map(g => {
+  const tief = schlimmster(g.key, 'overlay')
+  const hoch = schlimmster(g.key, 'base')
+  return { key: g.key, name: names[g.key][lang], tief, hoch,
+           von: (tief / MAX) * 100, bis: (hoch / MAX) * 100 }
+})
+const marke = (4.5 / MAX) * 100
+---
+<figure class="messung">
+  <table>
+    <caption class="vh">{labels.contrastAlt}</caption>
+    <tbody>
+      {reihen.map(r => (
+        <tr>
+          <th scope="row">{r.name}</th>
+          <td class="spur">
+            <span class="grenze" style={`left:${marke}%`}></span>
+            <span class="spanne" style={`--c:var(--${r.key});left:${r.von}%;width:${Math.max(r.bis - r.von, 1.2)}%`}></span>
+          </td>
+          <td class="zahl mono">{r.tief.toFixed(2).replace('.', lang === 'de' ? ',' : '.')}</td>
+        </tr>
+      ))}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td class="achse">
+          <span style="left:0">0</span>
+          <span style={`left:${marke}%`}>{lang === 'de' ? '4,5' : '4.5'}</span>
+          <span style="left:100%">{MAX}</span>
+        </td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+</figure>
+
+<style>
+  .messung { margin: var(--s5) 0 0; max-width: 34rem; }
+  .messung table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .messung th, .messung td { padding: .22rem 0; font-weight: 400;
+    text-align: left; vertical-align: middle; font-size: .84rem; }
+  .messung th { width: 26%; padding-right: var(--s3); }
+  .spur { position: relative; width: 100%; height: 1.1rem; }
+  /* Die Spur traegt den Nullpunkt links und den Hoechstwert rechts; die
+     Marke sitzt dort, wo die Richtlinie ihre Zahl hat. */
+  .spur::before { content: ""; position: absolute; inset: 50% 0 auto 0;
+    height: 1px; background: var(--hl_med); }
+  .grenze { position: absolute; top: 0; bottom: 0; width: 1px;
+    background: var(--line); }
+  .spanne { position: absolute; top: 50%; height: .5rem;
+    transform: translateY(-50%); border-radius: 3px; background: var(--c);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--c) 45%, transparent); }
+  .zahl { width: 3.6rem; text-align: right; color: var(--ketu);
+    font-size: .76rem; padding-left: var(--s3); }
+  /* Die Beschriftung liegt in derselben Spalte wie die Spur, damit sie unter
+     ihren Marken sitzt und nicht danebengerechnet werden muss. */
+  .achse { position: relative; height: 1.1rem; }
+  .achse span { position: absolute; top: 0; transform: translateX(-50%);
+    white-space: nowrap; }
+  /* Die Enden ragen sonst aus der Spalte: das erste haelt links, das letzte rechts. */
+  .achse span:first-child { transform: none; }
+  .achse span:last-child { transform: translateX(-100%);
+    color: var(--ketu); font-size: .7rem; letter-spacing: .014em;
+    font-family: "Monaspace Neon", ui-monospace, Menlo, monospace; }
+  @media (max-width: 34rem) {
+    .messung th { width: 34%; font-size: .8rem; }
+  }
+  @media (prefers-contrast: more) { .zahl, .achse { color: var(--subtle); } }
+</style>

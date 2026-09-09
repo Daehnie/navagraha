@@ -69,6 +69,13 @@ let n = 0
     })
   }
 
+  const sicht = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return
+    box.classList.add('rein')
+    sicht.disconnect()
+  }, { threshold: .25 })
+  sicht.observe(box)
+
   // Ein Graha im Diagramm ist ein Zusatzweg zur Wahl, kein eigener Zustand:
   // die Reihe unter dem Diagramm fuehrt sie, hier wird nur angestossen.
   box.querySelectorAll('.gh').forEach(g => g.addEventListener('click', () =>
@@ -104,7 +111,11 @@ let n = 0
   /* Die Haeuserziffern gehoeren zum Lagna, nicht zum Zodiak: eigener Ton. */
   .chartbox[data-mode="houses"] .hs { fill: var(--guru); }
   .chart .gh text { font-size: 5.4px; text-anchor: middle; font-weight: 600; }
-  .chart .gh { animation: rise .5s ease-out backwards; cursor: pointer; }
+  .chart .gh { cursor: pointer; }
+  /* Das Diagramm steht nicht mehr im ersten Bild. Die Animation laeuft
+     deshalb erst, wenn es in den Blick kommt — ohne Skript bleibt sie aus,
+     und die Kuerzel stehen einfach da. */
+  .chartbox.rein .gh { animation: rise .5s ease-out backwards; }
   @keyframes rise { from { opacity: 0; transform: translateY(2px); } }
   /* Der Gewaehlte wird hervorgehoben, die anderen nicht abgewertet: ein
      gedaempftes Kuerzel waere Text unter 4,5:1, und das gilt hier auch. */

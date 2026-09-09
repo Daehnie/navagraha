@@ -1,0 +1,63 @@
+---
+// Saettigung als Anteil des Moeglichen, sortiert. Daneben steht, woran es
+// liegt — die Wuerde kommt aus palette.json, der Balken aus der Farbe selbst.
+import palette from '../data/palette.json'
+import { ton } from '../data/color'
+import { names, dignities, ord, type Sprache } from '../i18n/grahas'
+const { labels } = Astro.props as { labels: any }
+const lang: Sprache = Astro.currentLocale === 'en' ? 'en' : 'de'
+const grund = (g: typeof palette.grahas[number]) => g.dignities.length > 0
+  ? g.dignities.map(d => dignities[d][lang]).join(', ')
+  : ord(g.house, lang)
+const saetze = Object.entries(palette.variants).map(([v, variante]) => ({
+  v,
+  reihen: palette.grahas
+    .map(g => ({ key: g.key, name: names[g.key][lang], grund: grund(g),
+                 anteil: ton((variante.colors as Record<string, string>)[g.key]).anteil }))
+    .sort((a, b) => b.anteil - a.anteil)
+}))
+---
+<figure class="kraft">
+  {saetze.map(({ v, reihen }) => (
+    <table class="satz" data-v={v}>
+      <caption class="vh">{labels.strengthAlt}</caption>
+      <tbody>
+        {reihen.map(r => (
+          <tr>
+            <th scope="row">{r.name}</th>
+            <td class="bal"><span style={`--c:var(--${r.key});--w:${(r.anteil * 100).toFixed(0)}%`}></span></td>
+            <td class="zahl mono">{(r.anteil * 100).toFixed(0)}%</td>
+            <td class="grund">{r.grund}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  ))}
+</figure>
+
+<style>
+  .kraft { margin: var(--s5) 0 0; max-width: 34rem; }
+  .satz { display: none; width: 100%; border-collapse: collapse;
+    table-layout: fixed; }
+  :global(html[data-theme="swati"]) .satz[data-v="swati"],
+  :global(html[data-theme="pratipada"]) .satz[data-v="pratipada"],
+  :global(html[data-theme="ushas"]) .satz[data-v="ushas"],
+  :global(html[data-theme="tula"]) .satz[data-v="tula"] { display: table; }
+  .satz th, .satz td { padding: .26rem 0; font-weight: 400; text-align: left;
+    vertical-align: middle; font-size: .84rem; }
+  .satz th { width: 22%; padding-right: var(--s3); }
+  .bal { width: auto; }
+  .bal span { display: block; height: .62rem; border-radius: 2px;
+    width: var(--w); background: var(--c);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--c) 45%, transparent); }
+  .zahl { width: 3.6rem; text-align: right; padding-right: var(--s3);
+    padding-left: var(--s3); color: var(--ketu); font-size: .76rem; }
+  .grund { width: 30%; color: var(--ketu); font-size: .78rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  @media (max-width: 40rem) {
+    .satz th { width: 28%; font-size: .8rem; }
+    .grund { display: none; }
+    .zahl { width: 3.2rem; }
+  }
+  @media (prefers-contrast: more) { .zahl, .grund { color: var(--subtle); } }
+</style>
