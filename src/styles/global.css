@@ -77,8 +77,8 @@ h3 { font-size: 1rem; font-weight: 400; margin: var(--s5) 0 var(--s1); line-heig
 .top nav a { color: var(--ketu); text-decoration: none; }
 /* Die Kopfzeile bleibt schmal, die Trefferflaeche wird es nicht: das
    Pseudo-Element dehnt sie senkrecht auf 44px, ohne die Zeile zu heben. */
-.top nav a, .lang a { position: relative; }
-.top nav a::after, .lang a::after { content: ""; position: absolute;
+.brand, .top nav a, .lang a { position: relative; }
+.brand::after, .top nav a::after, .lang a::after { content: ""; position: absolute;
   left: -2px; right: -2px; top: 50%; height: 44px; transform: translateY(-50%); }
 .top nav a:hover { color: var(--chandra); }
 /* Wo bin ich: eigenes Merkmal, nicht dieselbe Regel wie der Hover. */

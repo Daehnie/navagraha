@@ -31,6 +31,15 @@ Quelle, damit dieselbe Stellung nicht an zwei Orten zweierlei heißt.
 Klick-Delegat auf `[data-copy]` plus die Rückmeldung. Ein neuer Knopf braucht
 nur `data-copy` und, wenn er etwas Kurzes zeigen soll, `data-toast`.
 
+`src/components/Derivation.astro` ist der Abschnitt, der die Kette zeigt:
+Stand im Horoskop, Farbe, Rolle im Code. Diagramm, Tafel und Codezeile hängen
+an einem Zustand — dem Attribut `data-graha` am Abschnitt. Wer die Auswahl
+ändert, feuert `navagraha:graha` auf `document`; `Chart.astro` und der
+Abschnitt hören darauf und markieren, keiner ruft den anderen direkt.
+Markiert wird durch Hervorheben, nie durch Dämpfen der übrigen: ein
+abgeblendetes Kürzel wäre Text unter 4,5:1, und die Regel gilt auch für
+Diagrammbeschriftung.
+
 Wird eine Farbe geändert, gehört sie in `palette.json` — nie in eine
 Theme-Datei oder ins CSS. Die Dateien unter `themes/` sind Ausgabe, keine
 Quelle.

@@ -32,8 +32,11 @@ let n = 0
     {HOUSE.map(([x, y], h) => (OCC[h] ?? []).map(([key, abbr], j, all) => {
       const dy = (j - (all.length - 1) / 2) * 6.4
       const delay = (n++) * 90
-      return <text x={x} y={y + dy} class="gh"
-        style={`fill:var(--${key});animation-delay:${delay}ms`}>{abbr}</text>
+      return <g class="gh" data-key={key}
+                style={`--c:var(--${key});animation-delay:${delay}ms`}>
+        <rect x={x - 7} y={y + dy - 5} width="14" height="6.6" rx="1.4" />
+        <text x={x} y={y + dy} style="fill:var(--c)">{abbr}</text>
+      </g>
     }))}
   </svg>
   <div class="ctl" role="radiogroup" aria-label={labels.group}>
@@ -66,6 +69,16 @@ let n = 0
     })
   }
 
+  // Ein Graha im Diagramm ist ein Zusatzweg zur Wahl, kein eigener Zustand:
+  // die Reihe unter dem Diagramm fuehrt sie, hier wird nur angestossen.
+  box.querySelectorAll('.gh').forEach(g => g.addEventListener('click', () =>
+    document.dispatchEvent(new CustomEvent('navagraha:graha', { detail: g.dataset.key }))))
+  document.addEventListener('navagraha:graha', e => {
+    box.dataset.graha = e.detail
+    box.querySelectorAll('.gh').forEach(g =>
+      g.classList.toggle('an', g.dataset.key === e.detail))
+  })
+
   const SCHRITT = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }
   knoepfe.forEach((b, i) => {
     b.tabIndex = b.dataset.mode === box.dataset.mode ? 0 : -1
@@ -83,19 +96,26 @@ let n = 0
 
 <style>
   .chartbox { margin: 0; }
-  .chart { width: 100%; max-width: 20rem; display: block; }
+  .chart { width: 100%; max-width: var(--chart-max, 20rem); display: block; }
   .chart .num { font-size: 3.1px; fill: var(--ketu); text-anchor: middle;
     font-family: ui-monospace, Menlo, monospace; }
   .chartbox[data-mode="signs"] .hs,
   .chartbox[data-mode="houses"] .sg { display: none; }
   /* Die Haeuserziffern gehoeren zum Lagna, nicht zum Zodiak: eigener Ton. */
   .chartbox[data-mode="houses"] .hs { fill: var(--guru); }
-  .chart .gh { font-size: 5.4px; text-anchor: middle; font-weight: 600;
-    animation: rise .5s ease-out backwards; }
+  .chart .gh text { font-size: 5.4px; text-anchor: middle; font-weight: 600; }
+  .chart .gh { animation: rise .5s ease-out backwards; cursor: pointer; }
   @keyframes rise { from { opacity: 0; transform: translateY(2px); } }
+  /* Der Gewaehlte wird hervorgehoben, die anderen nicht abgewertet: ein
+     gedaempftes Kuerzel waere Text unter 4,5:1, und das gilt hier auch. */
+  .chart .gh rect { fill: transparent; transition: fill .2s; }
+  .chart .gh:hover rect { fill: var(--hl_med); }
+  .chart .gh.an rect { fill: color-mix(in oklab, var(--c) 22%, transparent);
+    stroke: var(--c); stroke-width: .4; }
 
   /* Sieht aus wie der Variantenschalter, weil er sich genauso verhaelt. */
-  .ctl { display: flex; gap: var(--s2); margin-top: var(--s4); max-width: 20rem; }
+  .ctl { display: flex; gap: var(--s2); margin-top: var(--s4);
+    max-width: var(--chart-max, 20rem); }
   .ctl button { flex: 1; background: var(--surface); color: var(--subtle);
     border: 1px solid var(--line); border-radius: 999px; font: inherit;
     font-size: .84rem; cursor: pointer; padding: var(--s2) var(--s3);

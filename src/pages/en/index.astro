@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro'
-import Chart from '../../components/Chart.astro'
+import Derivation from '../../components/Derivation.astro'
 import ThemeSwitcher from '../../components/ThemeSwitcher.astro'
 import CodePreview from '../../components/CodePreview.astro'
 import { getLangFromUrl, useTranslations, path } from '../../i18n/utils'
@@ -9,18 +9,12 @@ const t = useTranslations(lang)
 ---
 <Base title={`Navagraha — ${t.tagline}`} description={t.lede}>
   <header class="wrap">
-    <div class="hero">
-      <div>
-        <h1>{t.tagline}</h1>
-        <p class="sub">{t.lede}</p>
-        <ThemeSwitcher labels={t.variants} systemLabel={t.systemLabel} systemNote={t.systemNote} />
-      </div>
-      <div>
-        <Chart labels={t.chart} />
-        <p class="born">{t.chartCaption}</p>
-      </div>
-    </div>
+    <h1>{t.tagline}</h1>
+    <p class="sub">{t.lede}</p>
+    <ThemeSwitcher labels={t.variants} systemLabel={t.systemLabel} systemNote={t.systemNote} />
   </header>
+
+  <Derivation t={t} />
 
   <section class="wrap">
     <h2>{t.preview.title}</h2>
@@ -59,11 +53,8 @@ const t = useTranslations(lang)
 
 <style>
   header { padding: var(--s6) 0 var(--s8); }
-  .hero { display: grid; gap: var(--s6); align-items: center; }
-  @media (min-width: 52rem) { .hero { grid-template-columns: minmax(0,1fr) 20rem; gap: var(--s7); } }
-  .sub { font-size: 1.12rem; color: var(--subtle); margin: 0 0 var(--s5); max-width: 40ch; }
-  .born { font-size: .78rem; color: var(--ketu); letter-spacing: .012em;
-    margin: var(--s5) 0 0; }
+  .sub { font-size: 1.19rem; color: var(--subtle); margin: 0 0 var(--s6);
+    max-width: 46ch; }
   .method p { max-width: 62ch; }
   .cases { list-style: none; padding: 0; margin: var(--s4) 0 0;
     display: grid; gap: var(--s3); max-width: 62ch; }
@@ -77,11 +68,12 @@ const t = useTranslations(lang)
 
   /* Einrichten ist die Hauptsache und traegt deshalb Flaeche, nicht nur Farbe. */
   .go { display: flex; align-items: center; gap: var(--s5); margin-top: var(--s5); }
+  .go a { display: inline-flex; align-items: center; min-height: 44px; }
   .cta { display: inline-block; background: var(--shukra); color: var(--base);
     text-decoration: none; padding: var(--s3) var(--s5); border-radius: 999px;
     font-size: .95rem; }
 
   @media (prefers-contrast: more) {
-    .born, .gloss dd { color: var(--subtle); }
+    .gloss dd { color: var(--subtle); }
   }
 </style>

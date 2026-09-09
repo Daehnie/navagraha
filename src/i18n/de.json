@@ -31,6 +31,15 @@
     "groundTitle": "Grund und Fläche",
     "groundLede": "Hier entscheidet sich, welche Grahas hervortreten. Die vier Varianten unterscheiden sich ausschließlich in diesen Werten."
   },
+  "derivation": {
+    "title": "Vom Horoskop zum Code",
+    "lede": "Jede Farbe im Editor hat einen Ort im Diagramm. Wähle einen Graha: links steht, wo er im Horoskop steht, rechts, was seine Farbe im Code färbt.",
+    "choose": "Graha wählen",
+    "position": "Stand im Horoskop",
+    "role": "Rolle im Code",
+    "notInLine": "Rahu färbt Präprozessor, At-Rules und Tags. In diesen beiden Zeilen kommt davon nichts vor.",
+    "codeNote": "Zwei Zeilen aus der Datei weiter unten, Wort für Wort nach Graha eingefärbt."
+  },
   "preview": { "title": "Im Code", "lede": "Dieselbe Datei in der gewählten Variante." },
   "themes": {
     "title": "Einrichten",

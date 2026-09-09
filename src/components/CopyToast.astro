@@ -24,7 +24,7 @@ const { word } = Astro.props as { word: string }
 <style is:global>
   /* Schwebende Chrome ueber Inhalt: Glas, das ankommt, nicht eine Flaeche,
      die eingeblendet wird. Unschaerfe und Groesse laufen zusammen hoch. */
-  #copied { position: fixed; left: 50%; bottom: var(--s5);
+  #copied { position: fixed; left: 50%; bottom: var(--s5); z-index: 30;
     transform: translateX(-50%) scale(.96);
     background: color-mix(in oklab, var(--overlay) 72%, transparent);
     -webkit-backdrop-filter: blur(0px) saturate(100%);

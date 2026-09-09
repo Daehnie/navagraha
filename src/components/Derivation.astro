@@ -1,0 +1,174 @@
+---
+// Die Kette in einem Stueck: wo ein Graha im Horoskop steht, welche Farbe er
+// traegt, was diese Farbe im Code faerbt. Ein Zustand, drei Ansichten.
+import palette from '../data/palette.json'
+import Chart from './Chart.astro'
+import { names, roles, hues, dignities, stand, type Sprache } from '../i18n/grahas'
+const { t } = Astro.props as { t: any }
+const lang: Sprache = Astro.currentLocale === 'en' ? 'en' : 'de'
+const START = 'guru'
+
+// Zwei echte Zeilen aus der Datei weiter unten. Acht der neun Rollen kommen
+// darin vor; Rahu faerbt Praeprozessor und Tags, die es hier nicht gibt.
+const CODE: [string, string | null][][] = [
+  [['const', 'mangala'], [' ', null], ['arc', 'chandra'], [' ', null],
+   ['=', 'shani'], [' ', null], ['Math', 'chandra'], ['.', null],
+   ['abs', 'guru'], ['(', null], ['g', 'chandra'], ['.', null],
+   ['longitude', 'shukra'], [' ', null], ['-', 'shani'], [' ', null],
+   ['g', 'chandra'], ['.', null], ['exaltation', 'shukra'], [')', null]],
+  [['if', 'mangala'], [' (', null], ['arc', 'chandra'], [' ', null],
+   ['<', 'shani'], [' ', null], ['3', 'surya'], [') ', null],
+   ['return', 'mangala'], [' ', null], ['"uccha"', 'budha'], ['  ', null],
+   ['// exaltiert', 'ketu']]
+]
+const imCode = new Set(CODE.flat().map(([, k]) => k).filter(Boolean))
+// Flach mit Zeilenumbruch dazwischen: im <pre> zaehlt jedes Zeichen.
+const TOKENS: [string, string | null][] = CODE.flatMap((zeile, i) =>
+  i < CODE.length - 1 ? [...zeile, ['\n', null] as [string, null]] : zeile)
+---
+<section class="wrap deriv" data-graha={START}>
+  <h2>{t.derivation.title}</h2>
+  <p>{t.derivation.lede}</p>
+
+  <div class="raster">
+    <div>
+      <Chart labels={t.chart} />
+      <p class="born">{t.chartCaption}</p>
+    </div>
+
+    <div>
+      <div class="wahl" role="radiogroup" aria-label={t.derivation.choose}>
+        {palette.grahas.map(g => (
+          <button role="radio" data-key={g.key}
+                  aria-checked={g.key === START ? 'true' : 'false'}
+                  class={g.key === START ? 'an' : undefined}>
+            <i style={`background:var(--${g.key})`}></i>{g.sa}
+          </button>
+        ))}
+      </div>
+
+      <div class="tafeln">
+        {palette.grahas.map(g => (
+          <div class:list={['tafel', g.key === START && 'an']} data-key={g.key}>
+            <span class="feld" style={`background:var(--${g.key})`}></span>
+            <p class="wer"><b>{names[g.key][lang]}</b> <span class="sa">{g.sa}</span></p>
+            <dl>
+              <dt>{t.derivation.position}</dt>
+              <dd class="mono">{stand(g, lang)}{g.dignities.length > 0 && (
+                <span class="dg">{g.dignities.map(d => dignities[d][lang]).join(', ')}</span>
+              )}</dd>
+              <dt>{t.derivation.role}</dt>
+              <dd>{roles[g.key][lang]}<br /><span class="hue">{hues[g.key][lang]}</span></dd>
+            </dl>
+            {!imCode.has(g.key) && <p class="fehlt">{t.derivation.notInLine}</p>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <pre class="kette"><code>{TOKENS.map(([text, key]) => key
+    ? <span class:list={['tok', key === START && 'an']} data-key={key}
+            style={`color:var(--${key})`}>{text}</span>
+    : <span class="tok leer">{text}</span>)}</code></pre>
+  <p class="knote">{t.derivation.codeNote}</p>
+</section>
+
+<script is:inline>
+  const feld = document.querySelector('.deriv')
+  const knoepfe = [...feld.querySelectorAll('.wahl button')]
+
+  function markiere(key) {
+    feld.dataset.graha = key
+    knoepfe.forEach(b => {
+      const an = b.dataset.key === key
+      b.setAttribute('aria-checked', String(an))
+      b.classList.toggle('an', an)
+      // Dasselbe Muster wie die uebrigen Gruppen: ein Halt in der Reihenfolge.
+      b.tabIndex = an ? 0 : -1
+    })
+    feld.querySelectorAll('.tafel, .kette .tok').forEach(e =>
+      e.classList.toggle('an', e.dataset.key === key))
+  }
+
+  const waehle = key => document.dispatchEvent(
+    new CustomEvent('navagraha:graha', { detail: key }))
+  document.addEventListener('navagraha:graha', e => markiere(e.detail))
+
+  const SCHRITT = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }
+  knoepfe.forEach((b, i) => {
+    b.tabIndex = b.classList.contains('an') ? 0 : -1
+    b.addEventListener('click', () => waehle(b.dataset.key))
+    b.addEventListener('keydown', ev => {
+      const d = SCHRITT[ev.key]
+      if (!d) return
+      ev.preventDefault()
+      const ziel = knoepfe[(i + d + knoepfe.length) % knoepfe.length]
+      waehle(ziel.dataset.key)
+      ziel.focus()
+    })
+  })
+
+  // Einmal beim Laden, damit Diagramm, Tafel und Code von Anfang an dasselbe
+  // zeigen — die Startwahl steht im Markup, nicht doppelt hier.
+  waehle(feld.dataset.graha)
+</script>
+
+<style>
+  .deriv { --chart-max: 26rem; }
+  .raster { display: grid; gap: var(--s6); margin-top: var(--s6); }
+  @media (min-width: 56rem) {
+    .raster { grid-template-columns: 26rem minmax(0, 1fr); gap: var(--s7);
+      align-items: start; }
+  }
+
+  .born { font-size: .78rem; color: var(--ketu); letter-spacing: .012em;
+    margin: var(--s5) 0 0; max-width: var(--chart-max); }
+
+  .wahl { display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .wahl button { display: inline-flex; align-items: center; gap: var(--s2);
+    background: var(--surface); color: var(--subtle);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: var(--s2) var(--s3); font: inherit; font-size: .84rem;
+    min-height: 44px; cursor: pointer; transition: border-color .2s, color .2s; }
+  .wahl button:hover { border-color: var(--ketu); color: var(--chandra); }
+  .wahl button.an { border-color: var(--shukra); color: var(--chandra_b); }
+  .wahl i { width: .7rem; height: .7rem; border-radius: 50%; display: block;
+    box-shadow: 0 0 0 1px var(--line); }
+
+  /* Alle neun Tafeln stehen im Markup, sichtbar ist eine. So bleibt der Text
+     uebersetzt und das Skript kurz. */
+  .tafeln { margin-top: var(--s5); }
+  .tafel { display: none; }
+  .tafel.an { display: block; }
+  .feld { display: block; height: .5rem; border-radius: 3px;
+    box-shadow: 0 0 0 1px var(--line); }
+  .wer { margin: var(--s3) 0 var(--s4); font-size: 1.24rem; }
+  .wer b { font-weight: 400; }
+  .wer .sa { color: var(--ketu); font-size: .84rem; margin-left: var(--s2); }
+  .tafel dl { display: grid; gap: var(--s1) var(--s4); margin: 0;
+    grid-template-columns: 9rem minmax(0, 1fr); }
+  .tafel dt { color: var(--ketu); font-size: .78rem; letter-spacing: .012em;
+    padding-top: .15em; }
+  .tafel dd { margin: 0 0 var(--s3); font-size: .92rem; }
+  .tafel .dg { color: var(--shukra); margin-left: var(--s2); }
+  .tafel .hue { color: var(--ketu); font-size: .82rem; }
+  .fehlt { color: var(--ketu); font-size: .82rem; margin: 0; max-width: 34ch; }
+
+  .kette { margin: var(--s6) 0 0; padding: var(--s5) var(--s4);
+    background: var(--surface); border: 1px solid var(--hl_med);
+    border-radius: 10px; overflow-x: auto; box-shadow: var(--tiefe);
+    font-size: .92rem; line-height: 2; }
+  /* Markiert wird, was dieser Graha faerbt — die uebrigen Woerter bleiben
+     lesbar. currentColor ist die Farbe des Wortes selbst. */
+  .tok { border-radius: 3px; transition: background-color .2s; }
+  .tok.an { background: color-mix(in oklab, currentColor 18%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in oklab, currentColor 34%, transparent); }
+  .tok.leer { color: var(--ketu); }
+  .knote { color: var(--ketu); font-size: .82rem; margin: var(--s3) 0 0; }
+
+  @media (prefers-contrast: more) {
+    .tafel dt, .tafel .hue, .fehlt, .knote, .born { color: var(--subtle); }
+    .wahl button { border-color: var(--subtle); }
+  }
+</style>
