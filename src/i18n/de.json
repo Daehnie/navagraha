@@ -16,6 +16,7 @@
     "graha": "Graha", "role": "Rolle im Code", "source": "Farbe und Stand",
     "groundTitle": "Grund und Fläche",
     "groundLede": "Hier entscheidet sich, welche Grahas hervortreten. Die vier Varianten unterscheiden sich ausschließlich in diesen Werten.",
+    "copy": "kopieren",
     "copied": "kopiert"
   },
   "preview": { "title": "Im Code", "lede": "Dieselbe Datei in der gewählten Variante." },

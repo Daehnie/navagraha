@@ -3,9 +3,9 @@ import palette from '../data/palette.json'
 const { labels } = Astro.props as { labels: Record<string, string> }
 const variants = Object.entries(palette.variants)
 ---
-<div class="tabs" role="tablist" aria-label="Variante">
+<div class="tabs" role="radiogroup" aria-label="Variante">
   {variants.map(([key, v]) => (
-    <button role="tab" data-v={key} aria-selected={key === 'swati'}>
+    <button role="radio" data-v={key} aria-checked={key === 'swati'}>
       <span class="sw">
         <i style={`background:${v.colors.base}`}></i>
         <i style={`background:${v.colors.shukra}`}></i>
@@ -21,7 +21,7 @@ const variants = Object.entries(palette.variants)
   const note = document.getElementById('vnote')
   function pick(v, remember = true) {
     document.documentElement.dataset.theme = v
-    tabs.forEach(b => b.setAttribute('aria-selected', String(b.dataset.v === v)))
+    tabs.forEach(b => b.setAttribute('aria-checked', String(b.dataset.v === v)))
     if (note) note.textContent = labels[v] ?? ''
     if (remember) try { localStorage.setItem('navagraha', v) } catch {}
   }
@@ -40,11 +40,16 @@ const variants = Object.entries(palette.variants)
   /* Rueckmeldung liegt auf dem Druck, nicht auf dem Loslassen. */
   .tabs button:active { border-color: var(--hl_high); color: var(--chandra);
     transform: scale(.97); transition: transform 100ms ease-out; }
-  .tabs button[aria-selected="true"] { border-color: var(--shukra); color: var(--chandra_b); }
+  .tabs button[aria-checked="true"] { border-color: var(--shukra); color: var(--chandra_b); }
   .sw { display: inline-flex; }
   .sw i { width: .62rem; height: .95rem; display: block; }
   .sw i:first-child { border-radius: 3px 0 0 3px; }
   .sw i:last-child { border-radius: 0 3px 3px 0; }
   .vnote { color: var(--ketu); font-size: .86rem; margin: var(--s4) 0 0;
     max-width: 44ch; min-height: 3rem; }
+
+  @media (prefers-contrast: more) {
+    .vnote { color: var(--subtle); }
+    .tabs button { border-color: var(--hl_high); }
+  }
 </style>

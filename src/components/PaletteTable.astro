@@ -47,7 +47,8 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
         <td class="so">{g.color}, {g.pos}</td>
         <td class="hx">{variants.map(([, v]) => (
           <button data-hex={v.colors[g.key]} style={`--c:${v.colors[g.key]}`}
-                  title={`${v.label}: ${v.colors[g.key]}`}>
+                  title={`${v.label}: ${v.colors[g.key]}`}
+                  aria-label={`${v.label} ${v.colors[g.key]} ${t.palette.copy}`}>
             <i></i><code>{v.colors[g.key]}</code>
           </button>
         ))}</td>
@@ -69,7 +70,8 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
         <td class="ro" colspan="2"><code>{key}</code></td>
         <td class="hx">{variants.map(([, v]) => (
           <button data-hex={v.colors[key]} style={`--c:${v.colors[key]}`}
-                  title={`${v.label}: ${v.colors[key]}`}>
+                  title={`${v.label}: ${v.colors[key]}`}
+                  aria-label={`${v.label} ${v.colors[key]} ${t.palette.copy}`}>
             <i></i><code>{v.colors[key]}</code>
           </button>
         ))}</td>
@@ -139,4 +141,9 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
   #copied.on { opacity: 1; transform: translateX(-50%) scale(1);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     backdrop-filter: blur(20px) saturate(180%); }
+
+  @media (prefers-contrast: more) {
+    .so, thead th { color: var(--subtle); }
+    th, td { border-bottom-color: var(--hl_high); }
+  }
 </style>

@@ -36,4 +36,8 @@ const { title = 'dignity.ts' } = Astro.props
   .shani { color: var(--shani); }
   .surya { color: var(--surya); }
   .rahu { color: var(--rahu); }
+
+  @media (prefers-contrast: more) {
+    .pane { border-color: var(--hl_high); }
+  }
 </style>

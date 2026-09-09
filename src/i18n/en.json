@@ -16,6 +16,7 @@
     "graha": "Graha", "role": "Role in code", "source": "Colour and placement",
     "groundTitle": "Ground and surface",
     "groundLede": "This is where it is decided which grahas step forward. The four variants differ in these values alone.",
+    "copy": "copy",
     "copied": "copied"
   },
   "preview": { "title": "In code", "lede": "The same file in the selected variant." },

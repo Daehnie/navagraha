@@ -32,7 +32,10 @@ body {
   transition: background .45s ease, color .45s ease;
 }
 code, .mono { font-family: "Monaspace Neon", ui-monospace, "SF Mono", Menlo, monospace; }
-a { color: var(--shani); }
+a { color: var(--shani); text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--shani) 40%, transparent);
+    text-underline-offset: .15em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-color: var(--shani); }
 :focus-visible { outline: 2px solid var(--shukra); outline-offset: 2px; border-radius: 3px; }
 
 .wrap { width: min(64rem, 100% - var(--s6)); margin-inline: auto; }
@@ -52,10 +55,17 @@ h3 { font-size: 1rem; font-weight: 400; margin: var(--s5) 0 var(--s1); line-heig
 .brand img { width: 1.5rem; height: 1.5rem; border-radius: 5px; display: block; }
 .top nav { display: flex; gap: var(--s4); margin-left: auto; }
 .top nav a { color: var(--ketu); text-decoration: none; }
-.top nav a:hover, .top nav a[aria-current="page"] { color: var(--chandra); }
+.top nav a:hover { color: var(--chandra); }
+/* Wo bin ich: eigenes Merkmal, nicht dieselbe Regel wie der Hover. */
+.top nav a[aria-current="page"] { color: var(--chandra);
+  box-shadow: 0 1px 0 var(--shukra); }
 .lang a { color: var(--ketu); text-decoration: none; font-size: .8rem;
          letter-spacing: .012em; }
 .lang a[aria-current="true"] { color: var(--chandra); }
 
 footer { padding: var(--s7) 0 var(--s8); color: var(--ketu); font-size: .8rem;
          letter-spacing: .012em; border-top: 1px solid var(--hl_med); }
+
+@media (prefers-contrast: more) {
+  footer, .top nav a { color: var(--subtle); }
+}
