@@ -20,6 +20,11 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+/* Platz fuer die Scrollleiste immer freihalten: eine Seite, die kuerzer ist
+   als das Fenster (Einrichten), hat sonst keine, und der zentrierte Rahmen
+   rueckt um die halbe Leistenbreite nach rechts. Schwebende Leisten (macOS,
+   Telefon) betrifft das nicht. */
+html { scrollbar-gutter: stable; }
 @media (prefers-reduced-motion: reduce) {
   /* Bewegung faellt weg, Farbe nicht: ein harter Hell/Dunkel-Sprung ueber den
      ganzen Viewport waere unangenehmer als die Blende, die er ersetzt. */
