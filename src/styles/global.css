@@ -63,13 +63,16 @@ a:hover { text-decoration-color: var(--shani); }
         transform: translateY(-200%); }
 .skip:focus { transform: none; }
 
-.wrap { width: min(64rem, 100% - var(--s6)); margin-inline: auto; }
+/* 64rem liessen auf breiten Schirmen zwei Drittel leer. Der Fliesstext
+   bleibt trotzdem bei seiner Lesebreite — hier waechst nur der Rahmen, in
+   dem Text und Grafiken nebeneinander Platz finden. */
+.wrap { width: min(76rem, 100% - var(--s6)); margin-inline: auto; }
 section { padding: var(--s7) 0; border-top: 1px solid var(--hl_med); }
 h1 { font-size: clamp(2.3rem, 7.5vw, 3.9rem); line-height: 1.02; font-weight: 400;
      letter-spacing: -.028em; margin: 0 0 var(--s4); }
 h2 { font-size: 1.55rem; font-weight: 400; margin: 0 0 var(--s1); letter-spacing: -.012em;
      line-height: 1.22; }
-h2 + p { color: var(--ketu); margin: 0 0 var(--s6); max-width: 42ch; }
+h2 + p { color: var(--ketu); margin: 0 0 var(--s6); max-width: 54ch; }
 h3 { font-size: 1rem; font-weight: 400; margin: var(--s5) 0 var(--s1); line-height: 1.35; }
 
 /* Kopfzeile: schwebende Materialschicht, Inhalt laeuft darunter durch.

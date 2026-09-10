@@ -207,6 +207,14 @@ Die Seite trägt immer das gewählte Schema selbst.
 Kein Framework für Interaktion. Der Variantenschalter und das Kopieren sind
 `is:inline`-Skripte von wenigen Zeilen. So bleiben soll es.
 
+Der Rahmen (`.wrap`) misst 76rem. Der Fließtext bleibt trotzdem bei 62
+Zeichen — die Breite ist nicht für längere Zeilen da, sondern dafür, dass im
+Methodenteil ab 72rem Argument und Beleg nebeneinander stehen können
+(`.teil` mit `.wort` und `.beleg`). Darunter fallen sie in die Reihenfolge
+zurück, in der man liest: erst der Satz, dann seine Grafik. Die Schwelle
+liegt bei 72rem, weil der Textspalte darunter keine 60 Zeichen mehr
+blieben, und Lesbarkeit vor Flächennutzung geht.
+
 Kopfzeile und Fußzeile teilen sich die Arbeit: oben nur Marke und drei
 Seiten, damit die Leiste auf dem Telefon einzeilig bleibt; unten Sprache,
 Quelle, Lizenz und der Urheber. Der Sprachumschalter steht deshalb im Fuß,

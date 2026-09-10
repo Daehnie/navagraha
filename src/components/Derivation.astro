@@ -121,6 +121,12 @@ const TOKENS: [string, string | null][] = CODE.flatMap((zeile, i) =>
     .raster { grid-template-columns: 26rem minmax(0, 1fr); gap: var(--s7);
       align-items: start; }
   }
+  /* Auf breiten Schirmen darf das Diagramm mitwachsen — es ist der Ursprung
+     von allem und war hier das kleinste Element. */
+  @media (min-width: 76rem) {
+    .deriv { --chart-max: 31rem; }
+    .raster { grid-template-columns: 31rem minmax(0, 1fr); }
+  }
 
   .born { font-size: .78rem; color: var(--ketu); letter-spacing: .012em;
     margin: var(--s5) 0 0; max-width: var(--chart-max); }

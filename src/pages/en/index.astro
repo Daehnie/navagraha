@@ -34,30 +34,58 @@ const t = useTranslations(lang)
     <h3>{t.method.intro.h}</h3>
     <p>{t.method.intro.p1}</p>
     <p>{t.method.intro.p2}</p>
-    <h3>{t.method.hues.h}</h3><p>{t.method.hues.p}</p>
-    <HueWheel><span slot="alt">{t.method.figures.wheelAlt}</span></HueWheel>
-    <p class="bu">{t.method.figures.wheel}</p>
+    <div class="teil">
+      <div class="wort">
+        <h3>{t.method.hues.h}</h3>
+        <p>{t.method.hues.p}</p>
+      </div>
+      <div class="beleg">
+        <HueWheel><span slot="alt">{t.method.figures.wheelAlt}</span></HueWheel>
+        <p class="bu">{t.method.figures.wheel}</p>
+      </div>
+    </div>
 
-    <h3>{t.method.force.h}</h3><p>{t.method.force.p}</p>
-    <Strength labels={t.method.figures} />
-    <p class="bu">{t.method.figures.strength}</p>
-    <ul class="cases">
-      {t.method.force.cases.map(c => <li><b>{c.name}</b> {c.text}</li>)}
-    </ul>
-    <h3>{t.method.grounds.h}</h3>
-    <p>{t.method.grounds.p1}</p>
-    <p>{t.method.grounds.p2}</p>
-    <p>{t.method.grounds.p3}</p>
-    <p>{t.method.grounds.p4}</p>
-    <Grounds labels={t.method.figures} />
-    <p class="bu">{t.method.figures.grounds}</p>
+    <div class="teil">
+      <div class="wort">
+        <h3>{t.method.force.h}</h3>
+        <p>{t.method.force.p}</p>
+        <ul class="cases">
+          {t.method.force.cases.map(c => <li><b>{c.name}</b> {c.text}</li>)}
+        </ul>
+      </div>
+      <div class="beleg">
+        <Strength labels={t.method.figures} />
+        <p class="bu">{t.method.figures.strength}</p>
+      </div>
+    </div>
 
-    <h3>{t.method.contrast.h}</h3>
-    <p>{t.method.contrast.p1}</p>
-    <p>{t.method.contrast.p2}</p>
-    <ContrastSpan labels={t.method.figures} />
-    <p class="bu">{t.method.figures.contrast}</p>
-    <ContrastTable labels={t.method.figures} />
+    <div class="teil">
+      <div class="wort">
+        <h3>{t.method.grounds.h}</h3>
+        <p>{t.method.grounds.p1}</p>
+        <p>{t.method.grounds.p2}</p>
+        <p>{t.method.grounds.p3}</p>
+        <p>{t.method.grounds.p4}</p>
+      </div>
+      <div class="beleg">
+        <Grounds labels={t.method.figures} />
+        <p class="bu">{t.method.figures.grounds}</p>
+      </div>
+    </div>
+
+    <div class="teil">
+      <div class="wort">
+        <h3>{t.method.contrast.h}</h3>
+        <p>{t.method.contrast.p1}</p>
+        <p>{t.method.contrast.p2}</p>
+      </div>
+      <div class="beleg">
+        <ContrastSpan labels={t.method.figures} />
+        <p class="bu">{t.method.figures.contrast}</p>
+        <ContrastTable labels={t.method.figures} />
+      </div>
+    </div>
+
     <h3>{t.method.glossary.h}</h3>
     <dl class="gloss">
       {t.method.glossary.terms.map(g => <><dt>{g.t}</dt><dd>{g.d}</dd></>)}
@@ -89,6 +117,20 @@ const t = useTranslations(lang)
     max-width: 46ch; }
   .probe .bu { color: var(--ketu); font-size: .82rem; margin: var(--s4) 0 0; }
   .method p { max-width: 62ch; }
+  /* Auf breiten Schirmen steht das Argument links und sein Beleg rechts,
+     statt beides untereinander in einer schmalen Spalte. Darunter bleibt
+     die Reihenfolge, in der man liest. */
+  .teil { display: grid; gap: var(--s5); margin-bottom: var(--s6); }
+  /* Erst ab 72rem: darunter blieben der Textspalte keine 60 Zeichen mehr,
+     und Lesbarkeit geht vor Flaechennutzung. */
+  @media (min-width: 72rem) {
+    .teil { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--s7); align-items: start; margin-bottom: var(--s7); }
+    .teil .wort > h3:first-child { margin-top: 0; }
+    /* Der Abstand haelt den Beleg unter der schwebenden Kopfzeile frei. */
+    .beleg { position: sticky; top: calc(var(--s8) + var(--s5)); }
+  }
+  .beleg > :first-child { margin-top: 0; }
   /* Bildunterschrift: sagt, was die Grafik misst, und nennt die Grenze. */
   .bu { color: var(--ketu); font-size: .82rem; margin: var(--s3) 0 0;
     max-width: 46ch; }
