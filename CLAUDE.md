@@ -233,8 +233,4 @@ denselben Daten, und in beiden Ansichten des Umschalters gültig.
 
 ## Offene Punkte
 
-- Das VS-Code-Paket heißt im Manifest noch `graha`, seine vier Themes
-  erscheinen als „Graha Swati" und so fort — überall sonst heißt das
-  Projekt Navagraha. Umbenennen würde die Theme-Kennungen bei bestehenden
-  Nutzern ändern; das README nennt deshalb vorerst die Namen, die man
-  wirklich sieht.
+Zurzeit keine.

@@ -1,4 +1,4 @@
-# Graha – Tabby-Farbschemata (vier Varianten)
+# Navagraha – Tabby-Farbschemata (vier Varianten)
 # Abgeleitet aus dem siderischen Geburtshoroskop (Lahiri): 23.05.1982, 19:47 MESZ, Wedel.
 #
 # Farbton der Akzente = klassische Graha-Farbe (BPHS)
@@ -15,13 +15,13 @@
 #
 # Alle Farben 1–15 liegen bei >= 4.5:1 gegen background, surface und overlay.
 # Die ANSI-Plaetze tragen nur einen Farbton, keine Rolle – die Zuordnung zu
-# Syntaxelementen steht in graha.vim bzw. im VS-Code-Theme.
+# Syntaxelementen steht in navagraha.vim bzw. im VS-Code-Theme.
 # Platz 9 ist Surya (Kupfer), nicht ein helleres Mangala.
 
 terminal:
   customColorSchemes:
     # Erde  · dunkel · Grundton 76°  – Prithvi-Dominanz, 5 Grahas in Vrishabha und Kanya
-    - name: "Graha Pratipada"
+    - name: "Navagraha Pratipada"
       foreground: "#dcd7c8"
       background: "#16120d"
       selection: "#3c362d"
@@ -46,7 +46,7 @@ terminal:
         - "#f2ede3"  # 15 hellweiss   – Chandra
 
     # Erde  · hell   · Grundton 76°  – dieselbe Herleitung, Ushas: die Morgenroete
-    - name: "Graha Ushas"
+    - name: "Navagraha Ushas"
       foreground: "#2d281e"
       background: "#f8efe2"
       selection: "#d5c8b6"
@@ -71,7 +71,7 @@ terminal:
         - "#1a1810"  # 15 hellweiss   – Chandra
 
     # Luft  · dunkel · Grundton 255° – Lagna Tula, Guru in Swati, Gottheit Vayu
-    - name: "Graha Swati"
+    - name: "Navagraha Swati"
       foreground: "#ced6e3"
       background: "#101317"
       selection: "#32373e"
@@ -96,7 +96,7 @@ terminal:
         - "#e7edf6"  # 15 hellweiss   – Chandra
 
     # Luft  · hell   · Grundton 255° – Lagna Tula, Vayu-Tattva
-    - name: "Graha Tula"
+    - name: "Navagraha Tula"
       foreground: "#232933"
       background: "#ebf1f8"
       selection: "#c3cbd5"

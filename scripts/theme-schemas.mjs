@@ -33,7 +33,7 @@ export const ANSI_SLOT_LABELS = [
 ]
 
 // Kopfkommentar der tabby-Datei.
-export const TABBY_HEADER = `# Graha – Tabby-Farbschemata (vier Varianten)
+export const TABBY_HEADER = `# Navagraha – Tabby-Farbschemata (vier Varianten)
 # Abgeleitet aus dem siderischen Geburtshoroskop (Lahiri): 23.05.1982, 19:47 MESZ, Wedel.
 #
 # Farbton der Akzente = klassische Graha-Farbe (BPHS)
@@ -50,7 +50,7 @@ export const TABBY_HEADER = `# Graha – Tabby-Farbschemata (vier Varianten)
 #
 # Alle Farben 1–15 liegen bei >= 4.5:1 gegen background, surface und overlay.
 # Die ANSI-Plaetze tragen nur einen Farbton, keine Rolle – die Zuordnung zu
-# Syntaxelementen steht in graha.vim bzw. im VS-Code-Theme.
+# Syntaxelementen steht in navagraha.vim bzw. im VS-Code-Theme.
 # Platz 9 ist Surya (Kupfer), nicht ein helleres Mangala.`
 
 // Kommentarzeile ueber jedem Varianten-Block in der tabby-Datei.

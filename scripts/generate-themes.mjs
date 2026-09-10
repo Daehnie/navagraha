@@ -53,7 +53,7 @@ function generateTabby() {
 
     return [
       `    # ${TABBY_VARIANT_NOTES[key]}`,
-      `    - name: "Graha ${v.label}"`,
+      `    - name: "Navagraha ${v.label}"`,
       named,
       '      colors:',
       colors,
@@ -121,7 +121,7 @@ function generateVscodeThemes() {
     })
 
     const theme = {
-      name: `Graha ${v.label}`,
+      name: `Navagraha ${v.label}`,
       type: v.mode,
       semanticHighlighting: true,
       semanticTokenColors: Object.fromEntries(
@@ -138,7 +138,7 @@ function generateVscodeThemes() {
       })),
     }
 
-    write('themes', 'vscode', 'navagraha', 'themes', `graha-${key}-color-theme.json`,
+    write('themes', 'vscode', 'navagraha', 'themes', `navagraha-${key}-color-theme.json`,
       JSON.stringify(theme, null, 2))
   }
 }
@@ -152,9 +152,9 @@ function updateVscodePackageJson() {
   pkg.contributes.themes = VARIANT_ORDER.map((key) => {
     const v = palette.variants[key]
     return {
-      label: `Graha ${v.label}`,
+      label: `Navagraha ${v.label}`,
       uiTheme: v.mode === 'dark' ? 'vs-dark' : 'vs',
-      path: `./themes/graha-${key}-color-theme.json`,
+      path: `./themes/navagraha-${key}-color-theme.json`,
     }
   })
 

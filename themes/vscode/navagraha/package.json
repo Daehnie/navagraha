@@ -1,6 +1,6 @@
 {
-  "name": "graha",
-  "displayName": "Graha",
+  "name": "navagraha",
+  "displayName": "Navagraha",
   "description": "Vier Farbschemata, abgeleitet aus einem siderischen Geburtshoroskop.",
   "version": "1.2.0",
   "publisher": "local",
@@ -13,24 +13,24 @@
   "contributes": {
     "themes": [
       {
-        "label": "Graha Pratipada",
+        "label": "Navagraha Pratipada",
         "uiTheme": "vs-dark",
-        "path": "./themes/graha-pratipada-color-theme.json"
+        "path": "./themes/navagraha-pratipada-color-theme.json"
       },
       {
-        "label": "Graha Ushas",
+        "label": "Navagraha Ushas",
         "uiTheme": "vs",
-        "path": "./themes/graha-ushas-color-theme.json"
+        "path": "./themes/navagraha-ushas-color-theme.json"
       },
       {
-        "label": "Graha Swati",
+        "label": "Navagraha Swati",
         "uiTheme": "vs-dark",
-        "path": "./themes/graha-swati-color-theme.json"
+        "path": "./themes/navagraha-swati-color-theme.json"
       },
       {
-        "label": "Graha Tula",
+        "label": "Navagraha Tula",
         "uiTheme": "vs",
-        "path": "./themes/graha-tula-color-theme.json"
+        "path": "./themes/navagraha-tula-color-theme.json"
       }
     ]
   }

@@ -1,12 +1,12 @@
-" graha.vim — Syntax-Zuordnung fuer das Graha-Farbschema
+" navagraha.vim — Syntax-Zuordnung fuer das Navagraha-Farbschema
 "
 " Arbeitet ausschliesslich mit den ANSI-Plaetzen 0–15, nimmt also die Farben
 " aus dem Terminal. Damit gilt es unveraendert auf allen SSH-Zielen, egal ob
 " dort Pratipada oder Ushas eingestellt ist, und braucht kein 256-Farb- oder
 " Truecolor-Terminal.
 "
-" Ablage:  ~/.vim/colors/graha.vim   (bzw. ~/.config/nvim/colors/graha.vim)
-" Aktiv:   colorscheme graha         (in .vimrc unter syntax on)
+" Ablage:  ~/.vim/colors/navagraha.vim   (bzw. ~/.config/nvim/colors/navagraha.vim)
+" Aktiv:   colorscheme navagraha     (in .vimrc unter syntax on)
 "
 " Platzbelegung des Schemas:
 "   1 Mangala rot     2 Budha gruen    3 Guru gold     4 Shani blau
@@ -16,7 +16,7 @@ hi clear
 if exists("syntax_on")
   syntax reset
 endif
-let g:colors_name = "graha"
+let g:colors_name = "navagraha"
 
 " Grundflaeche: bewusst NONE, damit Terminal-Hintergrund und -Vordergrund
 " durchschlagen (Transparenz, Theme-Wechsel hell/dunkel bleiben intakt).
