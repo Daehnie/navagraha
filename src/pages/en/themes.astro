@@ -1,73 +1,95 @@
 ---
 import Base from '../../layouts/Base.astro'
 import ThemeSwitcher from '../../components/ThemeSwitcher.astro'
-import CopyToast from '../../components/CopyToast.astro'
 import { getLangFromUrl, useTranslations } from '../../i18n/utils'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
-// Beschreibungen stehen in src/i18n/, hier nur Struktur und Befehle.
-// kind unterscheidet Datei von Ordner, weil GitHub beides anders zeigt und
-// "Herunterladen" fuer einen Ordner nicht stimmt.
-const tools = [
-  { key: 'tabby', name: 'Tabby', kind: 'blob', file: 'themes/tabby/navagraha.yaml',
-    cmd: 'Settings → Config file\nSettings → Farbschema\nDarstellung → Terminal background: From color scheme' },
-  { key: 'iterm2', name: 'iTerm2', kind: 'tree', file: 'themes/iterm2',
-    cmd: 'Profiles → Colors → Color Presets\nUse different colors for light and dark mode' },
-  { key: 'vscode', name: 'VS Code', kind: 'tree', file: 'themes/vscode/navagraha',
-    cmd: 'cp -R navagraha ~/.vscode/extensions/\n⌘K ⌘T' },
-  { key: 'vimbat', name: 'Vim & bat', kind: 'blob', file: 'themes/vim/navagraha.vim',
-    cmd: 'cp navagraha.vim ~/.vim/colors/\ncolorscheme navagraha\nexport BAT_THEME=ansi' }
+// Wie eingebaut wird, steht im README neben den Dateien — nicht hier. Die
+// Seite sagt nur, wofuer es etwas gibt und wo es liegt.
+const ports = [
+  { key: 'tabby',  name: 'Tabby',      art: 'terminal', ordner: 'themes/tabby',
+    datei: 'navagraha.yaml' },
+  { key: 'iterm2', name: 'iTerm2',     art: 'terminal', ordner: 'themes/iterm2',
+    datei: '4 × .itermcolors' },
+  { key: 'vscode', name: 'VS Code',    art: 'editor',   ordner: 'themes/vscode/navagraha',
+    datei: 'Extension' },
+  { key: 'vim',    name: 'Vim & Neovim', art: 'editor', ordner: 'themes/vim',
+    datei: 'navagraha.vim' },
+  { key: 'bat',    name: 'bat',        art: 'terminal', ordner: 'themes/bat',
+    datei: 'BAT_THEME=ansi' }
 ]
-const repo = 'https://github.com/Daehnie/navagraha/'
+const repo = 'https://github.com/Daehnie/navagraha/tree/main/'
 ---
 <Base title={`${t.themes.title} — Navagraha`} description={t.themes.lede}>
   <section class="wrap" style="border-top:0">
     <h2>{t.themes.title}</h2>
     <p>{t.themes.lede}</p>
+    <p class="zahl mono">{t.themes.count.replace('{n}', String(ports.length))}</p>
+
     <ThemeSwitcher labels={t.variants} systemLabel={t.systemLabel} systemNote={t.systemNote} />
-    <div class="steps">
-      {tools.map(tool => (
-        <div>
-          <h3>{tool.name}</h3>
-          <p>{t.themes.tools[tool.key]}</p>
-          <pre class="mono">{tool.cmd}</pre>
-          <p class="acts">
-            <button class="copy" data-copy={tool.cmd}
-                    aria-label={`${tool.name}: ${t.themes.copyCmd}`}>{t.themes.copyCmd}</button>
-            <a href={`${repo}${tool.kind}/main/${tool.file}`}
-               aria-label={`${tool.name} — ${t.themes.open}`}>{t.themes.open}</a>
-          </p>
-        </div>
+
+    <ul class="ports">
+      {ports.map(p => (
+        <li>
+          <a href={repo + p.ordner}>
+            <span class="zeichen" aria-hidden="true">
+              {p.art === 'terminal' ? (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2.5" y="4" width="19" height="16" rx="2.5" />
+                  <path d="M7 9.5 L10.5 12.5 L7 15.5 M13 16 h4" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2.5" y="4" width="19" height="16" rx="2.5" />
+                  <path d="M2.5 8.5 h19" />
+                  <path d="M9.5 12 L7 14.5 L9.5 17 M14.5 12 L17 14.5 L14.5 17"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              )}
+            </span>
+            <span class="text">
+              <span class="name">{p.name}</span>
+              <span class="meta mono">{p.datei}</span>
+            </span>
+            <span class="art">{t.themes.kinds[p.art]}</span>
+          </a>
+        </li>
       ))}
-    </div>
+    </ul>
+
+    <p class="hinweis">{t.themes.readme}</p>
   </section>
-  <CopyToast word={t.copied} />
 </Base>
 
 <style>
-  .steps { display: grid; gap: var(--s6); margin-top: var(--s6); }
-  @media (min-width: 46rem) { .steps { grid-template-columns: 1fr 1fr; gap: var(--s6); } }
-  .steps h3 { margin: 0 0 var(--s1); }
-  .steps p { margin: 0 0 var(--s2); font-size: .88rem; color: var(--ketu); }
-  .steps pre { background: var(--surface); border: 1px solid var(--hl_med);
-    border-radius: 8px; padding: var(--s3); font-size: .74rem; line-height: 1.7;
-    letter-spacing: .016em; color: var(--subtle); white-space: pre-wrap;
-    margin: 0 0 var(--s2); }
-  /* Was auf der Farbseite gilt, gilt hier auch: was wie ein Wert aussieht,
-     laesst sich mit einem Griff mitnehmen. */
-  .acts { display: flex; align-items: center; gap: var(--s4); flex-wrap: wrap; }
-  .acts a { display: inline-flex; align-items: center; min-height: 44px; }
-  .copy { background: var(--surface); color: var(--subtle);
-    border: 1px solid var(--line); border-radius: 999px; font: inherit;
-    font-size: .84rem; padding: var(--s2) var(--s4); min-height: 44px;
-    cursor: pointer; transition: border-color .2s, color .2s; }
-  .copy:hover { border-color: var(--ketu); color: var(--chandra); }
-  .copy:active { border-color: var(--ketu); color: var(--chandra);
-    transform: scale(.97); transition: transform 100ms ease-out; }
+  .zahl { color: var(--shukra); font-size: .8rem; letter-spacing: .014em;
+    margin: calc(var(--s5) * -1) 0 var(--s6); }
+  .ports { list-style: none; padding: 0; margin: var(--s6) 0 0;
+    display: grid; gap: var(--s3); }
+  @media (min-width: 40rem) { .ports { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 62rem) { .ports { grid-template-columns: repeat(3, 1fr); } }
+
+  /* Die ganze Karte ist der Griff, nicht nur ihr Name. */
+  .ports a { display: flex; align-items: center; gap: var(--s3);
+    padding: var(--s4); border: 1px solid var(--line); border-radius: 10px;
+    background: var(--surface); text-decoration: none; color: var(--chandra);
+    min-height: 44px; transition: border-color .2s, background-color .2s; }
+  .ports a:hover { border-color: var(--shukra); background: var(--overlay); }
+  .zeichen { flex: 0 0 auto; color: var(--ketu); display: block; }
+  .zeichen svg { width: 1.5rem; height: 1.5rem; display: block; }
+  .ports a:hover .zeichen { color: var(--shukra); }
+  .text { display: grid; gap: .1rem; min-width: 0; }
+  .name { font-size: 1rem; }
+  .meta { color: var(--ketu); font-size: .7rem; letter-spacing: .014em;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .art { margin-left: auto; color: var(--ketu); font-size: .72rem;
+    letter-spacing: .03em; text-transform: uppercase; flex: 0 0 auto; }
+  .hinweis { color: var(--ketu); font-size: .84rem; margin: var(--s5) 0 0;
+    max-width: 54ch; }
 
   @media (prefers-contrast: more) {
-    .steps p { color: var(--subtle); }
-    .steps pre { border-color: var(--hl_high); }
+    .zeichen, .meta, .art, .hinweis { color: var(--subtle); }
   }
 </style>

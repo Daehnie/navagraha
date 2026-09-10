@@ -1,6 +1,16 @@
 /* Navagraha — die Seite traegt das Schema, das sie zeigt.
    Die Variablen werden aus src/data/palette.json erzeugt (siehe Base.astro). */
 
+/* Beide Schriften liegen im Projekt und werden mitgebaut: nichts wird von
+   fremden Servern nachgeladen. Nur die Schnitte, die die Seite benutzt —
+   latin-ext ist noetig, weil Suerya und Shukra ihre Diakritika brauchen.
+   Warum diese beiden Schriften, steht in CLAUDE.md unter "Schrift". */
+@import '@fontsource/spectral/latin-400.css';
+@import '@fontsource/spectral/latin-ext-400.css';
+@import '@fontsource/spectral/latin-600.css';
+@import '@fontsource/spectral/latin-ext-600.css';
+@import '@fontsource/monaspace-neon/latin-400.css';
+
 /* Abstandsskala, 4pt-Schritte. Jeder Abstand der Seite steht auf einer
    dieser Stufen — kein Wert dazwischen, damit keiner geraten ist. */
 :root {
@@ -23,7 +33,7 @@ body {
   margin: 0;
   background: var(--base);
   color: var(--chandra);
-  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: Spectral, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   font-size: 1.0625rem;   /* 17px bei Standardeinstellung, waechst aber mit ihr */
   line-height: 1.62;
   -webkit-font-smoothing: antialiased;
@@ -32,6 +42,9 @@ body {
   transition: background-color .28s ease, color .28s ease;
 }
 code, .mono { font-family: "Monaspace Neon", ui-monospace, "SF Mono", Menlo, monospace; }
+/* Kursive Kommentare im Code kommen aus der Schraeglage des Browsers: ein
+   eigener Schnitt kostete 47 KB fuer zwei Zeilen. */
+code i, .ketu { font-synthesis: style; }
 a { color: var(--shani); text-decoration: underline;
     text-decoration-color: color-mix(in oklab, var(--shani) 40%, transparent);
     text-underline-offset: .15em; text-decoration-thickness: 1px; }
@@ -84,12 +97,29 @@ h3 { font-size: 1rem; font-weight: 400; margin: var(--s5) 0 var(--s1); line-heig
 /* Wo bin ich: eigenes Merkmal, nicht dieselbe Regel wie der Hover. */
 .top nav a[aria-current="page"] { color: var(--chandra);
   box-shadow: 0 1px 0 var(--shukra); }
-.lang a { color: var(--ketu); text-decoration: none; font-size: .8rem;
-         letter-spacing: .012em; }
-.lang a[aria-current="true"] { color: var(--chandra); }
 
+/* Fusszeile: was die Kopfzeile nicht tragen muss, steht hier — Sprache,
+   Quelle, Urheber. Auf dem Telefon untereinander, sonst nebeneinander. */
 footer { padding: var(--s7) 0 var(--s8); color: var(--ketu); font-size: .8rem;
          letter-spacing: .012em; border-top: 1px solid var(--hl_med); }
+footer .spalten { display: grid; gap: var(--s5); }
+@media (min-width: 40rem) {
+  footer .spalten { grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s6); }
+}
+footer h2 { font-size: .74rem; font-weight: 400; color: var(--ketu);
+  letter-spacing: .03em; text-transform: uppercase; margin: 0 0 var(--s3); }
+footer ul { list-style: none; padding: 0; margin: 0; display: grid;
+  gap: var(--s1); }
+footer li a { color: var(--subtle); text-decoration: none; font-size: .88rem;
+  display: inline-flex; align-items: center; min-height: 44px; }
+footer li a:hover { color: var(--chandra); text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--chandra) 40%, transparent); }
+footer .lang a[aria-current="true"] { color: var(--chandra);
+  box-shadow: 0 1px 0 var(--shukra); }
+footer .unten { margin: var(--s6) 0 0; padding-top: var(--s4);
+  border-top: 1px solid var(--hl_low); }
+footer .marke { color: var(--subtle); margin-right: var(--s3); }
 
 /* Ohne Transluzenz traegt die Kopfzeile keine weiche Kante mehr — an ihre
    Stelle tritt der Trennstrich, den das Glas ersetzt hatte. */
@@ -101,5 +131,6 @@ footer { padding: var(--s7) 0 var(--s8); color: var(--ketu); font-size: .8rem;
 }
 
 @media (prefers-contrast: more) {
-  footer, .top nav a { color: var(--subtle); }
+  footer, footer h2, .top nav a { color: var(--subtle); }
+  footer li a { color: var(--chandra); }
 }

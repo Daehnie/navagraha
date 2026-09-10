@@ -51,3 +51,8 @@ Deutsch ist Standard und liegt ohne Präfix unter `/`. Englisch liegt unter
 `/en/`. Eine weitere Sprache: `src/i18n/<code>.json` anlegen, in
 `src/i18n/utils.ts` eintragen, `src/pages/<code>/` mit denselben drei Seiten
 anlegen und in `astro.config.mjs` bei `locales` ergänzen.
+
+## Lizenz
+
+MIT, siehe `LICENSE`. Die beiden mitgelieferten Schriften (Spectral,
+Monaspace Neon) stehen unter der SIL Open Font License 1.1.

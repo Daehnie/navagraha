@@ -40,18 +40,13 @@
     "notInLine": "Rahu paints preprocessor directives, at-rules and tags. Neither line here contains any.",
     "codeNote": "Two lines from the file below, coloured word by word according to graha."
   },
-  "preview": { "title": "In code", "lede": "The same file in the selected variant." },
+  "preview": { "lede": "The same file in the selected variant." },
   "themes": {
     "title": "Install",
-    "lede": "Every file carries all four variants. Which language element maps to which graha is decided by the editor, not the terminal.",
-    "open": "Open on GitHub",
-    "copyCmd": "Copy commands",
-    "tools": {
-      "tabby": "Paste the block into the config file under terminal:.",
-      "iterm2": "Double-click the four .itermcolors files, then pick one in the profile.",
-      "vscode": "Copy the folder to ~/.vscode/extensions/ and restart.",
-      "vimbat": "Both take their colours from the terminal and switch along."
-    }
+    "lede": "For terminal and editor. Every file carries all four variants; how to install it is in the README next to it.",
+    "count": "{n} ports",
+    "readme": "A click leads to the folder in the repository. The README there covers installation, the menu items to look for, and whatever is particular to that program.",
+    "kinds": {"terminal": "Terminal", "editor": "Editor"}
   },
   "method": {
     "title": "How the scheme is built",
@@ -166,6 +161,13 @@
   "close": {
     "title": "Take it with you",
     "lede": "Every file carries all four variants — terminal, editor, and whatever else reads colours. If you only need the values, they are on the palette page; one click copies them."
+  },
+  "foot": {
+    "pages": "Pages",
+    "source": "Source",
+    "language": "Language",
+    "repo": "On GitHub",
+    "license": "Licence (MIT)"
   },
   "footer": "One birth chart, nine colours, four variants. Free to use."
 }

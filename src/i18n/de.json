@@ -40,18 +40,13 @@
     "notInLine": "Rahu färbt Präprozessor, At-Rules und Tags. In diesen beiden Zeilen kommt davon nichts vor.",
     "codeNote": "Zwei Zeilen aus der Datei weiter unten, Wort für Wort nach Graha eingefärbt."
   },
-  "preview": { "title": "Im Code", "lede": "Dieselbe Datei in der gewählten Variante." },
+  "preview": { "lede": "Dieselbe Datei in der gewählten Variante." },
   "themes": {
     "title": "Einrichten",
-    "lede": "Alle vier Varianten stecken in jeder Datei. Die Zuordnung von Sprachelement zu Graha liegt im Editor, nicht im Terminal.",
-    "open": "Auf GitHub öffnen",
-    "copyCmd": "Befehle kopieren",
-    "tools": {
-      "tabby": "Block in die Konfigurationsdatei unter terminal: einfügen.",
-      "iterm2": "Die vier .itermcolors doppelklicken, dann im Profil auswählen.",
-      "vscode": "Ordner nach ~/.vscode/extensions/ kopieren, neu starten.",
-      "vimbat": "Beide nehmen die Farben vom Terminal und wechseln mit."
-    }
+    "lede": "Für Terminal und Editor. Jede Datei trägt alle vier Varianten; wie sie eingebaut wird, steht im README daneben.",
+    "count": "{n} Portierungen",
+    "readme": "Ein Klick führt zum Ordner im Repository. Dort steht das README mit der Einbauanleitung, den Menüpunkten und den Besonderheiten des jeweiligen Programms.",
+    "kinds": {"terminal": "Terminal", "editor": "Editor"}
   },
   "method": {
     "title": "Wie das Schema entsteht",
@@ -166,6 +161,13 @@
   "close": {
     "title": "Mitnehmen",
     "lede": "Alle vier Varianten stecken in jeder Datei — Terminal, Editor, und was sonst Farben liest. Wer nur die Werte braucht, findet sie auf der Farbseite; ein Klick kopiert sie."
+  },
+  "foot": {
+    "pages": "Seiten",
+    "source": "Quelle",
+    "language": "Sprache",
+    "repo": "Auf GitHub",
+    "license": "Lizenz (MIT)"
   },
   "footer": "Ein Horoskop, neun Farben, vier Varianten. Frei verwendbar."
 }

@@ -28,6 +28,7 @@ const nav = [
   ['/palette', t.nav.palette],
   ['/themes', t.nav.themes]
 ] as const
+const repo = 'https://github.com/Daehnie/navagraha/'
 ---
 <!doctype html>
 <html lang={lang} data-theme="swati">
@@ -74,18 +75,38 @@ const nav = [
            aria-current={here === p ? 'page' : undefined}>{label}</a>
       ))}
     </nav>
-    <span class="lang">
-      {Object.entries(languages).map(([l, name], i) => (
-        <>{i > 0 && ' / '}<a href={path(here, l as any)}
-          aria-current={l === lang ? 'true' : undefined}>{name}</a></>
-      ))}
-    </span>
   </div>
 
   <main id="inhalt">
     <slot />
   </main>
 
-  <footer class="wrap"><p>{t.footer}</p></footer>
+  <footer class="wrap">
+    <div class="spalten">
+      <nav aria-label={t.foot.pages}>
+        <h2>{t.foot.pages}</h2>
+        <ul>{nav.map(([p, label]) => (
+          <li><a href={path(p, lang)}>{label}</a></li>
+        ))}</ul>
+      </nav>
+      <nav aria-label={t.foot.source}>
+        <h2>{t.foot.source}</h2>
+        <ul>
+          <li><a href={repo}>{t.foot.repo}</a></li>
+          <li><a href={`${repo}blob/main/LICENSE`}>{t.foot.license}</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2>{t.foot.language}</h2>
+        <ul class="lang">
+          {Object.entries(languages).map(([l, name]) => (
+            <li><a href={path(here, l as any)}
+                   aria-current={l === lang ? 'true' : undefined}>{name}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <p class="unten"><span class="marke">Digital Spirit</span> {t.footer}</p>
+  </footer>
 </body>
 </html>

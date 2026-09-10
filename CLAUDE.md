@@ -166,11 +166,57 @@ geschieht pro Sprache, nicht pauschal.
 
 ## Stil
 
-Schrift auf der Seite: Serifen für Fließtext, `Monaspace Neon` für Code und
-Werte. Die Seite trägt immer das gewählte Schema selbst.
+### Schrift
+
+Beide Schriften liegen als Paket im Projekt (`@fontsource/spectral`,
+`@fontsource/monaspace-neon`, beide SIL OFL) und werden mitgebaut. Es wird
+nichts von fremden Servern nachgeladen — die Seite holt sich von außen
+nichts, und das soll so bleiben. Eingebunden sind nur die Schnitte, die
+wirklich vorkommen: Spectral 400 und 600, jeweils `latin` und `latin-ext`,
+sowie Monaspace Neon 400 `latin`. Zusammen 127 KB. `latin-ext` ist nicht
+verzichtbar: Sūrya und Śukra tragen ihre Diakritika dort.
+
+Kursive Kommentare im Code entstehen durch die Schräglage des Browsers
+(`font-synthesis`). Ein eigener kursiver Schnitt von Monaspace kostete
+47 KB für zwei Zeilen.
+
+**Die Wahl ist wie die Farben aus dem Chart abgeleitet, nicht erfunden.**
+Für Schriften gibt es keine klassische Zuordnung wie für Farben; erfunden
+wäre eine Tabelle „Graha X ⇒ Schrift Y". Stattdessen greifen zwei Regeln,
+die die Tradition wirklich kennt:
+
+- **Der Lagnesha bestimmt die äußere Erscheinung.** Das Lagna ist Tula,
+  sein Herrscher ist Shukra — in diesem Chart exaltiert in Revati und
+  Atmakaraka, also der stärkste Punkt der Karte. Die Schrift, die das
+  Gesicht der Seite ist, gehört damit unter Shukra: Verfeinerung, Maß,
+  Schönheit. Typografisch heißt das eine humanistische Antiqua
+  kalligrafischer Herkunft mit weichen Bogenübergängen und mittlerem
+  Strichkontrast — und wegen des Luftzeichens keine schweren Schnitte.
+  Spectral erfüllt das und ist für den Bildschirm gezeichnet.
+- **Budha regiert Schrift, Zeichen und Sprache.** Er steht in Vrishabha im
+  achten Haus, retrograd — nach innen gewendet, technisch, zurückgenommen.
+  Das ist die Schrift für Code, und dafür steht Monaspace Neon.
+
+Eine neue Schrift muss dieselbe Prüfung bestehen: erst die Herleitung, dann
+der Entwurf. Wer nur den Geschmack ändert, ändert das Projekt.
+
+### Sonstiges
+
+Die Seite trägt immer das gewählte Schema selbst.
 
 Kein Framework für Interaktion. Der Variantenschalter und das Kopieren sind
 `is:inline`-Skripte von wenigen Zeilen. So bleiben soll es.
+
+Kopfzeile und Fußzeile teilen sich die Arbeit: oben nur Marke und drei
+Seiten, damit die Leiste auf dem Telefon einzeilig bleibt; unten Sprache,
+Quelle, Lizenz und der Urheber. Der Sprachumschalter steht deshalb im Fuß,
+nicht im Kopf. Bei zwei Sprachen sind zwei Links besser als ein Menü — ab
+etwa vier lohnt sich das Aufklappen.
+
+`src/pages/themes.astro` ist eine Galerie, keine Anleitung: sie sagt, wofür
+es etwas gibt und wo es liegt. Wie eingebaut wird, steht im README neben
+den Dateien unter `themes/`. Jede Portierung braucht eins, zweisprachig,
+mit den Menüpunkten des jeweiligen Programms in seiner eigenen Sprache.
 
 `prefers-reduced-motion` wird respektiert, die Animation im Diagramm ist die
 einzige der Seite. Sie startet erst, wenn das Diagramm in den Blick kommt —
@@ -187,7 +233,8 @@ denselben Daten, und in beiden Ansichten des Umschalters gültig.
 
 ## Offene Punkte
 
-- Der `cmd`-Block für Tabby in `src/pages/themes.astro` nennt die Menüpunkte
-  auf Deutsch („Farbschema", „Darstellung") und steht so auch auf der
-  englischen Seite. Entweder englische Menünamen ergänzen oder den Block
-  ebenfalls nach `src/i18n/` ziehen.
+- Das VS-Code-Paket heißt im Manifest noch `graha`, seine vier Themes
+  erscheinen als „Graha Swati" und so fort — überall sonst heißt das
+  Projekt Navagraha. Umbenennen würde die Theme-Kennungen bei bestehenden
+  Nutzern ändern; das README nennt deshalb vorerst die Namen, die man
+  wirklich sieht.

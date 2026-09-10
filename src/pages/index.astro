@@ -14,22 +14,20 @@ const t = useTranslations(lang)
 ---
 <Base title={`Navagraha — ${t.tagline}`} description={t.lede}>
   <header class="wrap">
-    <h1>{t.tagline}</h1>
-    <p class="sub">{t.lede}</p>
-    <ThemeSwitcher labels={t.variants} systemLabel={t.systemLabel} systemNote={t.systemNote} />
+    <div class="hero">
+      <div>
+        <h1>{t.tagline}</h1>
+        <p class="sub">{t.lede}</p>
+        <ThemeSwitcher labels={t.variants} systemLabel={t.systemLabel} systemNote={t.systemNote} />
+      </div>
+      <div class="probe">
+        <CodePreview />
+        <p class="bu">{t.preview.lede}</p>
+      </div>
+    </div>
   </header>
 
   <Derivation t={t} />
-
-  <section class="wrap">
-    <h2>{t.preview.title}</h2>
-    <p>{t.preview.lede}</p>
-    <CodePreview />
-    <p class="go">
-      <a class="cta" href={path('/themes', lang)}>{t.themes.title}</a>
-      <a href={path('/palette', lang)}>{t.palette.title}</a>
-    </p>
-  </section>
 
   <section class="wrap method">
     <h2>{t.method.title}</h2>
@@ -78,8 +76,18 @@ const t = useTranslations(lang)
 
 <style>
   header { padding: var(--s6) 0 var(--s8); }
+  /* Die Aussage links, ihr Beweis rechts: der Variantenschalter steht neben
+     dem Fenster, das er umfaerbt. */
+  /* minmax(0,…) ist noetig, sonst zwingt der Codeblock mit seiner
+     Mindestbreite die Spalte auseinander und die Seite laeuft ueber. */
+  .hero { display: grid; gap: var(--s6); align-items: center;
+    grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 56rem) {
+    .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s7); }
+  }
   .sub { font-size: 1.19rem; color: var(--subtle); margin: 0 0 var(--s6);
     max-width: 46ch; }
+  .probe .bu { color: var(--ketu); font-size: .82rem; margin: var(--s4) 0 0; }
   .method p { max-width: 62ch; }
   /* Bildunterschrift: sagt, was die Grafik misst, und nennt die Grenze. */
   .bu { color: var(--ketu); font-size: .82rem; margin: var(--s3) 0 0;
