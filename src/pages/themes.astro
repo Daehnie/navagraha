@@ -77,6 +77,10 @@ const repo = 'https://github.com/Daehnie/navagraha/tree/main/'
     background: var(--surface); text-decoration: none; color: var(--chandra);
     min-height: 44px; transition: border-color .2s, background-color .2s; }
   .ports a:hover { border-color: var(--shukra); background: var(--overlay); }
+  /* Rueckmeldung auf dem Druck wie bei den Schaltern. Die Karte ist rund
+     dreimal so breit wie ein Chip; .99 ergibt etwa denselben Weg wie .97 dort. */
+  .ports a:active { border-color: var(--shukra); background: var(--overlay);
+    transform: scale(.99); transition: transform 100ms ease-out; }
   .zeichen { flex: 0 0 auto; color: var(--ketu); display: block; }
   .zeichen svg { width: 1.5rem; height: 1.5rem; display: block; }
   .ports a:hover .zeichen { color: var(--shukra); }

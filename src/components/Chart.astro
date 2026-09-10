@@ -119,10 +119,13 @@ let n = 0
   @keyframes rise { from { opacity: 0; transform: translateY(2px); } }
   /* Der Gewaehlte wird hervorgehoben, die anderen nicht abgewertet: ein
      gedaempftes Kuerzel waere Text unter 4,5:1, und das gilt hier auch. */
-  .chart .gh rect { fill: transparent; transition: fill .2s; }
+  /* Die Kontur steht immer da, nur unsichtbar: von "keine" auf eine Farbe
+     laesst sich nicht blenden, von transparent schon. */
+  .chart .gh rect { fill: transparent; stroke: transparent; stroke-width: .4;
+    transition: fill .2s, stroke .2s; }
   .chart .gh:hover rect { fill: var(--hl_med); }
   .chart .gh.an rect { fill: color-mix(in oklab, var(--c) 22%, transparent);
-    stroke: var(--c); stroke-width: .4; }
+    stroke: var(--c); }
 
   /* Sieht aus wie der Variantenschalter, weil er sich genauso verhaelt. */
   .ctl { display: flex; gap: var(--s2); margin-top: var(--s4);
@@ -136,8 +139,10 @@ let n = 0
     transform: scale(.97); transition: transform 100ms ease-out; }
   .ctl button[aria-checked="true"] { border-color: var(--shukra);
     color: var(--chandra_b); }
+  /* So breit wie Diagramm und Schalter, zu denen sie gehoert — mit 34ch
+     brach sie auf halber Diagrammbreite um. */
   .note { font-size: .78rem; color: var(--ketu); letter-spacing: .012em;
-    margin: var(--s3) 0 0; max-width: 34ch; }
+    margin: var(--s3) 0 0; max-width: var(--chart-max, 20rem); }
 
   @media (prefers-contrast: more) {
     .note { color: var(--subtle); }

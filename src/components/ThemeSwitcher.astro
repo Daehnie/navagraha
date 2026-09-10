@@ -42,13 +42,25 @@ const v = palette.variants as Record<string, { colors: Record<string, string> }>
     if (note) note.textContent = folgtSystem ? systemNote : (labels[v] ?? '')
   }
 
+  // Ein Wechsel blendet die ganze Seite in einem Zug ueber (siehe .blende in
+  // global.css). Ohne View Transitions, oder wenn sich die Farbe gar nicht
+  // aendert, wird direkt umgeschaltet.
+  function wechsle(v, folgtSystem) {
+    const root = document.documentElement
+    if (!document.startViewTransition || root.dataset.theme === v) return zeige(v, folgtSystem)
+    document.startViewTransition(() => {
+      root.classList.add('blende')
+      zeige(v, folgtSystem)
+    }).finished.finally(() => root.classList.remove('blende'))
+  }
+
   function waehle(b) {
     if (b.hasAttribute('data-system')) {
       try { localStorage.removeItem('navagraha') } catch {}
-      zeige(vomSystem(), true)
+      wechsle(vomSystem(), true)
     } else {
       try { localStorage.setItem('navagraha', b.dataset.v) } catch {}
-      zeige(b.dataset.v, false)
+      wechsle(b.dataset.v, false)
     }
   }
 
@@ -67,7 +79,7 @@ const v = palette.variants as Record<string, { colors: Record<string, string> }>
   })
 
   // Wechselt das System, folgt die Seite mit — solange nichts gewaehlt wurde.
-  document.addEventListener('navagraha:system', e => zeige(e.detail, true))
+  document.addEventListener('navagraha:system', e => wechsle(e.detail, true))
 
   let gespeichert
   try { gespeichert = localStorage.getItem('navagraha') } catch {}

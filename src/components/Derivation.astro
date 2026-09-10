@@ -138,6 +138,9 @@ const TOKENS: [string, string | null][] = CODE.flatMap((zeile, i) =>
     padding: var(--s2) var(--s3); font: inherit; font-size: .84rem;
     min-height: 44px; cursor: pointer; transition: border-color .2s, color .2s; }
   .wahl button:hover { border-color: var(--ketu); color: var(--chandra); }
+  /* Wie die beiden anderen Gruppen: Rueckmeldung auf dem Druck. */
+  .wahl button:active { border-color: var(--ketu); color: var(--chandra);
+    transform: scale(.97); transition: transform 100ms ease-out; }
   .wahl button.an { border-color: var(--shukra); color: var(--chandra_b); }
   .wahl i { width: .7rem; height: .7rem; border-radius: 50%; display: block;
     box-shadow: 0 0 0 1px var(--line); }
@@ -146,7 +149,10 @@ const TOKENS: [string, string | null][] = CODE.flatMap((zeile, i) =>
      uebersetzt und das Skript kurz. */
   .tafeln { margin-top: var(--s5); }
   .tafel { display: none; }
-  .tafel.an { display: block; }
+  /* Die neue Tafel blendet im selben Takt auf, in dem Diagramm und Codezeile
+     ihre Markierung wechseln — eine Wahl, eine Rueckmeldung, 200ms. */
+  .tafel.an { display: block; transition: opacity .2s; }
+  @starting-style { .tafel.an { opacity: 0; } }
   .feld { display: block; height: .5rem; border-radius: 3px;
     box-shadow: 0 0 0 1px var(--line); }
   .wer { margin: var(--s3) 0 var(--s4); font-size: 1.24rem; }
@@ -167,7 +173,7 @@ const TOKENS: [string, string | null][] = CODE.flatMap((zeile, i) =>
     font-size: .92rem; line-height: 2; }
   /* Markiert wird, was dieser Graha faerbt — die uebrigen Woerter bleiben
      lesbar. currentColor ist die Farbe des Wortes selbst. */
-  .tok { border-radius: 3px; transition: background-color .2s; }
+  .tok { border-radius: 3px; transition: background-color .2s, box-shadow .2s; }
   .tok.an { background: color-mix(in oklab, currentColor 18%, transparent);
     box-shadow: 0 0 0 1px color-mix(in oklab, currentColor 34%, transparent); }
   .tok.leer { color: var(--ketu); }

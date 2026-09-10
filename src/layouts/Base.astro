@@ -7,6 +7,10 @@ const { title, description } = Astro.props as { title: string; description?: str
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 const here = stripBase(Astro.url.pathname).replace(/^\/en/, '') || '/'
+// Die Seiten liegen als Ordner vor und heissen deshalb /palette/. Verglichen
+// wird ohne den Schraegstrich am Ende — sonst ist ausser der Startseite nie
+// ein Punkt der Kopfzeile als aktuelle Seite markiert.
+const aktiv = here.replace(/(.)\/$/, '$1')
 
 // Tiefe folgt dem Modus, nicht dem Geschmack: auf hellem Grund traegt ein
 // Schatten, auf dunklem nicht — dort ist selbst reines Schwarz nur 1,13:1.
@@ -72,7 +76,7 @@ const repo = 'https://github.com/Daehnie/navagraha/'
     <nav>
       {nav.map(([p, label]) => (
         <a href={path(p, lang)}
-           aria-current={here === p ? 'page' : undefined}>{label}</a>
+           aria-current={aktiv === p ? 'page' : undefined}>{label}</a>
       ))}
     </nav>
   </div>

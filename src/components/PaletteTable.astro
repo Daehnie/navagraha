@@ -49,7 +49,7 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
                   style={`--c:${v.colors[g.key]}`}
                   title={`${v.label}: ${v.colors[g.key]}`}
                   aria-label={`${v.label} ${v.colors[g.key]} ${t.copy}`}>
-            <i></i><code>{v.colors[g.key]}</code>
+            <span class="vn">{v.label}</span><i></i><code>{v.colors[g.key]}</code>
           </button>
         ))}</td>
       </tr>
@@ -73,7 +73,7 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
                   style={`--c:${v.colors[key]}`}
                   title={`${v.label}: ${v.colors[key]}`}
                   aria-label={`${v.label} ${v.colors[key]} ${t.copy}`}>
-            <i></i><code>{v.colors[key]}</code>
+            <span class="vn">{v.label}</span><i></i><code>{v.colors[key]}</code>
           </button>
         ))}</td>
       </tr>
@@ -111,6 +111,8 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
   .hx button i { width: .74rem; height: .74rem; border-radius: 2px; background: var(--c);
     display: block; box-shadow: 0 0 0 1px var(--line); }
   .hx code { font-size: .69rem; letter-spacing: .016em; }
+  /* Am Schreibtisch nennt der Tabellenkopf die Variante. */
+  .hx .vn { display: none; }
   /* Unter 46rem wird aus jeder Zeile eine Karte: vier Spalten passen dort
      nicht nebeneinander, und die Stand- und Hexwerte auszublenden hiesse,
      die Begruendung des Schemas nur am Schreibtisch zu zeigen. display:block
@@ -123,9 +125,16 @@ const neutrals = palette.neutrals.map(key => [key, neutralLabels[key]] as const)
     .ro { margin-top: var(--s1); }
     .so { max-width: none; margin-top: var(--s1); }
     .dg { display: inline; margin-left: var(--s2); }
-    .hx { margin-top: var(--s3); display: flex; flex-wrap: wrap; gap: var(--s2);
-      white-space: normal; }
-    .hx button { margin: 0; min-height: 44px; padding-inline: var(--s2); }
+    /* Hier fehlt der Kopf, der sagt, welcher Wert zu welcher Variante gehoert.
+       Deshalb zwei mal zwei, jeder Wert mit seinem Namen darueber — vier in
+       einer Reihe brachen drei zu eins um, und die Zuordnung ging verloren. */
+    .hx { margin-top: var(--s3); display: grid; gap: var(--s1) var(--s3);
+      grid-template-columns: repeat(2, minmax(0, 1fr)); white-space: normal; }
+    .hx button { margin: 0; min-height: 44px; padding-inline: var(--s2);
+      display: grid; grid-template-columns: auto 1fr; gap: 0 var(--s1);
+      align-items: center; justify-items: start; }
+    .hx .vn { display: block; grid-column: 1 / -1; font-size: .7rem;
+      letter-spacing: .014em; }
   }
   @media (prefers-contrast: more) {
     .so, .sa, thead th { color: var(--subtle); }

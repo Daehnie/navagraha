@@ -231,6 +231,14 @@ einzige der Seite. Sie startet erst, wenn das Diagramm in den Blick kommt —
 es steht nicht mehr im ersten Bild. Ohne Skript bleibt sie aus und die
 Kürzel stehen einfach da; das ist der gewollte Ausfall.
 
+Farbwechsel laufen in einem Takt. Der Variantenschalter blendet die ganze
+Seite über eine View Transition (`.blende` in `global.css`); während der
+Blende sind alle eigenen Übergänge aus. Vorher hatte jede Fläche ihren
+eigenen, und der Grund blendete, während Kopfzeile, Code und Diagramm
+sprangen. Eine neue gefärbte Fläche braucht deshalb keinen Übergang für
+den Variantenwechsel. Eine Graha-Wahl ändert Diagramm, Tafel und Codezeile
+gemeinsam in 200 ms — wer dort etwas ergänzt, hält diesen Takt.
+
 Bedienbares ist mindestens 44 Pixel hoch. In der Kopfzeile geschieht das über
 ein Pseudo-Element: die Fläche wächst, die Zeile nicht — sonst wäre die
 schwebende Leiste auf dem Telefon ein Fünftel des Schirms.

@@ -50,14 +50,16 @@ const saetze = Object.entries(palette.variants).map(([v, variante]) => ({
   .bal span { display: block; height: .62rem; border-radius: 2px;
     width: var(--w); background: var(--c);
     box-shadow: 0 0 0 1px color-mix(in oklab, var(--c) 45%, transparent); }
-  .zahl { width: 3.6rem; text-align: right; padding-right: var(--s3);
-    padding-left: var(--s3); color: var(--ketu); font-size: .76rem; }
+  /* Zwei Klassen, weil .satz td das Polster aller Zellen auf 0 setzt und
+     sonst gewinnt — dann stiess "100%" ohne Luft an den vollen Balken. */
+  .satz .zahl { width: 4rem; text-align: right; padding-inline: var(--s3);
+    color: var(--ketu); font-size: .76rem; }
   .grund { width: 30%; color: var(--ketu); font-size: .78rem;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   @media (max-width: 40rem) {
     .satz th { width: 28%; font-size: .8rem; }
     .grund { display: none; }
-    .zahl { width: 3.2rem; }
+    .satz .zahl { width: 3.2rem; padding-right: 0; }
   }
   @media (prefers-contrast: more) { .zahl, .grund { color: var(--subtle); } }
 </style>
