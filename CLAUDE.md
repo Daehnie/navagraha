@@ -213,7 +213,10 @@ Methodenteil ab 72rem Argument und Beleg nebeneinander stehen können
 (`.teil` mit `.wort` und `.beleg`). Darunter fallen sie in die Reihenfolge
 zurück, in der man liest: erst der Satz, dann seine Grafik. Die Schwelle
 liegt bei 72rem, weil der Textspalte darunter keine 60 Zeichen mehr
-blieben, und Lesbarkeit vor Flächennutzung geht.
+blieben, und Lesbarkeit vor Flächennutzung geht. Zwischen zwei `.teil`
+steht doppelt so viel Raum (`--s9`) wie die Fuge zwischen Satz und Grafik
+(`--s7`) — bei gleichem Abstand las sich die Bildunterschrift einer Grafik,
+als gehöre sie zur nächsten darunter.
 
 Kopfzeile und Fußzeile teilen sich die Arbeit: oben nur Marke und drei
 Seiten, damit die Leiste auf dem Telefon einzeilig bleibt; unten Sprache,

@@ -120,12 +120,18 @@ const t = useTranslations(lang)
   /* Auf breiten Schirmen steht das Argument links und sein Beleg rechts,
      statt beides untereinander in einer schmalen Spalte. Darunter bleibt
      die Reihenfolge, in der man liest. */
-  .teil { display: grid; gap: var(--s5); margin-bottom: var(--s6); }
+  /* Zwischen zwei Teilen steht deutlich mehr Raum als zwischen Satz und
+     Grafik — sonst liest sich die Bildunterschrift der einen Grafik, als
+     gehoere sie zur naechsten. margin-block, damit auch der erste Teil vom
+     Einstieg und der letzte vom Glossar so weit abgesetzt ist. */
+  .teil { display: grid; gap: var(--s5); margin-block: var(--s8); }
   /* Erst ab 72rem: darunter blieben der Textspalte keine 60 Zeichen mehr,
-     und Lesbarkeit geht vor Flaechennutzung. */
+     und Lesbarkeit geht vor Flaechennutzung. Der Abstand nach unten ist dann
+     doppelt so gross wie die Fuge zur Seite; die mitlaufende Grafik haelt
+     am Ende ihres Teils so auch Abstand zur naechsten. */
   @media (min-width: 72rem) {
     .teil { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: var(--s7); align-items: start; margin-bottom: var(--s7); }
+      gap: var(--s7); align-items: start; margin-block: var(--s9); }
     .teil .wort > h3:first-child { margin-top: 0; }
     /* Der Abstand haelt den Beleg unter der schwebenden Kopfzeile frei. */
     .beleg { position: sticky; top: calc(var(--s8) + var(--s5)); }

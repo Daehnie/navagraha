@@ -16,6 +16,7 @@
 :root {
   --s1: .25rem; --s2: .5rem;  --s3: .75rem; --s4: 1rem;
   --s5: 1.5rem; --s6: 2rem;   --s7: 3rem;   --s8: 4rem;
+  --s9: 6rem;   /* nur fuer Abstaende zwischen Gruppen, die nebeneinander schon s7 trennt */
 }
 
 *, *::before, *::after { box-sizing: border-box; }
