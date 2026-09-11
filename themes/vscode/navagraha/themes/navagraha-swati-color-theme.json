@@ -135,6 +135,7 @@
     "gitDecoration.conflictingResourceForeground": "#a186b2",
     "terminal.background": "#101317",
     "terminal.foreground": "#ced6e3",
+    "terminal.selectionForeground": "#e7edf6",
     "terminalCursor.foreground": "#02a0a2",
     "terminal.ansiBlack": "#26292d",
     "terminal.ansiRed": "#e46c64",

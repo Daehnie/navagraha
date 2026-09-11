@@ -9,9 +9,10 @@
 #   Pratipada / Ushas – Prithvi, aus der Erd-Gruppe im 8. und 12. Haus
 #   Swati / Tula      – Vayu, aus dem Lagna (Tula) und Guru in Swati
 #
-# Einbau: Settings → Config file → Block terminal: / customColorSchemes:
-#         Danach Settings → Color Scheme, und Appearance → Terminal background:
-#         From color scheme.
+# Einbau: Settings → Config file. Die vier Eintraege ab "- name:" unter
+#         terminal: → customColorSchemes: einfuegen (fehlt die Liste noch,
+#         beide Zeilen mit uebernehmen). Dann unter Settings → Color scheme
+#         je eine Variante fuer Dark mode und Light mode waehlen.
 #
 # Alle Farben 1–15 liegen bei >= 4.5:1 gegen background, surface und overlay.
 # Die ANSI-Plaetze tragen nur einen Farbton, keine Rolle – die Zuordnung zu
@@ -25,6 +26,7 @@ terminal:
       foreground: "#dcd7c8"
       background: "#16120d"
       selection: "#3c362d"
+      selectionForeground: "#f2ede3"
       cursor: "#00a2a3"
       cursorAccent: "#16120d"
       colors:
@@ -50,6 +52,7 @@ terminal:
       foreground: "#2d281e"
       background: "#f8efe2"
       selection: "#d5c8b6"
+      selectionForeground: "#1a1810"
       cursor: "#01686a"
       cursorAccent: "#f8efe2"
       colors:
@@ -75,6 +78,7 @@ terminal:
       foreground: "#ced6e3"
       background: "#101317"
       selection: "#32373e"
+      selectionForeground: "#e7edf6"
       cursor: "#02a0a2"
       cursorAccent: "#101317"
       colors:
@@ -100,6 +104,7 @@ terminal:
       foreground: "#232933"
       background: "#ebf1f8"
       selection: "#c3cbd5"
+      selectionForeground: "#14181f"
       cursor: "#006a6b"
       cursorAccent: "#ebf1f8"
       colors:

@@ -1,46 +1,65 @@
-# Tabby
+<p align="center">
+  <img src="../../public/icon-512.png" width="80" alt="">
+</p>
+<h2 align="center">Navagraha für Tabby</h2>
 
-Vier Farbschemata aus einem siderischen Geburtshoroskop, für den
-Tabby-Terminal. Alle vier stecken in derselben Datei.
+<p align="center">Neun Planeten, neun Farben — ein Farbschema, abgelesen aus einem Geburtshoroskop.</p>
+
+<p align="center">
+  <a href="https://daehnie.github.io/navagraha/">Zur Seite</a> · <a href="#english">English</a>
+</p>
 
 ## Einbauen
 
-`navagraha.yaml` öffnen und den Inhalt in die eigene Konfigurationsdatei
-unter dem Schlüssel `terminal:` einfügen. Die Datei findet sich über
+1. In Tabby **Settings → Config file** öffnen
+   (deutsch: *Einstellungen → Konfigurationsdatei*).
+2. Aus [`navagraha.yaml`](navagraha.yaml) die vier Einträge ab `- name:`
+   unter `terminal:` → `customColorSchemes:` einfügen. Gibt es
+   `customColorSchemes:` dort noch nicht, beide Zeilen mit übernehmen.
+3. Unter **Settings → Color scheme** (*Farbschema*) im Reiter **Dark mode**
+   (*Dunkler Modus*) eine dunkle Variante wählen, im Reiter **Light mode**
+   (*Heller Modus*) eine helle.
+4. Bei **Switch color scheme** (*Farbschema wechseln*) **From system**
+   (*Vom System*) wählen — dann wechselt Tabby mit dem System zwischen beiden.
 
-    Settings → Config file
+Zieht der Hintergrund nicht mit: **Settings → Appearance → Terminal
+background → From color scheme** (*Darstellung → Terminal-Hintergrund → Aus
+dem Farbschema*).
 
-Danach lassen sich die vier Varianten auswählen:
+## Galerie
 
-    Settings → Color scheme        (deutsch: Farbschema)
+**Navagraha Swati** · dunkel
 
-Damit der Hintergrund mitzieht, muss noch eine Einstellung umgestellt
-werden — sonst behält Tabby seinen eigenen Grundton:
+![Tabby mit Navagraha Swati](screenshot-swati.png)
 
-    Appearance → Terminal background: From color scheme
-    (deutsch: Darstellung → Terminal-Hintergrund: Aus Farbschema)
+**Navagraha Pratipada** · dunkel
 
-## Die vier Varianten
+![Tabby mit Navagraha Pratipada](screenshot-pratipada.png)
 
-| Name      | Grund   | Helligkeit |
-|-----------|---------|------------|
-| Swati     | Vayu    | dunkel     |
-| Pratipada | Prithvi | dunkel     |
-| Ushas     | Prithvi | hell       |
-| Tula      | Vayu    | hell       |
+**Navagraha Ushas** · hell
 
-Die neun Akzentfarben sind in allen vier gleich hergeleitet; es
-unterscheiden sich nur Grund, Fläche und Auflage.
+![Tabby mit Navagraha Ushas](screenshot-ushas.png)
+
+**Navagraha Tula** · hell
+
+![Tabby mit Navagraha Tula](screenshot-tula.png)
 
 ---
 
 ## English
 
-Four colour schemes derived from a sidereal birth chart, for the Tabby
-terminal. All four live in the same file.
+Nine planets, nine colours — a colour scheme read from a birth chart.
+[Visit the site](https://daehnie.github.io/navagraha/en/).
 
-Open `navagraha.yaml` and paste its contents into your own config file
-under the `terminal:` key — reach the file via **Settings → Config file**.
-Then pick a variant under **Settings → Color scheme**, and set
-**Appearance → Terminal background: From color scheme** so the background
-follows the scheme instead of Tabby's own.
+1. Open **Settings → Config file**.
+2. Paste the four entries starting at `- name:` from
+   [`navagraha.yaml`](navagraha.yaml) under `terminal:` →
+   `customColorSchemes:`. If `customColorSchemes:` doesn't exist yet, add
+   both lines too.
+3. Under **Settings → Color scheme**, pick a dark variant in the **Dark
+   mode** tab and a light one in **Light mode**.
+4. Set **Switch color scheme** to **From system** to follow the system
+   appearance.
+
+If the background doesn't follow: **Settings → Appearance → Terminal
+background → From color scheme**.

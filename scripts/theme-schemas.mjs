@@ -44,9 +44,10 @@ export const TABBY_HEADER = `# Navagraha – Tabby-Farbschemata (vier Varianten)
 #   Pratipada / Ushas – Prithvi, aus der Erd-Gruppe im 8. und 12. Haus
 #   Swati / Tula      – Vayu, aus dem Lagna (Tula) und Guru in Swati
 #
-# Einbau: Settings → Config file → Block terminal: / customColorSchemes:
-#         Danach Settings → Color Scheme, und Appearance → Terminal background:
-#         From color scheme.
+# Einbau: Settings → Config file. Die vier Eintraege ab "- name:" unter
+#         terminal: → customColorSchemes: einfuegen (fehlt die Liste noch,
+#         beide Zeilen mit uebernehmen). Dann unter Settings → Color scheme
+#         je eine Variante fuer Dark mode und Light mode waehlen.
 #
 # Alle Farben 1–15 liegen bei >= 4.5:1 gegen background, surface und overlay.
 # Die ANSI-Plaetze tragen nur einen Farbton, keine Rolle – die Zuordnung zu
@@ -62,10 +63,13 @@ export const TABBY_VARIANT_NOTES = {
 }
 
 // Benannte Farben eines tabby-Schemas, ausserhalb der 16 ANSI-Plaetze.
+// selectionForeground wie 'Selected Text Color' in iTerm2: ohne ihn behaelt
+// markierter Text seine ANSI-Farbe und liegt auf hl_high unter 4,5:1.
 export const TABBY_NAMED = {
   foreground: 'chandra',
   background: 'base',
   selection: 'hl_high',
+  selectionForeground: 'chandra_b',
   cursor: 'shukra',
   cursorAccent: 'base',
 }
@@ -213,6 +217,8 @@ export const VSCODE_COLORS = {
   'gitDecoration.conflictingResourceForeground': ['rahu'],
   'terminal.background': ['base'],
   'terminal.foreground': ['chandra'],
+  // Wie selectionForeground in tabby: markierter ANSI-Text laege sonst unter 4,5:1.
+  'terminal.selectionForeground': ['chandra_b'],
   'terminalCursor.foreground': ['shukra'],
 }
 
