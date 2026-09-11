@@ -1,58 +1,39 @@
 # Navagraha
 
-Ein Farbschema für Terminal und Editor, abgeleitet aus einem siderischen
-Geburtshoroskop. Jede Farbe ist die klassische Farbe eines Grahas, ihre
-Sättigung folgt seiner Stärke im Chart, soweit der Farbton es zulässt.
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="docs/screenshot-light.png">
+  <img src="docs/screenshot-dark.png" alt="Die Seite von Navagraha: die Überschrift „Neun Planeten, neun Farben“, der Variantenschalter und daneben ein TypeScript-Beispiel im Farbschema">
+</picture>
 
-Vier Varianten:
+Ein Farbschema für Terminal und Editor. Seine neun Akzentfarben sind nicht
+ausgesucht, sondern aus einem Geburtshoroskop abgelesen: Jede ist die
+klassische Farbe eines der neun Grahas der indischen Astrologie.
 
-| Variante  | Grund   | Helligkeit |
-|-----------|---------|------------|
-| Swati     | Vayu    | dunkel     |
-| Pratipada | Prithvi | dunkel     |
-| Ushas     | Prithvi | hell       |
-| Tula      | Vayu    | hell       |
+Es gibt vier Varianten, zwei dunkle (Swati, Pratipada) und zwei helle
+(Ushas, Tula). Alle Textfarben erreichen auf jeder Fläche mindestens 4,5:1
+Kontrast.
 
-## Aufbau
+**[Zur Seite](https://daehnie.github.io/navagraha/)** – mit allen Farben,
+ihrer Herleitung und einer Vorschau in jeder Variante.
 
-    src/data/palette.json     einzige Farbquelle, Seite und Themes lesen daraus
-    src/pages/                deutsche Seiten
-    src/pages/en/             englische Seiten
-    src/i18n/                 Wörterbücher und Helfer
-    themes/                   fertige Theme-Dateien je Zielprogramm
-    public/                   Icons
+## Für diese Programme
 
-## Entwickeln
-
-    npm install
-    npm run dev
-
-## Veröffentlichen
-
-Der Workflow in `.github/workflows/deploy.yml` baut bei jedem Push auf `main`
-und veröffentlicht über GitHub Pages. Einmalig unter Settings → Pages die
-Quelle auf *GitHub Actions* stellen.
-
-Für eine eigene Domain: `public/CNAME` mit der Domain anlegen und den
-DNS-Eintrag darauf zeigen lassen. In `astro.config.mjs` steht `site` bereits
-auf `navagraha.digitalspirit.io` — dort die tatsächliche Adresse eintragen.
-
-Ohne eigene Domain stattdessen in `astro.config.mjs`:
-
-    site: 'https://USER.github.io',
-    base: '/navagraha'
-
-In `src/pages/themes.astro` steht die Repo-Adresse als `USER` — dort den
-eigenen GitHub-Namen eintragen, damit die Download-Links greifen.
-
-## Sprachen
-
-Deutsch ist Standard und liegt ohne Präfix unter `/`. Englisch liegt unter
-`/en/`. Eine weitere Sprache: `src/i18n/<code>.json` anlegen, in
-`src/i18n/utils.ts` eintragen, `src/pages/<code>/` mit denselben drei Seiten
-anlegen und in `astro.config.mjs` bei `locales` ergänzen.
+- [VS Code](themes/vscode/navagraha/)
+- [iTerm2](themes/iterm2/)
+- [Tabby](themes/tabby/)
+- [Vim und Neovim](themes/vim/) – nimmt die Farben vom Terminal
+- [bat](themes/bat/) – ebenso
 
 ## Lizenz
 
-MIT, siehe `LICENSE`. Die beiden mitgelieferten Schriften (Spectral,
-Monaspace Neon) stehen unter der SIL Open Font License 1.1.
+MIT, siehe `LICENSE`.
+
+---
+
+## English
+
+A colour scheme for terminal and editor whose nine accent colours are read
+from a birth chart rather than picked: each is the classical colour of one
+of the nine grahas of Indian astrology. Four variants, two dark and two
+light. **[Visit the site](https://daehnie.github.io/navagraha/en/)** or
+pick your program above.

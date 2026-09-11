@@ -59,7 +59,8 @@ Theme-Datei oder ins CSS. Die Dateien unter `themes/` sind Ausgabe, keine
 Quelle.
 
 `scripts/generate-themes.mjs` baut sie: tabby, die vier iTerm2-Dateien, die
-vier VS-Code-Themes und `contributes.themes` im Extension-Manifest. Die
+vier VS-Code-Themes sowie `contributes.themes` und die Farbe von
+`galleryBanner` im Extension-Manifest. Die
 Zuordnungstabellen stehen daneben in `scripts/theme-schemas.mjs`. Der
 Generator läuft bei jedem `npm run build` mit, einzeln über
 `npm run generate:themes`. Nach einer Farbänderung gehören die neu erzeugten
@@ -228,6 +229,14 @@ etwa vier lohnt sich das Aufklappen.
 es etwas gibt und wo es liegt. Wie eingebaut wird, steht im README neben
 den Dateien unter `themes/`. Jede Portierung braucht eins, zweisprachig,
 mit den Menüpunkten des jeweiligen Programms in seiner eigenen Sprache.
+
+Ein README zeigt, was es ist, nicht wie es gebaut ist: oben ein Screenshot,
+darunter zwei, drei Sätze, bei den Themes dann das Einbauen. Herleitung,
+Regeln und Aufbau stehen auf der Seite und in dieser Datei, nicht im README.
+Die Screenshots liegen als `screenshot.png` neben ihrem README, die der
+Seite hell und dunkel unter `docs/`. VS Code zeigt als Galerie alle vier
+Varianten mit derselben Datei (`screenshot-<variante>.png`). Sie sind von Hand aufgenommen und
+veralten, wenn sich eine Farbe ändert — danach neu aufnehmen.
 
 `prefers-reduced-motion` wird respektiert, die Animation im Diagramm ist die
 einzige der Seite. Sie startet erst, wenn das Diagramm in den Blick kommt —

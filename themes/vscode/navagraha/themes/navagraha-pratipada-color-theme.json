@@ -30,6 +30,25 @@
     "editorRuler.foreground": "#2b251d",
     "editorBracketMatch.background": "#00a2a333",
     "editorBracketMatch.border": "#00a2a3",
+    "editorBracketHighlight.foreground1": "#dcd7c8",
+    "editorBracketHighlight.foreground2": "#dcd7c8",
+    "editorBracketHighlight.foreground3": "#dcd7c8",
+    "editorBracketHighlight.foreground4": "#dcd7c8",
+    "editorBracketHighlight.foreground5": "#dcd7c8",
+    "editorBracketHighlight.foreground6": "#dcd7c8",
+    "editorBracketHighlight.unexpectedBracket.foreground": "#e46d64",
+    "editorBracketPairGuide.background1": "#2b251d",
+    "editorBracketPairGuide.background2": "#2b251d",
+    "editorBracketPairGuide.background3": "#2b251d",
+    "editorBracketPairGuide.background4": "#2b251d",
+    "editorBracketPairGuide.background5": "#2b251d",
+    "editorBracketPairGuide.background6": "#2b251d",
+    "editorBracketPairGuide.activeBackground1": "#3c362d",
+    "editorBracketPairGuide.activeBackground2": "#3c362d",
+    "editorBracketPairGuide.activeBackground3": "#3c362d",
+    "editorBracketPairGuide.activeBackground4": "#3c362d",
+    "editorBracketPairGuide.activeBackground5": "#3c362d",
+    "editorBracketPairGuide.activeBackground6": "#3c362d",
     "editorError.foreground": "#e46d64",
     "editorWarning.foreground": "#d07c3d",
     "editorInfo.foreground": "#6d91d5",
@@ -213,11 +232,20 @@
         "keyword.operator.logical",
         "keyword.operator.assignment",
         "keyword.operator.comparison",
-        "punctuation.accessor",
         "storage.type.function.arrow"
       ],
       "settings": {
         "foreground": "#6d91d5"
+      }
+    },
+    {
+      "name": "Chandra – Satzzeichen, die wie Operatoren heissen",
+      "scope": [
+        "keyword.operator.type.annotation",
+        "punctuation.accessor"
+      ],
+      "settings": {
+        "foreground": "#dcd7c8"
       }
     },
     {
@@ -227,8 +255,7 @@
         "constant.language",
         "constant.character",
         "keyword.other.unit",
-        "support.constant",
-        "variable.other.constant"
+        "support.constant"
       ],
       "settings": {
         "foreground": "#d07c3d"

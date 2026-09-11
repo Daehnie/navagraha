@@ -106,6 +106,27 @@ export const VSCODE_COLORS = {
   'editorRuler.foreground': ['hl_med'],
   'editorBracketMatch.background': ['shukra', '33'],
   'editorBracketMatch.border': ['shukra'],
+  // Klammern haben keine eigene Rolle in der Graha-Tabelle: sie sind Grundtext
+  // wie auf der Seite. Ohne diese Keys faerbt VS Code sie mit eigenen Farben.
+  'editorBracketHighlight.foreground1': ['chandra'],
+  'editorBracketHighlight.foreground2': ['chandra'],
+  'editorBracketHighlight.foreground3': ['chandra'],
+  'editorBracketHighlight.foreground4': ['chandra'],
+  'editorBracketHighlight.foreground5': ['chandra'],
+  'editorBracketHighlight.foreground6': ['chandra'],
+  'editorBracketHighlight.unexpectedBracket.foreground': ['mangala'],
+  'editorBracketPairGuide.background1': ['hl_med'],
+  'editorBracketPairGuide.background2': ['hl_med'],
+  'editorBracketPairGuide.background3': ['hl_med'],
+  'editorBracketPairGuide.background4': ['hl_med'],
+  'editorBracketPairGuide.background5': ['hl_med'],
+  'editorBracketPairGuide.background6': ['hl_med'],
+  'editorBracketPairGuide.activeBackground1': ['hl_high'],
+  'editorBracketPairGuide.activeBackground2': ['hl_high'],
+  'editorBracketPairGuide.activeBackground3': ['hl_high'],
+  'editorBracketPairGuide.activeBackground4': ['hl_high'],
+  'editorBracketPairGuide.activeBackground5': ['hl_high'],
+  'editorBracketPairGuide.activeBackground6': ['hl_high'],
   'editorError.foreground': ['mangala'],
   'editorWarning.foreground': ['surya'],
   'editorInfo.foreground': ['shani'],
@@ -262,16 +283,25 @@ export const VSCODE_TOKEN_RULES = [
     scope: [
       'keyword.operator', 'keyword.operator.arithmetic',
       'keyword.operator.logical', 'keyword.operator.assignment',
-      'keyword.operator.comparison', 'punctuation.accessor',
-      'storage.type.function.arrow',
+      'keyword.operator.comparison', 'storage.type.function.arrow',
     ],
   },
   {
+    // Der Doppelpunkt vor einem Typ trennt, er rechnet nicht; der Punkt in
+    // g.longitude ebenso. Beide muessen hier stehen: ohne eigene Regel erbt der
+    // Punkt in Math.abs() das Gold des umgebenden Funktionsaufrufs.
+    name: 'Chandra – Satzzeichen, die wie Operatoren heissen',
+    paletteKey: 'chandra',
+    scope: ['keyword.operator.type.annotation', 'punctuation.accessor'],
+  },
+  {
+    // variable.other.constant fehlt mit Absicht: die TypeScript-Grammatik nennt
+    // so jede const-Variable, nicht nur echte Konstanten.
     name: 'Surya – Zahlen, Konstanten',
     paletteKey: 'surya',
     scope: [
       'constant.numeric', 'constant.language', 'constant.character',
-      'keyword.other.unit', 'support.constant', 'variable.other.constant',
+      'keyword.other.unit', 'support.constant',
     ],
   },
   {

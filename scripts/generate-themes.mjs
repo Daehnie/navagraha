@@ -143,11 +143,14 @@ function generateVscodeThemes() {
   }
 }
 
-// Nur contributes.themes wird erzeugt. Alles andere — vor allem version —
-// bleibt so stehen, wie es in der Datei steht.
+// Nur contributes.themes und die Farbe von galleryBanner werden erzeugt.
+// Alles andere — vor allem version — bleibt so stehen, wie es in der Datei steht.
 function updateVscodePackageJson() {
   const path = ['themes', 'vscode', 'navagraha', 'package.json']
   const pkg = JSON.parse(read(...path))
+
+  // Das Icon ist in Swati gezeichnet, der Banner traegt deshalb dessen Grund.
+  pkg.galleryBanner = { color: palette.variants.swati.colors.base, theme: 'dark' }
 
   pkg.contributes.themes = VARIANT_ORDER.map((key) => {
     const v = palette.variants[key]

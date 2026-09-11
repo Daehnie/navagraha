@@ -4,7 +4,7 @@ const { title = 'dignity.ts' } = Astro.props
 <div class="pane">
   <div class="bar"><i></i><i></i><i></i><span class="mono">{title}</span></div>
   <pre><code><span class="ketu">// dignity.ts</span>
-<span class="mangala">import</span> &#123; <span class="shukra">Graha</span> &#125; <span class="mangala">from</span> <span class="budha">"./jyotisha"</span>
+<span class="mangala">import</span> &#123; <span class="chandra">Graha</span> &#125; <span class="mangala">from</span> <span class="budha">"./jyotisha"</span>
 
 <span class="mangala">export function</span> <span class="guru">dignity</span>(<span class="chandra">g</span>: <span class="shukra">Graha</span>): <span class="shukra">string</span> &#123;
   <span class="mangala">const</span> <span class="chandra">arc</span> <span class="shani">=</span> <span class="chandra">Math</span>.<span class="guru">abs</span>(<span class="chandra">g</span>.<span class="shukra">longitude</span> <span class="shani">-</span> <span class="chandra">g</span>.<span class="shukra">exaltation</span>)
