@@ -1,43 +1,58 @@
-# iTerm2
+<p align="center">
+  <img src="../../public/icon-512.png" width="80" alt="">
+</p>
+<h2 align="center">Navagraha für iTerm2</h2>
 
-Vier Farbschemata aus einem siderischen Geburtshoroskop, je eine Datei pro
-Variante.
+<p align="center">Neun Planeten, neun Farben — ein Farbschema, abgelesen aus einem Geburtshoroskop.</p>
+
+<p align="center">
+  <a href="https://daehnie.github.io/navagraha/">Zur Seite</a> · <a href="#english">English</a>
+</p>
 
 ## Einbauen
 
-Die vier `.itermcolors`-Dateien doppelklicken — iTerm2 nimmt sie als
-Voreinstellungen auf. Danach im Profil auswählen:
-
-    Settings → Profiles → Colors → Color Presets…
-
-Dort erscheinen `Navagraha Swati`, `Navagraha Pratipada`, `Navagraha Ushas`
-und `Navagraha Tula`.
+1. Die vier `.itermcolors`-Dateien doppelklicken. iTerm2 nimmt sie als
+   Voreinstellungen auf und benennt sie nach der Datei.
+2. **Settings → Profiles → Colors** öffnen und unter **Color Presets…**
+   eine Variante wählen, etwa *Navagraha Swati*.
 
 ## Hell und dunkel automatisch
 
-iTerm2 kann zwischen zwei Voreinstellungen wechseln, wenn das System von
-hell auf dunkel schaltet. Dafür im selben Bereich
+1. Im selben Bereich **Use separate colors for light and dark mode**
+   anhaken.
+2. Mit dem Schalter **Editing** zwischen den beiden Modi wechseln und für
+   jeden unter **Color Presets…** eine Variante wählen — etwa Swati für
+   dunkel und Ushas für hell.
 
-    Use different colors for light and dark mode
+## Galerie
 
-anhaken und je eine der Varianten zuweisen — etwa Swati für dunkel und
-Ushas für hell.
+**Navagraha Swati** · dunkel
 
-## Die vier Varianten
+![iTerm2 mit Navagraha Swati](screenshot-swati.png)
 
-| Name      | Grund   | Helligkeit |
-|-----------|---------|------------|
-| Swati     | Vayu    | dunkel     |
-| Pratipada | Prithvi | dunkel     |
-| Ushas     | Prithvi | hell       |
-| Tula      | Vayu    | hell       |
+**Navagraha Pratipada** · dunkel
+
+![iTerm2 mit Navagraha Pratipada](screenshot-pratipada.png)
+
+**Navagraha Ushas** · hell
+
+![iTerm2 mit Navagraha Ushas](screenshot-ushas.png)
+
+**Navagraha Tula** · hell
+
+![iTerm2 mit Navagraha Tula](screenshot-tula.png)
 
 ---
 
 ## English
 
-Four colour schemes derived from a sidereal birth chart, one file per
-variant. Double-click the four `.itermcolors` files to add them as presets,
-then choose one under **Settings → Profiles → Colors → Color Presets…**.
-Tick **Use different colors for light and dark mode** to have iTerm2 switch
-between two of them with the system appearance.
+Nine planets, nine colours — a colour scheme read from a birth chart.
+[Visit the site](https://daehnie.github.io/navagraha/en/).
+
+1. Double-click the four `.itermcolors` files to add them as presets.
+2. Open **Settings → Profiles → Colors** and pick a variant under
+   **Color Presets…**.
+
+To follow the system appearance, tick **Use separate colors for light and
+dark mode**, switch between the modes with the **Editing** control and pick
+a preset for each — for example Swati for dark and Ushas for light.

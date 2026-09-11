@@ -74,16 +74,22 @@ export const TABBY_NAMED = {
   cursorAccent: 'base',
 }
 
-// iTerm2-Keys ausserhalb der 16 ANSI-Plaetze.
+// iTerm2-Keys ausserhalb der 16 ANSI-Plaetze: paletteKey oder [paletteKey, alpha].
 export const ITERM_FIXED = {
   'Background Color': 'base',
-  'Badge Color': 'surya',
+  // Das Badge liegt als grosser Schriftzug ueber dem Text; halbe Deckkraft wie
+  // in iTerm2 selbst, sonst verdeckt es, was darunter steht.
+  'Badge Color': ['surya', 0.5],
   'Bold Color': 'chandra_b',
   'Cursor Color': 'shukra',
   'Cursor Guide Color': 'hl_low',
   'Cursor Text Color': 'base',
   'Foreground Color': 'chandra',
   'Link Color': 'shani',
+  // Ohne diesen Key faerbt iTerm2 Suchtreffer grellgelb. Die Schrift darauf
+  // waehlt iTerm2 selbst (schwarz ab Helligkeit 0,5, sonst weiss); guru_b liegt
+  // in allen Varianten weit genug davon weg: 10,9:1 dunkel, 9,5:1 hell.
+  'Match Background Color': 'guru_b',
   'Selected Text Color': 'chandra_b',
   'Selection Color': 'hl_high',
   'Tab Color': 'surface',

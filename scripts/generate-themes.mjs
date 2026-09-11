@@ -66,11 +66,11 @@ function generateTabby() {
 
 // --- iTerm2 ---------------------------------------------------------------
 
-function itermColorDict(hex) {
+function itermColorDict(hex, alpha = 1) {
   return [
     '\t<dict>',
     '\t\t<key>Alpha Component</key>',
-    '\t\t<real>1.0</real>',
+    `\t\t<real>${formatFloat(alpha)}</real>`,
     '\t\t<key>Blue Component</key>',
     `\t\t<real>${component(hex, 5)}</real>`,
     '\t\t<key>Color Space</key>',
@@ -88,15 +88,16 @@ function generateIterm2() {
     const v = palette.variants[key]
     const entries = {}
     ANSI_SLOTS.forEach((colorKey, i) => {
-      entries[`Ansi ${i} Color`] = v.colors[colorKey]
+      entries[`Ansi ${i} Color`] = { hex: v.colors[colorKey] }
     })
-    for (const [itermKey, colorKey] of Object.entries(ITERM_FIXED)) {
-      entries[itermKey] = v.colors[colorKey]
+    for (const [itermKey, value] of Object.entries(ITERM_FIXED)) {
+      const [colorKey, alpha] = [].concat(value)
+      entries[itermKey] = { hex: v.colors[colorKey], alpha }
     }
 
     // iTerm2 schreibt die Keys alphabetisch, also "Ansi 10" vor "Ansi 2".
     const body = Object.keys(entries).sort()
-      .map((k) => `\t<key>${k}</key>\n${itermColorDict(entries[k])}`)
+      .map((k) => `\t<key>${k}</key>\n${itermColorDict(entries[k].hex, entries[k].alpha)}`)
       .join('\n')
 
     write('themes', 'iterm2', `Navagraha ${v.label}.itermcolors`,

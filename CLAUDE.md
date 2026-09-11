@@ -234,8 +234,8 @@ Ein README zeigt, was es ist, nicht wie es gebaut ist: oben ein Screenshot,
 darunter zwei, drei Sätze, bei den Themes dann das Einbauen. Herleitung,
 Regeln und Aufbau stehen auf der Seite und in dieser Datei, nicht im README.
 Die Screenshots liegen als `screenshot.png` neben ihrem README, die der
-Seite hell und dunkel unter `docs/`. VS Code und Tabby zeigen als Galerie
-alle vier Varianten mit demselben Inhalt (`screenshot-<variante>.png`). Sie sind von Hand aufgenommen und
+Seite hell und dunkel unter `docs/`. VS Code, Tabby und iTerm2 zeigen als
+Galerie alle vier Varianten mit demselben Inhalt (`screenshot-<variante>.png`). Sie sind von Hand aufgenommen und
 veralten, wenn sich eine Farbe ändert — danach neu aufnehmen.
 
 `prefers-reduced-motion` wird respektiert, die Animation im Diagramm ist die
