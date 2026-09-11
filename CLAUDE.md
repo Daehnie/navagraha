@@ -60,14 +60,17 @@ Quelle.
 
 `scripts/generate-themes.mjs` baut sie: tabby, die vier iTerm2-Dateien, die
 vier VS-Code-Themes sowie `contributes.themes` und die Farbe von
-`galleryBanner` im Extension-Manifest. Die
+`galleryBanner` im Extension-Manifest, dazu das bat-Theme. Die
 Zuordnungstabellen stehen daneben in `scripts/theme-schemas.mjs`. Der
 Generator läuft bei jedem `npm run build` mit, einzeln über
 `npm run generate:themes`. Nach einer Farbänderung gehören die neu erzeugten
 Dateien mit in den Commit.
 
-`themes/vim/` und `themes/bat/` fasst der Generator nicht an: beide enthalten
-keine Hexwerte, sondern nehmen die Farben über die ANSI-Plätze vom Terminal.
+`themes/vim/` fasst der Generator nicht an. `themes/bat/navagraha.tmTheme`
+erzeugt er aus denselben Scope-Regeln wie das VS-Code-Theme, damit beide nicht
+auseinanderlaufen. Weder vim noch bat enthalten Hexwerte: beide nehmen die
+Farben über die ANSI-Plätze vom Terminal. bat liest eine Theme-Farbe mit
+Deckkraft `00` als Platznummer im Rotkanal, mit `01` als Terminal-Standard.
 
 ### Varianten
 

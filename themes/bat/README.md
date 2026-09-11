@@ -1,32 +1,75 @@
-# bat
+<p align="center">
+  <img src="../../public/icon-512.png" width="80" alt="">
+</p>
+<h2 align="center">Navagraha für bat</h2>
 
-`bat` bringt eigene Themes mit festen Hexwerten mit. Dieses Schema geht
-einen anderen Weg: das eingebaute ANSI-Theme nimmt die Farben vom Terminal
-und folgt damit allen vier Varianten, ohne dass eine Datei nötig wäre.
+<p align="center">Neun Planeten, neun Farben — ein Farbschema, abgelesen aus einem Geburtshoroskop.</p>
+
+<p align="center">
+  <a href="https://daehnie.github.io/navagraha/">Zur Seite</a> · <a href="#english">English</a>
+</p>
+
+Das Theme setzt keine eigenen Farben, sondern nimmt die 16 ANSI-Plätze vom
+Terminal. Es folgt deshalb der Variante, die dort eingestellt ist — eine
+Datei für alle vier. Das Terminal braucht dafür selbst Navagraha, etwa in
+[iTerm2](../iterm2/) oder [Tabby](../tabby/).
 
 ## Einbauen
 
-In die Shell-Konfiguration (`~/.zshrc`, `~/.bashrc`) aufnehmen:
+1. Das Theme ablegen und bats Cache neu bauen:
 
-    export BAT_THEME=ansi
+       mkdir -p "$(bat --config-dir)/themes"
+       cp navagraha.tmTheme "$(bat --config-dir)/themes/"
+       bat cache --build
 
-Danach zeigt `bat` dieselben Farben wie das Terminal — und wechselt mit,
-wenn dort die Variante wechselt.
+   Ob bat das Theme kennt, zeigt:
 
-## Warum keine eigene Datei
+       bat --list-themes | grep navagraha
 
-Ein eigenes bat-Theme müsste die Hexwerte einer einzigen Variante
-festschreiben. Es würde dann nicht mehr mitwechseln, und bei einem Wechsel
-von hell auf dunkel stünde die falsche Farbe im Terminal. Der Umweg über
-ANSI ist hier die genauere Lösung, nicht die bequemere.
+   Steht dort nichts, nimmt bat ohne Warnung sein Standard-Theme. Nach jeder
+   Änderung an `navagraha.tmTheme` muss `bat cache --build` erneut laufen.
+
+2. In bats Konfigurationsdatei `$(bat --config-dir)/config` eintragen:
+
+       --theme=navagraha
+       --italic-text=always
+
+   Die zweite Zeile braucht es für kursive Kommentare; bat schreibt
+   sonst nichts kursiv.
+
+## Galerie
+
+**Navagraha Swati** · dunkel
+
+![bat mit Navagraha Swati](screenshot-swati.png)
+
+**Navagraha Pratipada** · dunkel
+
+![bat mit Navagraha Pratipada](screenshot-pratipada.png)
+
+**Navagraha Ushas** · hell
+
+![bat mit Navagraha Ushas](screenshot-ushas.png)
+
+**Navagraha Tula** · hell
+
+![bat mit Navagraha Tula](screenshot-tula.png)
 
 ---
 
 ## English
 
-`bat` ships themes with hard-coded hex values. This scheme takes another
-route: the built-in ANSI theme reads its colours from the terminal and thus
-follows all four variants without needing a file. Add
-`export BAT_THEME=ansi` to your shell config. A dedicated bat theme would
-freeze one variant's hex values and stop following the terminal — the
-detour through ANSI is the more accurate answer here, not the lazier one.
+Nine planets, nine colours — a colour scheme read from a birth chart.
+[Visit the site](https://daehnie.github.io/navagraha/en/).
+
+The theme sets no colours of its own: it reads the 16 ANSI slots from the
+terminal and therefore follows whichever Navagraha variant the terminal is
+using — one file for all four.
+
+1. Copy `navagraha.tmTheme` to `$(bat --config-dir)/themes/` and run
+   `bat cache --build`. Check with `bat --list-themes | grep navagraha` —
+   if it isn't listed, bat silently falls back to its default theme. Run
+   `bat cache --build` again after any change to the theme file.
+2. Add `--theme=navagraha` and `--italic-text=always` to
+   `$(bat --config-dir)/config`. The second line enables italic comments;
+   bat prints nothing in italics otherwise.

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Navagraha fuer bat. Farben als ANSI-Plaetze (#RR000000) oder
+     Terminal-Standard (#00000001), erzeugt aus scripts/theme-schemas.mjs. -->
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Navagraha</string>
+	<key>settings</key>
+	<array>
+		<dict>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#00000001</string>
+				<key>foreground</key>
+				<string>#00000001</string>
+				<key>gutter</key>
+				<string>#00000001</string>
+				<key>gutterForeground</key>
+				<string>#08000000</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Ketu – Kommentare</string>
+			<key>scope</key>
+			<string>comment, punctuation.definition.comment, string.comment</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#08000000</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Chandra – Bezeichner, Variablen</string>
+			<key>scope</key>
+			<string>variable, variable.other, meta.definition.variable.name, support.variable, string.other.link</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#00000001</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Mangala – Schluesselwoerter, Steuerfluss</string>
+			<key>scope</key>
+			<string>keyword, keyword.control, storage, storage.type, storage.modifier, keyword.other, markup.deleted</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#01000000</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Budha – Zeichenketten</string>
+			<key>scope</key>
+			<string>string, string.quoted, string.template, punctuation.definition.string, constant.other.symbol, markup.inline.raw</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#02000000</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Guru – Funktionen, Selektoren</string>
+			<key>scope</key>
+			<string>entity.name.function, support.function, meta.function-call, variable.function, entity.name.section, markup.heading, entity.other.attribute-name.class, entity.other.attribute-name.id</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#03000000</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Shani – Operatoren</string>
+			<key>scope</key>
+			<string>keyword.operator, keyword.operator.arithmetic, keyword.operator.logical, keyword.operator.assignment, keyword.operator.comparison, storage.type.function.arrow</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#04000000</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Chandra – Satzzeichen, die wie Operatoren heissen</string>
+			<key>scope</key>
+			<string>keyword.operator.type.annotation, punctuation.accessor</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#00000001</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Surya – Zahlen, Konstanten</string>
+			<key>scope</key>
+			<string>constant.numeric, constant.language, constant.character, keyword.other.unit, support.constant</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#09000000</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Shukra – Typen, Klassen, Eigenschaftsnamen</string>
+			<key>scope</key>
+			<string>entity.name.type, entity.name.class, entity.other.inherited-class, support.type, support.class, entity.name.namespace, meta.type.annotation, storage.type.class, support.type.property-name, entity.other.attribute-name, meta.object-literal.key, variable.other.property</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#06000000</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rahu – Praeprozessor, At-Rules, Tags</string>
+			<key>scope</key>
+			<string>meta.preprocessor, keyword.control.directive, keyword.control.at-rule, entity.name.tag, constant.character.escape, meta.decorator, punctuation.definition.template-expression</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#05000000</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Mangala – ungueltig</string>
+			<key>scope</key>
+			<string>invalid, invalid.illegal</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#01000000</string>
+				<key>fontStyle</key>
+				<string>bold</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Ketu – veraltet</string>
+			<key>scope</key>
+			<string>invalid.deprecated</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#08000000</string>
+				<key>fontStyle</key>
+				<string>strikethrough</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Budha – eingefuegt</string>
+			<key>scope</key>
+			<string>markup.inserted</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#02000000</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Markup – kursiv</string>
+			<key>scope</key>
+			<string>markup.italic</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#00000001</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Markup – fett</string>
+			<key>scope</key>
+			<string>markup.bold</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#0f000000</string>
+				<key>fontStyle</key>
+				<string>bold</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

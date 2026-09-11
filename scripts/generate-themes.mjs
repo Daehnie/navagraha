@@ -2,8 +2,9 @@
 // palette.json ist die einzige Farbquelle — die Ausgaben hier nie von Hand
 // bearbeiten, sondern die Palette aendern und neu generieren.
 //
-// themes/vim/ und themes/bat/ bleiben unangetastet: beide enthalten keine
-// Hexwerte, sondern nehmen die Farben ueber die ANSI-Plaetze vom Terminal.
+// themes/vim/ bleibt unangetastet. themes/bat/navagraha.tmTheme wird erzeugt,
+// enthaelt aber wie vim keine Hexwerte: beide nehmen die Farben ueber die
+// ANSI-Plaetze vom Terminal.
 
 import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
@@ -165,11 +166,69 @@ function updateVscodePackageJson() {
   write(...path, JSON.stringify(pkg, null, 2))
 }
 
+// --- bat ------------------------------------------------------------------
+
+// bat liest eine Theme-Farbe mit Deckkraft 00 als ANSI-Platz (Nummer im
+// Rotkanal) und mit 01 als Standardfarbe des Terminals. So folgt das Theme wie
+// vim der Variante im Terminal. Die Scopes sind dieselben wie im VS-Code-Theme,
+// damit beide nicht auseinanderlaufen. Chandra hat keinen eigenen Platz: er ist
+// der Vordergrund des Terminals.
+const batColor = (paletteKey) => {
+  const slot = ANSI_SLOTS.indexOf(paletteKey)
+  return slot === -1 ? '#00000001' : `#${slot.toString(16).padStart(2, '0')}000000`
+}
+
+function generateBatTheme() {
+  const dict = (entries, indent) => [
+    `${indent}<dict>`,
+    ...entries.map(([k, v]) => `${indent}\t<key>${k}</key>\n${indent}\t<string>${v}</string>`),
+    `${indent}</dict>`,
+  ].join('\n')
+
+  const global = [
+    '\t\t<dict>',
+    '\t\t\t<key>settings</key>',
+    dict([
+      ['background', '#00000001'],
+      ['foreground', '#00000001'],
+      ['gutter', '#00000001'],
+      ['gutterForeground', batColor('ketu')],
+    ], '\t\t\t'),
+    '\t\t</dict>',
+  ].join('\n')
+
+  const rules = VSCODE_TOKEN_RULES.map((rule) => [
+    '\t\t<dict>',
+    '\t\t\t<key>name</key>',
+    `\t\t\t<string>${rule.name}</string>`,
+    '\t\t\t<key>scope</key>',
+    `\t\t\t<string>${rule.scope.join(', ')}</string>`,
+    '\t\t\t<key>settings</key>',
+    dict([
+      ['foreground', batColor(rule.paletteKey)],
+      ...(rule.fontStyle ? [['fontStyle', rule.fontStyle]] : []),
+    ], '\t\t\t'),
+    '\t\t</dict>',
+  ].join('\n'))
+
+  write('themes', 'bat', 'navagraha.tmTheme',
+    '<?xml version="1.0" encoding="UTF-8"?>\n'
+    + '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n'
+    + '<!-- Navagraha fuer bat. Farben als ANSI-Plaetze (#RR000000) oder\n'
+    + '     Terminal-Standard (#00000001), erzeugt aus scripts/theme-schemas.mjs. -->\n'
+    + '<plist version="1.0">\n<dict>\n'
+    + '\t<key>name</key>\n\t<string>Navagraha</string>\n'
+    + '\t<key>settings</key>\n\t<array>\n'
+    + [global, ...rules].join('\n')
+    + '\n\t</array>\n</dict>\n</plist>\n')
+}
+
 // --- Lauf -----------------------------------------------------------------
 
 generateTabby()
 generateIterm2()
 generateVscodeThemes()
 updateVscodePackageJson()
+generateBatTheme()
 
 console.log(`themes/ aus palette.json erzeugt (${VARIANT_ORDER.length} Varianten).`)
