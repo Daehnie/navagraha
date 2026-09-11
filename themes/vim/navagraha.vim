@@ -23,8 +23,9 @@ let g:colors_name = "navagraha"
 hi Normal        ctermfg=NONE ctermbg=NONE cterm=NONE
 
 " --- Grahas nach Naturell -------------------------------------------------
-" Ketu, Loslösung: alles, was nicht ausgefuehrt wird
-hi Comment       ctermfg=8    ctermbg=NONE cterm=NONE
+" Ketu, Loslösung: alles, was nicht ausgefuehrt wird. Kursiv wie auf der Seite
+" und in VS Code; ein Terminal ohne Kursivschrift zeigt ihn einfach gerade.
+hi Comment       ctermfg=8    ctermbg=NONE cterm=italic
 hi SpecialComment ctermfg=8   ctermbg=NONE cterm=italic
 
 " Mangala, Handlung: Steuerfluss und Schluesselwoerter
@@ -70,6 +71,43 @@ hi Tag           ctermfg=5    ctermbg=NONE cterm=NONE
 
 " Chandra: Bezeichner bleiben Grundtext, das haelt den Fliesstext ruhig
 hi Identifier    ctermfg=NONE ctermbg=NONE cterm=NONE
+
+" --- TypeScript -----------------------------------------------------------
+" Vims TypeScript-Syntax verlinkt eingebaute Methoden auf Keyword, Klammern auf
+" Function und Argumente auf PreProc, und laesst Operatoren ohne Farbe. Hier
+" wird nachgezogen, was die Graha-Zuordnung verlangt. typescriptGlobal bleibt
+" Structure: darunter fallen Klassen wie Promise und Array, nicht nur Math.
+for s:g in split('NumberStaticMethod NumberMethod StringStaticMethod StringMethod
+      \ ArrayStaticMethod ArrayMethod ObjectStaticMethod ObjectMethod SymbolStaticMethod
+      \ FunctionMethod MathStaticMethod DateStaticMethod DateMethod JSONStaticMethod
+      \ RegExpMethod ES6MapMethod ES6SetMethod PromiseStaticMethod PromiseMethod
+      \ ReflectMethod IntlMethod BOMNavigatorMethod ServiceWorkerMethod BOMLocationMethod
+      \ BOMHistoryMethod ConsoleMethod XHRMethod FileMethod FileReaderMethod FileListMethod
+      \ BlobMethod URLStaticMethod SubtleCryptoMethod CryptoMethod HeadersMethod
+      \ RequestMethod ResponseMethod CacheMethod EncodingMethod GeolocationMethod
+      \ PaymentMethod PaymentResponseMethod DOMNodeMethod DOMDocMethod
+      \ DOMEventTargetMethod DOMEventMethod DOMStorageMethod DOMFormMethod DOMElemFuncs
+      \ GlobalMethod BOMWindowMethod')
+  exe 'hi! link typescript' . s:g . ' Function'
+endfor
+for s:g in split('NumberStaticProp SymbolStaticProp MathStaticProp RegExpStaticProp
+      \ RegExpProp ES6MapProp ES6SetProp BOMNavigatorProp BOMLocationProp BOMHistoryProp
+      \ XHRProp FileReaderProp URLUtilsProp CryptoProp RequestProp ResponseProp
+      \ ServiceWorkerProp EncodingProp BOMNetworkProp PaymentProp PaymentResponseProp
+      \ PaymentAddressProp PaymentShippingOptionProp DOMNodeProp DOMDocProp DOMEventProp
+      \ DOMStorageProp DOMFormProp BOMWindowProp DOMElemAttrs Prop')
+  exe 'hi! link typescript' . s:g . ' Type'
+endfor
+for s:g in split('TypeReference TypeParameter AliasDeclaration')
+  exe 'hi! link typescript' . s:g . ' Type'
+endfor
+for s:g in split('Assign BinaryOp UnaryOp OptionalMark')
+  exe 'hi! link typescript' . s:g . ' Operator'
+endfor
+for s:g in split('Braces Call FuncCallArg ArrowFuncArg ParamImpl DestructureVariable')
+  exe 'hi! link typescript' . s:g . ' Normal'
+endfor
+unlet s:g
 
 " --- Oberflaeche ----------------------------------------------------------
 hi LineNr        ctermfg=8    ctermbg=NONE cterm=NONE
