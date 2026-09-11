@@ -19,13 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-Die beiden mitgelieferten Schriften stehen unter eigenen Lizenzen, die von
-dieser unberührt bleiben:
-
-  Spectral        SIL Open Font License 1.1, Production Type
-  Monaspace Neon  SIL Open Font License 1.1, GitHub Inc.
-
-Ihre Lizenztexte liegen in den Paketen unter node_modules/@fontsource/.

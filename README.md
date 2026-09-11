@@ -27,7 +27,8 @@ ihrer Herleitung und einer Vorschau in jeder Variante.
 
 ## Lizenz
 
-MIT, siehe `LICENSE`.
+MIT, siehe `LICENSE`. Die Schriften der Seite, Spectral und Monaspace Neon,
+stehen unter der SIL Open Font License 1.1.
 
 ---
 
