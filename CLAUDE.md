@@ -247,6 +247,13 @@ die Bilder liegen als `screenshot-<variante>.png` neben ihrem README, die
 der Seite hell und dunkel unter `docs/`. Sie sind von Hand aufgenommen und
 veralten, wenn sich eine Farbe ändert — danach neu aufnehmen.
 
+Die Vorschaubilder für geteilte Links, `public/og-de.png` und `og-en.png`,
+erzeugt `scripts/social-card.mjs` (`npm run og:image`) mit Chrome aus Palette,
+Graha-Namen, Codebeispiel und den Texten der Seite. Sie laufen nicht beim
+Build mit; nach einer Farb- oder Textänderung neu erzeugen und mitcommitten.
+`og-en.png` ist zugleich die Social Preview des Repos und wird dort von Hand
+hochgeladen.
+
 `prefers-reduced-motion` wird respektiert, die Animation im Diagramm ist die
 einzige der Seite. Sie startet erst, wenn das Diagramm in den Blick kommt —
 es steht nicht mehr im ersten Bild. Ohne Skript bleibt sie aus und die

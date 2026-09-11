@@ -4,6 +4,10 @@
   "copy": "kopieren",
   "copied": "kopiert",
   "tagline": "Neun Planeten, neun Farben",
+  "og": {
+    "lede": "Ein Farbschema für Terminal und Editor, abgelesen aus einem Geburtshoroskop.",
+    "alt": "Navagraha: die neun Graha-Farben und ein Codebeispiel im Farbschema"
+  },
   "lede": "Ein Farbschema für Terminal und Editor, dessen Töne nicht gewählt, sondern abgelesen sind: jede Farbe ist die klassische Farbe eines Grahas, ihre Sättigung folgt so weit wie möglich seiner Stärke in einem einzigen Geburtshoroskop.",
   "chartCaption": "23. Mai 1982, 19:47 MESZ, Wedel. Siderisch nach Lahiri, Häuser nach Zeichen. Lagna in Tula.",
   "chart": {

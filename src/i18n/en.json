@@ -4,6 +4,10 @@
   "copy": "copy",
   "copied": "copied",
   "tagline": "Nine planets, nine colours",
+  "og": {
+    "lede": "A colour scheme for terminal and editor, read from a birth chart.",
+    "alt": "Navagraha: the nine graha colours and a code sample in the scheme"
+  },
   "lede": "A colour scheme for terminal and editor whose tones were not picked but read off: every colour is the classical colour of a graha, its saturation follows that planet's strength in one particular birth chart as far as the hue allows.",
   "chartCaption": "23 May 1982, 19:47 CEST, Wedel. Sidereal, Lahiri ayanamsa, whole-sign houses. Lagna in Tula.",
   "chart": {
