@@ -60,7 +60,8 @@ Quelle.
 
 `scripts/generate-themes.mjs` baut sie: tabby, die vier iTerm2-Dateien, die
 vier VS-Code-Themes sowie `contributes.themes` und die Farbe von
-`galleryBanner` im Extension-Manifest, dazu das bat-Theme. Die
+`galleryBanner` im Extension-Manifest, dazu das bat-Theme und die vier
+CotEditor-Themes. Die
 Zuordnungstabellen stehen daneben in `scripts/theme-schemas.mjs`. Der
 Generator läuft bei jedem `npm run build` mit, einzeln über
 `npm run generate:themes`. Nach einer Farbänderung gehören die neu erzeugten
@@ -71,6 +72,11 @@ erzeugt er aus denselben Scope-Regeln wie das VS-Code-Theme, damit beide nicht
 auseinanderlaufen. Weder vim noch bat enthalten Hexwerte: beide nehmen die
 Farben über die ANSI-Plätze vom Terminal. bat liest eine Theme-Farbe mit
 Deckkraft `00` als Platznummer im Rotkanal, mit `01` als Terminal-Standard.
+
+CotEditor liest Hexwerte nicht als sRGB, sondern als Generic RGB. Der
+Generator rechnet die Palette für die `.cottheme`-Dateien deshalb um; dort
+stehen also bewusst andere Hexwerte als in `palette.json`. Ohne Umrechnung
+zeigte CotEditor jede Farbe 9 bis 22 Stufen heller.
 
 ### Varianten
 
@@ -236,10 +242,9 @@ mit den Menüpunkten des jeweiligen Programms in seiner eigenen Sprache.
 Ein README zeigt, was es ist, nicht wie es gebaut ist: oben ein Screenshot,
 darunter zwei, drei Sätze, bei den Themes dann das Einbauen. Herleitung,
 Regeln und Aufbau stehen auf der Seite und in dieser Datei, nicht im README.
-Die Screenshots liegen als `screenshot.png` neben ihrem README, die der
-Seite hell und dunkel unter `docs/`. VS Code, Tabby, iTerm2 und Vim zeigen
-als Galerie alle vier Varianten mit demselben Inhalt
-(`screenshot-<variante>.png`). Sie sind von Hand aufgenommen und
+Jede Portierung zeigt als Galerie alle vier Varianten mit demselben Inhalt;
+die Bilder liegen als `screenshot-<variante>.png` neben ihrem README, die
+der Seite hell und dunkel unter `docs/`. Sie sind von Hand aufgenommen und
 veralten, wenn sich eine Farbe ändert — danach neu aufnehmen.
 
 `prefers-reduced-motion` wird respektiert, die Animation im Diagramm ist die

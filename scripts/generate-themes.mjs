@@ -6,7 +6,7 @@
 // enthaelt aber wie vim keine Hexwerte: beide nehmen die Farben ueber die
 // ANSI-Plaetze vom Terminal.
 
-import { readFileSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
@@ -14,6 +14,7 @@ import {
   VARIANT_ORDER, ANSI_SLOTS, ANSI_SLOT_LABELS, TABBY_HEADER,
   TABBY_VARIANT_NOTES, TABBY_NAMED, ITERM_FIXED, VSCODE_COLORS,
   VSCODE_ANSI_NAMES, VSCODE_SEMANTIC, VSCODE_TOKEN_RULES,
+  COTEDITOR_COLORS, COTEDITOR_SYSTEM_COLORS,
 } from './theme-schemas.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -223,6 +224,56 @@ function generateBatTheme() {
     + '\n\t</array>\n</dict>\n</plist>\n')
 }
 
+// --- CotEditor ------------------------------------------------------------
+
+// CotEditor liest einen Hexwert nicht als sRGB, sondern als Generic RGB
+// (NSColor calibrated) und schreibt ihn beim Speichern auch so. Ungerechnet
+// zeigte es jede Farbe 9 bis 22 Stufen heller. Die Palette wird deshalb
+// umgerechnet: sRGB linearisieren, Matrix aus den Primaerfarben der
+// macOS-Profile "sRGB Profile" und "Generic RGB Profile" (beide auf D50),
+// dann mit dem Mac-Gamma 461/256 codieren. Gegen die Umrechnung von macOS
+// geprueft: hoechstens 1 Stufe, im Blaukanal nahe 0 bis zu 2.
+const SRGB_TO_GENERIC = [
+  [0.9748492, 0.0273096, -0.0021511],
+  [-0.0200145, 1.054192, -0.0342235],
+  [0.0016844, 0.0015574, 0.9967426],
+]
+
+const toGenericRgb = (hex) => {
+  const lin = [1, 3, 5]
+    .map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+    .map((u) => (u <= 0.04045 ? u / 12.92 : ((u + 0.055) / 1.055) ** 2.4))
+  return `#${SRGB_TO_GENERIC
+    .map((row) => row[0] * lin[0] + row[1] * lin[1] + row[2] * lin[2])
+    .map((v) => Math.round(Math.min(1, Math.max(0, v)) ** (256 / 461) * 255))
+    .map((n) => n.toString(16).padStart(2, '0'))
+    .join('')}`
+}
+
+// CotEditor zeigt den Dateinamen als Namen des Themes. Die Schluessel stehen
+// alphabetisch wie in den mitgelieferten Themes.
+function generateCotEditorThemes() {
+  mkdirSync(join(root, 'themes', 'coteditor'), { recursive: true })
+  for (const key of VARIANT_ORDER) {
+    const v = palette.variants[key]
+    const theme = {
+      metadata: {
+        description: `Navagraha ${v.label} · https://daehnie.github.io/navagraha/`,
+        distributionURL: 'https://github.com/Daehnie/navagraha',
+        license: 'MIT',
+      },
+    }
+    for (const [name, [colorKey, alpha]] of Object.entries(COTEDITOR_COLORS)) {
+      theme[name] = { color: withAlpha(toGenericRgb(v.colors[colorKey]), alpha) }
+    }
+    for (const [name, [colorKey, alpha]] of Object.entries(COTEDITOR_SYSTEM_COLORS)) {
+      theme[name] = { color: withAlpha(toGenericRgb(v.colors[colorKey]), alpha), usesSystemSetting: false }
+    }
+    const sorted = Object.fromEntries(Object.keys(theme).sort().map((k) => [k, theme[k]]))
+    write('themes', 'coteditor', `Navagraha ${v.label}.cottheme`, `${JSON.stringify(sorted, null, 2)}\n`)
+  }
+}
+
 // --- Lauf -----------------------------------------------------------------
 
 generateTabby()
@@ -230,5 +281,6 @@ generateIterm2()
 generateVscodeThemes()
 updateVscodePackageJson()
 generateBatTheme()
+generateCotEditorThemes()
 
 console.log(`themes/ aus palette.json erzeugt (${VARIANT_ORDER.length} Varianten).`)

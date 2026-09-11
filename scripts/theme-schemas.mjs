@@ -367,3 +367,30 @@ export const VSCODE_TOKEN_RULES = [
     scope: ['markup.bold'],
   },
 ]
+
+// CotEditor: zehn Syntaxkategorien, keine Schriftschnitte, keine Kategorie fuer
+// Operatoren (die bleiben Grundtext). Werte wie bei VSCODE_COLORS:
+// [paletteKey] oder [paletteKey, alpha].
+export const COTEDITOR_COLORS = {
+  text: ['chandra'],
+  background: ['base'],
+  invisibles: ['hl_high'],
+  lineHighlight: ['hl_low'],
+  keywords: ['mangala'],
+  commands: ['guru'],
+  types: ['shukra'],
+  attributes: ['shukra'],
+  variables: ['chandra'],
+  values: ['surya'],
+  numbers: ['surya'],
+  strings: ['budha'],
+  characters: ['rahu'],
+  comments: ['ketu'],
+}
+
+// Diese drei koennten auf die Systemfarbe umschalten; Navagraha setzt eigene.
+export const COTEDITOR_SYSTEM_COLORS = {
+  selection: ['hl_high'],
+  insertionPoint: ['shukra'],
+  highlight: ['guru', '55'],
+}

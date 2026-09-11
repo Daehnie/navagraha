@@ -1,0 +1,61 @@
+{
+  "attributes": {
+    "color": "#0b5657"
+  },
+  "background": {
+    "color": "#f6ebdb"
+  },
+  "characters": {
+    "color": "#5a406a"
+  },
+  "commands": {
+    "color": "#634904"
+  },
+  "comments": {
+    "color": "#504b44"
+  },
+  "highlight": {
+    "color": "#63490455",
+    "usesSystemSetting": false
+  },
+  "insertionPoint": {
+    "color": "#0b5657",
+    "usesSystemSetting": false
+  },
+  "invisibles": {
+    "color": "#cbbca7"
+  },
+  "keywords": {
+    "color": "#962426"
+  },
+  "lineHighlight": {
+    "color": "#f3e3cd"
+  },
+  "metadata": {
+    "description": "Navagraha Ushas · https://daehnie.github.io/navagraha/",
+    "distributionURL": "https://github.com/Daehnie/navagraha",
+    "license": "MIT"
+  },
+  "numbers": {
+    "color": "#7f3904"
+  },
+  "selection": {
+    "color": "#cbbca7",
+    "usesSystemSetting": false
+  },
+  "strings": {
+    "color": "#1c5a27"
+  },
+  "text": {
+    "color": "#221e17"
+  },
+  "types": {
+    "color": "#0b5657"
+  },
+  "values": {
+    "color": "#7f3904"
+  },
+  "variables": {
+    "color": "#221e17"
+  }
+}

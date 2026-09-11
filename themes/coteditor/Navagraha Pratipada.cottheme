@@ -1,0 +1,61 @@
+{
+  "attributes": {
+    "color": "#139292"
+  },
+  "background": {
+    "color": "#110f0c"
+  },
+  "characters": {
+    "color": "#9073a4"
+  },
+  "commands": {
+    "color": "#a67806"
+  },
+  "comments": {
+    "color": "#857f75"
+  },
+  "highlight": {
+    "color": "#a6780655",
+    "usesSystemSetting": false
+  },
+  "insertionPoint": {
+    "color": "#139292",
+    "usesSystemSetting": false
+  },
+  "invisibles": {
+    "color": "#2e2922"
+  },
+  "keywords": {
+    "color": "#db5652"
+  },
+  "lineHighlight": {
+    "color": "#16130e"
+  },
+  "metadata": {
+    "description": "Navagraha Pratipada · https://daehnie.github.io/navagraha/",
+    "distributionURL": "https://github.com/Daehnie/navagraha",
+    "license": "MIT"
+  },
+  "numbers": {
+    "color": "#c4682f"
+  },
+  "selection": {
+    "color": "#2e2922",
+    "usesSystemSetting": false
+  },
+  "strings": {
+    "color": "#499351"
+  },
+  "text": {
+    "color": "#d4cebc"
+  },
+  "types": {
+    "color": "#139292"
+  },
+  "values": {
+    "color": "#c4682f"
+  },
+  "variables": {
+    "color": "#d4cebc"
+  }
+}

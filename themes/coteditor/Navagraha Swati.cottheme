@@ -1,0 +1,61 @@
+{
+  "attributes": {
+    "color": "#139091"
+  },
+  "background": {
+    "color": "#0e1012"
+  },
+  "characters": {
+    "color": "#8f70a3"
+  },
+  "commands": {
+    "color": "#a57808"
+  },
+  "comments": {
+    "color": "#787e87"
+  },
+  "highlight": {
+    "color": "#a5780855",
+    "usesSystemSetting": false
+  },
+  "insertionPoint": {
+    "color": "#139091",
+    "usesSystemSetting": false
+  },
+  "invisibles": {
+    "color": "#26292f"
+  },
+  "keywords": {
+    "color": "#db5552"
+  },
+  "lineHighlight": {
+    "color": "#111318"
+  },
+  "metadata": {
+    "description": "Navagraha Swati · https://daehnie.github.io/navagraha/",
+    "distributionURL": "https://github.com/Daehnie/navagraha",
+    "license": "MIT"
+  },
+  "numbers": {
+    "color": "#c4682e"
+  },
+  "selection": {
+    "color": "#26292f",
+    "usesSystemSetting": false
+  },
+  "strings": {
+    "color": "#489251"
+  },
+  "text": {
+    "color": "#c3ccdc"
+  },
+  "types": {
+    "color": "#139091"
+  },
+  "values": {
+    "color": "#c4682e"
+  },
+  "variables": {
+    "color": "#c3ccdc"
+  }
+}
