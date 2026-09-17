@@ -59,9 +59,9 @@ Theme-Datei oder ins CSS. Die Dateien unter `themes/` sind Ausgabe, keine
 Quelle.
 
 `scripts/generate-themes.mjs` baut sie: tabby, die vier iTerm2-Dateien, die
-vier VS-Code-Themes sowie `contributes.themes` und die Farbe von
-`galleryBanner` im Extension-Manifest, dazu das bat-Theme und die vier
-CotEditor-Themes. Die
+vier Profile fuer das Terminal von macOS, die vier VS-Code-Themes sowie
+`contributes.themes` und die Farbe von `galleryBanner` im Extension-Manifest,
+dazu das bat-Theme und die vier CotEditor-Themes. Die
 Zuordnungstabellen stehen daneben in `scripts/theme-schemas.mjs`. Der
 Generator läuft bei jedem `npm run build` mit, einzeln über
 `npm run generate:themes`. Nach einer Farbänderung gehören die neu erzeugten
@@ -77,6 +77,15 @@ CotEditor liest Hexwerte nicht als sRGB, sondern als Generic RGB. Der
 Generator rechnet die Palette für die `.cottheme`-Dateien deshalb um; dort
 stehen also bewusst andere Hexwerte als in `palette.json`. Ohne Umrechnung
 zeigte CotEditor jede Farbe 9 bis 22 Stufen heller.
+
+Dieselbe Umrechnung braucht das Terminal von macOS: eine `.terminal`-Datei
+trägt jede Farbe als archiviertes `NSColor` in Generic RGB, base64 in einem
+`<data>`-Block. Der Generator schreibt das Archiv als XML statt binär — der
+Entpacker von macOS liest beides, und so bleibt lesbar, was darin steht.
+Terminal kennt keine Vordergrundfarbe für markierten Text; die Auswahl liegt
+deshalb nicht auf `hl_high` wie in tabby und iTerm2, sondern auf `overlay`,
+damit auch dort jede Farbe über 4,5:1 bleibt. Die Profile tragen nur Farben:
+Schrift und Fenster bleiben, wie Terminal sie voreinstellt.
 
 ### Varianten
 

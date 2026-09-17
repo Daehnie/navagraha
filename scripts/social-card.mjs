@@ -35,7 +35,7 @@ const colors = palette.variants.swati.colors
 const code = read('src', 'components', 'CodePreview.astro').match(/<code>([\s\S]*?)<\/code>/)[1]
 
 // Die Programme stehen hier von Hand; die Liste auf der Seite ist Markup.
-const programs = ['VS Code', 'CotEditor', 'iTerm2', 'Tabby', 'Vim', 'bat', 'Anytype']
+const programs = ['VS Code', 'CotEditor', 'iTerm2', 'Terminal.app', 'Tabby', 'Vim', 'bat', 'Anytype']
 
 const card = (t) => `<!doctype html><meta charset="utf-8">
 <style>

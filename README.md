@@ -21,6 +21,7 @@ ihrer Herleitung und einer Vorschau in jeder Variante.
 - [VS Code](themes/vscode/navagraha/)
 - [CotEditor](themes/coteditor/)
 - [iTerm2](themes/iterm2/)
+- [Terminal von macOS](themes/apple-terminal/)
 - [Tabby](themes/tabby/)
 - [Vim und Neovim](themes/vim/) – nimmt die Farben vom Terminal
 - [bat](themes/bat/) – ebenso

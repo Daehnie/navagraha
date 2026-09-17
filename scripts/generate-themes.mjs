@@ -11,10 +11,10 @@ import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
 import {
-  VARIANT_ORDER, ANSI_SLOTS, ANSI_SLOT_LABELS, TABBY_HEADER,
+  VARIANT_ORDER, ANSI_SLOTS, ANSI_SLOT_LABELS, ANSI_SLOT_NAMES, TABBY_HEADER,
   TABBY_VARIANT_NOTES, TABBY_NAMED, ITERM_FIXED, VSCODE_COLORS,
-  VSCODE_ANSI_NAMES, VSCODE_SEMANTIC, VSCODE_TOKEN_RULES,
-  COTEDITOR_COLORS, COTEDITOR_SYSTEM_COLORS,
+  VSCODE_SEMANTIC, VSCODE_TOKEN_RULES, COTEDITOR_COLORS,
+  COTEDITOR_SYSTEM_COLORS, APPLE_TERMINAL_FIXED,
 } from './theme-schemas.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -38,6 +38,34 @@ const component = (hex, offset) =>
   formatFloat(parseInt(hex.slice(offset, offset + 2), 16) / 255)
 
 const withAlpha = (hex, alpha) => (alpha ? hex + alpha : hex)
+
+// macOS liest einen Hexwert an mehreren Stellen nicht als sRGB, sondern als
+// Generic RGB (NSColor calibrated): CotEditor speichert seine Themes so, das
+// Terminal archiviert seine Farben so. Ungerechnet zeigte CotEditor jede Farbe
+// 9 bis 22 Stufen heller. Die Umrechnung: sRGB linearisieren, Matrix aus den
+// Primaerfarben der macOS-Profile "sRGB Profile" und "Generic RGB Profile"
+// (beide auf D50), dann mit dem Mac-Gamma 461/256 codieren. Gegen die
+// Umrechnung von macOS geprueft: hoechstens 1 Stufe, im Blaukanal nahe 0 bis
+// zu 2.
+const SRGB_TO_GENERIC = [
+  [0.9748492, 0.0273096, -0.0021511],
+  [-0.0200145, 1.054192, -0.0342235],
+  [0.0016844, 0.0015574, 0.9967426],
+]
+
+// Die drei Komponenten in Generic RGB, jede von 0 bis 1.
+const toGeneric = (hex) => {
+  const lin = [1, 3, 5]
+    .map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+    .map((u) => (u <= 0.04045 ? u / 12.92 : ((u + 0.055) / 1.055) ** 2.4))
+  return SRGB_TO_GENERIC
+    .map((row) => row[0] * lin[0] + row[1] * lin[1] + row[2] * lin[2])
+    .map((v) => Math.min(1, Math.max(0, v)) ** (256 / 461))
+}
+
+const toGenericRgb = (hex) => `#${toGeneric(hex)
+  .map((v) => Math.round(v * 255).toString(16).padStart(2, '0'))
+  .join('')}`
 
 // --- tabby ----------------------------------------------------------------
 
@@ -109,6 +137,67 @@ function generateIterm2() {
   }
 }
 
+// --- Terminal von macOS ---------------------------------------------------
+
+// Terminal.app legt jede Farbe als NSColor im Format von NSKeyedArchiver ab,
+// base64 in einem <data>-Block. NSKeyedUnarchiver liest ein solches Archiv
+// auch als XML-Plist, deshalb steht es hier lesbar da statt als Binaerformat.
+// Der Farbraum ist NSCalibratedRGB, also Generic RGB.
+const nsColorArchive = (hex) => {
+  const rgb = `${toGeneric(hex).map((v) => v.toFixed(6)).join(' ')}\0`
+  const archive = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<plist version="1.0"><dict>',
+    '<key>$archiver</key><string>NSKeyedArchiver</string>',
+    '<key>$version</key><integer>100000</integer>',
+    '<key>$top</key><dict><key>root</key><dict><key>CF$UID</key><integer>1</integer></dict></dict>',
+    '<key>$objects</key><array>',
+    '<string>$null</string>',
+    '<dict><key>$class</key><dict><key>CF$UID</key><integer>2</integer></dict>'
+    + '<key>NSColorSpace</key><integer>1</integer>'
+    + `<key>NSRGB</key><data>${Buffer.from(rgb, 'utf8').toString('base64')}</data></dict>`,
+    '<dict><key>$classname</key><string>NSColor</string>'
+    + '<key>$classes</key><array><string>NSColor</string><string>NSObject</string></array></dict>',
+    '</array>',
+    '</dict></plist>',
+  ].join('\n')
+
+  return Buffer.from(archive, 'utf8').toString('base64')
+    .match(/.{1,68}/g)
+    .map((line) => `\t${line}`)
+    .join('\n')
+}
+
+function generateAppleTerminal() {
+  mkdirSync(join(root, 'themes', 'apple-terminal'), { recursive: true })
+  for (const key of VARIANT_ORDER) {
+    const v = palette.variants[key]
+    const entries = {}
+    ANSI_SLOTS.forEach((colorKey, i) => {
+      entries[`ANSI${ANSI_SLOT_NAMES[i]}Color`] = v.colors[colorKey]
+    })
+    for (const [terminalKey, colorKey] of Object.entries(APPLE_TERMINAL_FIXED)) {
+      entries[terminalKey] = v.colors[colorKey]
+    }
+
+    // Terminal.app schreibt die Keys alphabetisch, name und type ans Ende.
+    // Schrift, Fenstergroesse und Verhalten stehen bewusst nicht drin: das
+    // Profil bringt Farben mit, sonst nichts.
+    const body = Object.keys(entries).sort()
+      .map((k) => `\t<key>${k}</key>\n\t<data>\n${nsColorArchive(entries[k])}\n\t</data>`)
+      .join('\n')
+
+    write('themes', 'apple-terminal', `Navagraha ${v.label}.terminal`,
+      '<?xml version="1.0" encoding="UTF-8"?>\n'
+      + '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n'
+      + '<plist version="1.0">\n<dict>\n'
+      + body
+      + `\n\t<key>name</key>\n\t<string>Navagraha ${v.label}</string>\n`
+      + '\t<key>type</key>\n\t<string>Window Settings</string>\n'
+      + '</dict>\n</plist>\n')
+  }
+}
+
 // --- VS Code --------------------------------------------------------------
 
 function generateVscodeThemes() {
@@ -120,7 +209,7 @@ function generateVscodeThemes() {
       colors[vscodeKey] = withAlpha(v.colors[colorKey], alpha)
     }
     ANSI_SLOTS.forEach((colorKey, i) => {
-      colors[`terminal.ansi${VSCODE_ANSI_NAMES[i]}`] = v.colors[colorKey]
+      colors[`terminal.ansi${ANSI_SLOT_NAMES[i]}`] = v.colors[colorKey]
     })
 
     const theme = {
@@ -226,30 +315,6 @@ function generateBatTheme() {
 
 // --- CotEditor ------------------------------------------------------------
 
-// CotEditor liest einen Hexwert nicht als sRGB, sondern als Generic RGB
-// (NSColor calibrated) und schreibt ihn beim Speichern auch so. Ungerechnet
-// zeigte es jede Farbe 9 bis 22 Stufen heller. Die Palette wird deshalb
-// umgerechnet: sRGB linearisieren, Matrix aus den Primaerfarben der
-// macOS-Profile "sRGB Profile" und "Generic RGB Profile" (beide auf D50),
-// dann mit dem Mac-Gamma 461/256 codieren. Gegen die Umrechnung von macOS
-// geprueft: hoechstens 1 Stufe, im Blaukanal nahe 0 bis zu 2.
-const SRGB_TO_GENERIC = [
-  [0.9748492, 0.0273096, -0.0021511],
-  [-0.0200145, 1.054192, -0.0342235],
-  [0.0016844, 0.0015574, 0.9967426],
-]
-
-const toGenericRgb = (hex) => {
-  const lin = [1, 3, 5]
-    .map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
-    .map((u) => (u <= 0.04045 ? u / 12.92 : ((u + 0.055) / 1.055) ** 2.4))
-  return `#${SRGB_TO_GENERIC
-    .map((row) => row[0] * lin[0] + row[1] * lin[1] + row[2] * lin[2])
-    .map((v) => Math.round(Math.min(1, Math.max(0, v)) ** (256 / 461) * 255))
-    .map((n) => n.toString(16).padStart(2, '0'))
-    .join('')}`
-}
-
 // CotEditor zeigt den Dateinamen als Namen des Themes. Die Schluessel stehen
 // alphabetisch wie in den mitgelieferten Themes.
 function generateCotEditorThemes() {
@@ -278,6 +343,7 @@ function generateCotEditorThemes() {
 
 generateTabby()
 generateIterm2()
+generateAppleTerminal()
 generateVscodeThemes()
 updateVscodePackageJson()
 generateBatTheme()

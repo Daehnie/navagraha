@@ -228,8 +228,10 @@ export const VSCODE_COLORS = {
   'terminalCursor.foreground': ['shukra'],
 }
 
-// Namen der terminal.ansi*-Keys, index-gleich zu ANSI_SLOTS.
-export const VSCODE_ANSI_NAMES = [
+// Englische Namen der ANSI-Plaetze, index-gleich zu ANSI_SLOTS. Geteilt von
+// den terminal.ansi*-Keys im VS-Code-Theme und den ANSI*Color-Keys in den
+// Profilen fuer das Terminal von macOS.
+export const ANSI_SLOT_NAMES = [
   'Black', 'Red', 'Green', 'Yellow', 'Blue', 'Magenta', 'Cyan', 'White',
   'BrightBlack', 'BrightRed', 'BrightGreen', 'BrightYellow', 'BrightBlue',
   'BrightMagenta', 'BrightCyan', 'BrightWhite',
@@ -393,4 +395,19 @@ export const COTEDITOR_SYSTEM_COLORS = {
   selection: ['hl_high'],
   insertionPoint: ['shukra'],
   highlight: ['guru', '55'],
+}
+
+// Terminal von macOS: Keys ausserhalb der 16 ANSI-Plaetze.
+export const APPLE_TERMINAL_FIXED = {
+  BackgroundColor: 'base',
+  TextColor: 'chandra',
+  TextBoldColor: 'chandra_b',
+  CursorColor: 'shukra',
+  // Terminal.app kennt keine Vordergrundfarbe fuer markierten Text: was
+  // markiert ist, behaelt seine ANSI-Farbe. Die Auswahl liegt deshalb nicht
+  // auf hl_high wie in tabby und iTerm2 (dort 3,7 bis 3,9:1), sondern auf
+  // overlay – der Ebene, gegen die jede Farbe der Palette auf 4,5:1 geloest
+  // ist. Sichtbar bleibt sie: overlay ist eine der drei Flaechen, nicht eine
+  // Toenung des Grundes.
+  SelectionColor: 'overlay',
 }
