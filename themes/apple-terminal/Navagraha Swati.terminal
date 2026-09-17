@@ -359,6 +359,8 @@
 	ZWN0PC9zdHJpbmc+PC9hcnJheT48L2RpY3Q+CjwvYXJyYXk+CjwvZGljdD48L3BsaXN0
 	Pg==
 	</data>
+	<key>UseBrightBold</key>
+	<true/>
 	<key>name</key>
 	<string>Navagraha Swati</string>
 	<key>type</key>

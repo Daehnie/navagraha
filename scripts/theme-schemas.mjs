@@ -411,3 +411,18 @@ export const APPLE_TERMINAL_FIXED = {
   // Toenung des Grundes.
   SelectionColor: 'overlay',
 }
+
+// Schalter, die entscheiden, welche Farbe ueberhaupt erscheint — deshalb
+// stehen sie im Profil, obwohl es sonst nur Farben traegt. Terminal fuellt
+// einen fehlenden Schluessel aus dem Standardprofil des Benutzers auf, ein
+// Profil ohne sie sieht also bei jedem anders aus.
+//
+// UseBrightBold: fetter Text nimmt den hellen Platz seines Farbtons. Ohne den
+// Schalter faerbt Terminal jeden fetten Text mit TextBoldColor und
+// ueberschreibt damit die ANSI-Farbe — `ls` zeigte Verzeichnisse dann weiss
+// statt tuerkis. Mit ihm gilt TextBoldColor nur noch fuer fetten Grundtext,
+// wie 'Bold Color' in iTerm2. Platz 9 ist auch hier Surya: fettes Rot wird
+// kupfern, nicht hellrot.
+export const APPLE_TERMINAL_FLAGS = {
+  UseBrightBold: true,
+}

@@ -14,7 +14,7 @@ import {
   VARIANT_ORDER, ANSI_SLOTS, ANSI_SLOT_LABELS, ANSI_SLOT_NAMES, TABBY_HEADER,
   TABBY_VARIANT_NOTES, TABBY_NAMED, ITERM_FIXED, VSCODE_COLORS,
   VSCODE_SEMANTIC, VSCODE_TOKEN_RULES, COTEDITOR_COLORS,
-  COTEDITOR_SYSTEM_COLORS, APPLE_TERMINAL_FIXED,
+  COTEDITOR_SYSTEM_COLORS, APPLE_TERMINAL_FIXED, APPLE_TERMINAL_FLAGS,
 } from './theme-schemas.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -181,10 +181,12 @@ function generateAppleTerminal() {
     }
 
     // Terminal.app schreibt die Keys alphabetisch, name und type ans Ende.
-    // Schrift, Fenstergroesse und Verhalten stehen bewusst nicht drin: das
-    // Profil bringt Farben mit, sonst nichts.
+    // Schrift und Fenstergroesse stehen bewusst nicht drin: das Profil bringt
+    // Farben mit und die Schalter, ohne die sie nicht ankommen.
     const body = Object.keys(entries).sort()
       .map((k) => `\t<key>${k}</key>\n\t<data>\n${nsColorArchive(entries[k])}\n\t</data>`)
+      .concat(Object.entries(APPLE_TERMINAL_FLAGS)
+        .map(([k, on]) => `\t<key>${k}</key>\n\t<${on}/>`))
       .join('\n')
 
     write('themes', 'apple-terminal', `Navagraha ${v.label}.terminal`,

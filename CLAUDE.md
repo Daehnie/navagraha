@@ -84,8 +84,14 @@ trägt jede Farbe als archiviertes `NSColor` in Generic RGB, base64 in einem
 Entpacker von macOS liest beides, und so bleibt lesbar, was darin steht.
 Terminal kennt keine Vordergrundfarbe für markierten Text; die Auswahl liegt
 deshalb nicht auf `hl_high` wie in tabby und iTerm2, sondern auf `overlay`,
-damit auch dort jede Farbe über 4,5:1 bleibt. Die Profile tragen nur Farben:
-Schrift und Fenster bleiben, wie Terminal sie voreinstellt.
+damit auch dort jede Farbe über 4,5:1 bleibt.
+
+Ein Schlüssel, der im Profil fehlt, wird aus dem Standardprofil des jeweiligen
+Benutzers aufgefüllt — ein Profil, das nur Farben trägt, sieht deshalb nicht
+bei jedem gleich aus. `UseBrightBold` steht darum ausdrücklich drin: ohne ihn
+färbt Terminal jeden fetten Text mit `TextBoldColor` und überschreibt die
+ANSI-Farbe, `ls` zeigte Verzeichnisse dann weiß statt türkis. Schrift und
+Fenster bleiben dagegen, wie Terminal sie voreinstellt.
 
 ### Varianten
 

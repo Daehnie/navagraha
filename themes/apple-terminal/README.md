@@ -26,9 +26,11 @@ Terminal wechselt nicht mit der Systemdarstellung: das gewählte Profil gilt
 für helle und dunkle Umgebung gleichermaßen. Wer beides will, wählt von Hand
 oder legt sich zwei Fenstergruppen an.
 
-Die Profile bringen nur Farben mit. Schriftart, Fenstergröße und Verhalten
-bleiben so, wie Terminal sie voreinstellt; die Schrift steht im selben
-Bereich unter **Text**.
+Die Profile bringen Farben mit und einen einzigen Schalter: **Helle Farben
+für fetten Text**. Ohne ihn färbt Terminal jeden fetten Text mit der Fettfarbe
+und überschreibt damit die ANSI-Farbe — `ls` zeigte Verzeichnisse dann weiß
+statt türkis. Schriftart, Fenstergröße und alles Übrige bleiben so, wie
+Terminal sie voreinstellt; die Schrift steht im selben Bereich unter **Text**.
 
 Terminal kennt keine eigene Farbe für markierten Text — was markiert ist,
 behält seine Farbe. Die Auswahlfläche liegt deshalb auf der obersten
@@ -67,8 +69,11 @@ Nine planets, nine colours — a colour scheme read from a birth chart.
 Terminal does not follow the system appearance: the chosen profile applies in
 both light and dark surroundings, so switching is done by hand.
 
-The profiles carry colours only — font, window size and behaviour stay at
-Terminal's own defaults; the font sits in the same pane under **Text**.
+The profiles carry colours and one switch: **Use bright colors for bold
+text**. Without it Terminal paints every bold run in the bold colour and
+overrides the ANSI colour — `ls` then showed directories white instead of
+teal. Font, window size and everything else stay at Terminal's own defaults;
+the font sits in the same pane under **Text**.
 
 Terminal has no separate colour for selected text, so a selection keeps the
 colour it had. The selection sits on the topmost ground of the palette, the
