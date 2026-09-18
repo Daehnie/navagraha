@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Navagraha Pratipada",
+  "version": "1.0",
+  "description": "Navagraha Pratipada — abgeleitet aus einem siderischen Geburtshoroskop.",
+  "theme": {
+    "colors": {
+      "frame": [22, 18, 13],
+      "frame_inactive": [22, 18, 13],
+      "background_tab": [22, 18, 13],
+      "background_tab_inactive": [22, 18, 13],
+      "toolbar": [31, 28, 23],
+      "omnibox_background": [44, 41, 36],
+      "button_background": [44, 41, 36],
+      "ntp_background": [22, 18, 13],
+      "ntp_header": [31, 28, 23],
+      "tab_text": [242, 237, 227],
+      "tab_background_text": [151, 145, 136],
+      "tab_background_text_inactive": [151, 145, 136],
+      "toolbar_text": [220, 215, 200],
+      "bookmark_text": [220, 215, 200],
+      "toolbar_button_icon": [220, 215, 200],
+      "omnibox_text": [220, 215, 200],
+      "ntp_text": [220, 215, 200],
+      "ntp_link": [109, 145, 213]
+    },
+    "properties": {
+      "ntp_logo_alternate": 1
+    }
+  }
+}

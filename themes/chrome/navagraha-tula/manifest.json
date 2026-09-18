@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Navagraha Tula",
+  "version": "1.0",
+  "description": "Navagraha Tula — abgeleitet aus einem siderischen Geburtshoroskop.",
+  "theme": {
+    "colors": {
+      "frame": [235, 241, 248],
+      "frame_inactive": [235, 241, 248],
+      "background_tab": [235, 241, 248],
+      "background_tab_inactive": [235, 241, 248],
+      "toolbar": [227, 232, 238],
+      "omnibox_background": [215, 220, 226],
+      "button_background": [215, 220, 226],
+      "ntp_background": [235, 241, 248],
+      "ntp_header": [227, 232, 238],
+      "tab_text": [20, 24, 31],
+      "tab_background_text": [89, 94, 102],
+      "tab_background_text_inactive": [89, 94, 102],
+      "toolbar_text": [35, 41, 51],
+      "bookmark_text": [35, 41, 51],
+      "toolbar_button_icon": [35, 41, 51],
+      "omnibox_text": [35, 41, 51],
+      "ntp_text": [35, 41, 51],
+      "ntp_link": [60, 93, 157]
+    },
+    "properties": {
+      "ntp_logo_alternate": 0
+    }
+  }
+}

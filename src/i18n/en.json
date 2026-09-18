@@ -50,7 +50,7 @@
     "lede": "For terminal and editor. Every file carries all four variants; how to install it is in the README next to it.",
     "count": "{n} ports",
     "readme": "A click leads to the folder in the repository. The README there covers installation, the menu items to look for, and whatever is particular to that program.",
-    "kinds": {"terminal": "Terminal", "editor": "Editor"}
+    "kinds": {"terminal": "Terminal", "editor": "Editor", "browser": "Browser"}
   },
   "method": {
     "title": "How the scheme is built",

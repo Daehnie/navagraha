@@ -25,6 +25,7 @@ ihrer Herleitung und einer Vorschau in jeder Variante.
 - [Tabby](themes/tabby/)
 - [Vim und Neovim](themes/vim/) – nimmt die Farben vom Terminal
 - [bat](themes/bat/) – ebenso
+- [Chrome](themes/chrome/)
 
 ## Lizenz
 

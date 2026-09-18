@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Navagraha Swati",
+  "version": "1.0",
+  "description": "Navagraha Swati — abgeleitet aus einem siderischen Geburtshoroskop.",
+  "theme": {
+    "colors": {
+      "frame": [16, 19, 23],
+      "frame_inactive": [16, 19, 23],
+      "background_tab": [16, 19, 23],
+      "background_tab_inactive": [16, 19, 23],
+      "toolbar": [26, 29, 32],
+      "omnibox_background": [38, 41, 45],
+      "button_background": [38, 41, 45],
+      "ntp_background": [16, 19, 23],
+      "ntp_header": [26, 29, 32],
+      "tab_text": [231, 237, 246],
+      "tab_background_text": [139, 145, 153],
+      "tab_background_text_inactive": [139, 145, 153],
+      "toolbar_text": [206, 214, 227],
+      "bookmark_text": [206, 214, 227],
+      "toolbar_button_icon": [206, 214, 227],
+      "omnibox_text": [206, 214, 227],
+      "ntp_text": [206, 214, 227],
+      "ntp_link": [108, 144, 212]
+    },
+    "properties": {
+      "ntp_logo_alternate": 1
+    }
+  }
+}

@@ -50,7 +50,7 @@
     "lede": "Für Terminal und Editor. Jede Datei trägt alle vier Varianten; wie sie eingebaut wird, steht im README daneben.",
     "count": "{n} Portierungen",
     "readme": "Ein Klick führt zum Ordner im Repository. Dort steht das README mit der Einbauanleitung, den Menüpunkten und den Besonderheiten des jeweiligen Programms.",
-    "kinds": {"terminal": "Terminal", "editor": "Editor"}
+    "kinds": {"terminal": "Terminal", "editor": "Editor", "browser": "Browser"}
   },
   "method": {
     "title": "Wie das Schema entsteht",

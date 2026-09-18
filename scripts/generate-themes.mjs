@@ -15,6 +15,7 @@ import {
   TABBY_VARIANT_NOTES, TABBY_NAMED, ITERM_FIXED, VSCODE_COLORS,
   VSCODE_SEMANTIC, VSCODE_TOKEN_RULES, COTEDITOR_COLORS,
   COTEDITOR_SYSTEM_COLORS, APPLE_TERMINAL_FIXED, APPLE_TERMINAL_FLAGS,
+  CHROME_COLORS,
 } from './theme-schemas.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -315,6 +316,44 @@ function generateBatTheme() {
     + '\n\t</array>\n</dict>\n</plist>\n')
 }
 
+// --- Chrome ---------------------------------------------------------------
+
+// Ein Chrome-Theme ist eine Erweiterung und traegt genau ein Schema, anders
+// als das VS-Code-Theme mit seinen vier. Es gibt deshalb vier Ordner, jeder
+// mit nur einer Datei: dem Manifest.
+const chromeRgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16))
+
+function generateChromeThemes() {
+  for (const key of VARIANT_ORDER) {
+    const v = palette.variants[key]
+    const dir = join(root, 'themes', 'chrome', `navagraha-${key}`)
+    mkdirSync(dir, { recursive: true })
+
+    const manifest = {
+      manifest_version: 3,
+      name: `Navagraha ${v.label}`,
+      version: '1.0',
+      description: `Navagraha ${v.label} — abgeleitet aus einem siderischen Geburtshoroskop.`,
+      theme: {
+        colors: Object.fromEntries(Object.entries(CHROME_COLORS)
+          .map(([chromeKey, colorKey]) => [chromeKey, chromeRgb(v.colors[colorKey])])),
+        properties: {
+          // Das bunte Google-Logo auf der neuen Seite braucht einen hellen
+          // Grund; auf den dunklen Varianten nimmt Chrome das weisse.
+          ntp_logo_alternate: v.mode === 'dark' ? 1 : 0,
+        },
+      },
+    }
+
+    // JSON.stringify bricht jedes Tripel auf drei Zeilen um; eine Farbe
+    // gehoert aber in eine Zeile, sonst liest das Manifest sich nicht.
+    const json = JSON.stringify(manifest, null, 2)
+      .replace(/\[\n\s+(\d+),\n\s+(\d+),\n\s+(\d+)\n\s+\]/g, '[$1, $2, $3]')
+
+    write('themes', 'chrome', `navagraha-${key}`, 'manifest.json', `${json}\n`)
+  }
+}
+
 // --- CotEditor ------------------------------------------------------------
 
 // CotEditor zeigt den Dateinamen als Namen des Themes. Die Schluessel stehen
@@ -350,5 +389,6 @@ generateVscodeThemes()
 updateVscodePackageJson()
 generateBatTheme()
 generateCotEditorThemes()
+generateChromeThemes()
 
 console.log(`themes/ aus palette.json erzeugt (${VARIANT_ORDER.length} Varianten).`)

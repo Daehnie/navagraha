@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Navagraha Ushas",
+  "version": "1.0",
+  "description": "Navagraha Ushas — abgeleitet aus einem siderischen Geburtshoroskop.",
+  "theme": {
+    "colors": {
+      "frame": [248, 239, 226],
+      "frame_inactive": [248, 239, 226],
+      "background_tab": [248, 239, 226],
+      "background_tab_inactive": [248, 239, 226],
+      "toolbar": [238, 230, 218],
+      "omnibox_background": [226, 218, 208],
+      "button_background": [226, 218, 208],
+      "ntp_background": [248, 239, 226],
+      "ntp_header": [238, 230, 218],
+      "tab_text": [26, 24, 16],
+      "tab_background_text": [99, 93, 86],
+      "tab_background_text_inactive": [99, 93, 86],
+      "toolbar_text": [45, 40, 30],
+      "bookmark_text": [45, 40, 30],
+      "toolbar_button_icon": [45, 40, 30],
+      "omnibox_text": [45, 40, 30],
+      "ntp_text": [45, 40, 30],
+      "ntp_link": [59, 92, 156]
+    },
+    "properties": {
+      "ntp_logo_alternate": 0
+    }
+  }
+}

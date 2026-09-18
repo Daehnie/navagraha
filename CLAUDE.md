@@ -61,7 +61,8 @@ Quelle.
 `scripts/generate-themes.mjs` baut sie: tabby, die vier iTerm2-Dateien, die
 vier Profile fuer das Terminal von macOS, die vier VS-Code-Themes sowie
 `contributes.themes` und die Farbe von `galleryBanner` im Extension-Manifest,
-dazu das bat-Theme und die vier CotEditor-Themes. Die
+dazu das bat-Theme, die vier CotEditor-Themes und die vier Chrome-Manifeste.
+Die
 Zuordnungstabellen stehen daneben in `scripts/theme-schemas.mjs`. Der
 Generator läuft bei jedem `npm run build` mit, einzeln über
 `npm run generate:themes`. Nach einer Farbänderung gehören die neu erzeugten
@@ -85,6 +86,16 @@ Entpacker von macOS liest beides, und so bleibt lesbar, was darin steht.
 Terminal kennt keine Vordergrundfarbe für markierten Text; die Auswahl liegt
 deshalb nicht auf `hl_high` wie in tabby und iTerm2, sondern auf `overlay`,
 damit auch dort jede Farbe über 4,5:1 bleibt.
+
+Chrome trägt sein Design als Erweiterung, und eine Erweiterung kennt nur ein
+Design — anders als VS Code mit seinen vier in einer. Deshalb liegen unter
+`themes/chrome/` vier Ordner mit je einem `manifest.json`. Die Farbnamen
+stammen aus `kOverwritableColorTable` in Chromiums `browser_theme_pack.cc`;
+was dort nicht steht, übergeht Chrome stillschweigend. Die Flächen liegen wie
+im Editor — `frame` ist der Grund, `toolbar` die Fläche darauf,
+`omnibox_background` die darin. Die Schlüssel für den Inkognito-Modus fehlen
+mit Absicht: Chrome zeichnet ihn sonst wie ein gewöhnliches Fenster, und
+woran man den Modus erkennt, sollte ein Farbschema nicht verwischen.
 
 Ein Schlüssel, der im Profil fehlt, wird aus dem Standardprofil des jeweiligen
 Benutzers aufgefüllt — ein Profil, das nur Farben trägt, sieht deshalb nicht

@@ -21,8 +21,17 @@ const ports = [
   { key: 'vim',    name: 'Vim & Neovim', art: 'editor', ordner: 'themes/vim',
     datei: 'navagraha.vim' },
   { key: 'bat',    name: 'bat',        art: 'terminal', ordner: 'themes/bat',
-    datei: 'navagraha.tmTheme' }
+    datei: 'navagraha.tmTheme' },
+  { key: 'chrome', name: 'Chrome',     art: 'browser',  ordner: 'themes/chrome',
+    datei: '4 × Erweiterung' },
 ]
+// Alle drei Arten sind dasselbe Fenster; sie unterscheiden sich nur in dem,
+// was darin steht: Eingabepfeil, spitze Klammern, ein Tab.
+const zeichen = {
+  terminal: ['M7 9.5 L10.5 12.5 L7 15.5', 'M13 16 h4'],
+  editor: ['M2.5 8.5 h19', 'M9.5 12 L7 14.5 L9.5 17', 'M14.5 12 L17 14.5 L14.5 17'],
+  browser: ['M2.5 8.5 h19', 'M5.5 8.5 v-4.5 h6 v4.5'],
+}
 const repo = 'https://github.com/Daehnie/navagraha/tree/main/'
 ---
 <Base title={`${t.themes.title} — Navagraha`} description={t.themes.lede}>
@@ -38,20 +47,11 @@ const repo = 'https://github.com/Daehnie/navagraha/tree/main/'
         <li>
           <a href={repo + p.ordner}>
             <span class="zeichen" aria-hidden="true">
-              {p.art === 'terminal' ? (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="2.5" y="4" width="19" height="16" rx="2.5" />
-                  <path d="M7 9.5 L10.5 12.5 L7 15.5 M13 16 h4" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <rect x="2.5" y="4" width="19" height="16" rx="2.5" />
-                  <path d="M2.5 8.5 h19" />
-                  <path d="M9.5 12 L7 14.5 L9.5 17 M14.5 12 L17 14.5 L14.5 17"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              )}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2.5" y="4" width="19" height="16" rx="2.5" />
+                {zeichen[p.art].map(d => <path d={d} />)}
+              </svg>
             </span>
             <span class="text">
               <span class="name">{p.name}</span>

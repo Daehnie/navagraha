@@ -426,3 +426,38 @@ export const APPLE_TERMINAL_FIXED = {
 export const APPLE_TERMINAL_FLAGS = {
   UseBrightBold: true,
 }
+
+// Chrome-Theme: Manifest-Schluessel -> Palettenschluessel. Die Namen stammen
+// aus kOverwritableColorTable in Chromiums browser_theme_pack.cc; was dort
+// nicht steht, uebergeht Chrome stillschweigend.
+//
+// Die Ordnung der Flaechen ist dieselbe wie im Editor: der Rahmen ist die
+// hinterste Ebene, die Werkzeugleiste liegt darauf, das Adressfeld darin —
+// base, surface, overlay. Inaktive Tabs gehoeren zum Rahmen, der aktive
+// traegt die Farbe der Werkzeugleiste; so trennt Chrome sie von sich aus.
+//
+// Die Schluessel fuer den Inkognito-Modus fehlen mit Absicht: Chrome zeichnet
+// ihn dann in seinem eigenen Dunkelgrau, und er bleibt als solcher erkennbar.
+// Mit der Palette eingefaerbt saehe ein Inkognito-Fenster in den hellen
+// Varianten aus wie ein gewoehnliches.
+export const CHROME_COLORS = {
+  frame: 'base',
+  frame_inactive: 'base',
+  background_tab: 'base',
+  background_tab_inactive: 'base',
+  toolbar: 'surface',
+  omnibox_background: 'overlay',
+  button_background: 'overlay',
+  ntp_background: 'base',
+  ntp_header: 'surface',
+  // Text wie im VS-Code-Theme: der aktive Tab hell, die uebrigen Ketu.
+  tab_text: 'chandra_b',
+  tab_background_text: 'ketu',
+  tab_background_text_inactive: 'ketu',
+  toolbar_text: 'chandra',
+  bookmark_text: 'chandra',
+  toolbar_button_icon: 'chandra',
+  omnibox_text: 'chandra',
+  ntp_text: 'chandra',
+  ntp_link: 'shani',
+}
