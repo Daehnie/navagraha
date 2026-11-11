@@ -16,6 +16,7 @@ import {
   VSCODE_SEMANTIC, VSCODE_TOKEN_RULES, COTEDITOR_COLORS,
   COTEDITOR_SYSTEM_COLORS, APPLE_TERMINAL_FIXED, APPLE_TERMINAL_FLAGS,
   CHROME_COLORS, NEXTCLOUD_COLORS, NEXTCLOUD_PAIRS, NEXTCLOUD_SELECTORS,
+  VSCODE_SOLVED,
 } from './theme-schemas.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -40,10 +41,10 @@ const component = (hex, offset) =>
 
 const withAlpha = (hex, alpha) => (alpha ? hex + alpha : hex)
 
-// macOS liest einen Hexwert an mehreren Stellen nicht als sRGB, sondern als
 // Die drei Kanaele als Zahlen. Chrome und Nextcloud wollen sie so, nicht als Hex.
 const toRgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16))
 
+// macOS liest einen Hexwert an mehreren Stellen nicht als sRGB, sondern als
 // Generic RGB (NSColor calibrated): CotEditor speichert seine Themes so, das
 // Terminal archiviert seine Farben so. Ungerechnet zeigte CotEditor jede Farbe
 // 9 bis 22 Stufen heller. Die Umrechnung: sRGB linearisieren, Matrix aus den
@@ -70,6 +71,62 @@ const toGeneric = (hex) => {
 const toGenericRgb = (hex) => `#${toGeneric(hex)
   .map((v) => Math.round(v * 255).toString(16).padStart(2, '0'))
   .join('')}`
+
+// Kontrast nach WCAG und das Mischen einer Farbe mit Deckkraft ueber einen
+// Grund. Gebraucht fuer alles, was beim Erzeugen gesucht statt gewaehlt wird.
+const luminance = (hex) => {
+  const [r, g, b] = toRgb(hex).map((c) => c / 255)
+    .map((u) => (u <= 0.04045 ? u / 12.92 : ((u + 0.055) / 1.055) ** 2.4))
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b
+}
+const contrast = (a, b) => {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x)
+  return (hi + 0.05) / (lo + 0.05)
+}
+const mix = (fg, alpha, ground) => `#${toRgb(fg)
+  .map((c, i) => Math.round(c * alpha + toRgb(ground)[i] * (1 - alpha)).toString(16).padStart(2, '0'))
+  .join('')}`
+
+// Alles, was Text tragen kann. Dieselbe Menge, gegen die die Palette selbst
+// auf 4,5:1 geloest ist.
+const TEXT_KEYS = ['chandra', 'chandra_b', 'ketu', 'mangala', 'surya', 'guru', 'budha', 'shukra', 'shani', 'rahu']
+
+// Hoechste Deckkraft (0 bis 255), bei der aller Text auf der Toenung 4,5:1 haelt.
+const strongestFill = (colors, tint) => {
+  let best = 0
+  for (let a = 1; a <= 255; a++) {
+    const fill = mix(colors[tint], a / 255, colors.base)
+    if (Math.min(...TEXT_KEYS.map((k) => contrast(colors[k], fill))) < 4.5) break
+    best = a
+  }
+  return best
+}
+
+// Niedrigste Deckkraft (0 bis 255), bei der die Kante 3:1 gegen ihren Grund erreicht.
+const weakestEdge = (colors, tint, ground) => {
+  for (let a = 1; a <= 255; a++) {
+    if (contrast(mix(colors[tint], a / 255, ground), ground) >= 3) return a
+  }
+  throw new Error(`${tint} erreicht 3:1 gegen ${ground} nicht`)
+}
+
+const hexByte = (n) => Math.round(n).toString(16).padStart(2, '0')
+
+// Loest VSCODE_SOLVED fuer eine Variante: Schluessel -> Hexwert mit Deckkraft.
+function solveVscode(colors) {
+  const out = {}
+  const grounds = { base: colors.base }
+  for (const [key, spec] of Object.entries(VSCODE_SOLVED)) {
+    if (spec.fill) {
+      const alpha = Math.floor(strongestFill(colors, spec.fill) * (spec.share ?? 1))
+      out[key] = colors[spec.fill] + hexByte(alpha)
+      grounds[key] = mix(colors[spec.fill], alpha / 255, colors.base)
+    } else {
+      out[key] = colors[spec.edge] + hexByte(weakestEdge(colors, spec.edge, grounds[spec.on]))
+    }
+  }
+  return out
+}
 
 // --- tabby ----------------------------------------------------------------
 
@@ -214,6 +271,7 @@ function generateVscodeThemes() {
     for (const [vscodeKey, [colorKey, alpha]] of Object.entries(VSCODE_COLORS)) {
       colors[vscodeKey] = withAlpha(v.colors[colorKey], alpha)
     }
+    Object.assign(colors, solveVscode(v.colors))
     ANSI_SLOTS.forEach((colorKey, i) => {
       colors[`terminal.ansi${ANSI_SLOT_NAMES[i]}`] = v.colors[colorKey]
     })
@@ -382,18 +440,6 @@ function generateCotEditorThemes() {
   }
 }
 
-// --- Lauf -----------------------------------------------------------------
-
-generateTabby()
-generateIterm2()
-generateAppleTerminal()
-generateVscodeThemes()
-updateVscodePackageJson()
-generateBatTheme()
-generateCotEditorThemes()
-generateChromeThemes()
-
-console.log(`themes/ aus palette.json erzeugt (${VARIANT_ORDER.length} Varianten).`)
 // --- Nextcloud ------------------------------------------------------------
 
 // Nextcloud traegt sein Design als CSS-Variablen; eingesetzt werden sie ueber
@@ -454,4 +500,16 @@ function generateNextcloudThemes() {
   }
 }
 
+// --- Lauf -----------------------------------------------------------------
+
+generateTabby()
+generateIterm2()
+generateAppleTerminal()
+generateVscodeThemes()
+updateVscodePackageJson()
+generateBatTheme()
+generateCotEditorThemes()
+generateChromeThemes()
 generateNextcloudThemes()
+
+console.log(`themes/ aus palette.json erzeugt (${VARIANT_ORDER.length} Varianten).`)

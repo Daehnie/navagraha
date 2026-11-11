@@ -104,11 +104,10 @@ export const VSCODE_COLORS = {
   'editorLineNumber.foreground': ['ketu'],
   'editorLineNumber.activeForeground': ['guru'],
   'editorCursor.foreground': ['shukra'],
-  'editor.selectionBackground': ['hl_high', 'cc'],
-  'editor.selectionHighlightBackground': ['hl_med', '99'],
-  'editor.wordHighlightBackground': ['hl_med', '99'],
-  'editor.findMatchBackground': ['guru', '55'],
-  'editor.findMatchHighlightBackground': ['guru', '33'],
+  // Treffer, Auswahl und ihre Raender stehen in VSCODE_SOLVED: ihre Deckkraft
+  // haengt von der Variante ab.
+  'editor.findMatchBorder': ['guru_b'],
+  'editor.findRangeHighlightBackground': ['hl_low'],
   'editor.lineHighlightBackground': ['hl_low'],
   'editorIndentGuide.background1': ['hl_med'],
   'editorIndentGuide.activeBackground1': ['hl_high'],
@@ -145,27 +144,48 @@ export const VSCODE_COLORS = {
   'editorGutter.modifiedBackground': ['guru'],
   'editorGutter.deletedBackground': ['mangala'],
   'editorWidget.background': ['surface'],
-  'editorWidget.border': ['hl_high'],
+  'editorWidget.border': ['line'],
   'editorSuggestWidget.background': ['surface'],
   'editorSuggestWidget.selectedBackground': ['hl_high'],
   'editorHoverWidget.background': ['surface'],
-  'editorHoverWidget.border': ['hl_high'],
+  'editorHoverWidget.border': ['line'],
   'peekViewEditor.background': ['surface'],
   'peekViewResult.background': ['surface'],
-  'editorGroupHeader.tabsBackground': ['base'],
+  // Die Reiterleiste ist overlay, der aktive Reiter base: er hat die Farbe des
+  // Editors darunter und ist damit aus der Leiste ausgeschnitten, die nicht
+  // gewaehlten sitzen auf ihr. overlay ist die hoechste Flaeche, gegen die ketu
+  // noch 4,5:1 haelt (4,6 bis 4,7:1), die Leiste kann also nicht heller sein.
+  'editorGroupHeader.tabsBackground': ['overlay'],
   'editorGroup.border': ['hl_med'],
   'tab.activeBackground': ['base'],
   'tab.activeForeground': ['chandra_b'],
-  'tab.inactiveBackground': ['surface'],
+  'tab.inactiveBackground': ['overlay'],
   'tab.inactiveForeground': ['ketu'],
+  'tab.hoverBackground': ['hl_high'],
+  'tab.hoverForeground': ['chandra_b'],
   'tab.border': ['hl_low'],
   'tab.activeBorderTop': ['shukra'],
-  'activityBar.background': ['base'],
-  'activityBar.foreground': ['chandra'],
-  'activityBar.inactiveForeground': ['ketu'],
-  'activityBar.border': ['hl_med'],
-  'activityBarBadge.background': ['shukra'],
-  'activityBarBadge.foreground': ['base'],
+  // Die moderne Darstellung ab VS Code 1.14x zeichnet Reiter ueber eigene
+  // Schluessel und liest die tab.*-Farben eines Themes nicht: ohne diese
+  // Eintraege sind aktiver und inaktive Reiter nicht zu unterscheiden. Einen
+  // Rand oben kennt sie fuer Themes nicht, den traegt allein die Flaeche.
+  'modernEditorTab.activeBackground': ['base'],
+  'modernEditorTab.activeForeground': ['chandra_b'],
+  'modernEditorTab.hoverBackground': ['hl_high'],
+  'modernEditorTab.hoverForeground': ['chandra_b'],
+  // Die Leiste ist ein Band in Shukra: der staerkste Punkt der Karte —
+  // exaltiert in Revati, Atmakaraka, Lagnesha — rahmt das Fenster. Shukra ist
+  // zugleich der Akzent; Fokusrand, Knopf und Cursor liegen auf neutralem Grund
+  // und heben sich dort weiter ab. base auf Shukra erreicht 5,6 bis 5,9:1,
+  // overlay fuer die nicht gewaehlten Symbole 4,6 bis 4,8:1. Die Plakette dreht
+  // die Rollen um und traegt shukra, auf Shukra waere sie unsichtbar.
+  'activityBar.background': ['shukra'],
+  'activityBar.foreground': ['base'],
+  'activityBar.inactiveForeground': ['overlay'],
+  'activityBar.activeBorder': ['base'],
+  'activityBar.border': ['shukra'],
+  'activityBarBadge.background': ['base'],
+  'activityBarBadge.foreground': ['shukra'],
   'sideBar.background': ['surface'],
   'sideBar.foreground': ['subtle'],
   'sideBar.border': ['hl_med'],
@@ -195,22 +215,55 @@ export const VSCODE_COLORS = {
   'panel.border': ['hl_med'],
   'panelTitle.activeForeground': ['chandra'],
   'panelTitle.inactiveForeground': ['ketu'],
-  'input.background': ['surface'],
+  // Das Feld liegt im Widget: gegen dessen surface sinkt es ein (dunkel) oder
+  // hebt sich ab (hell), den Rand traegt line.
+  'input.background': ['base'],
+  'inputOption.activeBorder': ['shukra_b'],
+  'inputOption.activeBackground': ['hl_high'],
+  'inputOption.activeForeground': ['chandra_b'],
+  'inputOption.hoverBackground': ['hl_med'],
   'input.foreground': ['chandra'],
-  'input.border': ['hl_high'],
+  'input.border': ['line'],
   'input.placeholderForeground': ['ketu'],
   'dropdown.background': ['surface'],
   'dropdown.foreground': ['chandra'],
-  'dropdown.border': ['hl_high'],
+  'dropdown.border': ['line'],
   'button.background': ['shukra'],
   'button.foreground': ['base'],
   'button.hoverBackground': ['shukra_b'],
   'badge.background': ['hl_high'],
   'badge.foreground': ['chandra'],
   'progressBar.background': ['shukra'],
-  'scrollbarSlider.background': ['hl_high', '88'],
-  'scrollbarSlider.hoverBackground': ['hl_high', 'cc'],
+  // Der Griff liegt ueber der letzten, angeschnittenen Zeile. Bei 3:1 gegen den
+  // Grund waere er fast deckend und der Text darunter nur noch ein Schatten;
+  // mit 60 % bleibt er sichtbar (2,0 bis 2,2:1) und die Zeile lesbar.
+  'scrollbarSlider.background': ['line', '99'],
+  'scrollbarSlider.hoverBackground': ['line'],
   'scrollbarSlider.activeBackground': ['ketu'],
+  'minimapSlider.background': ['line', '66'],
+  'minimapSlider.hoverBackground': ['line', '99'],
+  'minimapSlider.activeBackground': ['line', 'cc'],
+  // Marken in der Minimap und der Uebersichtsleiste sind Grafik, keine Flaeche
+  // hinter Text: sie duerfen so laut sein wie ein Akzent.
+  'minimap.findMatchHighlight': ['guru_b'],
+  'minimap.selectionHighlight': ['shani_b'],
+  'minimap.selectionOccurrenceHighlight': ['shani'],
+  'minimap.errorHighlight': ['mangala'],
+  'minimap.warningHighlight': ['surya'],
+  'minimapGutter.addedBackground': ['budha'],
+  'minimapGutter.modifiedBackground': ['guru'],
+  'minimapGutter.deletedBackground': ['mangala'],
+  'editorOverviewRuler.findMatchForeground': ['guru_b'],
+  'editorOverviewRuler.selectionHighlightForeground': ['shani_b'],
+  'editorOverviewRuler.wordHighlightForeground': ['shani'],
+  'editorOverviewRuler.wordHighlightStrongForeground': ['shani_b'],
+  'editorOverviewRuler.errorForeground': ['mangala'],
+  'editorOverviewRuler.warningForeground': ['surya'],
+  'editorOverviewRuler.infoForeground': ['shani'],
+  'editorOverviewRuler.addedForeground': ['budha'],
+  'editorOverviewRuler.modifiedForeground': ['guru'],
+  'editorOverviewRuler.deletedForeground': ['mangala'],
+  'editorOverviewRuler.border': ['hl_med'],
   'focusBorder': ['shukra'],
   'foreground': ['chandra'],
   'widget.shadow': ['base', '80'],
@@ -226,6 +279,114 @@ export const VSCODE_COLORS = {
   // Wie selectionForeground in tabby: markierter ANSI-Text laege sonst unter 4,5:1.
   'terminal.selectionForeground': ['chandra_b'],
   'terminalCursor.foreground': ['shukra'],
+
+  // Alles Weitere stand bisher bei VS Code: der Standard kennt die Palette nicht
+  // und riss an mehreren Stellen die 4,5:1.
+  //
+  // Statusleiste. Der Standard fuer `prominent` ist Schwarz mit 50 % Deckkraft,
+  // das gab in den hellen Varianten einen dunkelgrauen Block, auf dem die
+  // Schrift bei 1,8:1 stand (das Feld "Fuer Sprachausgabe optimiert").
+  'statusBarItem.prominentBackground': ['overlay'],
+  'statusBarItem.prominentForeground': ['chandra_b'],
+  'statusBarItem.prominentHoverBackground': ['hl_high'],
+  'statusBarItem.prominentHoverForeground': ['chandra_b'],
+  'statusBarItem.hoverBackground': ['hl_med'],
+  'statusBarItem.hoverForeground': ['chandra_b'],
+  'statusBarItem.activeBackground': ['hl_high'],
+  'statusBarItem.errorBackground': ['mangala'],
+  'statusBarItem.errorForeground': ['base'],
+  'statusBarItem.errorHoverBackground': ['mangala_b'],
+  'statusBarItem.errorHoverForeground': ['base'],
+  'statusBarItem.warningBackground': ['surya'],
+  'statusBarItem.warningForeground': ['base'],
+  'statusBarItem.warningHoverBackground': ['surya_b'],
+  'statusBarItem.warningHoverForeground': ['base'],
+  'statusBarItem.offlineBackground': ['mangala'],
+  'statusBarItem.offlineForeground': ['base'],
+  // Treffer in Listen, Schnellwahl und Vorschlaegen. Auf der gewaehlten Zeile
+  // (hl_high) kam guru nur auf 3,8:1, guru_b erreicht dort 5,8 bis 6,3:1.
+  'list.focusHighlightForeground': ['guru_b'],
+  'editorSuggestWidget.highlightForeground': ['guru'],
+  'editorSuggestWidget.focusHighlightForeground': ['guru_b'],
+  'pickerGroup.foreground': ['shani'],
+  'pickerGroup.border': ['hl_med'],
+  // CodeLens und Inlay-Hinweise standen in den hellen Varianten bei 2,6 bis
+  // 2,8:1; Geistertext ist gedaempft gemeint, aber nicht unlesbar.
+  'editorCodeLens.foreground': ['ketu'],
+  'editorInlayHint.foreground': ['ketu'],
+  'editorInlayHint.background': ['hl_low'],
+  'editorGhostText.foreground': ['ketu'],
+  'editorLink.activeForeground': ['shani_b'],
+  'panelTitle.activeBorder': ['shukra'],
+  'errorForeground': ['mangala'],
+  'list.warningForeground': ['surya'],
+  'notificationsErrorIcon.foreground': ['mangala'],
+  'notificationsWarningIcon.foreground': ['surya'],
+  'notificationsInfoIcon.foreground': ['shani'],
+  'inputValidation.errorBackground': ['overlay'],
+  'inputValidation.errorBorder': ['mangala'],
+  'inputValidation.warningBackground': ['overlay'],
+  'inputValidation.warningBorder': ['surya'],
+  'inputValidation.infoBackground': ['overlay'],
+  'inputValidation.infoBorder': ['shani'],
+  'button.secondaryBackground': ['overlay'],
+  'button.secondaryForeground': ['chandra_b'],
+  'button.secondaryHoverBackground': ['hl_high'],
+  // Git. "Hinzugefuegt" stand in den hellen Varianten bei 3,9:1.
+  'gitDecoration.addedResourceForeground': ['budha'],
+  'gitDecoration.renamedResourceForeground': ['budha'],
+  'gitDecoration.stageModifiedResourceForeground': ['guru'],
+  'gitDecoration.stageDeletedResourceForeground': ['mangala'],
+  'gitDecoration.submoduleResourceForeground': ['rahu'],
+  // Diff: die Uebersicht am Rand traegt keinen Text und darf voll gefaerbt sein.
+  // Die Rinne neben den Zeilen dagegen traegt die Zeilennummern, sie steht in
+  // VSCODE_SOLVED.
+  'diffEditorOverview.insertedForeground': ['budha'],
+  'diffEditorOverview.removedForeground': ['mangala'],
+  'diffEditor.diagonalFill': ['hl_med'],
+}
+
+// VS Code legt die Treffer- und Auswahlflaechen hinter Text, ohne ihn
+// umzufaerben: jedes Token behaelt seine Farbe. Eine Flaeche darf daher nur so
+// weit getoent werden, dass noch der schwaechste Text darauf 4,5:1 haelt — und
+// das sind gegen den Grund nur rund 1,3:1. Eine Flaeche allein ist also nie gut
+// zu sehen. Sichtbar wird eine Stelle ueber Dinge, die keinen Text tragen: den
+// Rand (3:1), die Marke in der Uebersichtsleiste und den Farbton. Deshalb
+// stehen Suche (Guru) und Auswahl (Shani) auf verschiedenen Farbtoenen.
+//
+// Nur die Suche hat einen Rand. Faellt die Suche auf dasselbe Wort wie die
+// Auswahl — VS Code belegt das Suchfeld damit vor —, liegen beide Markierungen
+// uebereinander, und Gold und Blau mischen sich zu Grau. Mit Rand auf beiden
+// ginge der Farbton der Suche verloren; so bleibt ihr goldener Rand stehen, und
+// von der Auswahl faerbt sich nur die Flaeche.
+//
+// Die Deckkraft haengt von Variante und Farbton ab und wird beim Erzeugen
+// gesucht, nicht von Hand gewaehlt:
+//   { fill: farbe, share }  staerkste Toenung, unter der aller Text 4,5:1 haelt,
+//                           mal share (Standard 1)
+//   { edge: farbe, on }     schwaechste Deckkraft, bei der die Kante 3:1 gegen
+//                           ihren Grund erreicht: 'base' oder ein anderer
+//                           Schluessel aus dieser Tabelle, dessen Flaeche darunter liegt
+// Reihenfolge zaehlt: ein Grund steht vor der Kante, die auf ihm liegt.
+export const VSCODE_SOLVED = {
+  'editor.findMatchBackground': { fill: 'guru' },
+  'editor.findMatchHighlightBackground': { fill: 'guru', share: 0.55 },
+  'editor.findMatchHighlightBorder': { edge: 'guru', on: 'editor.findMatchHighlightBackground' },
+  'editor.selectionBackground': { fill: 'shani' },
+  'editor.selectionHighlightBackground': { fill: 'shani', share: 0.55 },
+  'editor.wordHighlightBackground': { fill: 'shani', share: 0.55 },
+  'editor.hoverHighlightBackground': { fill: 'shani', share: 0.5 },
+  'editor.rangeHighlightBackground': { fill: 'guru', share: 0.4 },
+  // Markierter Text in Eingabefeldern und Webansichten.
+  'selection.background': { fill: 'shani' },
+  // Diff: eingefuegt gruen, entfernt rot, die Zeile halb so stark wie das Wort.
+  // Beides liegt hinter Text und folgt derselben Regel wie die Suche.
+  'diffEditor.insertedTextBackground': { fill: 'budha' },
+  'diffEditor.removedTextBackground': { fill: 'mangala' },
+  'diffEditor.insertedLineBackground': { fill: 'budha', share: 0.5 },
+  'diffEditor.removedLineBackground': { fill: 'mangala', share: 0.5 },
+  'diffEditorGutter.insertedLineBackground': { fill: 'budha' },
+  'diffEditorGutter.removedLineBackground': { fill: 'mangala' },
 }
 
 // Englische Namen der ANSI-Plaetze, index-gleich zu ANSI_SLOTS. Geteilt von

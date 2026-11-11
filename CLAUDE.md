@@ -129,6 +129,59 @@ Navagraha färbt statt dessen Zeichen und Schrift — Mangala, Surya, Budha,
 Shani wie im VS-Code-Theme — und lässt die Karte auf `surface` stehen: ein
 eingefärbter Grund wäre eine Farbe, gegen die nichts gemessen wurde.
 
+VS Code legt die Flächen für Treffer und Auswahl hinter den Text, ohne ihn
+umzufärben; jedes Token behält seine Farbe. Eine solche Fläche darf deshalb nur
+so weit getönt sein, dass der schwächste Text darauf 4,5:1 hält — gegen den
+Grund sind das rund 1,3:1, eine Fläche allein ist also nie gut zu sehen. Was
+man sehen muss, trägt deshalb, was keinen Text trägt: der Rand (3:1), die Marke
+in Übersichtsleiste und Minimap und der Farbton. Suche steht in Guru, Auswahl in
+Shani, damit beide sich nicht verwechseln. Die Deckkraft dieser Flächen und
+Ränder steht nicht im Schema, sondern wird beim Erzeugen je Variante gesucht
+(`VSCODE_SOLVED`, `solveVscode` im Generator); die Fläche des aktuellen Treffers
+ist die stärkste, die die Regel zulässt, die übrigen Treffer liegen bei 55 %
+davon. Nur die Suche hat einen Rand, die Auswahl und ihre Vorkommen haben nur
+eine Fläche: VS Code belegt das Suchfeld mit der Auswahl vor, beide
+Markierungen liegen dann übereinander, und zwei Ränder in Gold und Blau
+mischen sich zu Grau. Der Griff des Scrollbalkens liegt mit 60 % bewusst unter
+den 3:1 (2,0 bis 2,2:1): er liegt über der angeschnittenen letzten Zeile, und
+ein deckender Griff machte ihren Text zum Schatten. Ränder von Eingabefeldern und Widgets stehen auf `line`, nicht auf
+`hl_high`. Die Aktivitätsleiste ist ein Band in Shukra: der stärkste Punkt der
+Karte — exaltiert in Revati, Atmakaraka, Lagnesha — rahmt das Fenster. Die Schrift
+darauf ist `base` (5,6 bis 5,9:1) und `overlay` für die nicht gewählten Symbole
+(4,6 bis 4,8:1); die Plakette dreht die Rollen um und trägt `shukra`, auf Shukra
+wäre sie unsichtbar. Shukra ist zugleich der Akzent. Das schadet nicht: Fokusrand,
+Knopf und Cursor liegen auf neutralem Grund und heben sich dort weiter ab, in
+den Aufnahmen stören sich das Teal der Leiste und das der Knöpfe nicht. In den
+dunklen Varianten ist die Leiste ein leuchtendes Cyan, in den hellen ein tiefes
+Teal. Verworfen wurden, jeweils nach Aufnahme in VS Code: Guru (Lagna-Bewohner
+mit Dig Bala, aber für Tula-Lagna funktional ungünstig und in den dunklen
+Varianten ein sehr lautes Senfgelb), der Farbton des Grundes (kein Graha),
+Shani (schon der Operatoren-Ton, Blau gefiel nicht) und Rahu (ruhig, aber
+„Technik" ist eine moderne Zuschreibung, und in den dunklen Varianten ein
+blasses Flieder).
+
+Was das Theme nicht setzt, setzt VS Code, und sein Standard kennt die Palette
+nicht: er hat in den hellen Varianten CodeLens und Inlay-Hinweise auf 2,6 bis
+2,8:1 gelassen, die Statusleisten-Markierung auf 1,8:1 (Schwarz mit 50 %
+Deckkraft über Hell) und Git „hinzugefügt" auf 3,9:1. Von 980 registrierten
+Farben setzt die Datei rund 235; wer eine Fläche mit Text darauf ergänzt, setzt
+beide Seiten, den Vordergrund und den Grund, und misst das Paar. Das gilt auch
+für Flächen, die man für Grafik hält: die Rinne im Diff trägt die
+Zeilennummern und darf deshalb nicht voll gefärbt sein, die Übersicht daneben
+trägt nichts und darf es.
+
+Reiter: Die moderne Darstellung ab VS Code 1.14x liest die `tab.*`-Farben eines
+Themes nicht, sondern nur eigene `modernEditorTab.*`-Schlüssel; ohne sie sind
+aktiver und inaktive Reiter nicht zu unterscheiden, und einen Rand oben kennt
+sie für Themes nicht. Die Leiste steht deshalb auf `overlay` — der höchsten
+Fläche, gegen die `ketu` noch 4,5:1 hält —, der aktive Reiter auf `base`, der
+Farbe des Editors. Er ist damit aus der Leiste ausgeschnitten. Die Fläche
+allein trägt das mit 1,2 bis 1,3:1 nicht; den Unterschied tragen die Schrift
+(15,6:1 gegen 4,6:1) und die Form. Ob eine Änderung an den Reitern wirkt, sieht
+man nur in VS Code selbst: eine zweite Instanz mit `--extensionDevelopmentPath`
+auf `themes/vscode/navagraha` und eigenem, kurzem `--user-data-dir` (der
+Socket-Pfad darf nicht länger als 103 Zeichen sein) zeigt es ohne Installation.
+
 ### Varianten
 
 Vier Stück, in `palette.json` unter `variants`:
@@ -330,4 +383,7 @@ denselben Daten, und in beiden Ansichten des Umschalters gültig.
 ## Offene Punkte
 
 Die vier Screenshots unter `themes/nextcloud/` fehlen noch; das README
-verweist bereits auf sie.
+verweist bereits auf sie. Die vier unter `themes/vscode/navagraha/` sind
+veraltet: Aktivitätsleiste, Suche und rechte Leiste sehen jetzt anders aus.
+Die Version in `themes/vscode/navagraha/package.json` steht noch auf 1.3.0 und
+wird bei der Veröffentlichung von Hand angehoben.
