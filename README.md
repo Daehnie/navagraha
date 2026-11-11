@@ -26,6 +26,7 @@ ihrer Herleitung und einer Vorschau in jeder Variante.
 - [Vim und Neovim](themes/vim/) – nimmt die Farben vom Terminal
 - [bat](themes/bat/) – ebenso
 - [Chrome](themes/chrome/)
+- [Nextcloud](themes/nextcloud/)
 
 ## Lizenz
 

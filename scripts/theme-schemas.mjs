@@ -461,3 +461,131 @@ export const CHROME_COLORS = {
   ntp_text: 'chandra',
   ntp_link: 'shani',
 }
+
+// Nextcloud: CSS-Variable -> Palettenschluessel. `{ rgb }` schreibt das
+// Tripel "r,g,b", das einige Variablen statt eines Hexwerts erwarten;
+// `{ dark, light }` einen festen Wert je Modus. Die Namen stammen aus
+// apps/theming/lib/Themes/DefaultTheme.php und DarkTheme.php; was dort nicht
+// steht, kennt Nextcloud nicht.
+//
+// Nicht gesetzt bleiben die Variablen, die Nextcloud selbst aus einer anderen
+// ableitet (`--color-main-background-blur`, `--color-scrollbar`,
+// `--color-background-selection`, die `--color-primary-element-light*`) —
+// sie folgen der Palette von allein. Ebenso der Schatten: er entsteht bei
+// Nextcloud aus dem Grund seines eigenen Modus, und der stimmt, weil eine
+// dunkle Variante nur im dunklen Design steht.
+export const NEXTCLOUD_COLORS = {
+  // Die drei Flaechen liegen wie im Editor: der Grund, die Flaeche darauf,
+  // die darin.
+  '--color-main-background': 'base',
+  '--color-main-background-rgb': { rgb: 'base' },
+  '--color-background-dark': 'surface',
+  '--color-background-darker': 'overlay',
+  '--color-background-plain': 'base',
+  '--color-background-plain-text': 'chandra',
+
+  // Die drei hl_*-Stufen in ihrer Ordnung: ueberfahren, gewaehlt, beides.
+  '--color-background-hover': 'hl_low',
+  '--color-primary-light': 'hl_med',
+  '--color-primary-light-hover': 'hl_high',
+  '--color-primary-light-text': 'chandra_b',
+
+  // Ladeplatzhalter und Ladezeichen. Kein Text darauf.
+  '--color-placeholder-light': 'surface',
+  '--color-placeholder-dark': 'overlay',
+  '--color-loading-light': 'hl_high',
+  '--color-loading-dark': 'ketu',
+
+  '--color-main-text': 'chandra',
+  // Nextcloud verlangt von maxcontrast 4,5:1 gegen Grund *und* Ueberfahren.
+  // subtle haelt das auf allen sechs Flaechen, am knappsten mit 4,66:1 auf
+  // hl_high.
+  '--color-text-maxcontrast': 'subtle',
+  '--color-text-maxcontrast-default': 'subtle',
+  // Auf der unscharfen Flaeche ist der Grund unbekannt; dort steht die
+  // staerkste Textfarbe, nicht die gerade noch ausreichende.
+  '--color-text-maxcontrast-background-blur': 'chandra',
+  '--color-text-error': 'mangala',
+  '--color-text-success': 'budha',
+
+  // Kanten. maxcontrast ist bei Nextcloud die Kante des Bedienelements —
+  // genau das, wofuer `line` da ist; die beiden anderen sind Fugen.
+  '--color-border': 'hl_med',
+  '--color-border-dark': 'hl_high',
+  '--color-border-maxcontrast': 'line',
+
+  // Zeichen der vier Meldungsarten, dieselbe Zuordnung wie im VS-Code-Theme.
+  '--color-element-error': 'mangala',
+  '--color-element-warning': 'surya',
+  '--color-element-success': 'budha',
+  '--color-element-info': 'shani',
+
+  // Die Karte selbst bleibt eine Flaeche der Palette, ihre Art liest man an
+  // Zeichen und Schrift. Ein eingefaerbter Grund waere eine Farbe, gegen die
+  // niemand gemessen hat — auf surface und overlay steht jeder Graha ueber
+  // 4,5:1.
+  '--color-error': 'surface',
+  '--color-error-hover': 'overlay',
+  '--color-error-text': 'mangala',
+  '--color-error-rgb': { rgb: 'surface' },
+  '--color-warning': 'surface',
+  '--color-warning-hover': 'overlay',
+  '--color-warning-text': 'surya',
+  '--color-warning-rgb': { rgb: 'surface' },
+  '--color-success': 'surface',
+  '--color-success-hover': 'overlay',
+  '--color-success-text': 'budha',
+  '--color-success-rgb': { rgb: 'surface' },
+  '--color-info': 'surface',
+  '--color-info-hover': 'overlay',
+  '--color-info-text': 'shani',
+  '--color-info-rgb': { rgb: 'surface' },
+
+  '--color-favorite': 'guru',
+  // Ein Treffer ist eine Auswahl: dieselbe Farbe, die in tabby, iTerm2 und
+  // VS Code markiert.
+  '--color-mark': 'hl_high',
+
+  // Shukra traegt den Akzent wie ueberall sonst: Knopf, Schreibmarke, Fokus.
+  '--color-primary': 'shukra',
+  '--color-primary-text': 'base',
+  '--color-primary-hover': 'shukra_b',
+  '--color-primary-element': 'shukra',
+  '--color-primary-element-hover': 'shukra_b',
+  '--color-primary-element-text': 'base',
+  // Abgeschaltete Schrift auf dem Akzent. overlay steht dort mit 4,6:1.
+  '--color-primary-element-text-dark': 'overlay',
+
+  // Keine Farben, sondern Filter fuer alte Bildzeichen. Sie drehen um, wenn
+  // die Schrift auf dem Akzent dunkel ist — bei Navagraha traegt der Akzent
+  // immer `base`, also in den dunklen Varianten.
+  '--primary-invert-if-bright': { dark: 'invert(100%)', light: 'no' },
+  '--primary-invert-if-dark': { dark: 'no', light: 'invert(100%)' },
+  '--background-image-invert-if-bright': { dark: 'no', light: 'invert(100%)' },
+}
+
+// Nextcloud laesst jeden Benutzer zwischen hell, dunkel und "wie das System"
+// waehlen, und diese Wahl ist eine Einstellung der Barrierefreiheit. Eine
+// Datei traegt deshalb nicht eine Variante, sondern das helle und das dunkle
+// Geschwister desselben Grundes.
+export const NEXTCLOUD_PAIRS = [
+  { key: 'prithvi', label: 'Prithvi', light: 'ushas', dark: 'pratipada' },
+  { key: 'vayu', label: 'Vayu', light: 'tula', dark: 'swati' },
+]
+
+// Die Selektoren. Nextcloud haengt jedes gewaehlte Design als eigenes
+// Attribut an <body> (`data-theme-dark`) und schreibt alle zusammen nach
+// `data-themes`; wer nicht angemeldet ist, hat dort nichts stehen und folgt
+// dem System. Die Regeln stehen auf `body[...]` und damit eine Stelle
+// spezifischer als Nextclouds eigene `[data-theme-*]` und `:root` — so gilt
+// die Palette, gleich in welcher Reihenfolge die Stilvorlagen geladen werden.
+//
+// `light-highcontrast` und `dark-highcontrast` fehlen mit Absicht: sie loesen
+// auf 7:1, Navagraha auf 4,5:1. Eingefaerbt waeren sie nicht mehr, was ihr
+// Name verspricht. Ein Attributselektor trifft nur den ganzen Namen, die
+// beiden bleiben von `[data-theme-light]` also unberuehrt.
+export const NEXTCLOUD_SELECTORS = {
+  auto: ['body[data-themes=""]', 'body[data-theme-default]'],
+  light: ['body[data-theme-light]'],
+  dark: ['body[data-theme-dark]'],
+}

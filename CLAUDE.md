@@ -61,7 +61,8 @@ Quelle.
 `scripts/generate-themes.mjs` baut sie: tabby, die vier iTerm2-Dateien, die
 vier Profile fuer das Terminal von macOS, die vier VS-Code-Themes sowie
 `contributes.themes` und die Farbe von `galleryBanner` im Extension-Manifest,
-dazu das bat-Theme, die vier CotEditor-Themes und die vier Chrome-Manifeste.
+dazu das bat-Theme, die vier CotEditor-Themes, die vier Chrome-Manifeste und
+die zwei CSS-Dateien fuer Nextcloud.
 Die
 Zuordnungstabellen stehen daneben in `scripts/theme-schemas.mjs`. Der
 Generator läuft bei jedem `npm run build` mit, einzeln über
@@ -103,6 +104,30 @@ bei jedem gleich aus. `UseBrightBold` steht darum ausdrücklich drin: ohne ihn
 färbt Terminal jeden fetten Text mit `TextBoldColor` und überschreibt die
 ANSI-Farbe, `ls` zeigte Verzeichnisse dann weiß statt türkis. Schrift und
 Fenster bleiben dagegen, wie Terminal sie voreinstellt.
+
+Nextcloud trägt sein Design als CSS-Variablen; eingesetzt werden sie über
+die App `theming_customcss`, die eigenes CSS unverändert ausliefert. Deshalb
+liegen unter `themes/nextcloud/` zwei Dateien — aber nicht eine je Variante
+wie bei Chrome, sondern eine je Grund, mit dem hellen und dem dunklen
+Geschwister darin. Ob hell oder dunkel gilt, wählt in Nextcloud jeder
+Benutzer selbst, und diese Wahl ist eine Einstellung der Barrierefreiheit;
+eine Datei, die beide Stellungen gleich belädt, nähme sie ihm ab.
+
+Die Regeln stehen auf `body[data-theme-…]` statt auf `[data-theme-…]` oder
+`:root`. Die eine Stelle mehr an Spezifität macht die Ladereihenfolge der
+Stilvorlagen gleichgültig — welche zuerst kommt, hängt sonst daran, in
+welcher Reihenfolge Nextcloud seine Apps bootet. Wer nicht angemeldet ist,
+hat gar kein Design gewählt und trägt ein leeres `data-themes`; dieser Fall
+steht neben `data-theme-default` und folgt mit ihm `prefers-color-scheme`.
+
+`light-highcontrast` und `dark-highcontrast` bleiben unberührt: sie lösen auf
+7:1, Navagraha auf 4,5:1. Ein Attributselektor trifft nur den ganzen Namen,
+`[data-theme-light]` fasst die beiden also nicht an.
+
+Die vier Meldungsarten färben bei Nextcloud sonst die Fläche der Karte.
+Navagraha färbt statt dessen Zeichen und Schrift — Mangala, Surya, Budha,
+Shani wie im VS-Code-Theme — und lässt die Karte auf `surface` stehen: ein
+eingefärbter Grund wäre eine Farbe, gegen die nichts gemessen wurde.
 
 ### Varianten
 
@@ -164,8 +189,9 @@ Bedienelementen und für Grafik verlangt, die man zum Verstehen braucht. Er
 steht an den Rändern der Schalter, am Rahmen der Farbfelder und am Raster
 des Diagramms. Die `hl_*`-Werte taugen dafür nicht: sie sind
 Auswahlfarben für den Editor und liegen bewusst bei 1,2 bis 1,6:1. `line`
-ist der einzige Palettenwert, der nur die Seite betrifft — kein Schema in
-`scripts/theme-schemas.mjs` greift ihn ab.
+betrifft außer der Seite nur Nextcloud: dort meint
+`--color-border-maxcontrast` dieselbe Kante und steht auf denselben 3:1.
+Kein anderes Schema in `scripts/theme-schemas.mjs` greift ihn ab.
 
 Dekorative Linien bleiben davon unberührt: die Trennstriche zwischen
 Abschnitten und Tabellenzeilen und der Rahmen der Codefläche stehen weiter
@@ -303,4 +329,5 @@ denselben Daten, und in beiden Ansichten des Umschalters gültig.
 
 ## Offene Punkte
 
-Zurzeit keine.
+Die vier Screenshots unter `themes/nextcloud/` fehlen noch; das README
+verweist bereits auf sie.

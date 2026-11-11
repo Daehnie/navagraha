@@ -15,7 +15,7 @@ import {
   TABBY_VARIANT_NOTES, TABBY_NAMED, ITERM_FIXED, VSCODE_COLORS,
   VSCODE_SEMANTIC, VSCODE_TOKEN_RULES, COTEDITOR_COLORS,
   COTEDITOR_SYSTEM_COLORS, APPLE_TERMINAL_FIXED, APPLE_TERMINAL_FLAGS,
-  CHROME_COLORS,
+  CHROME_COLORS, NEXTCLOUD_COLORS, NEXTCLOUD_PAIRS, NEXTCLOUD_SELECTORS,
 } from './theme-schemas.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -41,6 +41,9 @@ const component = (hex, offset) =>
 const withAlpha = (hex, alpha) => (alpha ? hex + alpha : hex)
 
 // macOS liest einen Hexwert an mehreren Stellen nicht als sRGB, sondern als
+// Die drei Kanaele als Zahlen. Chrome und Nextcloud wollen sie so, nicht als Hex.
+const toRgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16))
+
 // Generic RGB (NSColor calibrated): CotEditor speichert seine Themes so, das
 // Terminal archiviert seine Farben so. Ungerechnet zeigte CotEditor jede Farbe
 // 9 bis 22 Stufen heller. Die Umrechnung: sRGB linearisieren, Matrix aus den
@@ -321,7 +324,6 @@ function generateBatTheme() {
 // Ein Chrome-Theme ist eine Erweiterung und traegt genau ein Schema, anders
 // als das VS-Code-Theme mit seinen vier. Es gibt deshalb vier Ordner, jeder
 // mit nur einer Datei: dem Manifest.
-const chromeRgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16))
 
 function generateChromeThemes() {
   for (const key of VARIANT_ORDER) {
@@ -336,7 +338,7 @@ function generateChromeThemes() {
       description: `Navagraha ${v.label} — abgeleitet aus einem siderischen Geburtshoroskop.`,
       theme: {
         colors: Object.fromEntries(Object.entries(CHROME_COLORS)
-          .map(([chromeKey, colorKey]) => [chromeKey, chromeRgb(v.colors[colorKey])])),
+          .map(([chromeKey, colorKey]) => [chromeKey, toRgb(v.colors[colorKey])])),
         properties: {
           // Das bunte Google-Logo auf der neuen Seite braucht einen hellen
           // Grund; auf den dunklen Varianten nimmt Chrome das weisse.
@@ -392,3 +394,64 @@ generateCotEditorThemes()
 generateChromeThemes()
 
 console.log(`themes/ aus palette.json erzeugt (${VARIANT_ORDER.length} Varianten).`)
+// --- Nextcloud ------------------------------------------------------------
+
+// Nextcloud traegt sein Design als CSS-Variablen; eingesetzt werden sie ueber
+// die App "Custom CSS". Weil jeder Benutzer dort zwischen hell, dunkel und
+// "wie das System" waehlt, traegt eine Datei ein Paar — das helle und das
+// dunkle Geschwister desselben Grundes. Vier Dateien, von denen jede beide
+// Schalterstellungen mit derselben Variante belegte, naehme dem Benutzer
+// diese Wahl ab.
+const nextcloudBlock = (variantKey) => {
+  const v = palette.variants[variantKey]
+  return Object.entries(NEXTCLOUD_COLORS).map(([name, value]) => {
+    if (typeof value === 'string') return `  ${name}: ${v.colors[value]};`
+    if (value.rgb) return `  ${name}: ${toRgb(v.colors[value.rgb]).join(',')};`
+    return `  ${name}: ${value[v.mode]};`
+  }).join('\n')
+}
+
+function generateNextcloudThemes() {
+  mkdirSync(join(root, 'themes', 'nextcloud'), { recursive: true })
+  const { auto, light, dark } = NEXTCLOUD_SELECTORS
+
+  for (const pair of NEXTCLOUD_PAIRS) {
+    const hell = palette.variants[pair.light]
+    const dunkel = palette.variants[pair.dark]
+
+    // Der dunkle Satz steht zweimal da: einmal unter der Medienabfrage fuer
+    // alle, die nichts gewaehlt haben, einmal fuer die, die ihn gewaehlt
+    // haben. CSS kennt keinen Weg, denselben Block zwei Bedingungen zu geben.
+    const body = [
+      `/* Navagraha ${pair.label} für Nextcloud`,
+      ` * ${dunkel.label} (dunkel) und ${hell.label} (hell), abgeleitet aus einem`,
+      ' * siderischen Geburtshoroskop. https://daehnie.github.io/navagraha/',
+      ' *',
+      ' * Erzeugt aus src/data/palette.json — nicht von Hand ändern.',
+      ' * Einbau: Verwaltung → Design → Benutzerdefiniertes CSS.',
+      ' */',
+      '',
+      `/* ${hell.label} — hell: gewählt oder vom System vorgegeben */`,
+      `${[...light, ...auto].join(',\n')} {`,
+      nextcloudBlock(pair.light),
+      '}',
+      '',
+      '@media (prefers-color-scheme: dark) {',
+      `  /* ${dunkel.label} — für alle, die kein Design gewählt haben */`,
+      `${auto.map((s) => `  ${s}`).join(',\n')} {`,
+      nextcloudBlock(pair.dark).split('\n').map((l) => `  ${l}`).join('\n'),
+      '  }',
+      '}',
+      '',
+      `/* ${dunkel.label} — dunkel, ausdrücklich gewählt */`,
+      `${dark.join(',\n')} {`,
+      nextcloudBlock(pair.dark),
+      '}',
+      '',
+    ].join('\n')
+
+    write('themes', 'nextcloud', `navagraha-${pair.key}.css`, body)
+  }
+}
+
+generateNextcloudThemes()

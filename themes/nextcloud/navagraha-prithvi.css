@@ -1,0 +1,189 @@
+/* Navagraha Prithvi für Nextcloud
+ * Pratipada (dunkel) und Ushas (hell), abgeleitet aus einem
+ * siderischen Geburtshoroskop. https://daehnie.github.io/navagraha/
+ *
+ * Erzeugt aus src/data/palette.json — nicht von Hand ändern.
+ * Einbau: Verwaltung → Design → Benutzerdefiniertes CSS.
+ */
+
+/* Ushas — hell: gewählt oder vom System vorgegeben */
+body[data-theme-light],
+body[data-themes=""],
+body[data-theme-default] {
+  --color-main-background: #f8efe2;
+  --color-main-background-rgb: 248,239,226;
+  --color-background-dark: #eee6da;
+  --color-background-darker: #e2dad0;
+  --color-background-plain: #f8efe2;
+  --color-background-plain-text: #2d281e;
+  --color-background-hover: #f6e8d6;
+  --color-primary-light: #e5d8c6;
+  --color-primary-light-hover: #d5c8b6;
+  --color-primary-light-text: #1a1810;
+  --color-placeholder-light: #eee6da;
+  --color-placeholder-dark: #e2dad0;
+  --color-loading-light: #d5c8b6;
+  --color-loading-dark: #635d56;
+  --color-main-text: #2d281e;
+  --color-text-maxcontrast: #564f47;
+  --color-text-maxcontrast-default: #564f47;
+  --color-text-maxcontrast-background-blur: #2d281e;
+  --color-text-error: #a83632;
+  --color-text-success: #216b33;
+  --color-border: #e5d8c6;
+  --color-border-dark: #d5c8b6;
+  --color-border-maxcontrast: #867a6a;
+  --color-element-error: #a83632;
+  --color-element-warning: #934a00;
+  --color-element-success: #216b33;
+  --color-element-info: #3b5c9c;
+  --color-error: #eee6da;
+  --color-error-hover: #e2dad0;
+  --color-error-text: #a83632;
+  --color-error-rgb: 238,230,218;
+  --color-warning: #eee6da;
+  --color-warning-hover: #e2dad0;
+  --color-warning-text: #934a00;
+  --color-warning-rgb: 238,230,218;
+  --color-success: #eee6da;
+  --color-success-hover: #e2dad0;
+  --color-success-text: #216b33;
+  --color-success-rgb: 238,230,218;
+  --color-info: #eee6da;
+  --color-info-hover: #e2dad0;
+  --color-info-text: #3b5c9c;
+  --color-info-rgb: 238,230,218;
+  --color-favorite: #775a00;
+  --color-mark: #d5c8b6;
+  --color-primary: #01686a;
+  --color-primary-text: #f8efe2;
+  --color-primary-hover: #004d4e;
+  --color-primary-element: #01686a;
+  --color-primary-element-hover: #004d4e;
+  --color-primary-element-text: #f8efe2;
+  --color-primary-element-text-dark: #e2dad0;
+  --primary-invert-if-bright: no;
+  --primary-invert-if-dark: invert(100%);
+  --background-image-invert-if-bright: invert(100%);
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Pratipada — für alle, die kein Design gewählt haben */
+  body[data-themes=""],
+  body[data-theme-default] {
+    --color-main-background: #16120d;
+    --color-main-background-rgb: 22,18,13;
+    --color-background-dark: #1f1c17;
+    --color-background-darker: #2c2924;
+    --color-background-plain: #16120d;
+    --color-background-plain-text: #dcd7c8;
+    --color-background-hover: #1d1810;
+    --color-primary-light: #2b251d;
+    --color-primary-light-hover: #3c362d;
+    --color-primary-light-text: #f2ede3;
+    --color-placeholder-light: #1f1c17;
+    --color-placeholder-dark: #2c2924;
+    --color-loading-light: #3c362d;
+    --color-loading-dark: #979188;
+    --color-main-text: #dcd7c8;
+    --color-text-maxcontrast: #a9a298;
+    --color-text-maxcontrast-default: #a9a298;
+    --color-text-maxcontrast-background-blur: #dcd7c8;
+    --color-text-error: #e46d64;
+    --color-text-success: #58a164;
+    --color-border: #2b251d;
+    --color-border-dark: #3c362d;
+    --color-border-maxcontrast: #787167;
+    --color-element-error: #e46d64;
+    --color-element-warning: #d07c3d;
+    --color-element-success: #58a164;
+    --color-element-info: #6d91d5;
+    --color-error: #1f1c17;
+    --color-error-hover: #2c2924;
+    --color-error-text: #e46d64;
+    --color-error-rgb: 31,28,23;
+    --color-warning: #1f1c17;
+    --color-warning-hover: #2c2924;
+    --color-warning-text: #d07c3d;
+    --color-warning-rgb: 31,28,23;
+    --color-success: #1f1c17;
+    --color-success-hover: #2c2924;
+    --color-success-text: #58a164;
+    --color-success-rgb: 31,28,23;
+    --color-info: #1f1c17;
+    --color-info-hover: #2c2924;
+    --color-info-text: #6d91d5;
+    --color-info-rgb: 31,28,23;
+    --color-favorite: #b68a00;
+    --color-mark: #3c362d;
+    --color-primary: #00a2a3;
+    --color-primary-text: #16120d;
+    --color-primary-hover: #3bcfd0;
+    --color-primary-element: #00a2a3;
+    --color-primary-element-hover: #3bcfd0;
+    --color-primary-element-text: #16120d;
+    --color-primary-element-text-dark: #2c2924;
+    --primary-invert-if-bright: invert(100%);
+    --primary-invert-if-dark: no;
+    --background-image-invert-if-bright: no;
+  }
+}
+
+/* Pratipada — dunkel, ausdrücklich gewählt */
+body[data-theme-dark] {
+  --color-main-background: #16120d;
+  --color-main-background-rgb: 22,18,13;
+  --color-background-dark: #1f1c17;
+  --color-background-darker: #2c2924;
+  --color-background-plain: #16120d;
+  --color-background-plain-text: #dcd7c8;
+  --color-background-hover: #1d1810;
+  --color-primary-light: #2b251d;
+  --color-primary-light-hover: #3c362d;
+  --color-primary-light-text: #f2ede3;
+  --color-placeholder-light: #1f1c17;
+  --color-placeholder-dark: #2c2924;
+  --color-loading-light: #3c362d;
+  --color-loading-dark: #979188;
+  --color-main-text: #dcd7c8;
+  --color-text-maxcontrast: #a9a298;
+  --color-text-maxcontrast-default: #a9a298;
+  --color-text-maxcontrast-background-blur: #dcd7c8;
+  --color-text-error: #e46d64;
+  --color-text-success: #58a164;
+  --color-border: #2b251d;
+  --color-border-dark: #3c362d;
+  --color-border-maxcontrast: #787167;
+  --color-element-error: #e46d64;
+  --color-element-warning: #d07c3d;
+  --color-element-success: #58a164;
+  --color-element-info: #6d91d5;
+  --color-error: #1f1c17;
+  --color-error-hover: #2c2924;
+  --color-error-text: #e46d64;
+  --color-error-rgb: 31,28,23;
+  --color-warning: #1f1c17;
+  --color-warning-hover: #2c2924;
+  --color-warning-text: #d07c3d;
+  --color-warning-rgb: 31,28,23;
+  --color-success: #1f1c17;
+  --color-success-hover: #2c2924;
+  --color-success-text: #58a164;
+  --color-success-rgb: 31,28,23;
+  --color-info: #1f1c17;
+  --color-info-hover: #2c2924;
+  --color-info-text: #6d91d5;
+  --color-info-rgb: 31,28,23;
+  --color-favorite: #b68a00;
+  --color-mark: #3c362d;
+  --color-primary: #00a2a3;
+  --color-primary-text: #16120d;
+  --color-primary-hover: #3bcfd0;
+  --color-primary-element: #00a2a3;
+  --color-primary-element-hover: #3bcfd0;
+  --color-primary-element-text: #16120d;
+  --color-primary-element-text-dark: #2c2924;
+  --primary-invert-if-bright: invert(100%);
+  --primary-invert-if-dark: no;
+  --background-image-invert-if-bright: no;
+}

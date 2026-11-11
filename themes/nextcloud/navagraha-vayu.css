@@ -1,0 +1,189 @@
+/* Navagraha Vayu für Nextcloud
+ * Swati (dunkel) und Tula (hell), abgeleitet aus einem
+ * siderischen Geburtshoroskop. https://daehnie.github.io/navagraha/
+ *
+ * Erzeugt aus src/data/palette.json — nicht von Hand ändern.
+ * Einbau: Verwaltung → Design → Benutzerdefiniertes CSS.
+ */
+
+/* Tula — hell: gewählt oder vom System vorgegeben */
+body[data-theme-light],
+body[data-themes=""],
+body[data-theme-default] {
+  --color-main-background: #ebf1f8;
+  --color-main-background-rgb: 235,241,248;
+  --color-background-dark: #e3e8ee;
+  --color-background-darker: #d7dce2;
+  --color-background-plain: #ebf1f8;
+  --color-background-plain-text: #232933;
+  --color-background-hover: #e3ebf5;
+  --color-primary-light: #d3dbe5;
+  --color-primary-light-hover: #c3cbd5;
+  --color-primary-light-text: #14181f;
+  --color-placeholder-light: #e3e8ee;
+  --color-placeholder-dark: #d7dce2;
+  --color-loading-light: #c3cbd5;
+  --color-loading-dark: #595e66;
+  --color-main-text: #232933;
+  --color-text-maxcontrast: #4b525a;
+  --color-text-maxcontrast-default: #4b525a;
+  --color-text-maxcontrast-background-blur: #232933;
+  --color-text-error: #a83632;
+  --color-text-success: #216b33;
+  --color-border: #d3dbe5;
+  --color-border-dark: #c3cbd5;
+  --color-border-maxcontrast: #767d87;
+  --color-element-error: #a83632;
+  --color-element-warning: #944b00;
+  --color-element-success: #216b33;
+  --color-element-info: #3c5d9d;
+  --color-error: #e3e8ee;
+  --color-error-hover: #d7dce2;
+  --color-error-text: #a83632;
+  --color-error-rgb: 227,232,238;
+  --color-warning: #e3e8ee;
+  --color-warning-hover: #d7dce2;
+  --color-warning-text: #944b00;
+  --color-warning-rgb: 227,232,238;
+  --color-success: #e3e8ee;
+  --color-success-hover: #d7dce2;
+  --color-success-text: #216b33;
+  --color-success-rgb: 227,232,238;
+  --color-info: #e3e8ee;
+  --color-info-hover: #d7dce2;
+  --color-info-text: #3c5d9d;
+  --color-info-rgb: 227,232,238;
+  --color-favorite: #775a00;
+  --color-mark: #c3cbd5;
+  --color-primary: #006a6b;
+  --color-primary-text: #ebf1f8;
+  --color-primary-hover: #014f4f;
+  --color-primary-element: #006a6b;
+  --color-primary-element-hover: #014f4f;
+  --color-primary-element-text: #ebf1f8;
+  --color-primary-element-text-dark: #d7dce2;
+  --primary-invert-if-bright: no;
+  --primary-invert-if-dark: invert(100%);
+  --background-image-invert-if-bright: invert(100%);
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Swati — für alle, die kein Design gewählt haben */
+  body[data-themes=""],
+  body[data-theme-default] {
+    --color-main-background: #101317;
+    --color-main-background-rgb: 16,19,23;
+    --color-background-dark: #1a1d20;
+    --color-background-darker: #26292d;
+    --color-background-plain: #101317;
+    --color-background-plain-text: #ced6e3;
+    --color-background-hover: #15191f;
+    --color-primary-light: #22262d;
+    --color-primary-light-hover: #32373e;
+    --color-primary-light-text: #e7edf6;
+    --color-placeholder-light: #1a1d20;
+    --color-placeholder-dark: #26292d;
+    --color-loading-light: #32373e;
+    --color-loading-dark: #8b9199;
+    --color-main-text: #ced6e3;
+    --color-text-maxcontrast: #9ba2ac;
+    --color-text-maxcontrast-default: #9ba2ac;
+    --color-text-maxcontrast-background-blur: #ced6e3;
+    --color-text-error: #e46c64;
+    --color-text-success: #57a064;
+    --color-border: #22262d;
+    --color-border-dark: #32373e;
+    --color-border-maxcontrast: #6c727a;
+    --color-element-error: #e46c64;
+    --color-element-warning: #d07c3c;
+    --color-element-success: #57a064;
+    --color-element-info: #6c90d4;
+    --color-error: #1a1d20;
+    --color-error-hover: #26292d;
+    --color-error-text: #e46c64;
+    --color-error-rgb: 26,29,32;
+    --color-warning: #1a1d20;
+    --color-warning-hover: #26292d;
+    --color-warning-text: #d07c3c;
+    --color-warning-rgb: 26,29,32;
+    --color-success: #1a1d20;
+    --color-success-hover: #26292d;
+    --color-success-text: #57a064;
+    --color-success-rgb: 26,29,32;
+    --color-info: #1a1d20;
+    --color-info-hover: #26292d;
+    --color-info-text: #6c90d4;
+    --color-info-rgb: 26,29,32;
+    --color-favorite: #b58a02;
+    --color-mark: #32373e;
+    --color-primary: #02a0a2;
+    --color-primary-text: #101317;
+    --color-primary-hover: #3aced0;
+    --color-primary-element: #02a0a2;
+    --color-primary-element-hover: #3aced0;
+    --color-primary-element-text: #101317;
+    --color-primary-element-text-dark: #26292d;
+    --primary-invert-if-bright: invert(100%);
+    --primary-invert-if-dark: no;
+    --background-image-invert-if-bright: no;
+  }
+}
+
+/* Swati — dunkel, ausdrücklich gewählt */
+body[data-theme-dark] {
+  --color-main-background: #101317;
+  --color-main-background-rgb: 16,19,23;
+  --color-background-dark: #1a1d20;
+  --color-background-darker: #26292d;
+  --color-background-plain: #101317;
+  --color-background-plain-text: #ced6e3;
+  --color-background-hover: #15191f;
+  --color-primary-light: #22262d;
+  --color-primary-light-hover: #32373e;
+  --color-primary-light-text: #e7edf6;
+  --color-placeholder-light: #1a1d20;
+  --color-placeholder-dark: #26292d;
+  --color-loading-light: #32373e;
+  --color-loading-dark: #8b9199;
+  --color-main-text: #ced6e3;
+  --color-text-maxcontrast: #9ba2ac;
+  --color-text-maxcontrast-default: #9ba2ac;
+  --color-text-maxcontrast-background-blur: #ced6e3;
+  --color-text-error: #e46c64;
+  --color-text-success: #57a064;
+  --color-border: #22262d;
+  --color-border-dark: #32373e;
+  --color-border-maxcontrast: #6c727a;
+  --color-element-error: #e46c64;
+  --color-element-warning: #d07c3c;
+  --color-element-success: #57a064;
+  --color-element-info: #6c90d4;
+  --color-error: #1a1d20;
+  --color-error-hover: #26292d;
+  --color-error-text: #e46c64;
+  --color-error-rgb: 26,29,32;
+  --color-warning: #1a1d20;
+  --color-warning-hover: #26292d;
+  --color-warning-text: #d07c3c;
+  --color-warning-rgb: 26,29,32;
+  --color-success: #1a1d20;
+  --color-success-hover: #26292d;
+  --color-success-text: #57a064;
+  --color-success-rgb: 26,29,32;
+  --color-info: #1a1d20;
+  --color-info-hover: #26292d;
+  --color-info-text: #6c90d4;
+  --color-info-rgb: 26,29,32;
+  --color-favorite: #b58a02;
+  --color-mark: #32373e;
+  --color-primary: #02a0a2;
+  --color-primary-text: #101317;
+  --color-primary-hover: #3aced0;
+  --color-primary-element: #02a0a2;
+  --color-primary-element-hover: #3aced0;
+  --color-primary-element-text: #101317;
+  --color-primary-element-text-dark: #26292d;
+  --primary-invert-if-bright: invert(100%);
+  --primary-invert-if-dark: no;
+  --background-image-invert-if-bright: no;
+}
