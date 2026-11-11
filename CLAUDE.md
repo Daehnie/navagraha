@@ -10,6 +10,7 @@ npm install
 npm run dev       # lokaler Server
 npm run build     # statische Ausgabe nach dist/
 npm run preview   # dist/ ausliefern
+npm run audit:vscode   # erzeugte VS-Code-Themes gegen die Kontrastregeln pruefen
 ```
 
 Deploy läuft über `.github/workflows/deploy.yml` bei jedem Push auf `main`.
@@ -159,6 +160,15 @@ Varianten ein sehr lautes Senfgelb), der Farbton des Grundes (kein Graha),
 Shani (schon der Operatoren-Ton, Blau gefiel nicht) und Rahu (ruhig, aber
 „Technik" ist eine moderne Zuschreibung, und in den dunklen Varianten ein
 blasses Flieder).
+
+`npm run audit:vscode` (`scripts/audit-vscode.mjs`) prüft die erzeugten Dateien:
+Text auf seiner Fläche 4,5:1, Kanten und Grafik 3:1, jede Fläche aus
+`VSCODE_SOLVED` samt allem Text darauf, und — wenn VS Code installiert ist — ob
+jeder Schlüssel dort existiert. Es endet mit Status 1, wenn etwas verstößt,
+und gehört nach jeder Änderung an Palette oder Schema in den Lauf. Neue Paare
+aus Vordergrund und Grund trägt man in `TEXT` oder `EDGE` im Skript ein; was
+dort fehlt, prüft nichts. Absichtlich ausgenommen ist der Griff des
+Scrollbalkens (2,0 bis 2,2:1).
 
 Was das Theme nicht setzt, setzt VS Code, und sein Standard kennt die Palette
 nicht: er hat in den hellen Varianten CodeLens und Inlay-Hinweise auf 2,6 bis
